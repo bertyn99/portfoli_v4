@@ -23,13 +23,26 @@
     }
 
     body {
-        @apply font-poppins 
+        @apply font-poppins mt-12 text-base
     }
 
     html{
         scroll-behavior: smooth;
     }
+    
 }
 
+/*Reusable css class*/
+.section{
+ @apply pt-8 pb-16;
+
+  &-title{
+    @apply text-base text-center;
+  
+  }
+  &-subtitle{
+      @apply block text-4 mb-6 text-center
+  }
+}
 
 
