@@ -184,7 +184,7 @@ export default {
 
   @media screen and (max-width: 768px) {
     &-menu {
-      @apply fixed -bottom-full left-0 w-full bg-primary-body pt-8 px-6 pb-16 shadow-md rounded-t-lg transition duration-300;
+      @apply fixed -bottom-full left-0 w-full bg-primary-body pt-8 px-6 pb-16 shadow-md rounded-t-xl transition duration-300;
     }
   }
   &-list {
