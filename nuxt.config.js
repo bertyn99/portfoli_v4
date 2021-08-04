@@ -1,7 +1,6 @@
 export default {
   // Target: https://go.nuxtjs.dev/config-target
-  target: 'static',
-
+  ssr: false,
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
     title: 'portfoli_v4',
@@ -33,6 +32,7 @@ export default {
     '@nuxtjs/eslint-module',
     // https://go.nuxtjs.dev/tailwindcss
     '@nuxtjs/tailwindcss',
+
   ],
 
   // Modules: https://go.nuxtjs.dev/config-modules
@@ -59,6 +59,13 @@ export default {
       plugins: {
         'postcss-nested': {},
       }
+    }
+  },
+
+  vue: {
+    config: {
+      productionTip: true,
+      devtools: true
     }
   }
 }
