@@ -29,6 +29,13 @@
     html{
         scroll-behavior: smooth;
     }
+
+    h1,h2,h3,h4{
+        @apply text-primary-title font-semibold
+    }
+    img{
+       @apply max-w-full h-auto;
+    }
     
 }
 
@@ -41,7 +48,7 @@
   
   }
   &-subtitle{
-      @apply block text-4 mb-6 text-center
+      @apply block text-sm mb-6 text-center
   }
 }
 
