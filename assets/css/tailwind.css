@@ -23,7 +23,7 @@
     }
 
     body {
-        @apply font-poppins mt-12 text-base
+        @apply font-poppins text-base mb-8 text-primary-text;
     }
 
     html{
@@ -44,12 +44,14 @@
  @apply pt-8 pb-16;
 
   &-title{
-    @apply text-base text-center;
+    @apply text-xl text-center;
   
   }
   &-subtitle{
-      @apply block text-sm mb-6 text-center
+      @apply block text-base mb-6 text-center
   }
 }
+
+
 
 
