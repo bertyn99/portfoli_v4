@@ -5,7 +5,12 @@
 
     <div class="graduate-container container mx-auto px-6">
       <div class="graduate-tabs">
-        <div class="graduate-button flex">
+        <div
+          :class="[educations.isOpen ? 'graduate-active' : '']"
+          class="graduate-button"
+          data-target="#education"
+          @click="educations.isOpen = !educations.isOpen"
+        >
           <svg
             xmlns="http://www.w3.org/2000/svg"
             class="h-6 w-6"
@@ -26,7 +31,12 @@
           </svg>
           Education
         </div>
-        <div class="graduate-button flex">
+        <div
+          class="graduate-button"
+          data-target="#work"
+          :class="[works.isOpen ? 'graduate-active' : '']"
+          @click="works.isOpen = !works.isOpen"
+        >
           <svg
             xmlns="http://www.w3.org/2000/svg"
             class="h-6 w-6"
@@ -43,70 +53,86 @@
           </svg>
           Emploi
         </div>
+      </div>
 
-        <div class="graduate-section">
-          <div class="graduate-content">
-            <div v-for="(edu, i) in educations" :key="i" class="graduate-data">
-              <div>
-                <h3 class="graduate-title">{{ edu.grades }}</h3>
-                <span class="graduate-subtitle"
-                  >{{ edu.city }} - {{ edu.school }}</span
+      <div class="graduate-section">
+        <div
+          id="education"
+          class="graduate-content"
+          :class="[educations.isOpen ? 'graduate-active' : '']"
+          data-content
+        >
+          <div
+            v-for="(edu, i) in educations.data"
+            :key="i"
+            class="graduate-data"
+          >
+            <div v-if="i % 2 != 0"></div>
+            <div>
+              <h3 class="graduate-title">{{ edu.grades }}</h3>
+              <span class="graduate-subtitle"
+                >{{ edu.city }} - {{ edu.school }}</span
+              >
+              <div class="graduate-calendar">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="h-6 w-6"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
                 >
-                <div class="graduate-calendar">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    class="h-6 w-6"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                  >
-                    <path
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-width="2"
-                      d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
-                    />
-                  </svg>
-                  {{ edu.time }}
-                </div>
-              </div>
-
-              <div>
-                <span class="graduate-rounder"></span>
-                <span class="graduate-line"></span>
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
+                  />
+                </svg>
+                {{ edu.time }}
               </div>
             </div>
-          </div>
-          <div class="graduate-content">
-            <div v-for="(work, i) in works" :key="i" class="graduate-data">
-              <div>
-                <h3 class="graduate-title">{{ work.post }}</h3>
-                <span class="graduate-subtitle"
-                  >{{ work.city }} - {{ work.entreprise }}</span
-                >
-                <div class="graduate-calendar">
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    class="h-6 w-6"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                  >
-                    <path
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-width="2"
-                      d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
-                    />
-                  </svg>
-                  {{ work.time }}
-                </div>
-              </div>
 
-              <div>
-                <span class="graduate-rounder"></span>
-                <span class="graduate-line"></span>
+            <div :class="[i % 2 != 0 ? 'graduate-inv' : '']">
+              <span class="graduate-rounder"></span>
+              <span class="graduate-line"></span>
+            </div>
+          </div>
+        </div>
+        <div
+          id="work"
+          class="graduate-content"
+          :class="[works.isOpen ? 'graduate-active' : '']"
+          data-content
+        >
+          <div v-if="i % 2 != 0"></div>
+          <div v-for="(work, i) in works.data" :key="i" class="graduate-data">
+            <div>
+              <h3 class="graduate-title">{{ work.post }}</h3>
+              <span class="graduate-subtitle"
+                >{{ work.city }} - {{ work.entreprise }}</span
+              >
+              <div class="graduate-calendar">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  class="h-6 w-6"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="2"
+                    d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
+                  />
+                </svg>
+                {{ work.time }}
               </div>
+            </div>
+
+            <div :class="[i % 2 == 0 ? 'graduate-inv' : '']">
+              <span class="graduate-rounder"></span>
+              <span class="graduate-line"></span>
             </div>
           </div>
         </div>
@@ -119,47 +145,53 @@
 export default {
   data() {
     return {
-      educations: [
-        {
-          school: 'Lycée Privée Sacrée Coeur',
-          grades: 'Bac S',
-          city: 'Nantes',
-          time: '2012-2017',
-        },
-        {
-          school: 'Université des Sciences',
-          grades: 'Licence 1 MIP',
-          city: 'Nantes',
-          time: '2017-2019',
-        },
-        {
-          school: 'The Hacking Project',
-          grades: 'Certification développeur fullstack',
-          city: 'Nantes',
-          time: '2018',
-        },
-      ],
-      works: [
-        {
-          entreprise: 'Hawabowls',
-          post: 'Web developpeur stagiaire',
-          city: 'Nantes',
-          time: '2021',
-        },
-      ],
+      educations: {
+        isOpen: true,
+        data: [
+          {
+            school: 'Lycée Privée Sacrée Coeur',
+            grades: 'Bac S',
+            city: 'Nantes',
+            time: '2012-2017',
+          },
+          {
+            school: 'Université des Sciences',
+            grades: 'Licence 1 MIP',
+            city: 'Nantes',
+            time: '2017-2019',
+          },
+          {
+            school: 'The Hacking Project',
+            grades: 'Certification développeur fullstack',
+            city: 'Nantes',
+            time: '2018',
+          },
+        ],
+      },
+      works: {
+        isOpen: false,
+        data: [
+          {
+            entreprise: 'Hawabowls',
+            post: 'Web developpeur stagiaire',
+            city: 'Nantes',
+            time: '2021',
+          },
+        ],
+      },
     }
   },
 }
 </script>
 
 <style lang="postcss">
-.qualification {
+.graduate {
   &-tabs {
-    @apply flex justify-evenly mb-8;
+    @apply flex justify-evenly items-center mb-8;
   }
 
   &-button {
-    @apply text-2xl font-medium cursor-pointer;
+    @apply flex items-center text-2xl font-medium cursor-pointer;
     &:hover {
       @apply text-primary;
     }
@@ -171,6 +203,34 @@ export default {
     display: grid;
     grid-template-columns: 1fr max-content 1fr;
     column-gap: 1.5rem;
+  }
+  &-title {
+    @apply text-base font-medium;
+  }
+  &-subtitle {
+    @apply inline-block text-sm mb-4;
+  }
+  &-calendar {
+    @apply text-sm text-primary-textLight;
+  }
+  &-rounder {
+    @apply inline-block w-3 h-3 bg-primary rounded-full;
+  }
+  &-line {
+    @apply block w-px h-full transform translate-x-1.5 -translate-y-1.8 bg-primary;
+  }
+  & [data-content] {
+    @apply hidden;
+  }
+  &-active[data-content] {
+    @apply block;
+  }
+  &-button.&-active {
+    @apply text-primary;
+  }
+  &-inv {
+    grid-column: 2;
+    grid-row: 1;
   }
 }
 </style>
