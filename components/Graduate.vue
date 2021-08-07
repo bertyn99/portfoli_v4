@@ -9,7 +9,10 @@
           :class="[educations.isOpen ? 'graduate-active' : '']"
           class="graduate-button"
           data-target="#education"
-          @click="educations.isOpen = !educations.isOpen"
+          @click="
+            educations.isOpen = true
+            works.isOpen = false
+          "
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -35,7 +38,10 @@
           class="graduate-button"
           data-target="#work"
           :class="[works.isOpen ? 'graduate-active' : '']"
-          @click="works.isOpen = !works.isOpen"
+          @click="
+            works.isOpen = true
+            educations.isOpen = false
+          "
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -104,8 +110,8 @@
           :class="[works.isOpen ? 'graduate-active' : '']"
           data-content
         >
-          <div v-if="i % 2 != 0"></div>
           <div v-for="(work, i) in works.data" :key="i" class="graduate-data">
+            <div v-if="i % 2 != 0"></div>
             <div>
               <h3 class="graduate-title">{{ work.post }}</h3>
               <span class="graduate-subtitle"
@@ -205,7 +211,7 @@ export default {
     column-gap: 1.5rem;
   }
   &-title {
-    @apply text-base font-medium;
+    @apply text-base font-semibold;
   }
   &-subtitle {
     @apply inline-block text-sm mb-4;
@@ -225,7 +231,7 @@ export default {
   &-active[data-content] {
     @apply block;
   }
-  &-button.&-active {
+  &-button&-active {
     @apply text-primary;
   }
   &-inv {
