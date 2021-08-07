@@ -17,6 +17,9 @@ module.exports = {
           'input': 'hsl(250,70%,96%)',
           'body': 'hsl(250,60%,99%)',
         },
+      },
+      spacing: {
+        '1.8': '0.438rem'
       }
     }
   },
