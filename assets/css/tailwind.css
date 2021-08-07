@@ -52,6 +52,29 @@
   }
 }
 
+.button{
+    @apply bg-primary text-white p-4  rounded-md font-medium;
+    &-icon{
+        @apply h-6 w-6 ml-2 transition duration-300;
+    }
+    &:hover{
+        @apply bg-primary-alt;
+    }
+    &-flex{
+        @apply inline-flex items-center
+    }
+    &-small{
+        @apply py-3 px-4;
+    }
+    &-link{
+    @apply p-0 bg-transparent text-primary;
+    &:hover{
+        @apply text-primary-alt;
+    }
+}
+}
+
+
 
 
 
