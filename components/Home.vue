@@ -88,10 +88,10 @@ import Home from '~/components/Home.vue';
             Etudiant en web developpement, produisant du travail de qualité et
             Toujours curieux de découvrir de nouvelle techologie
           </p>
-          <the-button link="#contact"
+          <the-button link="#contact" class="button button-flex"
             >Contactez-moi<svg
               xmlns="http://www.w3.org/2000/svg"
-              class="h-6 w-6 ml-5 transition duration-1000"
+              class="button-icon"
               fill="none"
               viewBox="0 0 24 24"
               stroke="currentColor"
@@ -152,7 +152,7 @@ export default {
   &-container {
   }
   &-content {
-    @apply grid grid-cols-3 pt-14 items-center;
+    @apply grid grid-cols-3 gap-y-8 pt-14 items-center;
   }
   &-social {
     display: grid;
