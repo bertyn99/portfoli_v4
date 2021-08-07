@@ -1,7 +1,9 @@
 <template>
   <header id="header" class="header">
     <nav class="nav">
-      <nuxt-link to="/" class="nav-logo">Bertyn</nuxt-link>
+      <nuxt-link to="/" class="nav-logo"
+        ><img src="/BB.png" alt="bertyn boulikou initiale"
+      /></nuxt-link>
 
       <div class="nav-menu" :class="[isOpen ? 'show-menu' : '']">
         <ul class="nav-list">
@@ -42,7 +44,7 @@
             >
           </li>
           <li class="nav-item">
-            <nuxt-link to="#skill" class="nav-link" @click="iOpen = false"
+            <nuxt-link to="#skills" class="nav-link" @click="iOpen = false"
               ><svg
                 xmlns="http://www.w3.org/2000/svg"
                 class="h-5 w-5"
@@ -165,7 +167,7 @@ export default {
 
 <style lang="postcss" scoped>
 .header {
-  @apply w-full fixed bottom-0 left-0 z-30 bg-primary-body;
+  @apply w-full fixed bottom-0 left-0 z-20 bg-primary-body;
 }
 .nav {
   @apply max-w-screen-lg flex h-16 justify-between items-center;
@@ -182,9 +184,9 @@ export default {
     }
   }
 
-  @media screen and (max-width: 768px) {
+  @media screen and (max-width: 380px) {
     &-menu {
-      @apply fixed -bottom-full left-0 w-full bg-primary-body pt-8 px-6 pb-16 shadow-md rounded-t-xl transition duration-300;
+      @apply fixed -bottom-full left-0 w-full bg-primary-body pt-8 px-1 pb-16 shadow-md rounded-t-xl transition duration-300;
     }
   }
   &-list {
