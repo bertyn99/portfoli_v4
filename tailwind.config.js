@@ -1,4 +1,5 @@
 module.exports = {
+  darkMode: 'class',
   purge: [],
   darkMode: false, // or 'media' or 'class'
   theme: {
@@ -8,14 +9,16 @@ module.exports = {
       },
       colors: {
         primary: {
-          DEFAULT: 'hsl(250,69%,61%)',
-          'lighter': 'hsl(250,92%,85%)',
-          'alt': 'hsl(250,57%,53%)',
-          'title': 'hsl(250,8%,15%)',
-          'text': 'hsl(250,8%,61%)',
-          'textLight': 'hsl(250,8%,61%)',
-          'input': 'hsl(250,70%,96%)',
-          'body': 'hsl(250,60%,99%)',
+          DEFAULT: 'var(--first-color)',
+          'second': 'var(--first-color-second)',
+          'lighter': 'var(--first-color-lighter)',
+          'alt': 'var(--first-color-alt)',
+          'title': 'var(--title-color)',
+          'text': 'var(--text-color)',
+          'textLight': 'var(--text-color-light)',
+          'input': 'var(--timput-color)',
+          'body': 'var(--body-color)',
+          'container': 'var(--container-color)'
         },
       },
       spacing: {
