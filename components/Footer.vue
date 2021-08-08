@@ -100,7 +100,13 @@ export default {}
     }
   }
   &-copy {
-    @apply text-xs text-center text-primary-textLight mb-12;
+    @apply text-xs text-center text-primary-textLight mt-12;
+  }
+  &-title,
+  &-subtitle,
+  &-link,
+  &-social {
+    @apply text-white fill-current;
   }
 }
 </style>
