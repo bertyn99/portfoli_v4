@@ -70,13 +70,13 @@ export default {}
 
 <style lang="postcss">
 .footer {
-  @apply pt-8;
+  @apply pt-8 bg-primary;
 
   &-container {
     @apply grid-flow-row gap-14;
   }
   &-bg {
-    @apply bg-primary pt-4 px-0 pb-12;
+    @apply pt-4 px-0 pb-12;
   }
   &-title {
     @apply text-2xl mb-1;
