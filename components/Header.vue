@@ -162,6 +162,22 @@ export default {
       isOpen: false,
     }
   },
+  destroyed() {
+    window.removeEventListener('scroll', this.scrollHeader)
+  },
+  mounted() {
+    window.addEventListener('scroll', this.scrollHeader)
+  },
+  methods: {
+    scrollHeader() {
+      const nav = document.getElementById('header')
+      if (window.scrollY >= 80) {
+        nav.classList.add('scroll-header')
+      } else {
+        nav.classList.remove('scroll-header')
+      }
+    },
+  },
 }
 </script>
 
@@ -208,5 +224,9 @@ export default {
 }
 .show-menu {
   @apply bottom-0;
+}
+
+.scroll-header {
+  box-shadow: 0 -1px 4px;
 }
 </style>
