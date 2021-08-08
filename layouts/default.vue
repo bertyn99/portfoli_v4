@@ -5,5 +5,6 @@
     <Nuxt />
 
     <Footer />
+    <ScrollTop />
   </div>
 </template>
