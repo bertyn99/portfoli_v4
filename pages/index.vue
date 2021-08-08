@@ -6,6 +6,8 @@
     <graduate></graduate>
     <services></services>
     <portfolio></portfolio>
+    <project-in-mind></project-in-mind>
+    <derniers-post></derniers-post>
     <contactme></contactme>
   </main>
 </template>
@@ -18,6 +20,8 @@ import Graduate from '~/components/Graduate.vue'
 import Portfolio from '~/components/Portfolio.vue'
 import Services from '~/components/Services.vue'
 import Contactme from '~/components/Contactme.vue'
+import ProjectInMind from '~/components/ProjectInMind.vue'
+import DerniersPost from '~/components/DerniersPost.vue'
 
 export default {
   components: {
@@ -28,6 +32,8 @@ export default {
     Graduate,
     Services,
     Contactme,
+    ProjectInMind,
+    DerniersPost,
   },
   layout: 'default',
 }
