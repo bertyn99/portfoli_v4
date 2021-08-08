@@ -67,20 +67,33 @@
         <div class="contact-inputs grid">
           <div class="contact-content">
             <label for="" class="contact-label"> Nom </label>
-            <input type="text" class="contact-input" />
+            <input type="text" placeholder="Jhon Doe" class="contact-input" />
           </div>
           <div class="contact-content">
             <label for="" class="contact-label">Email</label>
-            <input type="email" class="contact-input" />
+            <input
+              type="email"
+              placeholder="you@email.com"
+              class="contact-input"
+            />
           </div>
         </div>
         <div class="contact-content">
           <label for="" class="contact-label">Projet</label>
-          <input type="text" class="contact-input" />
+          <input
+            type="text"
+            placeholder="Website,Serveur api ..."
+            class="contact-input"
+          />
         </div>
         <div class="contact-content">
           <label for="" class="contact-label">Message</label>
-          <textarea cols="0" rows="7" class="contact-input" />
+          <textarea
+            placeholder="Ecrivez votre message"
+            cols="0"
+            rows="7"
+            class="contact-input"
+          />
         </div>
         <div>
           <button type="submit" class="button button-flex">
