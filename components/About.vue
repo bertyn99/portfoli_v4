@@ -7,9 +7,8 @@
       <div class="about-data">
         <p class="about-description">
           Web developper junior, qui grâce a ces projet à acquis beaucoup de
-          connaissance, en travaillant sur des technologie web tels que vuejs,
-          angular, ionic,..etc. J'aime me challenge et apprendre de nouvelle
-          chose.
+          connaissance, en travaillant sur des technologie web. J'aime me
+          challenge et apprendre de nouvelle chose.
         </p>
         <div class="about-info">
           <div>
@@ -69,18 +68,30 @@ export default {
     @screen md {
       @apply grid grid-cols-2;
     }
+    @screen lg {
+      @apply gap-20;
+    }
   }
   &-img {
     @apply w-48 rounded-lg self-center justify-self-center;
     @screen md {
       @apply w-56;
     }
+    @screen lg {
+      width: 350px;
+    }
   }
   &-description {
     @apply text-center mb-10;
+    @screen lg {
+      text-align: initial;
+    }
   }
   &-info {
     @apply flex justify-evenly mb-10;
+    @screen lg {
+      @apply justify-between;
+    }
     &-name {
       @apply block text-center text-xs;
     }
@@ -90,6 +101,9 @@ export default {
   }
   &-buttons {
     @apply flex justify-center;
+    @screen lg {
+      @apply justify-start;
+    }
   }
 }
 </style>

@@ -161,8 +161,14 @@ export default {
     @screen md {
       grid-template-columns: max-content 1fr 1fr;
     }
+    @screen lg {
+      @apply pt-20;
+    }
   }
   &-container {
+    @screen lg {
+      @apply gap-20;
+    }
   }
 
   &-social {
@@ -185,6 +191,9 @@ export default {
   }
   &-blob {
     @apply w-48 fill-current text-primary;
+    @screen lg {
+      @apply w-72;
+    }
     &-img {
       @apply w-44;
     }
@@ -205,7 +214,13 @@ export default {
     @apply mb-8;
   }
   &-scroll {
+    @screen lg {
+      @apply block;
+    }
     &-button {
+      @screen lg {
+        @apply ml-12;
+      }
       @apply flex items-center text-primary transition duration-300;
       &:hover {
         @apply transform translate-y-1;

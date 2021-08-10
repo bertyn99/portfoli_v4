@@ -267,7 +267,7 @@ export default {
     @apply flex items-center;
   }
 
-  @media screen (max-width: 767px) {
+  @media screen and (max-width: 767px) {
     &-menu {
       @apply fixed -bottom-full left-0 w-full bg-primary-body pt-8 px-1 pb-16 shadow-md rounded-t-3xl transition duration-300;
     }

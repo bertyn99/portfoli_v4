@@ -9,7 +9,7 @@
         <div>
           <svg
             v-if="service.name == 'Ux/Ui'"
-            class="h-6 w-6 text-primary mb-4"
+            class="h-6 w-6 text-primary mb-4 lg:h-8 lg:w-8"
             viewBox="0 0 24 24"
           >
             <path
@@ -20,7 +20,7 @@
           <svg
             v-if="service.name == 'Website'"
             xmlns="http://www.w3.org/2000/svg"
-            class="h-6 w-6 text-primary mb-4"
+            class="h-6 w-6 text-primary mb-4 lg:h-8 lg:w-8"
             fill="none"
             viewBox="0 0 24 24"
             stroke="currentColor"
@@ -35,7 +35,7 @@
           <svg
             v-if="service.name == 'Server'"
             xmlns="http://www.w3.org/2000/svg"
-            class="h-6 w-6 text-primary mb-4"
+            class="h-6 w-6 text-primary mb-4 lg:h-8 lg:w-8"
             fill="none"
             viewBox="0 0 24 24"
             stroke="currentColor"
@@ -142,9 +142,15 @@ export default {
     @screen md {
       @apply grid-cols-2;
     }
+    @screen lg {
+      @apply grid-cols-3 justify-center;
+    }
   }
   &-content {
     @apply relative bg-primary-body pt-14 pr-14 pl-5 pb-6 rounded shadow-sm transition duration-300;
+    @screen lg {
+      @apply pt-24 pr-0 pl-8 pb-10;
+    }
     &:hover {
       @apply shadow-md;
     }

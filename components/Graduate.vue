@@ -192,19 +192,31 @@ export default {
 
 <style lang="postcss">
 .graduate {
+  &-container {
+  }
   &-section {
     @screen md {
       display: grid;
       grid-template-columns: 0.6fr;
       justify-content: center;
     }
+    @screen lg {
+      grid-template-columns: 0.5fr;
+    }
   }
   &-tabs {
     @apply flex justify-evenly items-center mb-8;
+    @screen lg {
+      @apply justify-center;
+    }
   }
 
   &-button {
     @apply flex items-center text-2xl font-medium cursor-pointer;
+    @screen lg {
+      @apply my-0 mx-4;
+    }
+
     &:hover {
       @apply text-primary;
     }

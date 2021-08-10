@@ -77,9 +77,15 @@ export default {}
     @screen md {
       @apply grid-cols-2 px-4 py-0;
     }
+    @screen lg {
+      @apply grid-cols-3;
+    }
   }
   &-bg {
     @apply pt-4 px-0 pb-12;
+    @screen lg {
+      @apply pt-12 pb-14;
+    }
   }
   &-title {
     @apply text-2xl mb-1;
@@ -87,23 +93,33 @@ export default {}
   &-subtitle {
     @apply text-sm;
   }
-  &-link {
+  &-links {
     @apply flex flex-col gap-6;
+    @screen lg {
+      @apply flex-row gap-8;
+    }
     &:hover {
       @apply text-primary-lighter;
     }
   }
   &-socials {
     @apply flex;
+    @screen lg {
+      @apply justify-self-end;
+    }
   }
   &-social {
-    @apply mr-6;
+    @apply mr-4;
+
     &:hover {
       @apply text-primary-lighter fill-current;
     }
   }
   &-copy {
     @apply text-xs text-center text-primary-textLight mt-12;
+    @screen lg {
+      @apply text-base;
+    }
   }
   &-title,
   &-subtitle,

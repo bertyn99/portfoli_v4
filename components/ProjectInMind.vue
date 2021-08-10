@@ -486,14 +486,29 @@ export default {}
 <style lang="postcss">
 .project {
   @apply text-center;
-
+  @screen lg {
+    text-align: initial;
+  }
   &-container {
     @screen md {
       @apply grid-cols-2 gap-6;
     }
+    @screen lg {
+      grid-template-columns: 1fr max-content;
+      @apply bg-primary-second rounded-2xl py-12 px-6 gap-12;
+    }
+  }
+
+  &-data {
+    @screen lg {
+      @apply pt-3;
+    }
   }
   &-bg {
     @apply bg-primary-second py-12;
+    @screen lg {
+      @apply bg-transparent;
+    }
   }
   &-title {
     @apply text-xl mb-3;
@@ -507,6 +522,9 @@ export default {}
   }
   &-img {
     @apply w-60 justify-self-center;
+    @screen lg {
+      @apply w-64;
+    }
   }
 }
 </style>

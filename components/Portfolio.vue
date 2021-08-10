@@ -74,11 +74,17 @@ export default {
     @screen md {
       @apply grid-cols-2 gap-6;
     }
+    @screen lg {
+      @apply items-center;
+    }
   }
   &-img {
     width: 256px;
     min-height: 150px;
     @apply rounded-lg object-cover justify-self-center;
+    @screen lg {
+      @apply w-80;
+    }
   }
   &-title {
     @apply text-lg mb-2;

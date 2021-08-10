@@ -70,6 +70,9 @@ export default {
   @apply fixed top-0 inset-x-0 h-screen bg-black bg-opacity-80 flex items-center justify-center px-2 py-4 z-30 opacity-0 transition duration-500;
   &-content {
     @apply relative bg-primary-body p-6 rounded-lg;
+    @screen lg {
+      width: 450px;
+    }
   }
 
   &-services {
