@@ -175,7 +175,12 @@ export default {
     display: grid;
     grid-template-columns: max-content;
     row-gap: 1rem;
-
+    @screen md {
+      @apply mr-8;
+    }
+    @screen xl {
+      @apply transform -translate-x-24;
+    }
     &-icon {
       @apply text-xl text-primary fill-current transition duration-300;
       &:hover {
@@ -193,6 +198,9 @@ export default {
     @apply w-48 fill-current text-primary;
     @screen lg {
       @apply w-72;
+    }
+    @screen xl {
+      @apply w-80;
     }
     &-img {
       @apply w-44;

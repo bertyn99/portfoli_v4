@@ -64,10 +64,11 @@ export default {
 }
 </script>
 
-<style lang="postcss">
+<style lang="postcss"  scoped>
 .portfolio {
-  &-contianer {
+  &-container {
     overflow: initial;
+    position: relative;
   }
   &-content {
     @apply py-12 px-6;
@@ -76,6 +77,9 @@ export default {
     }
     @screen lg {
       @apply items-center;
+    }
+    @screen xl {
+      @apply gap-10;
     }
   }
   &-img {

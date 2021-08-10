@@ -80,6 +80,9 @@ export default {}
     @screen lg {
       @apply grid-cols-3;
     }
+    @screen xl {
+      @apply p-0;
+    }
   }
   &-bg {
     @apply pt-4 px-0 pb-12;

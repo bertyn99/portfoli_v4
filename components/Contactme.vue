@@ -1,10 +1,10 @@
 <template>
-  <section id="contact" class="contact section mx-auto px-4 sm:px-6 lg:px-8">
+  <section id="contact" class="contact section">
     <h2 class="section-title">Contactez-moi</h2>
     <span class="section-subtitle">Entrer en contact</span>
 
-    <div class="contact-container container grid">
-      <div>
+    <div class="contact-container container grid mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="">
         <div v-for="(c, i) in contact" :key="i" class="contact-information">
           <svg
             v-if="c.type == 'Telephone'"
@@ -126,7 +126,17 @@ export default {
   &-container {
     @apply grid auto-rows-auto gap-12;
     @screen md {
-      @apply grid-cols-2 gap-4;
+      @apply grid-cols-2 gap-4 justify-center mx-auto;
+    }
+  }
+  &-form {
+    @screen xl {
+      width: 460px;
+    }
+  }
+  &-inputs {
+    @screen xl {
+      @apply grid-cols-2;
     }
   }
   &-form,

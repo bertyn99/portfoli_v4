@@ -4,7 +4,7 @@
     ><button class="carousel-nav carousel-prev" @click.prevent="prev">
       <svg
         xmlns="http://www.w3.org/2000/svg"
-        class="h-5 w-5"
+        class="h-5 w-5 md:h-7 md:w-7 xl:h-10 xl:w-10"
         fill="none"
         viewBox="0 0 24 24"
         stroke="currentColor"
@@ -20,7 +20,7 @@
     <button class="carousel-nav carousel-next" @click.prevent="next">
       <svg
         xmlns="http://www.w3.org/2000/svg"
-        class="h-5 w-5"
+        class="h-5 w-5 md:h-7 md:w-7 xl:h-10 xl:w-10"
         fill="none"
         viewBox="0 0 24 24"
         stroke="currentColor"
@@ -85,23 +85,31 @@ export default {
 }
 </script>
 
-<style lang="postcss">
+<style lang="postcss" scoped>
 .carousel {
-  position: relative;
   overflow: hidden;
+
   display: flex;
   flex-direction: column;
   justify-content: center;
+
   &-nav {
     position: absolute;
     top: 50%;
   }
   &-next {
-    right: -0.25rem;
+    right: 10px;
     left: auto;
+    @screen xl {
+      @apply right-4;
+    }
   }
   &-prev {
-    left: -0.25rem;
+    position: absolute;
+    left: 10px;
+    @screen xl {
+      @apply left-4;
+    }
   }
 
   &-pagination {
@@ -116,6 +124,7 @@ export default {
       opacity: 0.8;
       border-radius: 0.5rem;
       margin: 0 0.1rem;
+
       &.active {
         background: var(--first-color);
       }

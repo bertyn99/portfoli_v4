@@ -145,6 +145,9 @@ export default {
     @screen lg {
       @apply grid-cols-3 justify-center;
     }
+    @screen xl {
+      grid-template-columns: repeat(3, 238px);
+    }
   }
   &-content {
     @apply relative bg-primary-body pt-14 pr-14 pl-5 pb-6 rounded shadow-sm transition duration-300;
