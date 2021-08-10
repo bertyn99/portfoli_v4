@@ -5,12 +5,12 @@
         class="project-container container grid mx-auto px-4 sm:px-6 lg:px-8"
       >
         <div class="projetc-data">
-          <h2 class="project-title">Vous avez des idée de project</h2>
+          <h2 class="project-title">Vous avez des idées de projet</h2>
           <p class="project-description">
             Contactez-moi afin que nous en discutions.
           </p>
           <a href="#contact" class="button button-flex button-white mb-6">
-            Contactez moi
+            Contactez-moi
             <svg
               xmlns="http://www.w3.org/2000/svg"
               class="h-6 w-6 project-icon"

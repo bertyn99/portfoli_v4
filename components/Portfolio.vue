@@ -50,7 +50,7 @@ export default {
           name: 'Site web Moderne',
           img: 'hawa.png',
           link: 'https://www.hawabowls.com/',
-          desc: 'Site web adapté responsive avec des composants ui et des intéractions animées.',
+          desc: 'Site web adapté responsive avec des composants ui et des interactions animées.',
         },
         {
           name: 'Click n Chill',

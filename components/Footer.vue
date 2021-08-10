@@ -8,7 +8,7 @@
         </div>
         <ul class="footer-links">
           <li><a href="#services" class="footer-link">Services</a></li>
-          <li><a href="#porfolio" class="footer-link">Porfolio</a></li>
+          <li><a href="#porfolio" class="footer-link">Portfolio</a></li>
           <li><a href="#contact" class="footer-link">Contact</a></li>
         </ul>
         <div class="footer-socials">

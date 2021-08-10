@@ -6,30 +6,30 @@
       <img src="/img/pose1.jpg" class="about-img" alt="" />
       <div class="about-data">
         <p class="about-description">
-          Web developper junior, qui grâce a ces projet à acquis beaucoup de
-          connaissance, en travaillant sur des technologie web. J'aime me
+          Web développé junior, qui grâce à ces projets a acquis beaucoup de
+          connaissances, en travaillant sur des techniques web. J'aime me
           challenge et apprendre de nouvelle chose.
         </p>
         <div class="about-info">
           <div>
             <span class="about-info-title">3+</span>
             <span class="about-info-name"
-              >Année <br />
+              >Années <br />
               d'expériences</span
             >
           </div>
           <div>
             <span class="about-info-title">8+</span>
             <span class="about-info-name"
-              >Projet <br />
+              >Projets <br />
               Complétés</span
             >
           </div>
           <div>
             <span class="about-info-title">2</span>
             <span class="about-info-name"
-              >Entreprise<br />
-              où j'ai travaillé</span
+              >Entreprises<br />
+              où j'ai travaillés</span
             >
           </div>
         </div>

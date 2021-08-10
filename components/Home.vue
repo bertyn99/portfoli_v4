@@ -81,10 +81,10 @@
         </div>
         <div class="home-data">
           <h1 class="home-title">Salut, Je m'appelle Bertyn</h1>
-          <h3 class="home-subtitle">Web developper</h3>
+          <h3 class="home-subtitle">Web developpeur</h3>
           <p class="home-description">
-            Etudiant en web developpement, produisant du travail de qualité et
-            Toujours curieux de découvrir de nouvelle techologie
+            Étudiant en web développement, produisant du travail de qualité et
+            Toujours curieux de découvrir de nouvelles technologies.
           </p>
           <the-button link="#contact" class="button button-flex"
             >Contactez-moi<svg
