@@ -1,7 +1,9 @@
 <template>
   <section class="project section">
     <div class="project-bg">
-      <div class="project-container container grid mx-auto px-6">
+      <div
+        class="project-container container grid mx-auto px-4 sm:px-6 lg:px-8"
+      >
         <div class="projetc-data">
           <h2 class="project-title">Vous avez des idée de project</h2>
           <p class="project-description">
@@ -485,6 +487,11 @@ export default {}
 .project {
   @apply text-center;
 
+  &-container {
+    @screen md {
+      @apply grid-cols-2 gap-6;
+    }
+  }
   &-bg {
     @apply bg-primary-second py-12;
   }

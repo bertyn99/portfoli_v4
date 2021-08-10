@@ -255,13 +255,13 @@ export default {
     @apply flex items-center;
   }
 
-  @media screen and (max-width: 380px) {
-    &-menu {
-      @apply fixed -bottom-full left-0 w-full bg-primary-body pt-8 px-1 pb-16 shadow-md rounded-t-xl transition duration-300;
-    }
+  @screen sm {
+  }
+  &-menu {
+    @apply fixed -bottom-full left-0 w-full bg-primary-body pt-8 px-1 pb-16 shadow-md rounded-t-3xl transition duration-300;
   }
   &-list {
-    @apply grid grid-cols-3 gap-8;
+    @apply grid grid-cols-3 gap-y-8;
   }
   &-link {
     @apply flex flex-col items-center font-medium text-primary-title text-sm;

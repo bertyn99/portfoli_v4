@@ -2,7 +2,7 @@
   <section id="portfolio" class="portfolio section">
     <h2 class="section-title">Portfolio</h2>
     <span class="section-subtitle">Derniers Projet</span>
-    <div class="portfolio-container container mx-auto px-5">
+    <div class="portfolio-container container mx-auto px-4 sm:px-6 lg:px-8">
       <carousel>
         <carousel-slide v-for="(p, i) in projects" :key="i" :index="i">
           <div class="portfolio-content grid">
@@ -50,13 +50,13 @@ export default {
           name: 'Site web Moderne',
           img: 'hawa.png',
           link: 'https://www.hawabowls.com/',
-          desc: 'Site web responsive avec des composants ui et des intéractions animées.',
+          desc: 'Site web adapté responsive avec des composants ui et des intéractions animées.',
         },
         {
           name: 'Click n Chill',
           link: 'https://clicknchill.net/',
           img: 'v2.png',
-          desc: "Extension chrome qui permet de synchroniser le visionnage d'une série Netflix à plusieurs personnes.",
+          desc: 'Extension chrome qui permet de synchroniser une série Netflix à plusieurs personnes.',
         },
       ],
     }
@@ -70,12 +70,15 @@ export default {
     overflow: initial;
   }
   &-content {
-    @apply py-0 px-6;
+    @apply py-12 px-6;
+    @screen md {
+      @apply grid-cols-2 gap-6;
+    }
   }
   &-img {
     width: 256px;
-    height: 160px;
-    @apply rounded-lg justify-self-center;
+    min-height: 150px;
+    @apply rounded-lg object-cover justify-self-center;
   }
   &-title {
     @apply text-lg mb-2;

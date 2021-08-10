@@ -1,5 +1,5 @@
 <template>
-  <section id="contact" class="contact section mx-auto px-5">
+  <section id="contact" class="contact section mx-auto px-4 sm:px-6 lg:px-8">
     <h2 class="section-title">Contactez-moi</h2>
     <span class="section-subtitle">Entrer en contact</span>
 
@@ -125,6 +125,9 @@ export default {
 .contact {
   &-container {
     @apply grid auto-rows-auto gap-12;
+    @screen md {
+      @apply grid-cols-2 gap-4;
+    }
   }
   &-form,
   &-inputs {

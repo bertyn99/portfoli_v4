@@ -1,7 +1,9 @@
 import Home from '~/components/Home.vue';
 <template>
   <section class="home section">
-    <div class="home-container container mx-auto px-6 grid gap-6">
+    <div
+      class="home-container container mx-auto px-4 sm:px-6 lg:px:8 grid gap-6"
+    >
       <div class="home-content">
         <div class="home-social">
           <a href="" class="home-social-icon"
@@ -149,16 +151,25 @@ export default {
 
 <style lang="postcss">
 .home {
+  &-content {
+    display: grid;
+    grid-template-columns: 0.25fr 3fr;
+    padding-top: 3.5rem;
+    @screen sm {
+      grid-template-columns: 0.5fr 3fr;
+    }
+    @screen md {
+      grid-template-columns: max-content 1fr 1fr;
+    }
+  }
   &-container {
   }
-  &-content {
-    @apply grid grid-cols-3 gap-y-8 pt-14 items-center;
-  }
+
   &-social {
     display: grid;
     grid-template-columns: max-content;
     row-gap: 1rem;
-    @apply col-span-1;
+
     &-icon {
       @apply text-xl text-primary fill-current transition duration-300;
       &:hover {
@@ -167,7 +178,10 @@ export default {
     }
   }
   &-img {
-    @apply col-span-2 inline-flex justify-center;
+    @apply inline-flex justify-center;
+    @screen md {
+      @apply order-1 justify-self-center;
+    }
   }
   &-blob {
     @apply w-48 fill-current text-primary;
@@ -176,7 +190,10 @@ export default {
     }
   }
   &-data {
-    @apply col-span-3;
+    grid-column: 1/3;
+    @screen md {
+      grid-column: initial;
+    }
   }
   &-title {
     @apply text-2xl;

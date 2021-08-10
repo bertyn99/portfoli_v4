@@ -3,7 +3,7 @@
     <h2 class="section-title">Diplomes et Certifications</h2>
     <span class="section-subtitle"> Mon parcours personel </span>
 
-    <div class="graduate-container container mx-auto px-6">
+    <div class="graduate-container container mx-auto px-4 sm:px-6 lg:px-8">
       <div class="graduate-tabs">
         <div
           :class="[educations.isOpen ? 'graduate-active' : '']"
@@ -192,6 +192,13 @@ export default {
 
 <style lang="postcss">
 .graduate {
+  &-section {
+    @screen md {
+      display: grid;
+      grid-template-columns: 0.6fr;
+      justify-content: center;
+    }
+  }
   &-tabs {
     @apply flex justify-evenly items-center mb-8;
   }
@@ -208,7 +215,10 @@ export default {
   &-data {
     display: grid;
     grid-template-columns: 1fr max-content 1fr;
-    column-gap: 1.5rem;
+    column-gap: 0.5rem;
+    @screen sm {
+      gap: 1.5rem;
+    }
   }
   &-title {
     @apply text-base font-semibold;

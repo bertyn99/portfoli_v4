@@ -2,7 +2,7 @@
   <section id="about" class="about section">
     <h2 class="section-title">A propos</h2>
     <span class="section-subtitle">Ma présentation</span>
-    <div class="about-container container grid mx-auto px-4">
+    <div class="about-container container grid mx-auto px-4 sm:px-6 lg:px-8">
       <img src="/img/pose1.jpg" class="about-img" alt="" />
       <div class="about-data">
         <p class="about-description">
@@ -65,8 +65,16 @@ export default {
 
 <style lang="postcss">
 .about {
+  &-container {
+    @screen md {
+      @apply grid grid-cols-2;
+    }
+  }
   &-img {
     @apply w-48 rounded-lg self-center justify-self-center;
+    @screen md {
+      @apply w-56;
+    }
   }
   &-description {
     @apply text-center mb-10;

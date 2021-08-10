@@ -2,7 +2,9 @@
   <section id="services" class="services section">
     <h2 class="section-title">Services</h2>
     <span class="section-subtitle">Que puis-je offrir?</span>
-    <div class="services-container container grid mx-auto px-5">
+    <div
+      class="services-container container grid mx-auto px-12 sm:px-14 lg:px-20"
+    >
       <div v-for="(service, i) in services" :key="i" class="services-content">
         <div>
           <svg
@@ -136,10 +138,13 @@ export default {
 <style lang="postcss">
 .services {
   &-container {
-    @apply grid-cols-2 gap-6;
+    @apply grid-cols-1 gap-6;
+    @screen md {
+      @apply grid-cols-2;
+    }
   }
   &-content {
-    @apply relative bg-primary-body pt-14 pr-2 pl-5 pb-6 rounded shadow-sm transition duration-300;
+    @apply relative bg-primary-body pt-14 pr-14 pl-5 pb-6 rounded shadow-sm transition duration-300;
     &:hover {
       @apply shadow-md;
     }
