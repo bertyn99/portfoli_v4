@@ -55,7 +55,7 @@ export default {
         {
           name: 'Click n Chill',
           link: 'https://clicknchill.net/',
-          img: 'v2.png',
+          img: 'V2.png',
           desc: 'Extension chrome qui permet de synchroniser une série Netflix à plusieurs personnes.',
         },
       ],
