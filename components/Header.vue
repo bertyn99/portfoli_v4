@@ -11,7 +11,7 @@
             <nuxt-link to="/" class="nav-link" @click="iOpen = false"
               ><svg
                 xmlns="http://www.w3.org/2000/svg"
-                class="h-5 w-5"
+                class="h-5 w-5 lg:hidden"
                 fill="none"
                 viewBox="0 0 24 24"
                 stroke="currentColor"
@@ -29,7 +29,7 @@
             <nuxt-link to="#about" class="nav-link" @click="iOpen = false"
               ><svg
                 xmlns="http://www.w3.org/2000/svg"
-                class="h-5 w-5"
+                class="h-5 w-5 lg:hidden"
                 fill="none"
                 viewBox="0 0 24 24"
                 stroke="currentColor"
@@ -47,7 +47,7 @@
             <nuxt-link to="#skills" class="nav-link" @click="iOpen = false"
               ><svg
                 xmlns="http://www.w3.org/2000/svg"
-                class="h-5 w-5"
+                class="h-5 w-5 lg:hidden"
                 fill="none"
                 viewBox="0 0 24 24"
                 stroke="currentColor"
@@ -65,7 +65,7 @@
             <nuxt-link to="#services" class="nav-link" @click="iOpen = false"
               ><svg
                 xmlns="http://www.w3.org/2000/svg"
-                class="h-5 w-5"
+                class="h-5 w-5 lg:hidden"
                 fill="none"
                 viewBox="0 0 24 24"
                 stroke="currentColor"
@@ -83,7 +83,7 @@
             <nuxt-link to="#portfolio" class="nav-link" @click="iOpen = false"
               ><svg
                 xmlns="http://www.w3.org/2000/svg"
-                class="h-5 w-5"
+                class="h-5 w-5 lg:hidden"
                 fill="none"
                 viewBox="0 0 24 24"
                 stroke="currentColor"
@@ -101,7 +101,7 @@
             <nuxt-link to="#contact" class="nav-link" @click="iOpen = false"
               ><svg
                 xmlns="http://www.w3.org/2000/svg"
-                class="h-5 w-5"
+                class="h-5 w-5 lg:hidden"
                 fill="none"
                 viewBox="0 0 24 24"
                 stroke="currentColor"
@@ -236,9 +236,18 @@ export default {
 <style lang="postcss" scoped>
 .header {
   @apply w-full fixed bottom-0 left-0 z-20 bg-primary-body;
+  @screen lg {
+    bottom: initial;
+    @apply top-0 px-4 py-0;
+  }
 }
 .nav {
-  @apply max-w-screen-lg flex h-16 justify-between items-center;
+  @apply max-w-screen-xl flex h-16 justify-between items-center;
+  @screen lg {
+    height: 4.5rem;
+    columns-gap: 1rem;
+  }
+
   &-logo {
     @apply text-primary-title font-medium;
     &:hover {
@@ -247,6 +256,9 @@ export default {
   }
   &-toggle {
     @apply text-primary-title font-medium text-base cursor-pointer;
+    @screen lg {
+      @apply hidden;
+    }
     &:hover {
       @apply text-primary;
     }
@@ -255,13 +267,22 @@ export default {
     @apply flex items-center;
   }
 
-  @screen sm {
+  @media screen (max-width: 767px) {
+    &-menu {
+      @apply fixed -bottom-full left-0 w-full bg-primary-body pt-8 px-1 pb-16 shadow-md rounded-t-3xl transition duration-300;
+    }
   }
+
   &-menu {
-    @apply fixed -bottom-full left-0 w-full bg-primary-body pt-8 px-1 pb-16 shadow-md rounded-t-3xl transition duration-300;
+    @screen lg {
+      @apply ml-auto;
+    }
   }
   &-list {
     @apply grid grid-cols-3 gap-y-8;
+    @screen lg {
+      @apply flex gap-8;
+    }
   }
   &-link {
     @apply flex flex-col items-center font-medium text-primary-title text-sm;
@@ -272,6 +293,9 @@ export default {
 
   &-close {
     @apply absolute right-5 bottom-2 text-2xl cursor-pointer text-primary;
+    @screen lg {
+      @apply hidden;
+    }
     &:hover {
       @apply text-primary-alt;
     }
@@ -279,6 +303,9 @@ export default {
 }
 .change-theme {
   @apply h-6 w-6 text-primary mr-4 cursor-pointer;
+  @screen lg {
+    @apply ml-4 mr-0;
+  }
   &:hover {
     @apply text-primary-alt;
   }

@@ -38,3 +38,10 @@ export default {
   layout: 'default',
 }
 </script>
+<style lan="postcss" scoped>
+.main {
+  @screen md {
+    @apply px-4 py-0;
+  }
+}
+</style>

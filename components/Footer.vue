@@ -74,6 +74,9 @@ export default {}
 
   &-container {
     @apply grid-flow-row gap-14;
+    @screen md {
+      @apply grid-cols-2 px-4 py-0;
+    }
   }
   &-bg {
     @apply pt-4 px-0 pb-12;

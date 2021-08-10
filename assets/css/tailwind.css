@@ -46,6 +46,9 @@
 
     body {
         @apply font-poppins text-base mb-8 text-primary-text;
+        @screen lg{
+            @apply m-0
+        }
     }
 
     html{
@@ -63,14 +66,19 @@
 
 /*Reusable css class*/
 .section{
- @apply pt-8 pb-16 bg-primary-container;
-
+ @apply pt-8 pb-16 bg-primary-container ;
+    @screen lg{
+        @apply pt-24 px-0 pb-8;
+    }
   &-title{
     @apply text-xl text-center;
   
   }
   &-subtitle{
-      @apply block text-base mb-6 text-center
+      @apply block text-base mb-6 text-center;
+      @screen lg{
+          @apply mb-8
+      }
   }
 }
 
