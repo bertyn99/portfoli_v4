@@ -5,13 +5,11 @@
     <div class="skills-container container grid mx-auto px-4 sm:px-6 lg:px-8">
       <div
         v-for="(skill, i) in skills"
-        :key="skill.name"
+        :key="i"
         class="skills-content"
-        :class="[
-          i == 0 || skill.isOpen == true ? 'skills-open' : 'skills-close',
-        ]"
+        :class="[skill.isOpen == true ? 'skills-open' : 'skills-close']"
       >
-        <div class="skills-header">
+        <div class="skills-header" @click="skill.isOpen = !skill.isOpen">
           <svg
             v-if="skill.name == 'Front-End'"
             class="h-8 w-8 skills-icon"
@@ -62,7 +60,6 @@
             fill="none"
             viewBox="0 0 24 24"
             stroke="currentColor"
-            @click="skill.isOpen = !skill.isOpen"
           >
             <path
               stroke-linecap="round"

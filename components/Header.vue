@@ -240,9 +240,12 @@ export default {
     bottom: initial;
     @apply top-0 px-4 py-0;
   }
+  @screen xl {
+    @apply px-5;
+  }
 }
 .nav {
-  @apply max-w-screen-xl flex h-16 justify-between items-center;
+  @apply w-full flex h-16 justify-between items-center;
   @screen lg {
     height: 4.5rem;
     columns-gap: 1rem;
