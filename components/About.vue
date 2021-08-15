@@ -34,7 +34,10 @@
           </div>
         </div>
         <div class="about-buttons">
-          <the-button link="/Bertyn_Boulikou_CV.pdf" class="button button-flex"
+          <the-button
+            link="Helen Bertyn Boulikou d'amours.pdf"
+            class="button button-flex"
+            download="CV Bertyn Boulikou"
             >Telecharger mon cv<svg
               xmlns="http://www.w3.org/2000/svg"
               class="h-6 w-6 ml-4 transition duration-1000"
