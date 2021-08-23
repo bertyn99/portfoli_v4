@@ -1,7 +1,6 @@
 module.exports = {
   darkMode: 'class',
   purge: [],
-  darkMode: false, // or 'media' or 'class'
   theme: {
     screens: {
       'sm': '375px',
