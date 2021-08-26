@@ -1,12 +1,26 @@
 <template>
-  <div class="rounded-md w-full h-96 mb-4 bg-white shadow-md overflow-hidden">
-    <div class="h-3/5 relative">
-      <img src="imgUrl" class="w-full h-full object-cover" alt="" />
+  <div
+    class="
+      rounded-md
+      w-full
+      max-w-3xl
+      h-auto
+      mx-auto
+      mb-4
+      bg-white
+      shadow-md
+      overflow-hidden
+    "
+  >
+    <div class="article-img">
+      <img :src="imgUrl" class="w-full max-h-96 object-cover" :alt="title" />
       <div
         class="
           rounded-md
-          w-20
-          h-20
+          w-18
+          h-18
+          lg:w-20
+          lg:h-20
           bg-blue-500
           absolute
           left-3
@@ -15,12 +29,16 @@
           text-center
         "
       >
-        <span class="text-4xl text-white font-semibold">24</span>
+        <span class="text-3xl lg:text-4xl text-white font-semibold">24</span>
         <p class="text-xl text-white font-normal">Aout</p>
       </div>
     </div>
-    <div class="pl-8 pr-1 pt-8 pb-2">
-      <span class="text-xl">{{ title }}</span>
+    <div class="article-details">
+      <nuxt-link
+        :to="{ name: 'blog-articles-slug', params: { slug: slug } }"
+        class="text-xl"
+        >{{ title }}</nuxt-link
+      >
       <p class="text-sm">
         {{ description }}
       </p>
@@ -33,9 +51,21 @@ export default {
   props: {
     title: { type: String, default: '' },
     description: { type: String, default: '' },
+    slug: { type: String, default: '' },
     imgUrl: { type: String, default: 'none' },
   },
 }
 </script>
 
-<style></style>
+<style lang="postcss" scoped>
+.article-img {
+  position: relative;
+  width: 100%;
+  flex: 4;
+}
+
+.article-details {
+  flex: 2;
+  @apply pl-8 pr-1 pt-8 pb-4;
+}
+</style>
