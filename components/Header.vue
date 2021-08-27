@@ -62,10 +62,10 @@
             >
           </li>
           <li class="nav-item">
-            <nuxt-link to="#services" class="nav-link" @click="iOpen = false"
+            <nuxt-link to="/blog" class="nav-link" @click="iOpen = false"
               ><svg
                 xmlns="http://www.w3.org/2000/svg"
-                class="h-5 w-5 lg:hidden"
+                class="h-6 w-6 lg:hidden"
                 fill="none"
                 viewBox="0 0 24 24"
                 stroke="currentColor"
@@ -74,9 +74,10 @@
                   stroke-linecap="round"
                   stroke-linejoin="round"
                   stroke-width="2"
-                  d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
-                /></svg
-              >Services</nuxt-link
+                  d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z"
+                />
+              </svg>
+              Blog</nuxt-link
             >
           </li>
           <li class="nav-item">
