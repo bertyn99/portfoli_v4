@@ -84,7 +84,7 @@
           <h3 class="home-subtitle">Web developpeur</h3>
           <p class="home-description">
             Étudiant en web développement, produisant du travail de qualité et
-            Toujours curieux de découvrir de nouvelles technologies.
+            toujours curieux de découvrir de nouvelles technologies.
           </p>
           <the-button link="#contact" class="button button-flex"
             >Contactez-moi<svg

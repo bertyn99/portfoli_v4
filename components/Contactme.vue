@@ -1,7 +1,10 @@
 <template>
   <section id="contact" class="contact section">
-    <h2 class="section-title">Contactez-moi</h2>
-    <span class="section-subtitle">Entrer en contact</span>
+    <h2 class="section-title">Contact</h2>
+    <span class="section-subtitle"
+      >Si vous avez envie des requêtes ou des questions n'hésiter pas à me
+      contacter</span
+    >
 
     <div class="contact-container container grid mx-auto px-4 sm:px-6 lg:px-8">
       <div class="">

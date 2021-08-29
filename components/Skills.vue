@@ -95,7 +95,7 @@ export default {
       skills: [
         {
           name: 'Front-End',
-          time: 'Depuis +1ans',
+          time: 'Depuis +1 an',
           isOpen: true,
           lang: [
             { name: 'HTML', percentage: 90 },
@@ -106,7 +106,7 @@ export default {
         },
         {
           name: 'Back-End',
-          time: 'Depuis +1ans',
+          time: 'Depuis +1 an',
           isOpen: false,
           lang: [
             { name: 'PHP', percentage: 60 },
@@ -117,7 +117,7 @@ export default {
         },
         {
           name: 'Design',
-          time: 'Depuis +6mois',
+          time: 'Depuis +6 mois',
           isOpen: false,
           lang: [
             { name: 'Figma', percentage: 50 },

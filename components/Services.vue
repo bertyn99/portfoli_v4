@@ -18,7 +18,7 @@
             />
           </svg>
           <svg
-            v-if="service.name == 'Website'"
+            v-if="service.name == 'Site Web'"
             xmlns="http://www.w3.org/2000/svg"
             class="h-6 w-6 text-primary mb-4 lg:h-8 lg:w-8"
             fill="none"
@@ -33,7 +33,7 @@
             />
           </svg>
           <svg
-            v-if="service.name == 'Server'"
+            v-if="service.name == 'Serveur'"
             xmlns="http://www.w3.org/2000/svg"
             class="h-6 w-6 text-primary mb-4 lg:h-8 lg:w-8"
             fill="none"
@@ -106,7 +106,7 @@ export default {
           ],
         },
         {
-          name: 'Website',
+          name: 'Site Web',
           post: 'Front-End',
           isOpen: false,
           skills: [
@@ -115,7 +115,7 @@ export default {
           ],
         },
         {
-          name: 'Server',
+          name: 'Serveur',
           post: 'Back-End',
           isOpen: false,
           skills: [
