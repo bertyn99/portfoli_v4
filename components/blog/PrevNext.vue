@@ -4,7 +4,7 @@
       <span class="text-primary-text text-base">Post Précedent</span>
       <NuxtLink
         :to="{ name: 'blog-articles-slug', params: { slug: prev.slug } }"
-        class="flex font-bold hover:text-primary"
+        class="flex font-bold text-primary-title hover:text-primary"
       >
         {{ prev.title }}
       </NuxtLink>
@@ -13,8 +13,8 @@
     <div v-if="next" class="flex flex-col">
       <span class="text-primary-text text-base">Post suivant</span>
       <NuxtLink
-        :to="{ name: 'blog--articles-slug', params: { slug: next.slug } }"
-        class="font-bold hover:text-primary"
+        :to="{ name: 'blog-articles-slug', params: { slug: next.slug } }"
+        class="font-bold text-primary-title hover:text-primary"
       >
         {{ next.title }}
       </NuxtLink>

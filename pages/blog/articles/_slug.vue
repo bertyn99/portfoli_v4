@@ -149,4 +149,7 @@ export default {
 </script>
 
 <style>
+h1 > span {
+  @apply text-primary-title !important;
+}
 </style>
