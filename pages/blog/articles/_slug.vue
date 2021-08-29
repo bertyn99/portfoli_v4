@@ -59,7 +59,7 @@
         <div
           class="
             flex
-            bg-purple-100
+            bg-primary-input
             justify-center
             items-center
             text-left
@@ -76,9 +76,9 @@
               mr-8
               w-24
               h-24
+              bg-primary-container
               text-gray-900
               align-middle
-              bg-white
               border-none
               box-border
               rounded-full
@@ -115,7 +115,7 @@
                 text-sm
                 font-light
                 leading-7
-                text-gray-700
+                text-primary-text
                 box-border
               "
             >
