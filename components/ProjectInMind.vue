@@ -5,7 +5,10 @@
         class="project-container container grid mx-auto px-4 sm:px-6 lg:px-8"
       >
         <div class="projetc-data">
-          <h2 class="project-title">Vous avez des idées de projet</h2>
+          <h2 class="project-title">
+            Vous avez des idées de projet ou vous avez des question sur
+            problèmes techniques
+          </h2>
           <p class="project-description">
             Contactez-moi afin que nous en discutions.
           </p>
