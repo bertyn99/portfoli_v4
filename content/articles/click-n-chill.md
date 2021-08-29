@@ -20,5 +20,3 @@ Chaque utilisateur peut avoir des amis et voir les séries qu'ils ont déjà vue
 
 
 Ce projet à été pour moi on camarade un belle aventure même  si  cela ne nous a  génèré aucun revenu et a été crée dans l'unique but de répondre à une problématique  sur laquelle on étais tombé par hasard durant ce deuxième confinement et d'apprendre de nouvelles choses dans le domaine du développement web.
-
-Merci de m'avoir lu.

@@ -12,6 +12,14 @@ module.exports = {
       fontFamily: {
         poppins: "'Poppins', sans-serif"
       },
+      typography: (theme) => ({
+        DEFAULT: {
+          css: {
+            h1: { color: theme('colors.primary.title') },
+
+          }
+        }
+      }),
       colors: {
         primary: {
           DEFAULT: 'var(--first-color)',

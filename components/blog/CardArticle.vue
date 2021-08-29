@@ -13,7 +13,11 @@
     "
   >
     <div class="article-img">
-      <img :src="imgUrl" class="w-full max-h-96 object-cover" :alt="title" />
+      <img
+        :src="imgUrl"
+        class="w-full h-96 max-h-96 object-cover"
+        :alt="title"
+      />
       <div
         class="
           rounded-md
