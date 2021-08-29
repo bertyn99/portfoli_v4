@@ -6,8 +6,7 @@
       >
         <div class="projetc-data">
           <h2 class="project-title">
-            Vous avez des idées de projet ou vous avez des question sur
-            problèmes techniques
+            Vous avez des idées de projet ou vous avez des question
           </h2>
           <p class="project-description">
             Contactez-moi afin que nous en discutions.
