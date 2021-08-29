@@ -2,7 +2,7 @@
   <section id="contact" class="contact section">
     <h2 class="section-title">Contact</h2>
     <span class="section-subtitle"
-      >Si vous avez envie des requêtes ou des questions n'hésiter pas à me
+      >Si vous avez des requêtes ou des questions n'hésiter pas à me
       contacter</span
     >
 
