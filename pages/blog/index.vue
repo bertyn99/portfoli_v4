@@ -1,7 +1,7 @@
 <template>
   <main class="main">
-    <div class="bg-gray-100 pt-24 pb-8 px-6 md:px-12 lg:px-20 mx-auto">
-      <div class="grid grid-cols-1 lg:grid-cols-3 gap-4">
+    <div class="bg-primary-container pt-24 pb-8 px-6 md:px-12 lg:px-20 mx-auto">
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-4 xl:gap-2">
         <div class="lg:col-span-2 pt-2 flex flex-col">
           <card-article
             v-for="article of articles"
@@ -12,7 +12,19 @@
             :slug="article.slug"
           ></card-article>
         </div>
-        <div class="bg-indigo-600 flex flex-col"></div>
+
+        <div class="flex pt-2 flex-col">
+          <div class="bg-primary-input rounded-lg h-36 mb-8">
+            <h4 class="mx-4 my-2 text-primary-text border-b border-gray-300">
+              Categorie
+            </h4>
+          </div>
+          <div class="bg-primary-input rounded-lg h-80">
+            <h4 class="mx-4 my-2 text-primary-text border-b border-gray-300">
+              Les Derniers posts
+            </h4>
+          </div>
+        </div>
       </div>
     </div>
     <div class="mx-auto" v-if="articles.length > 5">
