@@ -67,7 +67,7 @@ export default {
 <style lang="postcss"  scoped>
 .portfolio {
   &-container {
-    overflow: initial;
+    overflow: hidden;
     position: relative;
   }
   &-content {
