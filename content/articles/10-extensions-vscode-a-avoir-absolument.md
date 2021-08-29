@@ -1,7 +1,7 @@
 ---
-title: 10 extension vscode à avoir
+title: 10 extension vscode à avoir absolument
 description: Voici une petite liste d'extension que je trouve imporatnt d'voir sous la main.
-slug: 10-extension-vscode-a-avoir
+slug: 10-extension-vscode-a-avoir-absolument
 img: /article/vscode.png
 ---
 
