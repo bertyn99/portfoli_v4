@@ -171,14 +171,17 @@ import CardArticle from '~/components/blog/CardArticle.vue'
 export default {
   components: { CardArticle },
   async asyncData({ $content, params }) {
-    const articles = await $content('articles', params.slug)
+    const lastArticles = await $content('articles', params.slug)
       .only(['title', 'description', 'img', 'slug', 'author'])
-      .sortBy('createdAt', 'asc')
+      .sortBy('createdAt', 'desc')
+      .limit(5)
       .fetch()
 
-    console.log(articles)
+    const nextPage = lastArticles.length === 10
+    const articles = nextPage ? lastArticles.slice(0, -1) : lastArticles
     return {
       articles,
+      nextPage,
     }
   },
 }
