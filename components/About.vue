@@ -7,13 +7,14 @@
       <div class="about-data">
         <p class="about-description">
           Je suis un jeune développeur web, je maîtrise les technologies
-          front-end,frameworks Tailwind et Vue js je fait aussi du back-end, et
-          particulièrement NodeJs. Pour les CMS, je me suis familiarisé avec le
-          WordPress Pour la partie gestion de projets, j’ai des connaissances en
-          méthode agile ainsi que l’outil Git pour la gestion de version de
-          projet Je suis à l'écoute d'opportunités en développement de site et
-          application web. Je suis particulièrement intéressé par le
-          développement en langage JavaScript et ses différent frameworks.
+          front-end tels frameworks Tailwind et Vue js je fait aussi du
+          back-end, et particulièrement NodeJs et aravel. Pour les CMS, je me
+          suis familiarisé avec le WordPress Pour la partie gestion de projets,
+          j’ai des connaissances en méthode agile ainsi que l’outil Git pour la
+          gestion de version de projet Je suis à l'écoute d'opportunités en
+          développement de site et application web. Je suis particulièrement
+          intéressé par le développement en langage JavaScript et ses différent
+          frameworks.
         </p>
         <div class="about-info">
           <div>
