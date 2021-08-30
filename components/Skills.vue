@@ -98,9 +98,9 @@ export default {
           time: 'Depuis +1 an',
           isOpen: true,
           lang: [
-            { name: 'HTML', percentage: 90 },
-            { name: 'Javascript', percentage: 70 },
-            { name: 'Css ', percentage: 68 },
+            { name: 'HTML', percentage: 100 },
+            { name: 'Javascript', percentage:80},
+            { name: 'Css ', percentage: 75 },
             { name: 'Vue', percentage: 75 },
           ],
         },
@@ -110,8 +110,8 @@ export default {
           isOpen: false,
           lang: [
             { name: 'PHP', percentage: 60 },
-            { name: 'NodeJs', percentage: 70 },
-            { name: 'Laravel', percentage: 68 },
+            { name: 'NodeJs', percentage: 90 },
+            { name: 'Laravel', percentage: 70},
             { name: 'Firebase', percentage: 75 },
           ],
         },
