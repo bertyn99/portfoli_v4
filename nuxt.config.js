@@ -1,5 +1,6 @@
 import { join } from 'path'
-export default {
+import { defineNuxtConfig } from 'nuxt'
+export default defineNuxtConfig({
   // Target: https://go.nuxtjs.dev/config-target
   target: 'static',
   // Global page headers: https://go.nuxtjs.dev/config-head
@@ -23,23 +24,6 @@ export default {
   // Auto import components: https://go.nuxtjs.dev/config-components
   components: true,
 
-  // Modules for dev and build (recommended): https://go.nuxtjs.dev/config-modules
-  buildModules: [
-    // https://go.nuxtjs.dev/eslint
-    '@nuxtjs/eslint-module',
-    // https://go.nuxtjs.dev/tailwindcss
-    '@nuxtjs/tailwindcss',
-    '@nuxt/postcss8',
-  ],
-
-  // Modules: https://go.nuxtjs.dev/config-modules
-  modules: [
-    // https://go.nuxtjs.dev/axios
-    '@nuxtjs/axios',
-    // https://go.nuxtjs.dev/pwa
-    '@nuxtjs/pwa',
-    '@nuxt/content',
-  ],
 
   // content
   content: {
@@ -47,13 +31,6 @@ export default {
   },
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
   axios: {},
-
-  // PWA module configuration: https://go.nuxtjs.dev/pwa
-  pwa: {
-    manifest: {
-      lang: 'en',
-    },
-  },
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
@@ -73,4 +50,4 @@ export default {
       devtools: true,
     },
   },
-}
+})
