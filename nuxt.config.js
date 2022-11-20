@@ -15,9 +15,15 @@ export default defineNuxtConfig({
     link: [{ rel: "icon", type: "image/x-icon", href: "/BB.png" }],
   }, */
 
-  // Global CSS: https://go.nuxtjs.dev/config-css
-  css: ["@/assets/css/tailwind.css"],
-
+  css: ["@/assets/css/main.css"],
+  postcss: {
+    plugins: {
+      "postcss-nested": {},
+      "tailwindcss/nesting": {},
+      tailwindcss: {},
+      autoprefixer: {},
+    },
+  },
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [],
   // content
@@ -25,14 +31,4 @@ export default defineNuxtConfig({
     // Options
   },
   // Build Configuration: https://go.nuxtjs.dev/config-build
-  build: {
-    postcss: {
-      plugins: {
-        "postcss-nested": {},
-        "tailwindcss/nesting": {},
-        tailwindcss: join(__dirname, "tailwind.config.js"),
-        autoprefixer: {},
-      },
-    },
-  },
 });

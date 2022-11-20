@@ -11,7 +11,7 @@
           data-target="#education"
           @click="
             educations.isOpen = true;
-            works.isOpen = false
+            works.isOpen = false;
           "
         >
           <svg
@@ -39,8 +39,8 @@
           data-target="#work"
           :class="[works.isOpen ? 'graduate-active' : '']"
           @click="
-            works.isOpen = true
-            educations.isOpen = false
+            works.isOpen = true;
+            educations.isOpen = false;
           "
         >
           <svg
@@ -155,22 +155,22 @@ export default {
         isOpen: true,
         data: [
           {
-            school: 'Lycée Privée Sacrée Coeur',
-            grades: 'Bac S',
-            city: 'Nantes',
-            time: '2012-2017',
+            school: "Lycée Privée Sacrée Coeur",
+            grades: "Bac S",
+            city: "Nantes",
+            time: "2012-2017",
           },
           {
-            school: 'Université des Sciences',
-            grades: 'Licence 1 MIP',
-            city: 'Nantes',
-            time: '2017-2019',
+            school: "Université des Sciences",
+            grades: "Licence 1 MIP",
+            city: "Nantes",
+            time: "2017-2019",
           },
           {
-            school: 'The Hacking Project',
-            grades: 'Certification développeur fullstack',
-            city: 'Nantes',
-            time: '2018',
+            school: "The Hacking Project",
+            grades: "Certification développeur fullstack",
+            city: "Nantes",
+            time: "2018",
           },
         ],
       },
@@ -178,16 +178,16 @@ export default {
         isOpen: false,
         data: [
           {
-            entreprise: 'Hawabowls',
-            post: 'Web developpeur stagiaire',
-            city: 'Nantes',
-            time: '2021',
+            entreprise: "Hawabowls",
+            post: "Web developpeur stagiaire",
+            city: "Nantes",
+            time: "2021",
           },
         ],
       },
-    }
+    };
   },
-}
+};
 </script>
 
 <style lang="postcss">
