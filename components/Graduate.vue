@@ -10,7 +10,7 @@
           class="graduate-button"
           data-target="#education"
           @click="
-            educations.isOpen = true
+            educations.isOpen = true;
             works.isOpen = false
           "
         >
