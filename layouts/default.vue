@@ -2,7 +2,7 @@
   <div>
     <Header />
 
-    <Nuxt />
+    <slot />
 
     <Footer />
     <ScrollTop />
