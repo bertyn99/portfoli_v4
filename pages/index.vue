@@ -7,7 +7,7 @@
     <Services></Services>
     <Portfolio></Portfolio>
     <ProjectInMind></ProjectInMind>
-    <DerniersPost></DerniersPost>
+
     <Contactme></Contactme>
   </main>
 </template>
