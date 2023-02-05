@@ -15,7 +15,8 @@
     </button>
 
     <div class="carousel-pagination">
-      <button v-for="n in slidesCount" :key="n" :class="{ active: n - 1 == index }" @click="goTo(n - 1)"></button>
+      <button v-for="n in getSlideCount" :key="n" :class="{ active: n - 1 == currentSlide }"
+        @click="goTo(n - 1)"></button>
     </div>
   </div>
 </template>
