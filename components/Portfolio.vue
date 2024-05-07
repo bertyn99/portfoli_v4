@@ -37,7 +37,7 @@ const projects = ref([
   {
     name: 'Site web Moderne',
     img: 'hawa.png',
-    link: 'https://www.hawabowls.com/',
+    link: 'https://hawa-bowls-website.vercel.app/',
     desc: 'Site web adapté responsive avec des composants ui et des interactions animées.',
   },
   {
@@ -46,11 +46,24 @@ const projects = ref([
     img: 'V2.png',
     desc: 'Extension chrome qui permet de synchroniser une série Netflix à plusieurs personnes.',
   },
+
+  {
+    name: 'Sciredev',
+    link: 'https://sciredev.com/',
+    img: 'sciredev.png',
+    desc: 'Blog sur le developpement web et mobile. Ou je partage tutoriel et news sur la tech. Dans le future je pense le transformer en une plateforme de formation.',
+  },
+  {
+    name: 'Journal du cuistot',
+    link: 'https://journalducuistot.fr/',
+    img: 'journalducuistot.png',
+    desc: 'Blog de cuisine ou je partage mes recettes et mes astuces culinaires.',
+  },
 ])
 
 </script>
 
-<style lang="postcss"  scoped>
+<style lang="postcss" scoped>
 .portfolio {
   &-container {
     overflow: hidden;
