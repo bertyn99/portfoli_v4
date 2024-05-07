@@ -18,6 +18,7 @@ module.exports = {
     extend: {
       fontFamily: {
         poppins: "'Poppins', sans-serif",
+        barlow: "'Barlow', sans-serif",
       },
       typography: (theme) => ({
         DEFAULT: {
@@ -49,5 +50,5 @@ module.exports = {
   variants: {
     extend: {},
   },
-  plugins: [require("@tailwindcss/typography")],
+  plugins: [require("@tailwindcss/typography"),require("tailwindcss-animate")],
 };

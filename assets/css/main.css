@@ -3,115 +3,111 @@
 @tailwind utilities;
 @tailwind screens;
 
-:root{
-    --hue-color:250;
-    --first-color:hsl(var(--hue-color),69%,61%);
-    --first-color-second:hsl(var(--hue-color),69%,61%);
-    --first-color-alt:hsl(var(--hue-color),57%,53%);
-     --first-color-lighter:hsl(var(--hue-color),92%,95%);
-    --title-color:hsl(var(--hue-color),8%,15%);
-    --text-color:hsl(var(--hue-color),8%,45%);
-    --text-color-light:hsl(var(--hue-color),8%,65%);
-    --input-color:hsl(var(--hue-color),70%,96%);
-    --body-color:hsl(var(--hue-color),60%,99%);
-    --container-color:#FFF;
+:root {
+  --hue-color: 250;
+  --first-color: hsl(var(--hue-color), 69%, 61%);
+  --first-color-second: hsl(var(--hue-color), 69%, 61%);
+  --first-color-alt: hsl(var(--hue-color), 57%, 53%);
+  --first-color-lighter: hsl(var(--hue-color), 92%, 95%);
+  --title-color: hsl(var(--hue-color), 8%, 15%);
+  --text-color: hsl(var(--hue-color), 8%, 45%);
+  --text-color-light: hsl(var(--hue-color), 8%, 65%);
+  --input-color: hsl(var(--hue-color), 70%, 96%);
+  --body-color: hsl(var(--hue-color), 60%, 99%);
+  --container-color: #fff;
 }
-.dark{
-    --first-color-second:hsl(var(--hue-color),30%,8%);
-    --title-color:hsl(var(--hue-color),8%,95%);
-    --text-color:hsl(var(--hue-color),8%,75%);
-    --input-color:hsl(var(--hue-color),29%,18%);
-    --body-color:hsl(var(--hue-color),28%,12%);
-    --container-color:hsl(var(--hue-color),29%,16%);
+.dark {
+  --first-color-second: hsl(var(--hue-color), 30%, 8%);
+  --title-color: hsl(var(--hue-color), 8%, 95%);
+  --text-color: hsl(var(--hue-color), 8%, 75%);
+  --input-color: hsl(var(--hue-color), 29%, 18%);
+  --body-color: hsl(var(--hue-color), 28%, 12%);
+  --container-color: hsl(var(--hue-color), 29%, 16%);
 }
-@layer base{
-    @font-face{
-        font-family:'Poppins';
-        font-weight:400;
-         font-style: Regular;
-        src:url('~assets/fonts/Poppins-Regular.ttf') format('ttf')
-    }
-    @font-face{
-        font-family:'Poppins';
-        font-weight:500;
-         font-style: medium;
-        src:url('~assets/fonts/Poppins-Medium.ttf') format('ttf')
-    }
-    @font-face{
-        font-family:'Poppins';
-        font-weight:600;
-        font-style:semibold;
-        src:url('~assets/fonts/Poppins-SemiBold.ttf') format('ttf')
-    }
+@layer base {
+  @font-face {
+    font-family: "Poppins";
+    font-weight: 400;
+    font-style: Regular;
+    src: url("~assets/fonts/Poppins-Regular.ttf") format("ttf");
+  }
+  @font-face {
+    font-family: "Poppins";
+    font-weight: 500;
+    font-style: medium;
+    src: url("~assets/fonts/Poppins-Medium.ttf") format("ttf");
+  }
+  @font-face {
+    font-family: "Poppins";
+    font-weight: 600;
+    font-style: semibold;
+    src: url("~assets/fonts/Poppins-SemiBold.ttf") format("ttf");
+  }
 
-    body {
-        @apply font-poppins text-base mb-8 text-primary-text;
-        @screen lg{
-            @apply m-0
-        }
+  body {
+    @apply font-barlow text-base mb-8 text-primary-text;
+    @screen lg {
+      @apply m-0;
     }
+  }
 
-    html{
-        scroll-behavior: smooth;
-    }
+  html {
+    scroll-behavior: smooth;
+  }
 
-    h1,h2,h3,h4{
-        @apply text-primary-title font-semibold
-    }
-    img{
-       @apply max-w-full h-auto;
-    }
-    
+  h1,
+  h2,
+  h3,
+  h4 {
+    @apply text-primary-title font-semibold;
+  }
+  img {
+    @apply max-w-full h-auto;
+  }
 }
 
 /*Reusable css class*/
-.section{
- @apply pt-8 pb-16 bg-primary-container ;
-    @screen lg{
-        @apply pt-24 px-0 pb-8;
-    }
-  &-title{
-    @apply text-xl text-center;
-  
+.section {
+  @apply pt-8 pb-16 bg-primary-container;
+  @screen lg {
+    @apply pt-24 px-0 pb-8;
   }
-  &-subtitle{
-      @apply block text-base mb-6 text-center;
-      @screen lg{
-          @apply mb-8
-      }
+  &-title {
+    @apply text-xl text-center font-black font-barlow;
+  }
+  &-subtitle {
+    @apply block text-2xl leading-6 font-black mb-6 text-center text-primary-second uppercase font-barlow;
+    @screen lg {
+      @apply mb-8;
+    }
   }
 }
 
-.button{
-    @apply bg-primary text-white p-4  rounded-md font-medium;
-    &-icon{
-        @apply h-6 w-6 ml-2 transition duration-300;
-    }
-    &:hover{
-        @apply bg-primary-alt;
-    }
-    &-flex{
-        @apply inline-flex items-center
-    }
-    &-small{
-        @apply py-3 px-4;
-    }
-    &-link{
+.button {
+  @apply bg-primary text-white p-4  rounded-md font-medium;
+  &-icon {
+    @apply h-6 w-6 ml-2 transition duration-300;
+  }
+  &:hover {
+    @apply bg-primary-alt;
+  }
+  &-flex {
+    @apply inline-flex items-center;
+  }
+  &-small {
+    @apply py-3 px-4;
+  }
+  &-link {
     @apply p-0 bg-transparent text-primary;
-    &:hover{
-        @apply text-primary-alt;
+    &:hover {
+      @apply text-primary-alt;
     }
-}
-&-white{
+  }
+  &-white {
     @apply bg-white text-primary;
 
-    &:hover{
-        @apply bg-primary-alt text-white transition duration-300
+    &:hover {
+      @apply bg-primary-alt text-white transition duration-300;
     }
+  }
 }
-}
-
-
-
-
-

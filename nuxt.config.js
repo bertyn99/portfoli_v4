@@ -1,6 +1,11 @@
 import { join } from "path";
 export default defineNuxtConfig({
-  modules: ["@nuxt/content"],
+  modules: [
+    "@nuxt/content",
+    "nuxt-icon",
+    "@nuxtjs/google-fonts",
+    "@nuxtjs/fontaine",
+  ],
   // Target: https://go.nuxtjs.dev/config-target
   target: "static",
   // Global page headers: https://go.nuxtjs.dev/config-head
@@ -24,8 +29,11 @@ export default defineNuxtConfig({
       autoprefixer: {},
     },
   },
-  // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
-  plugins: [],
+  googleFonts: {
+    families: {
+      Barlow: [200, 400, 600, 800, 900],
+    },
+  },
   // content
   content: {
     // Options
