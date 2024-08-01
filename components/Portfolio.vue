@@ -48,6 +48,12 @@ const projects = ref([
   },
 
   {
+    name: 'Carrousel Star wars',
+    link: 'https://reverent-jepsen-c6ce5c.netlify.app/',
+    img: 'star_wars.png',
+    desc: "Projet d'un client fiverr",
+  },
+  {
     name: 'Sciredev',
     link: 'https://sciredev.com/',
     img: 'sciredev.png',
@@ -89,7 +95,7 @@ const projects = ref([
   &-img {
     width: 256px;
     min-height: 150px;
-    @apply rounded-lg object-cover justify-self-center;
+    @apply rounded-lg object-cover justify-self-center aspect-video;
 
     @screen lg {
       @apply w-80;
