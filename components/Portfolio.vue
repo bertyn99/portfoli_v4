@@ -53,6 +53,13 @@ const projects = ref([
     img: 'star_wars.png',
     desc: "Projet d'un client fiverr",
   },
+
+  {
+    name: 'Site Star wars',
+    link: 'https://clever-golick-c20c5f.netlify.app/',
+    img: 'website_star_wars.png',
+    desc: "Projet de cours sur l'integration d'une api star wars",
+  },
   {
     name: 'Sciredev',
     link: 'https://sciredev.com/',
