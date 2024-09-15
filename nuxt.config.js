@@ -2,9 +2,10 @@ import { join } from "path";
 export default defineNuxtConfig({
   modules: [
     "@nuxt/content",
-    "nuxt-icon",
     "@nuxtjs/google-fonts",
     "@nuxtjs/fontaine",
+    "@nuxt/icon",
+    '@vueuse/nuxt',
   ],
   // Target: https://go.nuxtjs.dev/config-target
   target: "static",
@@ -21,6 +22,11 @@ export default defineNuxtConfig({
   }, */
 
   css: ["@/assets/css/main.css"],
+  icon: {
+    serverBundle: {
+      collections: ['uil', 'mdi'] // <!--- this
+    }
+  },
   postcss: {
     plugins: {
       "postcss-nested": {},
