@@ -6,6 +6,7 @@ export default defineNuxtConfig({
     "@nuxtjs/fontaine",
     "@nuxt/icon",
     '@vueuse/nuxt',
+    "@nuxt/image"
   ],
   // Target: https://go.nuxtjs.dev/config-target
   target: "static",

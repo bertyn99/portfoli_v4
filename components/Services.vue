@@ -2,39 +2,52 @@
   <section id="services" class="services section  animate-in  slide-in-from-bottom">
     <h2 class="text-xl text-center font-medium mb-4">EXPERTISE</h2>
     <span class="section-subtitle">& SERVICES</span>
-    <div class="services-container container grid grid-cols-4 gap-2 mx-auto px-12 sm:px-14 lg:px-20">
-      <div v-for="(service, i) in services" :key="i"
-        class=" h-48 border border-gray-200 rounded-md cursor-pointer hover:shadow-xl group   hover:bg-primary-lighter"
-        :class="[service.active ? 'bg-primary' : 'bg-primary-dark']">
-        <div class="flex flex-col h-full gap-4 justify-around items-center">
-          <Icon :name="service.icon" class="h-10 w-10 text-primary-lighter group-hover:text-primary lg:h-20 lg:w-20" />
-          <h3 class="leading-5  text-primary dark:text-white">
-            {{ service.name }}
-          </h3>
+
+
+  </section>
+  <div class="mx-auto max-w-2xl lg:max-w-6xl ">
+    <div class="lg:flex lg:items-center lg:justify-end">
+      <div class="flex justify-center lg:w-1/2 lg:justify-end lg:pr-12 px-4">
+        <div class="w-[30.375rem] flex-none lg:w-[40.5rem]">
+          <StylizedImg src="/img/laptop.jpg" alt="services" sizes="(min-width: 1024px) 36.9rem, 27.9rem"
+            class="justify-center lg:justify-end" />
         </div>
       </div>
+      <ul role="list" class="text-base text-neutral-600 mt-16 lg:mt-0 lg:w-1/2 lg:min-w-[30rem] lg:pl-4 px-6">
+        <li class="group mt-10 first:mt-0" v-for="service in services">
+          <Border class="pt-10 group-first:pt-0 group-first:before:hidden group-first:after:hidden">
+            <strong>{{ service.name }}</strong>
+            {{ service.description }}
+          </Border>
+        </li>
+      </ul>
       <!--  <div class="col-span-4 h-72 bg-primary"></div> -->
     </div>
-  </section>
+  </div>
 </template>
 
 <script setup>
 const services = [
   {
-    name: "Integration Web",
-
-    icon: "uim:web-grid",
+    name: "Developpement Web",
+    icon: "streamline:paint-palette-solid",
+    description: "Je suis spécialisés dans la création de belles pages marketing de haute qualité. Le reste du site sera une coquille qui utilise du lorem ipsum partout.",
   },
   {
-    name: "Développeur FullStack",
+    name: "Developpement d'application fullstack",
+    description: "Je suis développeurs qualifiés experts dans les derniers frameworks d'applications, comme React, Vuejs, NUxt et Nextjs.",
     icon: "ion:desktop",
   },
+
   {
-    name: "Ux/Ui Design",
-    icon: "streamline:paint-palette-solid",
+    name: "Prise en main",
+    description: "Je comprend l’importance d’avoir un CMS robuste et personnalisé pour les client. C’est pourquoi je peux pouvons gérer vos projets clients à partir de cms tels que Strapi, Nuxt Studio, Directus, etc.",
+    icon: "clarity:blocks-group-line",
   },
+
   {
-    name: "Consulting",
+    name: "Prise en main",
+    description: "Je comprend l’importance d’avoir un CMS robuste et personnalisé pour les client. C’est pourquoi je peux pouvons gérer vos projets clients à partir de cms tels que Strapi, Nuxt Studio, Directus, etc.",
     icon: "clarity:blocks-group-line",
   },
 ];
