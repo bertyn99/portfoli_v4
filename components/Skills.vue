@@ -51,20 +51,23 @@ export default {
       skills: [
         {
           name: 'Front-End',
-          time: 'Depuis +1 an',
+          time: 'Depuis +3 an',
           isOpen: true,
           lang: [
             { name: 'Php ', percentage: 75 },
             { name: 'Vue', percentage: 75 },
+            { name: 'Nuxt', percentage: 85 },
             { name: 'React', percentage: 70 },
-            { name: 'Tailwind', percentage: 80 },],
+            { name: 'Next', percentage: 80 },
+            { name: 'TailwindCss', percentage: 90 },],
         },
         {
           name: 'Back-End',
-          time: 'Depuis +1 an',
+          time: 'Depuis +2 an',
           isOpen: false,
           lang: [
             { name: 'NodeJs/Express', percentage: 90 },
+            { name: 'NestJs', percentage: 90 },
             { name: 'Laravel', percentage: 70 },
             { name: 'adonisJs', percentage: 70 }
           ],
@@ -74,9 +77,9 @@ export default {
           time: 'Depuis +6 mois',
           isOpen: false,
           lang: [
-            { name: 'Figma', percentage: 50 },
-            { name: 'UX', percentage: 40 },
-            { name: 'UI', percentage: 50 },
+            { name: 'Figma', percentage: 60 },
+            { name: 'UX', percentage: 50 },
+            { name: 'UI', percentage: 65 },
           ],
         },
       ],
