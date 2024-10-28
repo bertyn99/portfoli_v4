@@ -2,28 +2,29 @@
   <section id="services" class="services section  animate-in  slide-in-from-bottom">
     <h2 class="text-xl text-center font-medium mb-4">EXPERTISE</h2>
     <span class="section-subtitle">& SERVICES</span>
-
+    <div class="mx-auto max-w-2xl lg:max-w-6xl ">
+      <div class="lg:flex lg:items-center lg:justify-end">
+        <div class="flex justify-center lg:w-1/2 lg:justify-end lg:pr-12 px-4">
+          <div class="w-[30.375rem] flex-none lg:w-[40.5rem]">
+            <StylizedImg src="/img/laptop.jpg" alt="services" sizes="(min-width: 1024px) 36.9rem, 27.9rem"
+              class="justify-center lg:justify-end" />
+          </div>
+        </div>
+        <ul role="list" class="text-base text-neutral-600 mt-16 lg:mt-0 lg:w-1/2 lg:min-w-[30rem] lg:pl-4 px-6">
+          <li class="group mt-10 first:mt-0" v-for="service in services">
+            <Border
+              class="pt-10 group-first:pt-0 group-first:before:hidden group-first:after:hidden text-primary-text">
+              <strong class="dark:text-primary">{{ service.name }}</strong>
+              {{ service.description }}
+            </Border>
+          </li>
+        </ul>
+        <!--  <div class="col-span-4 h-72 bg-primary"></div> -->
+      </div>
+    </div>
 
   </section>
-  <div class="mx-auto max-w-2xl lg:max-w-6xl ">
-    <div class="lg:flex lg:items-center lg:justify-end">
-      <div class="flex justify-center lg:w-1/2 lg:justify-end lg:pr-12 px-4">
-        <div class="w-[30.375rem] flex-none lg:w-[40.5rem]">
-          <StylizedImg src="/img/laptop.jpg" alt="services" sizes="(min-width: 1024px) 36.9rem, 27.9rem"
-            class="justify-center lg:justify-end" />
-        </div>
-      </div>
-      <ul role="list" class="text-base text-neutral-600 mt-16 lg:mt-0 lg:w-1/2 lg:min-w-[30rem] lg:pl-4 px-6">
-        <li class="group mt-10 first:mt-0" v-for="service in services">
-          <Border class="pt-10 group-first:pt-0 group-first:before:hidden group-first:after:hidden">
-            <strong>{{ service.name }}</strong>
-            {{ service.description }}
-          </Border>
-        </li>
-      </ul>
-      <!--  <div class="col-span-4 h-72 bg-primary"></div> -->
-    </div>
-  </div>
+
 </template>
 
 <script setup>
