@@ -74,7 +74,7 @@ const projects = ref([{
 },
 {
   name: 'Click n Chill',
-  link: 'https://clicknchill.net/',
+  link: 'https://wonderful-mcnulty-82fef7.netlify.app/',
   img: 'V2.png',
   desc: 'Extension chrome qui permet de synchroniser une série Netflix à plusieurs personnes.',
   stack: [
