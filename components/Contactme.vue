@@ -66,11 +66,11 @@
           </div>
         </div>
       </div>
-      <form action="" class="contact-form grid">
+      <form @submit.prevent="sendEmails" class="contact-form grid">
         <div class="contact-inputs grid">
           <div class="contact-content">
             <label for="" class="contact-label"> Nom </label>
-            <input type="text" placeholder="Jhon Doe" class="contact-input" />
+            <input type="text" placeholder="Jhon Doe" class="contact-input" v-model="formData.name" />
           </div>
           <div class="contact-content">
             <label for="" class="contact-label">Email</label>
@@ -78,6 +78,8 @@
               type="email"
               placeholder="you@email.com"
               class="contact-input"
+              v-model="formData.email"
+              required
             />
           </div>
         </div>
@@ -87,6 +89,8 @@
             type="text"
             placeholder="Website,Serveur api ..."
             class="contact-input"
+            v-model="formData.project"
+            required
           />
         </div>
         <div class="contact-content">
@@ -96,13 +100,21 @@
             cols="0"
             rows="7"
             class="contact-input"
+            v-model="formData.message"
           />
         </div>
+        <div v-if="errorMessage" class="error-message">
+          {{ errorMessage }}
+        </div>
+        <div v-if="successMessage" class="success-message">
+          {{ successMessage }}
+        </div>
         <div>
-          <button type="submit" class="button button-flex">
-            Envoyer<svg class="button-icon" viewBox="0 0 24 24">
-              <path fill="currentColor" d="M2,21L23,12L2,3V10L17,12L2,14V21Z" />
-            </svg>
+          <button type="submit" class="button button-flex" :disabled="isLoading">
+            {{ isLoading ? 'Envoi en cours...' : 'Envoyer' }}
+        <svg v-if="!isLoading" class="button-icon" viewBox="0 0 24 24">
+          <path fill="currentColor" d="M2,21L23,12L2,3V10L17,12L2,14V21Z" />
+        </svg>
           </button>
         </div>
       </form>
@@ -110,17 +122,82 @@
   </section>
 </template>
 
-<script>
-export default {
-  data() {
-    return {
-      contact: [
-        { type: 'Telephone', content: '0659113907' },
-        { type: 'Email', content: 'bboulikou@gmail.com' },
-        { type: 'Localisation', content: 'France-Nantes' },
-      ],
+<script setup>
+import { ref } from 'vue'
+import emailjs from '@emailjs/browser'
+
+const formData = reactive({
+  name: '',
+  email: '',
+  project: '',
+  message: ''
+})
+const contact= [
+  { type: 'Telephone', content: '0659113907' },
+  { type: 'Email', content: 'bboulikou@gmail.com' },
+  { type: 'Localisation', content: 'France-Nantes' },
+]
+
+
+const isLoading = ref(false)
+const errorMessage = ref('')  
+const successMessage = ref('')
+
+const config = useRuntimeConfig()
+
+const emailService=emailjs
+
+emailService.init({
+  publicKey: config.public.EMAILJS_PUBLIC_KEY,
+})
+
+console.log(emailService)
+
+
+const sendEmails = async () => {
+  isLoading.value = true
+  errorMessage.value = ''
+  successMessage.value = ''
+
+  try {
+    const templateParams = {
+      name: formData.name,
+      email: formData.email,
+      title: formData.project,
+      message: formData.message,
     }
-  },
+console.log(  config.public.EMAILJS_SERVICE_ID,
+      config.public.EMAILJS_TEMPLATE_OWNER_ID,
+      templateParams,
+    )
+    await emailService.send(
+      config.public.EMAILJS_SERVICE_ID,
+      config.public.EMAILJS_TEMPLATE_OWNER_ID,
+      templateParams,
+    )
+
+
+    // Envoyer l'auto-réponse au client
+    await emailService.send(
+      config.public.EMAILJS_SERVICE_ID,
+      config.public.EMAILJS_TEMPLATE_REPLY_ID,{
+      ...templateParams
+    },
+      config.public.EMAILJS_PUBLIC_KEY
+    )
+
+    successMessage.value = 'Message envoyé avec succès!'
+    formData.name = ''
+    formData.email = ''
+    formData.project = ''
+    formData.message = ''
+
+  } catch (error) {
+    console.error('Erreur lors de l\'envoi:', error)
+    errorMessage.value = 'Échec de l\'envoi du message. Veuillez réessayer.'
+  } finally {
+    isLoading.value = false
+  }
 }
 </script>
 
@@ -168,5 +245,21 @@ export default {
   &-input {
     @apply w-full bg-primary-input text-primary-text font-poppins border-none outline-none pt-1 px-2 pr-0;
   }
+}
+.error-message {
+  color: #dc3545;
+  margin-top: 1rem;
+  text-align: center;
+}
+
+.success-message {
+  color: #28a745;
+  margin-top: 1rem;
+  text-align: center;
+}
+
+button:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
 }
 </style>

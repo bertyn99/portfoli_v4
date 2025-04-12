@@ -45,5 +45,13 @@ export default defineNuxtConfig({
   content: {
     // Options
   },
+  runtimeConfig: {
+    public: {
+      EMAILJS_SERVICE_ID: process.env.NUXT_PUBLIC_EMAILJS_SERVICE_ID,
+      EMAILJS_TEMPLATE_OWNER_ID: process.env.NUXT_PUBLIC_EMAILJS_TEMPLATE_ID_MYSELF,
+      EMAILJS_TEMPLATE_REPLY_ID: process.env.NUXT_PUBLIC_EMAILJS_TEMPLATE_ID_VISITOR,
+      EMAILJS_PUBLIC_KEY: process.env.NUXT_PUBLIC_EMAILJS_PUBLIC_KEY,
+    }
+  }
   // Build Configuration: https://go.nuxtjs.dev/config-build
 });

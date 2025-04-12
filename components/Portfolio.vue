@@ -54,6 +54,7 @@
 import Carousel from '@/components/Carousel/carousel.vue'
 import CarouselSlide from '@/components/Carousel/carouselSlide.vue'
 
+
 const projects = ref([{
   name: 'Site vitrine Restaurant de PokeBowls',
   img: 'hawa.png',
@@ -149,7 +150,21 @@ const projects = ref([{
     'Design responsive optimisé pour mobile et desktop',
     'Interface engageante et conviviale'
   ]
-}])
+},  {
+    name: 'Kosmonotes',
+    link: 'https://kosmonotes.com/',
+    img: 'kosmonotes.png',
+    desc: 'Application pour booster les notes de vos élèves et leur aider dans leur révision.',
+    stack: [
+    { name: 'Vue.js', icon: 'vscode-icons:file-type-vue' },
+    { name: 'Nuxt.js', icon: 'vscode-icons:file-type-nuxt' },
+    { name: 'Cloudlflare Worker', icon: 'i-devicon-cloudflareworkers' },
+
+    {name:"NuxtUi", icon:"vscode-icons:file-type-nuxt"},
+    {name: "OpenAI",icon:"i-tabler-brand-openai"},
+    {name:"llama3", icon:"i-simple-icons-ollama"},  
+  ],
+  },])
 </script>
 
 <style lang="postcss" scoped>
@@ -165,8 +180,6 @@ const projects = ref([{
 
   &-img {
     @apply rounded-lg object-cover justify-self-center aspect-video h-full;
-
-
   }
 
   &-title {
