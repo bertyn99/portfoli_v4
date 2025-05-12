@@ -26,7 +26,7 @@ export default defineNuxtConfig({
   css: ["@/assets/css/main.css"],
   icon: {
     serverBundle: {
-      collections: ['uil', 'mdi'] // <!--- this
+      collections: ['uil', 'mdi','vscode-icons'] // <!--- this
     }
   },
   postcss: {
