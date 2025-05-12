@@ -143,7 +143,7 @@ const getIconName = (skillName) => {
            backdrop-blur-sm;
 
     &:not(.spacer):hover {
-      @apply shadow-lg shadow-primary/20 scale-105 z-10;
+      @apply shadow-lg shadow-primary scale-105 z-10;
     }
 
     &.elevated:not(.spacer) {
