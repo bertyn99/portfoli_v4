@@ -1,110 +1,33 @@
-```vue
 <template>
-  <section id="skills" class="py-16">
-    <h2 class="text-xl text-center font-medium mb-4 animate-fadeIn">COMPÉTENCES</h2>
-    <span class="block text-2xl text-center mb-16 text-primary uppercase font-black animate-fadeIn">
-      MON NIVEAU TECHNIQUE
-    </span>
-
-    <div class="container mx-auto px-4">
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        <!-- Frontend Category -->
-        <div class="skill-category">
-          <div class="flex items-center gap-3 mb-6">
-            <Icon name="vscode-icons:file-type-html" class="text-4xl"/>
-            <div>
-              <h3 class="text-xl font-bold">Frontend</h3>
-              <p class="text-sm text-gray-500">3+ ans d'expérience</p>
-            </div>
+  <section id="skills" class="skills section">
+    <h2 class="section-title text-xl text-center font-medium mb-4 animate-fadeIn">COMPÉTENCES</h2>
+    <span class="section-subtitle animate-fadeIn">MON NIVEAU TECHNIQUE</span>
+    <div class="skills-container container grid mx-auto px-4 sm:px-6 lg:px-8">
+      <div v-for="(skill, i) in skills" :key="i" 
+           class="skills-content group transition-all duration-300 hover:scale-105"
+           :class="[skill.isOpen ? 'skills-open' : 'skills-close']">
+        <div class="skills-header cursor-pointer transition-colors duration-300 hover:bg-primary-lighter/10 rounded-lg p-4" 
+             @click="skill.isOpen = !skill.isOpen">
+          <Icon :name="skill.icon" class="text-3xl text-primary mr-3 transition-transform duration-300 group-hover:scale-110"/>
+          <div>
+            <h1 class="skills-title">{{ skill.name }}</h1>
+            <span class="skills-subtitle">{{ skill.time }}</span>
           </div>
-          <div class="grid gap-4">
-            <div v-for="tech in frontendTech" :key="tech.name" 
-                 class="tech-card group">
-              <div class="flex items-center gap-3">
-                <Icon :name="tech.icon" class="text-2xl"/>
-                <span class="font-medium">{{ tech.name }}</span>
-              </div>
-              <div class="mt-2 space-y-2">
-                <div class="flex justify-between text-sm">
-                  <span>Maîtrise</span>
-                  <span>{{ tech.mastery }}%</span>
-                </div>
-                <div class="h-2 bg-gray-200 rounded-full overflow-hidden">
-                  <div class="h-full bg-primary transition-all duration-1000 ease-out rounded-full"
-                       :style="{ width: `${tech.mastery}%` }">
-                  </div>
-                </div>
-                <div class="mt-3 text-sm text-gray-500">
-                  {{ tech.description }}
-                </div>
-              </div>
-            </div>
-          </div>
+          <Icon name="heroicons:chevron-down" 
+                class="ml-auto h-5 w-5 transition-transform duration-300"
+                :class="{ 'rotate-180': skill.isOpen }"/>
         </div>
-
-        <!-- Backend Category -->
-        <div class="skill-category">
-          <div class="flex items-center gap-3 mb-6">
-            <Icon name="vscode-icons:file-type-node" class="text-4xl"/>
-            <div>
-              <h3 class="text-xl font-bold">Backend</h3>
-              <p class="text-sm text-gray-500">2+ ans d'expérience</p>
+        <div class="skills-list grid transition-all duration-500 ease-in-out"
+             :class="{ 'max-h-0 opacity-0': !skill.isOpen, 'max-h-[1000px] opacity-100': skill.isOpen }">
+          <div v-for="l in skill.lang" :key="l.name" 
+               class="skills-data transform transition-all duration-500 hover:translate-x-2">
+            <div class="skills-titles">
+              <h3 class="skills-name">{{ l.name }}</h3>
+              <span class="skills-number">{{ l.percentage }}%</span>
             </div>
-          </div>
-          <div class="grid gap-4">
-            <div v-for="tech in backendTech" :key="tech.name" 
-                 class="tech-card group">
-              <div class="flex items-center gap-3">
-                <Icon :name="tech.icon" class="text-2xl"/>
-                <span class="font-medium">{{ tech.name }}</span>
-              </div>
-              <div class="mt-2 space-y-2">
-                <div class="flex justify-between text-sm">
-                  <span>Maîtrise</span>
-                  <span>{{ tech.mastery }}%</span>
-                </div>
-                <div class="h-2 bg-gray-200 rounded-full overflow-hidden">
-                  <div class="h-full bg-primary transition-all duration-1000 ease-out rounded-full"
-                       :style="{ width: `${tech.mastery}%` }">
-                  </div>
-                </div>
-                <div class="mt-3 text-sm text-gray-500">
-                  {{ tech.description }}
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Tools & Design Category -->
-        <div class="skill-category">
-          <div class="flex items-center gap-3 mb-6">
-            <Icon name="vscode-icons:file-type-figma" class="text-4xl"/>
-            <div>
-              <h3 class="text-xl font-bold">Outils & Design</h3>
-              <p class="text-sm text-gray-500">6+ mois d'expérience</p>
-            </div>
-          </div>
-          <div class="grid gap-4">
-            <div v-for="tech in toolsTech" :key="tech.name" 
-                 class="tech-card group">
-              <div class="flex items-center gap-3">
-                <Icon :name="tech.icon" class="text-2xl"/>
-                <span class="font-medium">{{ tech.name }}</span>
-              </div>
-              <div class="mt-2 space-y-2">
-                <div class="flex justify-between text-sm">
-                  <span>Maîtrise</span>
-                  <span>{{ tech.mastery }}%</span>
-                </div>
-                <div class="h-2 bg-gray-200 rounded-full overflow-hidden">
-                  <div class="h-full bg-primary transition-all duration-1000 ease-out rounded-full"
-                       :style="{ width: `${tech.mastery}%` }">
-                  </div>
-                </div>
-                <div class="mt-3 text-sm text-gray-500">
-                  {{ tech.description }}
-                </div>
+            <div class="skills-bar bg-primary-lighter/20 rounded-full overflow-hidden">
+              <div class="skills-percentage h-full bg-primary rounded-full transition-all duration-1000 ease-out"
+                   :style="{ width: l.percentage + '%', transform: skill.isOpen ? 'scaleX(1)' : 'scaleX(0)' }">
               </div>
             </div>
           </div>
@@ -115,78 +38,99 @@
 </template>
 
 <script setup>
-const frontendTech = [
+const skills = ref([
   {
-    name: 'Vue.js/Nuxt',
-    icon: 'vscode-icons:file-type-vue',
-    mastery: 85,
-    description: 'Développement d\'applications complexes, SSR, et optimisation des performances'
+    name: 'Front-End',
+    time: 'Depuis +3 ans',
+    isOpen: true,
+    icon: 'vscode-icons:file-type-html',
+    lang: [
+      { name: 'PHP', percentage: 75 },
+      { name: 'Vue', percentage: 75 },
+      { name: 'Nuxt', percentage: 85 },
+      { name: 'React', percentage: 70 },
+      { name: 'Next', percentage: 80 },
+      { name: 'TailwindCSS', percentage: 90 },
+    ],
   },
   {
-    name: 'React/Next.js',
-    icon: 'vscode-icons:file-type-reactjs',
-    mastery: 80,
-    description: 'Creation d\'interfaces utilisateur réactives et gestion d\'état'
-  },
-  {
-    name: 'TailwindCSS',
-    icon: 'vscode-icons:file-type-tailwind',
-    mastery: 90,
-    description: 'Création d\'interfaces modernes et responsive avec une approche utility-first'
-  }
-]
-
-const backendTech = [
-  {
-    name: 'Node.js/Express',
+    name: 'Back-End',
+    time: 'Depuis +2 ans',
+    isOpen: false,
     icon: 'vscode-icons:file-type-node',
-    mastery: 90,
-    description: 'APIs RESTful, authentification, et intégration de bases de données'
+    lang: [
+      { name: 'NodeJs/Express', percentage: 90 },
+      { name: 'NestJs', percentage: 90 },
+      { name: 'Laravel', percentage: 70 },
+      { name: 'AdonisJs', percentage: 70 }
+    ],
   },
   {
-    name: 'NestJS',
-    icon: 'vscode-icons:file-type-nest',
-    mastery: 90,
-    description: 'Architecture modulaire, microservices, et injection de dépendances'
-  },
-  {
-    name: 'Laravel',
-    icon: 'vscode-icons:file-type-php',
-    mastery: 70,
-    description: 'Développement d\'applications web full-stack avec PHP'
-  }
-]
-
-const toolsTech = [
-  {
-    name: 'Figma',
+    name: 'Design',
+    time: 'Depuis +6 mois',
+    isOpen: false,
     icon: 'vscode-icons:file-type-figma',
-    mastery: 60,
-    description: 'Création de maquettes et prototypes interactifs'
+    lang: [
+      { name: 'Figma', percentage: 60 },
+      { name: 'UX', percentage: 50 },
+      { name: 'UI', percentage: 65 },
+    ],
   },
-  {
-    name: 'UI Design',
-    icon: 'mdi:palette-outline',
-    mastery: 65,
-    description: 'Conception d\'interfaces utilisateur modernes et intuitives'
-  },
-  {
-    name: 'UX Design',
-    icon: 'mdi:account-group-outline',
-    mastery: 50,
-    description: 'Recherche utilisateur et conception d\'expériences fluides'
-  }
-]
+])
 </script>
 
-<style lang="postcss" scoped>
-.skill-category {
-  @apply bg-white/5 backdrop-blur-sm rounded-xl p-6 shadow-lg;
+<style lang="postcss">
+.skills {
+  @apply py-16;
+
+  &-container {
+    @screen md {
+      @apply grid-cols-2 gap-8;
+    }
+  }
+
+  &-content {
+    @apply bg-white/5 backdrop-blur-sm rounded-xl p-4 mb-8 shadow-lg;
+  }
+
+  &-header {
+    @apply flex items-center mb-6;
+  }
+
+  &-title {
+    @apply text-lg font-semibold;
+  }
+
+  &-subtitle {
+    @apply text-sm text-primary-textLight;
+  }
+
+  &-list {
+    @apply gap-y-6 pl-11 overflow-hidden;
+  }
+
+  &-titles {
+    @apply flex justify-between mb-2;
+  }
+
+  &-name {
+    @apply text-base font-medium;
+  }
+
+  &-bar {
+    @apply h-2;
+  }
+
+  &-percentage {
+    @apply transform-gpu origin-left;
+  }
+
+  &-close &-list {
+    @apply max-h-0 opacity-0;
+  }
 }
 
-.tech-card {
-  @apply bg-white/10 rounded-lg p-4 transition-all duration-300 hover:bg-white/20;
-  @apply transform hover:-translate-y-1 hover:shadow-xl;
+.section-subtitle {
+  @apply block text-2xl text-center mb-16 text-primary uppercase font-black;
 }
 </style>
-```
