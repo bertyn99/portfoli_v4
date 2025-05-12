@@ -34,7 +34,7 @@
             <template v-if="cell.icon">
               <div class="skill-content group">
                 <Icon :name="cell.icon" 
-                      class="skill-icon"
+                      class="skill-icon "
                       :aria-label="cell.name"/>
                 <div class="skill-tooltip">{{ cell.name }}</div>
               </div>
@@ -67,9 +67,10 @@ const skills = ref([
     selected: false,
     lang: [
       { name: 'NodeJs', icon: 'vscode-icons:file-type-node' },
-      { name: 'NestJs', icon: 'vscode-icons:file-type-nest' },
-      { name: 'Laravel', icon: 'vscode-icons:file-type-php' },
-      { name: 'AdonisJs', icon: 'vscode-icons:file-type-js' }
+      { name: 'NestJs', icon: 'i-vscode-icons-file-type-nestjs' },
+      { name: 'Laravel', icon: 'logos:laravel' },
+      { name: 'PHP', icon: 'vscode-icons:file-type-php' },
+      { name: 'AdonisJs', icon: 'logos:adonisjs-icon' }
     ],
   },
   {
@@ -77,8 +78,8 @@ const skills = ref([
     selected: false,
     lang: [
       { name: 'Figma', icon: 'logos:figma' },
-      { name: 'UX', icon: 'mdi:palette-outline' },
-      { name: 'UI', icon: 'mdi:palette-swatch-outline' },
+      { name: 'UX', icon: 'majesticons:ux-circle-line' },
+      { name: 'UI', icon: 'material-symbols:cloudbuild' },
     ],
   },
 ])
@@ -86,7 +87,7 @@ const skills = ref([
 // Create a 6x6 grid with skills and empty cells
 const gridRows = computed(() => {
   const grid = []
-  const totalRows = 3
+  const totalRows = 4
   const totalCols = 6
   let skillIndex = 0
 
@@ -127,18 +128,18 @@ const selectCategory = (index) => {
 
 <style lang="postcss">
 .skills {
-  @apply py-16;
+  @apply py-14;
 
   .skills-container {
-    @apply mt-12;
+    @apply mt-8;
   }
 
   .category-tabs {
-    @apply flex justify-center gap-4 mb-12;
+    @apply flex justify-center gap-4 mb-10;
   }
 
   .category-tab {
-    @apply px-6 py-2 rounded-full transition-all duration-300
+    @apply px-6 py-2 rounded-md transition-all duration-300
            text-primary-text hover:text-primary hover:bg-primary-lighter;
 
     &.active {
@@ -147,13 +148,13 @@ const selectCategory = (index) => {
   }
 
   .skills-grid {
-    @apply grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4 
+    @apply grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-2
            max-w-6xl mx-auto;
   }
 
   .skill-cell {
-    @apply aspect-square rounded-xl p-4 transition-all duration-300
-           relative flex items-center justify-center;
+    @apply aspect-square rounded-xl p-2 transition-all duration-300
+           relative flex items-center justify-center max-h-36;
 
     &.elevated {
       @apply transform -translate-y-2 shadow-xl shadow-primary bg-primary text-white;
@@ -168,7 +169,7 @@ const selectCategory = (index) => {
     }
 
     &.chess-light {
-      @apply bg-primary-lighter border border-primary;
+      @apply bg-primary-input border border-primary  dark:text-white;
     }
 
     &.glass-effect {
@@ -190,10 +191,10 @@ const selectCategory = (index) => {
   }
 
   .skill-tooltip {
-    @apply absolute -top-10 left-1/2 -translate-x-1/2 px-3 py-1 
-           bg-primary text-white text-sm rounded-md opacity-0
+    @apply  absolute -top-8 left-1/2 -translate-x-1/2 px-2 py-1
+           bg-primary text-white text-xs rounded-md opacity-0
            pointer-events-none transition-opacity duration-200
-           group-hover:opacity-100;
+           group-hover:opacity-100 z-10;
 
     &::after {
       content: '';

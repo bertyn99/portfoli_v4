@@ -2,9 +2,11 @@ import { join } from "path";
 export default defineNuxtConfig({
   modules: [
     "@nuxt/content",
+
     "@nuxtjs/google-fonts",
     "@nuxtjs/fontaine",
     "@nuxt/icon",
+    '@nuxtjs/tailwindcss',
     '@vueuse/nuxt',
     "@nuxt/image"
   ],
