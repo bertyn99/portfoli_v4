@@ -85,7 +85,7 @@ const skills = ref([
 // Create a 6x6 grid with skills and empty cells
 const gridRows = computed(() => {
   const grid = []
-  const totalRows = 4
+  const totalRows = 3
   const totalCols = 6
   let skillIndex = 0
 
