@@ -156,7 +156,7 @@ const selectCategory = (index) => {
            relative flex items-center justify-center;
 
     &.elevated {
-      @apply transform -translate-y-2 shadow-xl shadow-primary/30 bg-primary text-white;
+      @apply transform -translate-y-2 shadow-xl shadow-primary bg-primary text-white;
     }
 
     &.dimmed {
