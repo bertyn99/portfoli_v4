@@ -97,7 +97,7 @@ const getIconName = (skillName) => {
 
   .skill-item {
     @apply aspect-square rounded-xl p-4 transition-all duration-300
-           hover:shadow-lg hover:shadow-xl;
+           hover:shadow-lg hover:shadow-primary-500/20;
   }
 
   .skill-icon-wrapper {
