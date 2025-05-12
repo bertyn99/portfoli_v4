@@ -2,33 +2,19 @@
   <section id="skills" class="skills section">
     <h2 class="section-title text-xl text-center font-medium mb-4 animate-fadeIn">COMPÉTENCES</h2>
     <span class="section-subtitle animate-fadeIn">MON NIVEAU TECHNIQUE</span>
-    <div class="skills-container container grid mx-auto px-4 sm:px-6 lg:px-8">
-      <div v-for="(skill, i) in skills" :key="i" 
-           class="skills-content group transition-all duration-300 hover:scale-105"
-           :class="[skill.isOpen ? 'skills-open' : 'skills-close']">
-        <div class="skills-header cursor-pointer transition-colors duration-300 hover:bg-primary-lighter/10 rounded-lg p-4" 
-             @click="skill.isOpen = !skill.isOpen">
-          <Icon :name="skill.icon" class="text-3xl text-primary mr-3 transition-transform duration-300 group-hover:scale-110"/>
-          <div>
-            <h1 class="skills-title">{{ skill.name }}</h1>
-            <span class="skills-subtitle">{{ skill.time }}</span>
-          </div>
-          <Icon name="heroicons:chevron-down" 
-                class="ml-auto h-5 w-5 transition-transform duration-300"
-                :class="{ 'rotate-180': skill.isOpen }"/>
-        </div>
-        <div class="skills-list grid transition-all duration-500 ease-in-out"
-             :class="{ 'max-h-0 opacity-0': !skill.isOpen, 'max-h-[1000px] opacity-100': skill.isOpen }">
-          <div v-for="l in skill.lang" :key="l.name" 
-               class="skills-data transform transition-all duration-500 hover:translate-x-2">
-            <div class="skills-titles">
-              <h3 class="skills-name">{{ l.name }}</h3>
-              <span class="skills-number">{{ l.percentage }}%</span>
-            </div>
-            <div class="skills-bar bg-primary-lighter/20 rounded-full overflow-hidden">
-              <div class="skills-percentage h-full bg-primary rounded-full transition-all duration-1000 ease-out"
-                   :style="{ width: l.percentage + '%', transform: skill.isOpen ? 'scaleX(1)' : 'scaleX(0)' }">
-              </div>
+    
+    <div class="skills-grid container mx-auto px-4 sm:px-6 lg:px-8">
+      <div v-for="(category, categoryIndex) in skills" :key="categoryIndex" class="skill-category">
+        <h3 class="category-title">{{ category.name }}</h3>
+        <div class="skill-items">
+          <div v-for="(skill, skillIndex) in category.lang" :key="skillIndex"
+               class="skill-item"
+               :class="{ 'bg-primary/10': (categoryIndex + skillIndex) % 2 === 0 }">
+            <div class="skill-icon-wrapper group">
+              <Icon :name="getIconName(skill.name)" 
+                    class="skill-icon group-hover:scale-110 group-hover:translate-y-[-4px] transition-all duration-300"
+                    :title="skill.name"/>
+              <span class="skill-tooltip">{{ skill.name }}</span>
             </div>
           </div>
         </div>
@@ -41,92 +27,98 @@
 const skills = ref([
   {
     name: 'Front-End',
-    time: 'Depuis +3 ans',
-    isOpen: true,
-    icon: 'vscode-icons:file-type-html',
     lang: [
-      { name: 'PHP', percentage: 75 },
-      { name: 'Vue', percentage: 75 },
-      { name: 'Nuxt', percentage: 85 },
-      { name: 'React', percentage: 70 },
-      { name: 'Next', percentage: 80 },
-      { name: 'TailwindCSS', percentage: 90 },
+      { name: 'HTML/CSS' },
+      { name: 'Vue' },
+      { name: 'Nuxt' },
+      { name: 'React' },
+      { name: 'Next' },
+      { name: 'TailwindCSS' },
     ],
   },
   {
     name: 'Back-End',
-    time: 'Depuis +2 ans',
-    isOpen: false,
-    icon: 'vscode-icons:file-type-node',
     lang: [
-      { name: 'NodeJs/Express', percentage: 90 },
-      { name: 'NestJs', percentage: 90 },
-      { name: 'Laravel', percentage: 70 },
-      { name: 'AdonisJs', percentage: 70 }
+      { name: 'NodeJs' },
+      { name: 'NestJs' },
+      { name: 'Laravel' },
+      { name: 'AdonisJs' }
     ],
   },
   {
     name: 'Design',
-    time: 'Depuis +6 mois',
-    isOpen: false,
-    icon: 'vscode-icons:file-type-figma',
     lang: [
-      { name: 'Figma', percentage: 60 },
-      { name: 'UX', percentage: 50 },
-      { name: 'UI', percentage: 65 },
+      { name: 'Figma' },
+      { name: 'UX' },
+      { name: 'UI' },
     ],
   },
 ])
+
+const getIconName = (skillName) => {
+  const iconMap = {
+    'HTML/CSS': 'vscode-icons:file-type-html',
+    'Vue': 'vscode-icons:file-type-vue',
+    'Nuxt': 'vscode-icons:file-type-nuxt',
+    'React': 'vscode-icons:file-type-reactjs',
+    'Next': 'vscode-icons:file-type-next',
+    'TailwindCSS': 'vscode-icons:file-type-tailwind',
+    'NodeJs': 'vscode-icons:file-type-node',
+    'NestJs': 'vscode-icons:file-type-nest',
+    'Laravel': 'vscode-icons:file-type-php',
+    'AdonisJs': 'vscode-icons:file-type-js',
+    'Figma': 'vscode-icons:file-type-figma',
+    'UX': 'mdi:palette-outline',
+    'UI': 'mdi:palette-swatch-outline',
+  }
+  return iconMap[skillName] || 'mdi:code-tags'
+}
 </script>
 
 <style lang="postcss">
 .skills {
   @apply py-16;
 
-  &-container {
-    @screen md {
-      @apply grid-cols-2 gap-8;
+  &-grid {
+    @apply mt-12 space-y-12;
+  }
+
+  .skill-category {
+    @apply space-y-6;
+  }
+
+  .category-title {
+    @apply text-2xl font-bold text-primary mb-6;
+  }
+
+  .skill-items {
+    @apply grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4;
+  }
+
+  .skill-item {
+    @apply aspect-square rounded-xl p-4 transition-all duration-300
+           hover:shadow-lg hover:shadow-primary/20;
+  }
+
+  .skill-icon-wrapper {
+    @apply relative flex items-center justify-center h-full;
+  }
+
+  .skill-icon {
+    @apply w-12 h-12 text-primary;
+  }
+
+  .skill-tooltip {
+    @apply absolute -top-10 left-1/2 -translate-x-1/2 px-3 py-1 
+           bg-gray-900 text-white text-sm rounded-md opacity-0
+           pointer-events-none transition-all duration-300
+           group-hover:opacity-100 group-hover:-top-12;
+
+    &::after {
+      content: '';
+      @apply absolute top-full left-1/2 -translate-x-1/2
+             border-4 border-transparent border-t-gray-900;
     }
-  }
-
-  &-content {
-    @apply bg-white/5 backdrop-blur-sm rounded-xl p-4 mb-8 shadow-lg;
-  }
-
-  &-header {
-    @apply flex items-center mb-6;
-  }
-
-  &-title {
-    @apply text-lg font-semibold;
-  }
-
-  &-subtitle {
-    @apply text-sm text-primary-textLight;
-  }
-
-  &-list {
-    @apply gap-y-6 pl-11 overflow-hidden;
-  }
-
-  &-titles {
-    @apply flex justify-between mb-2;
-  }
-
-  &-name {
-    @apply text-base font-medium;
-  }
-
-  &-bar {
-    @apply h-2;
-  }
-
-  &-percentage {
-    @apply transform-gpu origin-left;
-  }
-
-  &-close &-list {
-    @apply max-h-0 opacity-0;
   }
 }
 
