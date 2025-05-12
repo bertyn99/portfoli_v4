@@ -4,37 +4,19 @@
     <span class="section-subtitle animate-fadeIn">MON NIVEAU TECHNIQUE</span>
     
     <div class="skills-grid container mx-auto px-4 sm:px-6 lg:px-8">
-      <div v-for="(category, categoryIndex) in skills" :key="categoryIndex" 
-           class="skill-category"
-           :class="{ 'active': activeCategory === category.name }"
-           @mouseenter="activeCategory = category.name"
-           @mouseleave="activeCategory = null">
+      <div v-for="(category, categoryIndex) in skills" :key="categoryIndex" class="skill-category">
         <h3 class="category-title">{{ category.name }}</h3>
         <div class="skill-items">
-          <template v-for="(item, itemIndex) in getGridItems(category.lang)" :key="itemIndex">
-            <div v-if="item.type === 'skill'" 
-                 class="skill-item"
-                 :class="[
-                   getChessboardClass(categoryIndex, itemIndex),
-                   {'elevated': activeCategory === category.name}
-                 ]"
-                 role="button"
-                 :aria-label="item.name">
-              <div class="skill-content">
-                <div class="skill-icon-wrapper group">
-                  <Icon :name="getIconName(item.name)" 
-                        class="skill-icon group-hover:scale-110 transition-all duration-300"
-                        :title="item.name"/>
-                  <span class="skill-tooltip">{{ item.name }}</span>
-                </div>
-              </div>
+          <div v-for="(skill, skillIndex) in category.lang" :key="skillIndex"
+               class="skill-item"
+               :class="{ 'bg-primary/10': (categoryIndex + skillIndex) % 2 === 0 }">
+            <div class="skill-icon-wrapper group">
+              <Icon :name="getIconName(skill.name)" 
+                    class="skill-icon group-hover:scale-110 group-hover:translate-y-[-4px] transition-all duration-300"
+                    :title="skill.name"/>
+              <span class="skill-tooltip">{{ skill.name }}</span>
             </div>
-            <div v-else 
-                 class="skill-item spacer"
-                 :class="getChessboardClass(categoryIndex, itemIndex)">
-              <div class="glass-effect"></div>
-            </div>
-          </template>
+          </div>
         </div>
       </div>
     </div>
@@ -42,8 +24,6 @@
 </template>
 
 <script setup>
-const activeCategory = ref(null)
-
 const skills = ref([
   {
     name: 'Front-End',
@@ -75,25 +55,6 @@ const skills = ref([
   },
 ])
 
-const getGridItems = (skills) => {
-  const items = [...skills.map(skill => ({ type: 'skill', ...skill }))]
-  // Add spacer items between skills
-  const spacersCount = Math.ceil(items.length * 0.3) // 30% more items as spacers
-  for (let i = 0; i < spacersCount; i++) {
-    const randomIndex = Math.floor(Math.random() * items.length)
-    items.splice(randomIndex, 0, { type: 'spacer' })
-  }
-  return items
-}
-
-const getChessboardClass = (categoryIndex, itemIndex) => {
-  const isEven = (categoryIndex + itemIndex) % 2 === 0
-  return {
-    'bg-primary/5 dark:bg-primary/10': isEven,
-    'bg-primary/10 dark:bg-primary/15': !isEven
-  }
-}
-
 const getIconName = (skillName) => {
   const iconMap = {
     'HTML/CSS': 'vscode-icons:file-type-html',
@@ -119,15 +80,11 @@ const getIconName = (skillName) => {
   @apply py-16;
 
   &-grid {
-    @apply mt-12 space-y-16;
+    @apply mt-12 space-y-12;
   }
 
   .skill-category {
     @apply space-y-6;
-
-    &.active .skill-item:not(.spacer) {
-      @apply translate-y-[-4px];
-    }
   }
 
   .category-title {
@@ -139,29 +96,8 @@ const getIconName = (skillName) => {
   }
 
   .skill-item {
-    @apply aspect-square rounded-xl p-4 transition-all duration-300 relative
-           backdrop-blur-sm;
-
-    &:not(.spacer):hover {
-      @apply shadow-lg shadow-primary scale-105 z-10;
-    }
-
-    &.elevated:not(.spacer) {
-      @apply shadow-md shadow-primary;
-    }
-
-    &.spacer {
-      @apply overflow-hidden;
-      
-      .glass-effect {
-        @apply absolute inset-0 bg-white/5 backdrop-blur-md
-               border border-white/10 rounded-xl;
-      }
-    }
-  }
-
-  .skill-content {
-    @apply relative h-full flex items-center justify-center;
+    @apply aspect-square rounded-xl p-4 transition-all duration-300
+           hover:shadow-lg hover:shadow-primary;
   }
 
   .skill-icon-wrapper {
@@ -176,7 +112,7 @@ const getIconName = (skillName) => {
     @apply absolute -top-10 left-1/2 -translate-x-1/2 px-3 py-1 
            bg-gray-900 text-white text-sm rounded-md opacity-0
            pointer-events-none transition-all duration-300
-           group-hover:opacity-100 group-hover:-top-12 z-20;
+           group-hover:opacity-100 group-hover:-top-12;
 
     &::after {
       content: '';
