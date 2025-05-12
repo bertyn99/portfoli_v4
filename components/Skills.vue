@@ -163,7 +163,7 @@ const selectCategory = (index) => {
     }
 
     &.chess-dark {
-      @apply bg-primary/5;
+      @apply bg-primary;
     }
 
     &.glass-effect {
