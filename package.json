@@ -13,8 +13,7 @@
   "dependencies": {
     "@emailjs/browser": "^4.4.1",
     "dotenv": "^16.4.5",
-    "tailwindcss-animate": "^1.0.7",
-    "framer-motion": "^10.16.4"
+    "tailwindcss-animate": "^1.0.7"
   },
   "devDependencies": {
     "@iconify-json/mdi": "^1.2.1",
