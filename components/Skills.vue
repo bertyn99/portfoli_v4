@@ -152,7 +152,7 @@ const selectCategory = (index) => {
 
   .skill-cell {
     @apply aspect-square rounded-xl p-4 transition-all duration-300
-           relative flex items-center justify-center border border-primary-input;
+           relative flex items-center justify-center border border-primary;
 
     &.elevated {
       @apply transform -translate-y-2 shadow-xl shadow-primary bg-primary-lighter;
