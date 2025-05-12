@@ -152,10 +152,10 @@ const selectCategory = (index) => {
 
   .skill-cell {
     @apply aspect-square rounded-xl p-4 transition-all duration-300
-           relative flex items-center justify-center;
+           relative flex items-center justify-center border border-primary/20;
 
     &.elevated {
-      @apply transform -translate-y-2 shadow-xl shadow-primary;
+      @apply transform -translate-y-2 shadow-xl shadow-primary/30 bg-primary/10;
     }
 
     &.dimmed {
@@ -163,11 +163,11 @@ const selectCategory = (index) => {
     }
 
     &.chess-dark {
-      @apply bg-primary;
+      @apply bg-primary/5;
     }
 
     &.glass-effect {
-      @apply backdrop-blur-sm bg-white/10 border border-white/20;
+      @apply backdrop-blur-sm bg-primary/5 border-primary/10;
     }
   }
 
@@ -176,20 +176,20 @@ const selectCategory = (index) => {
   }
 
   .skill-icon {
-    @apply w-12 h-12 text-primary transition-transform duration-300
+    @apply w-12 h-12 transition-transform duration-300
            group-hover:scale-110 group-hover:transform group-hover:-translate-y-1;
   }
 
   .skill-tooltip {
     @apply absolute -top-10 left-1/2 -translate-x-1/2 px-3 py-1 
-           bg-gray-900 text-white text-sm rounded-md opacity-0
+           bg-primary text-white text-sm rounded-md opacity-0
            pointer-events-none transition-opacity duration-200
            group-hover:opacity-100;
 
     &::after {
       content: '';
       @apply absolute top-full left-1/2 -translate-x-1/2
-             border-4 border-transparent border-t-gray-900;
+             border-4 border-transparent border-t-primary;
     }
   }
 }
