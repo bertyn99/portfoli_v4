@@ -2,76 +2,125 @@
   <section id="skills" class="skills section">
     <h2 class="section-title text-xl text-center font-medium mb-4 animate-fadeIn">COMPÉTENCES</h2>
     <span class="section-subtitle animate-fadeIn">MON NIVEAU TECHNIQUE</span>
-    
-    <div class="skills-grid container mx-auto px-4 sm:px-6 lg:px-8">
-      <div v-for="(category, categoryIndex) in skills" :key="categoryIndex" class="skill-category">
-        <h3 class="category-title">{{ category.name }}</h3>
-        <div class="skill-items">
-          <div v-for="(skill, skillIndex) in category.lang" :key="skillIndex"
-               class="skill-item"
-               :class="{ 'bg-primary/10': (categoryIndex + skillIndex) % 2 === 0 }">
-            <div class="skill-icon-wrapper group">
-              <Icon :name="getIconName(skill.name)" 
-                    class="skill-icon group-hover:scale-110 group-hover:translate-y-[-4px] transition-all duration-300"
-                    :title="skill.name"/>
-              <span class="skill-tooltip">{{ skill.name }}</span>
-            </div>
+
+    <div class="skills-container container mx-auto px-4 sm:px-6 lg:px-8">
+      <!-- Category Tabs -->
+      <div class="category-tabs">
+        <button v-for="(category, index) in skills" 
+                :key="index"
+                @click="selectCategory(index)"
+                :class="['category-tab', { 'active': category.selected }]"
+                :aria-selected="category.selected"
+                role="tab">
+          {{ category.name }}
+        </button>
+      </div>
+
+      <!-- Skills Grid -->
+      <div class="skills-grid">
+        <template v-for="(row, rowIndex) in gridRows" :key="rowIndex">
+          <div v-for="(cell, cellIndex) in row" 
+               :key="cellIndex"
+               :class="[
+                 'skill-cell',
+                 { 'glass-effect': !cell.icon },
+                 { 'elevated': cell.categoryIndex === selectedCategoryIndex },
+                 { 'dimmed': selectedCategoryIndex !== null && cell.categoryIndex !== selectedCategoryIndex },
+                 { 'chess-dark': (rowIndex + cellIndex) % 2 === 0 }
+               ]"
+               role="gridcell"
+               :aria-label="cell.name || 'Empty cell'">
+            <template v-if="cell.icon">
+              <div class="skill-content group">
+                <Icon :name="cell.icon" 
+                      class="skill-icon"
+                      :aria-label="cell.name"/>
+                <div class="skill-tooltip">{{ cell.name }}</div>
+              </div>
+            </template>
           </div>
-        </div>
+        </template>
       </div>
     </div>
   </section>
 </template>
 
 <script setup>
+const selectedCategoryIndex = ref(null)
+
 const skills = ref([
   {
     name: 'Front-End',
+    selected: false,
     lang: [
-      { name: 'HTML/CSS' },
-      { name: 'Vue' },
-      { name: 'Nuxt' },
-      { name: 'React' },
-      { name: 'Next' },
-      { name: 'TailwindCSS' },
+      { name: 'HTML/CSS', icon: 'vscode-icons:file-type-html' },
+      { name: 'Vue', icon: 'vscode-icons:file-type-vue' },
+      { name: 'Nuxt', icon: 'vscode-icons:file-type-nuxt' },
+      { name: 'React', icon: 'vscode-icons:file-type-reactjs' },
+      { name: 'Next', icon: 'vscode-icons:file-type-next' },
+      { name: 'TailwindCSS', icon: 'vscode-icons:file-type-tailwind' },
     ],
   },
   {
     name: 'Back-End',
+    selected: false,
     lang: [
-      { name: 'NodeJs' },
-      { name: 'NestJs' },
-      { name: 'Laravel' },
-      { name: 'AdonisJs' }
+      { name: 'NodeJs', icon: 'vscode-icons:file-type-node' },
+      { name: 'NestJs', icon: 'vscode-icons:file-type-nest' },
+      { name: 'Laravel', icon: 'vscode-icons:file-type-php' },
+      { name: 'AdonisJs', icon: 'vscode-icons:file-type-js' }
     ],
   },
   {
     name: 'Design',
+    selected: false,
     lang: [
-      { name: 'Figma' },
-      { name: 'UX' },
-      { name: 'UI' },
+      { name: 'Figma', icon: 'vscode-icons:file-type-figma' },
+      { name: 'UX', icon: 'mdi:palette-outline' },
+      { name: 'UI', icon: 'mdi:palette-swatch-outline' },
     ],
   },
 ])
 
-const getIconName = (skillName) => {
-  const iconMap = {
-    'HTML/CSS': 'vscode-icons:file-type-html',
-    'Vue': 'vscode-icons:file-type-vue',
-    'Nuxt': 'vscode-icons:file-type-nuxt',
-    'React': 'vscode-icons:file-type-reactjs',
-    'Next': 'vscode-icons:file-type-next',
-    'TailwindCSS': 'vscode-icons:file-type-tailwind',
-    'NodeJs': 'vscode-icons:file-type-node',
-    'NestJs': 'vscode-icons:file-type-nest',
-    'Laravel': 'vscode-icons:file-type-php',
-    'AdonisJs': 'vscode-icons:file-type-js',
-    'Figma': 'vscode-icons:file-type-figma',
-    'UX': 'mdi:palette-outline',
-    'UI': 'mdi:palette-swatch-outline',
+// Create a 6x6 grid with skills and empty cells
+const gridRows = computed(() => {
+  const grid = []
+  const totalRows = 6
+  const totalCols = 6
+  let skillIndex = 0
+
+  for (let i = 0; i < totalRows; i++) {
+    const row = []
+    for (let j = 0; j < totalCols; j++) {
+      // Add empty cells strategically
+      if ((i + j) % 3 === 0) {
+        row.push({})
+      } else if (skillIndex < getAllSkills().length) {
+        row.push(getAllSkills()[skillIndex++])
+      } else {
+        row.push({})
+      }
+    }
+    grid.push(row)
   }
-  return iconMap[skillName] || 'mdi:code-tags'
+  return grid
+})
+
+// Flatten all skills into a single array with category index
+const getAllSkills = () => {
+  return skills.value.flatMap((category, categoryIndex) => 
+    category.lang.map(skill => ({
+      ...skill,
+      categoryIndex
+    }))
+  )
+}
+
+const selectCategory = (index) => {
+  selectedCategoryIndex.value = selectedCategoryIndex.value === index ? null : index
+  skills.value.forEach((category, i) => {
+    category.selected = i === index
+  })
 }
 </script>
 
@@ -79,40 +128,63 @@ const getIconName = (skillName) => {
 .skills {
   @apply py-16;
 
-  &-grid {
-    @apply mt-12 space-y-12;
+  .skills-container {
+    @apply mt-12;
   }
 
-  .skill-category {
-    @apply space-y-6;
+  .category-tabs {
+    @apply flex justify-center gap-4 mb-12;
   }
 
-  .category-title {
-    @apply text-2xl font-bold text-primary mb-6;
+  .category-tab {
+    @apply px-6 py-2 rounded-full transition-all duration-300
+           text-primary-text hover:text-primary hover:bg-primary/10;
+
+    &.active {
+      @apply bg-primary text-white;
+    }
   }
 
-  .skill-items {
-    @apply grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4;
+  .skills-grid {
+    @apply grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4 
+           max-w-6xl mx-auto;
   }
 
-  .skill-item {
+  .skill-cell {
     @apply aspect-square rounded-xl p-4 transition-all duration-300
-           hover:shadow-lg hover:shadow-primary;
+           relative flex items-center justify-center;
+
+    &.elevated {
+      @apply transform -translate-y-2 shadow-xl shadow-primary/20;
+    }
+
+    &.dimmed {
+      @apply opacity-40;
+    }
+
+    &.chess-dark {
+      @apply bg-primary/5;
+    }
+
+    &.glass-effect {
+      @apply backdrop-blur-sm bg-white/10 border border-white/20;
+    }
   }
 
-  .skill-icon-wrapper {
-    @apply relative flex items-center justify-center h-full;
+  .skill-content {
+    @apply relative flex items-center justify-center h-full w-full;
   }
 
   .skill-icon {
-    @apply w-12 h-12 text-primary;
+    @apply w-12 h-12 text-primary transition-transform duration-300
+           group-hover:scale-110 group-hover:transform group-hover:-translate-y-1;
   }
 
   .skill-tooltip {
     @apply absolute -top-10 left-1/2 -translate-x-1/2 px-3 py-1 
            bg-gray-900 text-white text-sm rounded-md opacity-0
-           pointer-events-none transition-all duration-300
-           group-hover:opacity-100 group-hover:-top-12;
+           pointer-events-none transition-opacity duration-200
+           group-hover:opacity-100;
 
     &::after {
       content: '';
