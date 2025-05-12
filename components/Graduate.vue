@@ -124,14 +124,26 @@ export default {
             time: "2021",
           },
           {
-            entreprise: "Yggdaz",
-            post: "freelance Web developpeur + cours particuliers",
+            entreprise: "Exp4",
+            post: "Web developpeur Alternance",
             city: "Nantes",
             time: "2022-2024",
           },
-          {
+           {
             entreprise: "Exp4",
-            post: "Web developpeur Alternance",
+            post: "Developpeur freelance Fullstack",
+            city: "Nantes",
+            time: "2022-2024",
+          },
+           {
+            entreprise: "Aldere",
+            post: "Developpeur freelance Fullstack",
+            city: "Nantes",
+            time: "2 mois ",
+          },
+          {
+            entreprise: "Kosmonotes",
+            post: "Developpeur Fullstack",
             city: "Nantes",
             time: "2022-2024",
           },

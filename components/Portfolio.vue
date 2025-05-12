@@ -135,6 +135,24 @@ const projects = ref([{
   ]
 },
 {
+  name:"FightingClubFinder",
+  link:"https://fightingclubfinder.com",
+  img:"fcf.png",
+  desc:"Site web pour trouver des clubs de combat en France. Avec une carte interactive et une liste de clubs.",
+  stack:[
+    {name:"Vue.js",icon:"vscode-icons:file-type-vue"},
+    {name:"Nuxt.js",icon:"vscode-icons:file-type-nuxt"},
+    {name:"Tailwind CSS",icon:"vscode-icons:file-type-tailwind"}
+  ],
+  features:[
+    'Carte interactive pour trouver des clubs de combat',
+    'Liste de clubs avec des informations détaillées',
+    'Scrapping de données pour mettre à jour la liste des clubs',
+    'SEO optimisé pour une meilleure visibilité'
+
+  ]
+},
+{
   name: 'Journal du cuistot',
   link: 'https://journalducuistot.fr/',
   img: 'journalducuistot.png',
