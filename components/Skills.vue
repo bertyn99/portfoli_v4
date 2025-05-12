@@ -175,7 +175,7 @@ const selectCategory = (index) => {
       @apply backdrop-blur-sm bg-primary-lighter border-primary;
 
       &.chess-dark {
-        @apply bg-primary/20;
+        @apply bg-primary;
       }
     }
   }
