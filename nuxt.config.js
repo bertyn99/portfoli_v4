@@ -8,7 +8,7 @@ export default defineNuxtConfig({
     '@vueuse/nuxt',
     "@nuxt/image"
   ],
-  devtools:{enabled:false}
+  devtools:{enabled:false},
   // Target: https://go.nuxtjs.dev/config-target
   target: "static",
   // Global page headers: https://go.nuxtjs.dev/config-head
