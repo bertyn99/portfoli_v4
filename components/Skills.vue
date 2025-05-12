@@ -152,7 +152,7 @@ const selectCategory = (index) => {
 
   .skill-cell {
     @apply aspect-square rounded-xl p-4 transition-all duration-300
-           relative flex items-center justify-center border border-primary-lighter;
+           relative flex items-center justify-center border border-primary-input;
 
     &.elevated {
       @apply transform -translate-y-2 shadow-xl shadow-primary-lighter bg-primary-lighter;
@@ -167,7 +167,7 @@ const selectCategory = (index) => {
     }
 
     &.glass-effect {
-      @apply backdrop-blur-sm bg-primary border-primary/10;
+      @apply backdrop-blur-sm bg-primary border-primary;
     }
   }
 
