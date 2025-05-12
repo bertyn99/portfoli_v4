@@ -138,7 +138,7 @@ const selectCategory = (index) => {
 
   .category-tab {
     @apply px-6 py-2 rounded-full transition-all duration-300
-           text-primary-text hover:text-primary hover:bg-primary/10;
+           text-primary-text hover:text-primary hover:bg-primary-lighter;
 
     &.active {
       @apply bg-primary text-white;
