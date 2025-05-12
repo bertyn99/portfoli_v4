@@ -26,7 +26,8 @@
                  { 'glass-effect': !cell.icon },
                  { 'elevated': cell.categoryIndex === selectedCategoryIndex },
                  { 'dimmed': selectedCategoryIndex !== null && cell.categoryIndex !== selectedCategoryIndex },
-                 { 'chess-dark': (rowIndex + cellIndex) % 2 === 0 }
+                 { 'chess-dark': (rowIndex + cellIndex) % 2 === 0 },
+                 { 'chess-light': (rowIndex + cellIndex) % 2 !== 0 }
                ]"
                role="gridcell"
                :aria-label="cell.name || 'Empty cell'">
@@ -152,10 +153,10 @@ const selectCategory = (index) => {
 
   .skill-cell {
     @apply aspect-square rounded-xl p-4 transition-all duration-300
-           relative flex items-center justify-center border border-primary;
+           relative flex items-center justify-center;
 
     &.elevated {
-      @apply transform -translate-y-2 shadow-xl shadow-primary bg-primary-lighter;
+      @apply transform -translate-y-2 shadow-xl shadow-primary/30 bg-primary text-white;
     }
 
     &.dimmed {
@@ -163,11 +164,19 @@ const selectCategory = (index) => {
     }
 
     &.chess-dark {
-      @apply bg-primary;
+      @apply bg-primary text-white border border-primary;
+    }
+
+    &.chess-light {
+      @apply bg-primary-lighter border border-primary;
     }
 
     &.glass-effect {
-      @apply backdrop-blur-sm bg-primary border-primary-input;
+      @apply backdrop-blur-sm bg-primary-lighter/50 border-primary/20;
+
+      &.chess-dark {
+        @apply bg-primary/20;
+      }
     }
   }
 
