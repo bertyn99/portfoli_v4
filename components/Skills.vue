@@ -147,7 +147,7 @@ const getIconName = (skillName) => {
     }
 
     &.elevated:not(.spacer) {
-      @apply shadow-md shadow-primary/20;
+      @apply shadow-md shadow-primary;
     }
 
     &.spacer {
