@@ -172,7 +172,7 @@ const selectCategory = (index) => {
     }
 
     &.glass-effect {
-      @apply backdrop-blur-sm bg-primary-lighter/50 border-primary/20;
+      @apply backdrop-blur-sm bg-primary-lighter border-primary;
 
       &.chess-dark {
         @apply bg-primary/20;
