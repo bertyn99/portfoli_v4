@@ -167,7 +167,7 @@ const selectCategory = (index) => {
     }
 
     &.glass-effect {
-      @apply backdrop-blur-sm bg-primary border-primary;
+      @apply backdrop-blur-sm bg-primary border-primary-input;
     }
   }
 
