@@ -75,7 +75,7 @@ const skills = ref([
     name: 'Design',
     selected: false,
     lang: [
-      { name: 'Figma', icon: 'logos-figma' },
+      { name: 'Figma', icon: 'logos:figma' },
       { name: 'UX', icon: 'mdi:palette-outline' },
       { name: 'UI', icon: 'mdi:palette-swatch-outline' },
     ],
