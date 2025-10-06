@@ -89,12 +89,6 @@ export default {
         isOpen: true,
         data: [
           {
-            school: "Lycée Privée Sacrée Coeur",
-            grades: "Bac S",
-            city: "Nantes",
-            time: "2012-2017",
-          },
-          {
             school: "Université des Sciences",
             grades: "Licence 1 MIP",
             city: "Nantes",
@@ -104,13 +98,13 @@ export default {
             school: "The Hacking Project",
             grades: "Certification développeur fullstack",
             city: "Nantes",
-            time: "2018",
+            time: "2019-2020",
           },
           {
             school: "Ynov Campus Nantes",
             grades: "Master en Web Development",
             city: "Nantes",
-            time: "2020-2024",
+            time: "2020-2023",
           },
         ],
       },
@@ -123,15 +117,9 @@ export default {
             city: "Nantes",
             time: "2021",
           },
-          {
-            entreprise: "Exp4",
-            post: "Web developpeur Alternance",
-            city: "Nantes",
-            time: "2022-2024",
-          },
            {
             entreprise: "Exp4",
-            post: "Developpeur freelance Fullstack",
+            post: "Developpeur Fullstack",
             city: "Nantes",
             time: "2022-2024",
           },
@@ -142,10 +130,16 @@ export default {
             time: "2 mois ",
           },
           {
+            entreprise: "VAGABOX",
+            post: "Developpeur Fullstack",
+            city: "Nantes",
+            time: "2024-2025",
+          },
+          {
             entreprise: "Kosmonotes",
             post: "Developpeur Fullstack",
             city: "Nantes",
-            time: "2022-2024",
+            time: "2025",
           },
         ],
       },
