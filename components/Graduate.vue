@@ -117,13 +117,13 @@ export default {
             city: "Nantes",
             time: "2021",
           },
-           {
+          {
             entreprise: "Exp4",
             post: "Developpeur Fullstack",
             city: "Nantes",
             time: "2022-2024",
           },
-           {
+          {
             entreprise: "Aldere",
             post: "Developpeur freelance Fullstack",
             city: "Nantes",
@@ -131,13 +131,13 @@ export default {
           },
           {
             entreprise: "VAGABOX",
-            post: "Developpeur Fullstack",
+            post: "Developpeur freelance Fullstack",
             city: "Nantes",
             time: "2024-2025",
           },
           {
             entreprise: "Kosmonotes",
-            post: "Developpeur Fullstack",
+            post: "Developpeur freelance Fullstack",
             city: "Nantes",
             time: "2025",
           },
