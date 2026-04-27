@@ -8,7 +8,8 @@ export default defineNuxtConfig({
     '@nuxtjs/tailwindcss',
     "@nuxt/icon",
     '@vueuse/nuxt',
-    "@nuxt/image"
+    "@nuxt/image",
+    "motion-v/nuxt",
   ],
   future: {
     compatibilityVersion: 4,
