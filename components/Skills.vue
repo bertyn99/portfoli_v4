@@ -23,9 +23,8 @@
         </div>
       </div>
 
-      <div :id="SKILLS_PANEL_ID"
-        class="mx-auto grid max-w-6xl grid-cols-2 gap-2 sm:grid-cols-3 sm:gap-3 md:gap-4 lg:grid-cols-6" role="grid"
-        aria-labelledby="skills-heading" :aria-rowcount="gridLayout.length" :aria-colcount="6">
+      <div :id="SKILLS_PANEL_ID" class="grid w-full grid-cols-2 gap-3 sm:grid-cols-3 sm:gap-4 md:gap-6 lg:grid-cols-6"
+        role="grid" aria-labelledby="skills-heading" :aria-rowcount="gridLayout.length" :aria-colcount="6">
         <div v-for="(cell, i) in flatCells" :key="i" role="gridcell"
           class="skills-bento-cell flex aspect-square min-h-0 min-w-0 items-center justify-center rounded-2xl transition-[transform,box-shadow,opacity,filter] duration-300 motion-safe:hover:-translate-y-1 motion-safe:hover:duration-300"
           :class="[cellClasses(cell), cellMotionClass]" :style="cellStaggerStyle(i)"

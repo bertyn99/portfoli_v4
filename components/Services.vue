@@ -2,15 +2,15 @@
   <section id="services" class="@container services shell-section animate-in slide-in-from-bottom">
     <h2 class="section-title">EXPERTISE</h2>
     <span class="section-subtitle">& SERVICES</span>
-    <div class="mx-auto max-w-2xl lg:max-w-6xl ">
-      <div class="lg:flex lg:items-center lg:justify-end">
-        <div class="flex justify-center lg:w-1/2 lg:justify-end lg:pr-12 px-4">
-          <div class="w-[30.375rem] flex-none lg:w-[40.5rem]">
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="lg:flex lg:items-center lg:justify-between lg:gap-12 xl:gap-16">
+        <div class="flex justify-center lg:w-1/2 lg:max-w-xl lg:justify-end">
+          <div class="w-[30.375rem] max-w-full flex-none lg:w-[40.5rem]">
             <StylizedImg src="/img/laptop.jpg" alt="services" sizes="(min-width: 1024px) 36.9rem, 27.9rem"
               class="justify-center lg:justify-end" />
           </div>
         </div>
-        <ul role="list" class="text-base text-neutral-600 mt-16 lg:mt-0 lg:w-1/2 lg:min-w-[30rem] lg:pl-4 px-6">
+        <ul role="list" class="mt-16 w-full max-w-2xl text-base text-primary-text lg:mt-0 lg:w-1/2 lg:min-w-0 lg:max-w-none">
           <li class="group mt-10 first:mt-0" v-for="service in services">
             <Border
               class="pt-10 group-first:pt-0 group-first:before:hidden group-first:after:hidden text-primary-text">

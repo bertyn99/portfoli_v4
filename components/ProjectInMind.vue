@@ -2,19 +2,34 @@
   <section class="@container shell-section text-center lg:text-left">
     <div class="bg-primary-second py-12 lg:bg-transparent">
       <div class="container grid mx-auto px-4 sm:px-6 lg:px-8 md:grid-cols-2 md:gap-6 lg:[grid-template-columns:1fr_max-content] lg:bg-primary-second lg:rounded-2xl lg:py-12 lg:px-6 lg:gap-12">
-        <div class="projetc-data lg:pt-3">
-          <h2 class="section-title mb-3 text-white lg:text-left">
+        <div class="projetc-data flex min-w-0 flex-col items-center lg:items-start lg:pt-3">
+          <p class="project-cta-lead mb-3 max-w-prose text-center text-sm font-medium leading-snug text-white lg:text-left">
             Vous avez des idées de projet ou vous avez des question
-          </h2>
-          <span class="section-subtitle mb-6 text-white/90 lg:text-left">
+          </p>
+          <h2 class="project-cta-heading mb-6 text-center text-xl font-black uppercase tracking-wide text-white/90 lg:text-left">
             Contactez-moi afin que nous en discutions.
-          </span>
-          <a href="https://cal.com/bertyn-boulikou" target="_blank" class="button button-flex button-white mb-6">
-            Booker un entretien
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 project-icon" fill="none" viewBox="0 0 24 24"
-              stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+          </h2>
+          <a
+            href="https://cal.com/bertyn-boulikou"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="button button-flex button-white mb-6 inline-flex shrink-0 items-center gap-2 whitespace-nowrap no-underline"
+          >
+            <span>Booker un entretien</span>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="button-icon h-6 w-6 shrink-0 transition duration-300"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+              aria-hidden="true"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
+              />
             </svg>
           </a>
         </div>
@@ -286,4 +301,14 @@
 export default {}
 </script>
 
-<style lang="postcss"></style>
+<style lang="postcss">
+/* Override global `h2` / body rules so this CTA card keeps light copy on dark `bg-primary-second`. */
+.projetc-data .project-cta-heading {
+  @apply text-white/90;
+  font-family: var(--font-family-barlow);
+}
+
+.projetc-data .project-cta-lead {
+  font-family: var(--font-family-barlow);
+}
+</style>

@@ -1,20 +1,24 @@
 <template>
-  <footer class="pt-8 bg-primary">
-    <div class="pt-4 px-0 pb-12 lg:pt-12 lg:pb-14">
-      <div class="container grid grid-flow-row gap-14 mx-auto px-5 md:grid-cols-2 md:px-4 md:py-0 lg:grid-cols-3 xl:p-0">
+  <footer
+    class="border-t border-primary/15 bg-primary-container pt-10 pb-12 text-primary-title dark:border-white/10"
+  >
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-flow-row gap-10 md:grid-cols-2 md:gap-12 lg:grid-cols-3 lg:gap-14">
         <div>
-          <h1 class="text-white fill-current text-2xl mb-1">Bertyn Boulikou</h1>
-          <span class="text-white fill-current text-sm">Developpeur FullStack Freelance</span>
+          <h1 class="mb-1 text-2xl font-semibold text-primary-title">Bertyn Boulikou</h1>
+          <span class="text-sm text-primary-text">Developpeur FullStack Freelance</span>
         </div>
-        <ul class="flex flex-col gap-6 lg:flex-row lg:gap-8 hover:text-primary-lighter">
-          <li><a href="#services" class="text-white fill-current">Services</a></li>
-          <li><a href="#porfolio" class="text-white fill-current">Portfolio</a></li>
-          <li><a href="#contact" class="text-white fill-current">Contact</a></li>
+        <ul class="flex flex-col gap-4 lg:flex-row lg:gap-8">
+          <li><a href="#services" class="text-primary font-medium hover:text-primary-alt">Services</a></li>
+          <li><a href="#portfolio" class="text-primary font-medium hover:text-primary-alt">Portfolio</a></li>
+          <li><a href="#contact" class="text-primary font-medium hover:text-primary-alt">Contact</a></li>
         </ul>
         <div class="flex lg:justify-self-end">
           <a href="https://www.facebook.com/helenbertyn.boulikoudamours" target="_blank"
-            class="mr-4 text-white fill-current hover:text-primary-lighter hover:fill-current">
-            <svg class="h-5 w-5 text-white fill-current hover:text-primary-lighter hover:fill-current"
+            rel="noopener noreferrer"
+            class="mr-4 text-primary-title hover:text-primary"
+            aria-label="Facebook">
+            <svg class="h-5 w-5 fill-current"
               enable-background="new 0 0 24 24" viewBox="0 0 24 24"
               xmlns="http://www.w3.org/2000/svg">
               <path
@@ -22,16 +26,20 @@
             </svg>
           </a>
           <a href="https://github.com/bertyn99" target="_blank"
-            class="mr-4 text-white fill-current hover:text-primary-lighter hover:fill-current">
-            <svg class="h-6 w-6 text-white fill-current hover:text-primary-lighter hover:fill-current" viewBox="0 0 24 24">
+            rel="noopener noreferrer"
+            class="mr-4 text-primary-title hover:text-primary"
+            aria-label="GitHub">
+            <svg class="h-6 w-6 fill-current" viewBox="0 0 24 24">
               <path fill="currentColor"
                 d="M12,2A10,10 0 0,0 2,12C2,16.42 4.87,20.17 8.84,21.5C9.34,21.58 9.5,21.27 9.5,21C9.5,20.77 9.5,20.14 9.5,19.31C6.73,19.91 6.14,17.97 6.14,17.97C5.68,16.81 5.03,16.5 5.03,16.5C4.12,15.88 5.1,15.9 5.1,15.9C6.1,15.97 6.63,16.93 6.63,16.93C7.5,18.45 8.97,18 9.54,17.76C9.63,17.11 9.89,16.67 10.17,16.42C7.95,16.17 5.62,15.31 5.62,11.5C5.62,10.39 6,9.5 6.65,8.79C6.55,8.54 6.2,7.5 6.75,6.15C6.75,6.15 7.59,5.88 9.5,7.17C10.29,6.95 11.15,6.84 12,6.84C12.85,6.84 13.71,6.95 14.5,7.17C16.41,5.88 17.25,6.15 17.25,6.15C17.8,7.5 17.45,8.54 17.35,8.79C18,9.5 18.38,10.39 18.38,11.5C18.38,15.32 16.04,16.16 13.81,16.41C14.17,16.72 14.5,17.33 14.5,18.26C14.5,19.6 14.5,20.68 14.5,21C14.5,21.27 14.66,21.59 15.17,21.5C19.14,20.16 22,16.42 22,12A10,10 0 0,0 12,2Z" />
             </svg>
           </a>
           <a href="https://www.linkedin.com/in/bertyn-boulikou/" target="_blank"
-            class="mr-4 text-white fill-current hover:text-primary-lighter hover:fill-current"><svg id="Bold"
+            rel="noopener noreferrer"
+            class="mr-4 text-primary-title hover:text-primary"
+            aria-label="LinkedIn"><svg id="Bold"
               enable-background="new 0 0 24 24"
-              class="h-5 w-5 text-white fill-current hover:text-primary-lighter hover:fill-current" viewBox="0 0 24 24"
+              class="h-5 w-5 fill-current" viewBox="0 0 24 24"
               xmlns="http://www.w3.org/2000/svg">
               <path
                 d="m23.994 24v-.001h.006v-8.802c0-4.306-.927-7.623-5.961-7.623-2.42 0-4.044 1.328-4.707 2.587h-.07v-2.185h-4.773v16.023h4.97v-7.934c0-2.089.396-4.109 2.983-4.109 2.549 0 2.587 2.384 2.587 4.243v7.801z" />
@@ -41,7 +49,9 @@
             </svg></a>
         </div>
       </div>
-      <p class="text-xs text-center text-primary-textLight mt-12 lg:text-base">&#169; Bertyn. Tous drois réserved</p>
+      <p class="mt-10 text-center text-xs text-primary-text lg:mt-12 lg:text-sm">
+        &#169; Bertyn. Tous droits réservés
+      </p>
     </div>
   </footer>
 </template>

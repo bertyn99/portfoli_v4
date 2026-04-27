@@ -1,5 +1,5 @@
 <template>
-  <main class="xl:p-0">
+  <main>
     <Home></Home>
     <About></About>
     <Skills></Skills>

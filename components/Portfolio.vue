@@ -1,5 +1,5 @@
 <template>
-  <section id="portfolio" class="portfolio @container bg-primary-container py-16 md:py-24 md:px-0">
+  <section id="portfolio" class="portfolio @container bg-primary-container py-16 md:py-24">
     <h2 class="section-title">Portfolio</h2>
     <span class="section-subtitle">Derniers Projet</span>
     <div class="container mx-auto px-4 sm:px-6 lg:px-8 overflow-hidden relative">
