@@ -1,21 +1,22 @@
 <template>
-  <div class="carousel">
-    <slot :visibleSlide="currentSlide" :direction="direction"></slot><button class="carousel-nav carousel-prev"
+  <div class="flex flex-col justify-center overflow-hidden">
+    <slot :visibleSlide="currentSlide" :direction="direction"></slot><button class="absolute top-1/2 left-2.5 xl:left-4"
       @click.prevent="goPrev">
       <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 md:h-7 md:w-7 xl:h-10 xl:w-10" fill="none"
         viewBox="0 0 24 24" stroke="currentColor">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
       </svg>
     </button>
-    <button class="carousel-nav carousel-next" @click.prevent="goNext">
+    <button class="absolute top-1/2 right-2.5 left-auto xl:right-4" @click.prevent="goNext">
       <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 md:h-7 md:w-7 xl:h-10 xl:w-10" fill="none"
         viewBox="0 0 24 24" stroke="currentColor">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
       </svg>
     </button>
 
-    <div class="carousel-pagination">
+    <div class="carousel-pagination mt-2 w-full text-center">
       <button v-for="n in getSlideCount" :key="n" :class="{ active: n - 1 == currentSlide }"
+        class="mx-0.5 inline-block h-2.5 w-2.5 rounded-lg bg-[var(--text-color-light)] opacity-80"
         @click="goTo(n - 1)"></button>
     </div>
   </div>
@@ -52,54 +53,7 @@ function goTo(i) {
 </script>
 
 <style lang="postcss" scoped>
-.carousel {
-  overflow: hidden;
-
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-
-  &-nav {
-    position: absolute;
-    top: 50%;
-  }
-
-  &-next {
-    right: 10px;
-    left: auto;
-
-    @screen xl {
-      @apply right-4;
-    }
-  }
-
-  &-prev {
-    position: absolute;
-    left: 10px;
-
-    @screen xl {
-      @apply left-4;
-    }
-  }
-
-  &-pagination {
-    width: 100%;
-    text-align: center;
-    margin-top: 0.5rem;
-
-    button {
-      display: inline-block;
-      width: 10px;
-      height: 10px;
-      background: var(--text-color-light);
-      opacity: 0.8;
-      border-radius: 0.5rem;
-      margin: 0 0.1rem;
-
-      &.active {
-        background: var(--first-color);
-      }
-    }
-  }
+.carousel-pagination button.active {
+  background: var(--first-color);
 }
 </style>

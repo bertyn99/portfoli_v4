@@ -1,19 +1,19 @@
 <template>
-  <section id="portfolio" class="portfolio section py-16">
-    <h2 class="section-title text-3xl font-bold text-center mb-4">Portfolio</h2>
-    <span class="section-subtitle text-xl text-center block mb-10">Derniers Projet</span>
-    <div class="portfolio-container container mx-auto px-4 sm:px-6 lg:px-8">
+  <section id="portfolio" class="portfolio @container bg-primary-container py-16 md:py-24 md:px-0">
+    <h2 class="section-title">Portfolio</h2>
+    <span class="section-subtitle">Derniers Projet</span>
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8 overflow-hidden relative">
       <carousel v-slot="{ visibleSlide, direction }">
         <template v-for="(p, i) in projects" :key="i">
           <carousel-slide :index="i" :visible-index="visibleSlide" :direction="direction">
-            <div class="portfolio-content grid gap-6">
-              <img :src="`/img/${p.img}`" :alt="p.name" class="portfolio-img" />
+            <div class="grid gap-6 py-12 px-6 md:grid-cols-2 grid-cols-1 md:gap-6 lg:items-center xl:gap-10">
+              <img :src="`/img/${p.img}`" :alt="p.name" class="rounded-lg object-cover justify-self-center aspect-video h-full" />
               <div class="portfolio-data">
-                <h3 class="portfolio-title text-2xl font-semibold">{{ p.name }}</h3>
-                <p class="portfolio-description text-gray-700">
+                <h3 class="text-2xl font-semibold mb-2">{{ p.name }}</h3>
+                <p class="text-gray-700 mb-3">
                   {{ p.desc }}
                 </p>
-                <div class="portfolio-tech text-sm text-gray-600 mb-4">
+                <div class="text-sm text-gray-600 mb-3">
                   <strong>Stack :</strong>
                   <ul class="flex space-x-2 mt-1">
                     <li v-for="(tech, index) in p.stack" :key="index"
@@ -26,16 +26,16 @@
                     </li>
                   </ul>
                 </div>
-                <p class="portfolio-tech text-sm text-gray-600">
+                <p class="text-sm text-gray-600 mb-3">
                   <strong>Fonctionnalité:</strong> {{ p.framework }}
                 </p>
-                <ul class="portfolio-features list-disc list-inside mb-3 text-sm text-gray-600">
+                <ul class="list-disc list-inside mb-3 text-sm text-gray-600">
                   <li v-for="(feature, index) in p.features" :key="index">{{ feature }}</li>
                 </ul>
                 <a :href="p.link"
-                  class="button button-flex button-small portfolio-button inline-flex items-center px-4 py-2 bg-blue-600 text-white rounded-lg transition-transform duration-300 ease-in-out hover:bg-blue-700">
+                  class="button button-flex button-small inline-flex items-center px-4 py-2 bg-blue-600 text-white rounded-lg transition-transform duration-300 ease-in-out hover:bg-blue-700 group">
                   Demo
-                  <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 button-icon ml-2" fill="none"
+                  <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 button-icon ml-2 group-hover:translate-x-2" fill="none"
                     viewBox="0 0 24 24" stroke="currentColor">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                       d="M13 7l5 5m0 0l-5 5m5-5H6" />
@@ -185,39 +185,4 @@ const projects = ref([{
   },])
 </script>
 
-<style lang="postcss" scoped>
-.portfolio {
-  &-container {
-    overflow: hidden;
-    position: relative;
-  }
-
-  &-content {
-    @apply py-12 px-6 md:grid-cols-2 grid-cols-1 md:gap-6 lg:items-center xl:gap-10;
-  }
-
-  &-img {
-    @apply rounded-lg object-cover justify-self-center aspect-video h-full;
-  }
-
-  &-title {
-    @apply text-lg mb-2;
-  }
-
-  &-description {
-    @apply mb-3;
-  }
-
-  &-button:hover>.button-icon {
-    @apply transform translate-x-2;
-  }
-
-  &-tech {
-    @apply mb-3 text-sm;
-  }
-
-  &-features {
-    @apply list-disc list-inside mb-3 text-sm;
-  }
-}
-</style>
+<style lang="postcss" scoped></style>

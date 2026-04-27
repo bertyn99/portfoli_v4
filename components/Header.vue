@@ -1,14 +1,17 @@
 <template>
-  <header id="header" class="header">
-    <nav class="nav">
-      <nuxt-link to="/" class="nav-logo"
+  <header id="header" class="w-full fixed bottom-0 left-0 z-20 bg-primary-body lg:bottom-auto lg:top-0 lg:px-4 lg:py-0 xl:px-5">
+    <nav class="w-full flex h-16 justify-between items-center lg:h-[4.5rem]">
+      <nuxt-link to="/" class="text-primary-title font-medium hover:text-primary"
         ><img src="/BB.png" alt="bertyn boulikou initiale"
       /></nuxt-link>
 
-      <div class="nav-menu" :class="[isOpen ? 'show-menu' : '']">
-        <ul class="nav-list">
+      <div
+        class="max-lg:fixed max-lg:-bottom-full max-lg:left-0 max-lg:w-full max-lg:bg-primary-body max-lg:pt-8 max-lg:px-1 max-lg:pb-16 max-lg:shadow-md max-lg:rounded-t-3xl max-lg:transition max-lg:duration-300 lg:ml-auto"
+        :class="[isOpen ? 'show-menu' : '']">
+        <ul class="grid grid-cols-3 gap-y-8 lg:flex lg:gap-8">
           <li class="nav-item">
-            <nuxt-link to="/" class="nav-link" @click="iOpen = false"
+            <nuxt-link to="/" class="flex flex-col items-center font-medium text-primary-title text-sm hover:text-primary"
+              @click="iOpen = false"
               ><svg
                 xmlns="http://www.w3.org/2000/svg"
                 class="h-5 w-5 lg:hidden"
@@ -27,7 +30,8 @@
             >
           </li>
           <li class="nav-item">
-            <nuxt-link to="#about" class="nav-link" @click="iOpen = false"
+            <nuxt-link to="#about" class="flex flex-col items-center font-medium text-primary-title text-sm hover:text-primary"
+              @click="iOpen = false"
               ><svg
                 xmlns="http://www.w3.org/2000/svg"
                 class="h-5 w-5 lg:hidden"
@@ -45,7 +49,8 @@
             >
           </li>
           <li class="nav-item">
-            <nuxt-link to="#skills" class="nav-link" @click="iOpen = false"
+            <nuxt-link to="#skills" class="flex flex-col items-center font-medium text-primary-title text-sm hover:text-primary"
+              @click="iOpen = false"
               ><svg
                 xmlns="http://www.w3.org/2000/svg"
                 class="h-5 w-5 lg:hidden"
@@ -63,7 +68,9 @@
             >
           </li>
           <li class="nav-item">
-            <nuxt-link to="https://sciredev.com" class="nav-link" @click="iOpen = false"
+            <nuxt-link to="https://sciredev.com"
+              class="flex flex-col items-center font-medium text-primary-title text-sm hover:text-primary"
+              @click="iOpen = false"
               ><svg
                 xmlns="http://www.w3.org/2000/svg"
                 class="h-6 w-6 lg:hidden"
@@ -82,7 +89,9 @@
             >
           </li>
           <li class="nav-item">
-            <nuxt-link to="#portfolio" class="nav-link" @click="iOpen = false"
+            <nuxt-link to="#portfolio"
+              class="flex flex-col items-center font-medium text-primary-title text-sm hover:text-primary"
+              @click="iOpen = false"
               ><svg
                 xmlns="http://www.w3.org/2000/svg"
                 class="h-5 w-5 lg:hidden"
@@ -100,7 +109,8 @@
             >
           </li>
           <li class="nav-item">
-            <nuxt-link to="#contact" class="nav-link" @click="iOpen = false"
+            <nuxt-link to="#contact" class="flex flex-col items-center font-medium text-primary-title text-sm hover:text-primary"
+              @click="iOpen = false"
               ><svg
                 xmlns="http://www.w3.org/2000/svg"
                 class="h-5 w-5 lg:hidden"
@@ -118,7 +128,8 @@
             >
           </li>
         </ul>
-        <button class="nav-close" @click="isOpen = !isOpen">
+        <button class="absolute right-5 bottom-2 text-2xl cursor-pointer text-primary hover:text-primary-alt lg:hidden"
+          @click="isOpen = !isOpen">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             class="h-5 w-5"
@@ -135,8 +146,8 @@
           </svg>
         </button>
       </div>
-      <div class="nav-btns">
-        <button class="change-theme" @click="theme">
+      <div class="flex items-center">
+        <button class="h-6 w-6 text-primary mr-4 cursor-pointer hover:text-primary-alt lg:ml-4 lg:mr-0" @click="theme">
           <svg
             v-if="!isDark"
             xmlns="http://www.w3.org/2000/svg"
@@ -168,7 +179,8 @@
             />
           </svg>
         </button>
-        <div class="nav-toggle" @click="isOpen = !isOpen">
+        <div class="text-primary-title font-medium text-base cursor-pointer hover:text-primary lg:hidden"
+          @click="isOpen = !isOpen">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             class="h-6 w-6"
@@ -236,85 +248,6 @@ export default {
 </script>
 
 <style lang="postcss" scoped>
-.header {
-  @apply w-full fixed bottom-0 left-0 z-20 bg-primary-body;
-  @screen lg {
-    bottom: initial;
-    @apply top-0 px-4 py-0;
-  }
-  @screen xl {
-    @apply px-5;
-  }
-}
-.nav {
-  @apply w-full flex h-16 justify-between items-center;
-  @screen lg {
-    height: 4.5rem;
-    columns-gap: 1rem;
-  }
-
-  &-logo {
-    @apply text-primary-title font-medium;
-    &:hover {
-      @apply text-primary;
-    }
-  }
-  &-toggle {
-    @apply text-primary-title font-medium text-base cursor-pointer;
-    @screen lg {
-      @apply hidden;
-    }
-    &:hover {
-      @apply text-primary;
-    }
-  }
-  &-btns {
-    @apply flex items-center;
-  }
-
-  @media screen and (max-width: 767px) {
-    &-menu {
-      @apply fixed -bottom-full left-0 w-full bg-primary-body pt-8 px-1 pb-16 shadow-md rounded-t-3xl transition duration-300;
-    }
-  }
-
-  &-menu {
-    @screen lg {
-      @apply ml-auto;
-    }
-  }
-  &-list {
-    @apply grid grid-cols-3 gap-y-8;
-    @screen lg {
-      @apply flex gap-8;
-    }
-  }
-  &-link {
-    @apply flex flex-col items-center font-medium text-primary-title text-sm;
-    &:hover {
-      @apply text-primary;
-    }
-  }
-
-  &-close {
-    @apply absolute right-5 bottom-2 text-2xl cursor-pointer text-primary;
-    @screen lg {
-      @apply hidden;
-    }
-    &:hover {
-      @apply text-primary-alt;
-    }
-  }
-}
-.change-theme {
-  @apply h-6 w-6 text-primary mr-4 cursor-pointer;
-  @screen lg {
-    @apply ml-4 mr-0;
-  }
-  &:hover {
-    @apply text-primary-alt;
-  }
-}
 .show-menu {
   @apply bottom-0;
 }

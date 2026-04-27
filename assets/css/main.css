@@ -1,7 +1,8 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-@tailwind screens;
+@import "tailwindcss";
+
+@plugin "@tailwindcss/typography";
+
+@variant dark (&:where(.dark, .dark *));
 
 :root {
   --hue-color: 250;
@@ -15,7 +16,16 @@
   --input-color: hsl(var(--hue-color), 70%, 96%);
   --body-color: hsl(var(--hue-color), 60%, 99%);
   --container-color: #fff;
+
+  /* Skills strip + tiles (light) — overridden in .dark */
+  --skills-strip-bg: hsl(var(--hue-color) 38% 97%);
+  --skills-strip-muted: hsl(var(--hue-color) 10% 42%);
+  --skills-tile-light: hsl(var(--hue-color) 45% 98%);
+  --skills-tile-dark: hsl(var(--hue-color) 16% 22%);
+  --skills-tile-dark-border: hsl(var(--hue-color) 14% 36%);
+  --skills-tile-glow: rgb(124 58 237 / 0.22);
 }
+
 .dark {
   --first-color-second: hsl(var(--hue-color), 30%, 8%);
   --title-color: hsl(var(--hue-color), 8%, 95%);
@@ -23,64 +33,126 @@
   --input-color: hsl(var(--hue-color), 29%, 18%);
   --body-color: hsl(var(--hue-color), 28%, 12%);
   --container-color: hsl(var(--hue-color), 29%, 16%);
-}
-@layer base {
-  @font-face {
-    font-family: "Poppins";
-    font-weight: 400;
-    font-style: Regular;
-    src: url("~assets/fonts/Poppins-Regular.ttf") format("ttf");
-  }
-  @font-face {
-    font-family: "Poppins";
-    font-weight: 500;
-    font-style: medium;
-    src: url("~assets/fonts/Poppins-Medium.ttf") format("ttf");
-  }
-  @font-face {
-    font-family: "Poppins";
-    font-weight: 600;
-    font-style: semibold;
-    src: url("~assets/fonts/Poppins-SemiBold.ttf") format("ttf");
-  }
 
-  body {
-    @apply font-barlow text-base mb-8 text-primary-text;
-    @screen lg {
-      @apply m-0;
+  --skills-strip-bg: hsl(245 22% 9%);
+  --skills-strip-muted: hsl(250 12% 72%);
+  --skills-tile-light: hsl(252 26% 93%);
+  --skills-tile-dark: hsl(248 22% 14%);
+  --skills-tile-dark-border: hsl(250 12% 28%);
+  --skills-tile-glow: rgb(167 139 250 / 0.32);
+}
+
+@theme {
+  --breakpoint-sm: 375px;
+  --breakpoint-md: 568px;
+  --breakpoint-lg: 768px;
+  --breakpoint-xl: 1024px;
+
+  --font-family-poppins: "Poppins", sans-serif;
+  --font-family-barlow: "Barlow", sans-serif;
+
+  --color-primary: var(--first-color);
+  --color-primary-second: var(--first-color-second);
+  --color-primary-lighter: var(--first-color-lighter);
+  --color-primary-alt: var(--first-color-alt);
+  --color-primary-title: var(--title-color);
+  --color-primary-text: var(--text-color);
+  --color-primary-textLight: var(--text-color-light);
+  --color-primary-input: var(--input-color);
+  --color-primary-body: var(--body-color);
+  --color-primary-container: var(--container-color);
+
+  /* Skills strip — maps to :root / .dark variables */
+  --color-skills-bg: var(--skills-strip-bg);
+  --color-skills-muted: var(--skills-strip-muted);
+  --color-skills-tile-light: var(--skills-tile-light);
+  --color-skills-tile-dark: var(--skills-tile-dark);
+  --color-skills-tile-border: var(--skills-tile-dark-border);
+
+  --animate-fadeIn: fadeIn 1s ease-in-out;
+  --animate-skills-cell-reveal: skillsCellReveal 0.52s cubic-bezier(0.22, 1, 0.36, 1) both;
+  --animate-slideInFromLeft: slideInFromLeft 1s ease-in-out;
+  --animate-slideInFromRight: slideInFromRight 1s ease-in-out;
+
+  @keyframes fadeIn {
+    0% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
     }
   }
 
-  html {
-    scroll-behavior: smooth;
+  @keyframes skillsCellReveal {
+    from {
+      opacity: 0;
+      transform: translateY(14px) scale(0.94);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
   }
 
-  h1,
-  h2,
-  h3,
-  h4 {
-    @apply text-primary-title font-semibold;
+  @keyframes slideInFromLeft {
+    0% {
+      transform: translateX(-100%);
+      opacity: 0;
+    }
+    100% {
+      transform: translateX(0);
+      opacity: 1;
+    }
   }
-  img {
-    @apply max-w-full h-auto;
+
+  @keyframes slideInFromRight {
+    0% {
+      transform: translateX(100%);
+      opacity: 0;
+    }
+    100% {
+      transform: translateX(0);
+      opacity: 1;
+    }
   }
 }
 
-/*Reusable css class*/
-.section {
-  @apply pt-8 pb-16 bg-primary-container;
-  @screen lg {
-    @apply pt-24 px-0 pb-8;
+body {
+  font-family: var(--font-family-barlow);
+  @apply text-base mb-8 text-primary-text;
+  @media (min-width: 768px) {
+    @apply m-0;
   }
-  &-title {
-    @apply text-xl text-center font-black font-barlow;
-  }
-  &-subtitle {
-    @apply block text-2xl leading-6 font-black mb-6 text-center text-primary-second uppercase font-barlow;
-    @screen lg {
-      @apply mb-8;
-    }
-  }
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  @apply text-primary-title font-semibold;
+}
+img {
+  @apply max-w-full h-auto;
+}
+
+/* Section surface (padding + background). Pair with Tailwind `@container` on the same `<section>`. */
+.shell-section {
+  @apply pt-8 pb-16 bg-primary-container md:pt-24 md:pb-8 md:px-0;
+}
+
+/* Unified section headings — use `h2.section-title` + `span.section-subtitle` (or `p` with subtitle class). */
+.section-title {
+  @apply text-center font-black text-xl text-primary-title;
+  font-family: var(--font-family-barlow);
+}
+
+.section-subtitle {
+  @apply block text-center text-2xl leading-tight font-black uppercase tracking-wide text-primary-text mb-6 md:mb-8;
+  font-family: var(--font-family-barlow);
 }
 
 .button {

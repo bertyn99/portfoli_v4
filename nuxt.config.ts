@@ -1,18 +1,20 @@
-import { join } from "path";
+import tailwindcss from "@tailwindcss/vite";
+
+
 export default defineNuxtConfig({
   modules: [
-    "@nuxt/content",
-
-    "@nuxtjs/google-fonts",
-    "@nuxtjs/fontaine",
-    "@nuxt/icon",
+    /*     "@nuxt/content", */
+    '@nuxt/fonts',
     '@nuxtjs/tailwindcss',
+    "@nuxt/icon",
     '@vueuse/nuxt',
     "@nuxt/image"
   ],
-  devtools:{enabled:false},
-  // Target: https://go.nuxtjs.dev/config-target
-  target: "static",
+  future: {
+    compatibilityVersion: 4,
+  },
+  compatibilityDate: "2026-04-21",
+  devtools: { enabled: false },
   // Global page headers: https://go.nuxtjs.dev/config-head
   /* head: {
     title: "Bertyn Boulikou Portfolio",
@@ -28,22 +30,10 @@ export default defineNuxtConfig({
   css: ["@/assets/css/main.css"],
   icon: {
     serverBundle: {
-      collections: ['uil', 'mdi','vscode-icons'] // <!--- this
+      collections: ['uil', 'mdi', 'vscode-icons'] // <!--- this
     }
   },
-  postcss: {
-    plugins: {
-      "postcss-nested": {},
-      "tailwindcss/nesting": {},
-      tailwindcss: {},
-      autoprefixer: {},
-    },
-  },
-  googleFonts: {
-    families: {
-      Barlow: [200, 400, 600, 800, 900],
-    },
-  },
+
   // content
   content: {
     // Options

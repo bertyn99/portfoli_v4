@@ -1,6 +1,6 @@
 <template>
-  <section id="services" class="services section  animate-in  slide-in-from-bottom">
-    <h2 class="text-xl text-center font-medium mb-4">EXPERTISE</h2>
+  <section id="services" class="@container services shell-section animate-in slide-in-from-bottom">
+    <h2 class="section-title">EXPERTISE</h2>
     <span class="section-subtitle">& SERVICES</span>
     <div class="mx-auto max-w-2xl lg:max-w-6xl ">
       <div class="lg:flex lg:items-center lg:justify-end">
@@ -54,14 +54,4 @@ const services = [
 ];
 </script>
 
-<style lang="postcss">
-.services {
-  &-button {
-    @apply cursor-pointer text-sm;
-
-    &:hover>.button-icon {
-      @apply transform translate-x-2;
-    }
-  }
-}
-</style>
+<style lang="postcss"></style>

@@ -1,18 +1,18 @@
 <template>
-  <section id="contact" class="contact section">
+  <section id="contact" class="@container shell-section">
     <h2 class="section-title">Contact</h2>
     <span class="section-subtitle"
       >Si vous avez des requêtes ou des questions n'hésiter pas à me
       contacter</span
     >
 
-    <div class="contact-container container grid mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="container mx-auto grid auto-rows-auto gap-12 px-4 sm:px-6 lg:px-8 md:grid-cols-2 md:gap-4 md:justify-center md:mx-auto">
       <div class="">
-        <div v-for="(c, i) in contact" :key="i" class="contact-information">
+        <div v-for="(c, i) in contact" :key="i" class="mb-8 flex">
           <svg
             v-if="c.type == 'Telephone'"
             xmlns="http://www.w3.org/2000/svg"
-            class="h-6 w-6"
+            class="mb-3 h-6 w-6 text-3xl text-primary"
             fill="none"
             viewBox="0 0 24 24"
             stroke="currentColor"
@@ -27,7 +27,7 @@
           <svg
             v-if="c.type == 'Email'"
             xmlns="http://www.w3.org/2000/svg"
-            class="h-6 w-6"
+            class="mb-3 h-6 w-6 text-3xl text-primary"
             fill="none"
             viewBox="0 0 24 24"
             stroke="currentColor"
@@ -42,7 +42,7 @@
           <svg
             v-if="c.type == 'Localisation'"
             xmlns="http://www.w3.org/2000/svg"
-            class="h-6 w-6"
+            class="mb-3 h-6 w-6 text-3xl text-primary"
             fill="none"
             viewBox="0 0 24 24"
             stroke="currentColor"
@@ -61,56 +61,56 @@
             />
           </svg>
           <div>
-            <h3 class="contact-title">{{ c.type }}</h3>
-            <span class="contact-subtitle">{{ c.content }}</span>
+            <h3 class="text-lg font-medium">{{ c.type }}</h3>
+            <span class="text-sm text-primary-text">{{ c.content }}</span>
           </div>
         </div>
       </div>
-      <form @submit.prevent="sendEmails" class="contact-form grid">
-        <div class="contact-inputs grid">
-          <div class="contact-content">
-            <label for="" class="contact-label"> Nom </label>
-            <input type="text" placeholder="Jhon Doe" class="contact-input" v-model="formData.name" />
+      <form @submit.prevent="sendEmails" class="grid auto-rows-auto gap-12 xl:w-[460px]">
+        <div class="grid auto-rows-auto gap-12 xl:grid-cols-2">
+          <div class="rounded-lg bg-primary-input pt-3 px-4 pb-1">
+            <label for="" class="text-xs text-primary-title"> Nom </label>
+            <input type="text" placeholder="Jhon Doe" class="w-full bg-primary-input text-primary-text border-none outline-none pt-1 px-2 pr-0 font-[family-name:var(--font-family-poppins)]" v-model="formData.name" />
           </div>
-          <div class="contact-content">
-            <label for="" class="contact-label">Email</label>
+          <div class="rounded-lg bg-primary-input pt-3 px-4 pb-1">
+            <label for="" class="text-xs text-primary-title">Email</label>
             <input
               type="email"
               placeholder="you@email.com"
-              class="contact-input"
+              class="w-full bg-primary-input text-primary-text border-none outline-none pt-1 px-2 pr-0 font-[family-name:var(--font-family-poppins)]"
               v-model="formData.email"
               required
             />
           </div>
         </div>
-        <div class="contact-content">
-          <label for="" class="contact-label">Projet</label>
+        <div class="rounded-lg bg-primary-input pt-3 px-4 pb-1">
+          <label for="" class="text-xs text-primary-title">Projet</label>
           <input
             type="text"
             placeholder="Website,Serveur api ..."
-            class="contact-input"
+            class="w-full bg-primary-input text-primary-text border-none outline-none pt-1 px-2 pr-0 font-[family-name:var(--font-family-poppins)]"
             v-model="formData.project"
             required
           />
         </div>
-        <div class="contact-content">
-          <label for="" class="contact-label">Message</label>
+        <div class="rounded-lg bg-primary-input pt-3 px-4 pb-1">
+          <label for="" class="text-xs text-primary-title">Message</label>
           <textarea
             placeholder="Ecrivez votre message"
             cols="0"
             rows="7"
-            class="contact-input"
+            class="w-full bg-primary-input text-primary-text border-none outline-none pt-1 px-2 pr-0 font-[family-name:var(--font-family-poppins)]"
             v-model="formData.message"
           />
         </div>
-        <div v-if="errorMessage" class="error-message">
+        <div v-if="errorMessage" class="mt-4 text-center text-[#dc3545]">
           {{ errorMessage }}
         </div>
-        <div v-if="successMessage" class="success-message">
+        <div v-if="successMessage" class="mt-4 text-center text-[#28a745]">
           {{ successMessage }}
         </div>
         <div>
-          <button type="submit" class="button button-flex" :disabled="isLoading">
+          <button type="submit" class="button button-flex disabled:opacity-70 disabled:cursor-not-allowed" :disabled="isLoading">
             {{ isLoading ? 'Envoi en cours...' : 'Envoyer' }}
         <svg v-if="!isLoading" class="button-icon" viewBox="0 0 24 24">
           <path fill="currentColor" d="M2,21L23,12L2,3V10L17,12L2,14V21Z" />
@@ -122,7 +122,7 @@
   </section>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { ref } from 'vue'
 import emailjs from '@emailjs/browser'
 
@@ -201,65 +201,4 @@ console.log(  config.public.EMAILJS_SERVICE_ID,
 }
 </script>
 
-<style lang="postcss">
-.contact {
-  &-container {
-    @apply grid auto-rows-auto gap-12;
-    @screen md {
-      @apply grid-cols-2 gap-4 justify-center mx-auto;
-    }
-  }
-  &-form {
-    @screen xl {
-      width: 460px;
-    }
-  }
-  &-inputs {
-    @screen xl {
-      @apply grid-cols-2;
-    }
-  }
-  &-form,
-  &-inputs {
-    @apply grid auto-rows-auto gap-12;
-  }
-  &-information {
-    @apply flex mb-8;
-  }
-  &-icon {
-    @apply text-3xl text-primary h-6 w-6 mb-3;
-  }
-  &-title {
-    @apply text-lg font-medium;
-  }
-
-  &-subtitle {
-    @apply text-sm text-primary-text;
-  }
-  &-content {
-    @apply rounded-lg bg-primary-input pt-3 px-4 pb-1;
-  }
-  &-label {
-    @apply text-xs text-primary-title;
-  }
-  &-input {
-    @apply w-full bg-primary-input text-primary-text font-poppins border-none outline-none pt-1 px-2 pr-0;
-  }
-}
-.error-message {
-  color: #dc3545;
-  margin-top: 1rem;
-  text-align: center;
-}
-
-.success-message {
-  color: #28a745;
-  margin-top: 1rem;
-  text-align: center;
-}
-
-button:disabled {
-  opacity: 0.7;
-  cursor: not-allowed;
-}
-</style>
+<style></style>

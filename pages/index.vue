@@ -1,5 +1,5 @@
 <template>
-  <main class="main">
+  <main class="xl:p-0">
     <Home></Home>
     <About></About>
     <Skills></Skills>
@@ -13,10 +13,4 @@
 </template>
 
 <script setup lang="ts"></script>
-<style scoped>
-.main {
-  @screen xl {
-    @apply p-0;
-  }
-}
-</style>
+<style scoped lang="postcss"></style>

@@ -1,14 +1,14 @@
 <template>
-  <section class="project section">
-    <div class="project-bg">
-      <div class="project-container container grid mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="projetc-data">
-          <h2 class="project-title">
+  <section class="@container shell-section text-center lg:text-left">
+    <div class="bg-primary-second py-12 lg:bg-transparent">
+      <div class="container grid mx-auto px-4 sm:px-6 lg:px-8 md:grid-cols-2 md:gap-6 lg:[grid-template-columns:1fr_max-content] lg:bg-primary-second lg:rounded-2xl lg:py-12 lg:px-6 lg:gap-12">
+        <div class="projetc-data lg:pt-3">
+          <h2 class="section-title mb-3 text-white lg:text-left">
             Vous avez des idées de projet ou vous avez des question
           </h2>
-          <p class="project-description">
+          <span class="section-subtitle mb-6 text-white/90 lg:text-left">
             Contactez-moi afin que nous en discutions.
-          </p>
+          </span>
           <a href="https://cal.com/bertyn-boulikou" target="_blank" class="button button-flex button-white mb-6">
             Booker un entretien
             <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 project-icon" fill="none" viewBox="0 0 24 24"
@@ -18,7 +18,7 @@
             </svg>
           </a>
         </div>
-        <svg class="project-img" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg"
+        <svg class="w-60 justify-self-center lg:w-64" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 1036.608 758.00135">
           <title>team work</title>
           <circle cx="578.6059" cy="373.0001" r="373.0001" fill="#f2f2f2" />
@@ -286,58 +286,4 @@
 export default {}
 </script>
 
-<style lang="postcss">
-.project {
-  @apply text-center;
-
-  @screen lg {
-    text-align: initial;
-  }
-
-  &-container {
-    @screen md {
-      @apply grid-cols-2 gap-6;
-    }
-
-    @screen lg {
-      grid-template-columns: 1fr max-content;
-      @apply bg-primary-second rounded-2xl py-12 px-6 gap-12;
-    }
-  }
-
-  &-data {
-    @screen lg {
-      @apply pt-3;
-    }
-  }
-
-  &-bg {
-    @apply bg-primary-second py-12;
-
-    @screen lg {
-      @apply bg-transparent;
-    }
-  }
-
-  &-title {
-    @apply text-xl mb-3;
-  }
-
-  &-description {
-    @apply mb-6;
-  }
-
-  &-title,
-  &-description {
-    @apply text-white;
-  }
-
-  &-img {
-    @apply w-60 justify-self-center;
-
-    @screen lg {
-      @apply w-64;
-    }
-  }
-}
-</style>
+<style lang="postcss"></style>

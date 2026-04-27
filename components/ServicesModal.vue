@@ -1,14 +1,14 @@
 <template>
   <transition>
-    <div class="services-modal">
-      <div class="services-modal-content">
-        <h4 class="services-modal-title">
+    <div class="fixed top-0 inset-x-0 h-screen bg-black bg-opacity-80 flex items-center justify-center px-2 py-4 z-30 opacity-0 transition duration-500">
+      <div class="relative rounded-lg bg-primary-body p-6 lg:w-[450px]">
+        <h4 class="mb-6 text-lg font-medium">
           {{ service.name }} <br />
           {{ service.post }}
         </h4>
         <svg
           xmlns="http://www.w3.org/2000/svg"
-          class="h-6 w-6 services-modal-close"
+          class="absolute top-4 right-4 h-6 w-6 cursor-pointer text-2xl text-primary"
           fill="none"
           viewBox="0 0 24 24"
           stroke="currentColor"
@@ -21,15 +21,15 @@
             d="M6 18L18 6M6 6l12 12"
           />
         </svg>
-        <ul class="services-modal-services grid">
+        <ul class="grid gap-4">
           <li
             v-for="(skill, i) in service.skills"
             :key="i"
-            class="services-modal-service"
+            class="flex"
           >
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              class="h-6 w-6 services-modal-icon"
+              class="mr-1 h-6 w-6 text-primary"
               fill="none"
               viewBox="0 0 24 24"
               stroke="currentColor"
@@ -65,30 +65,4 @@ export default {
 }
 </script>
 
-<style lang="postcss">
-.services-modal {
-  @apply fixed top-0 inset-x-0 h-screen bg-black bg-opacity-80 flex items-center justify-center px-2 py-4 z-30 opacity-0 transition duration-500;
-  &-content {
-    @apply relative bg-primary-body p-6 rounded-lg;
-    @screen lg {
-      width: 450px;
-    }
-  }
-
-  &-services {
-    @apply gap-4;
-  }
-  &-service {
-    @apply flex;
-  }
-  &-title {
-    @apply text-lg font-medium mb-6;
-  }
-  &-close {
-    @apply absolute top-4 right-4 text-2xl text-primary cursor-pointer;
-  }
-  &-icon {
-    @apply text-primary mr-1;
-  }
-}
-</style>
+<style></style>

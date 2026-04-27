@@ -1,11 +1,13 @@
 <template>
-  <section id="graduate" class="graduate section">
+  <section id="graduate" class="@container graduate shell-section">
     <h2 class="section-title">Diplomes et Certifications</h2>
     <span class="section-subtitle"> Mon parcours personel </span>
 
-    <div class="graduate-container container mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="graduate-tabs">
-        <div :class="[educations.isOpen ? 'graduate-active' : '']" class="graduate-button" data-target="#education"
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex justify-evenly items-center mb-8 lg:justify-center">
+        <div :class="[educations.isOpen ? 'graduate-active' : '']"
+          class="graduate-button flex items-center text-2xl font-medium cursor-pointer hover:text-primary lg:my-0 lg:mx-4"
+          data-target="#education"
           @click="
             educations.isOpen = true;
           works.isOpen = false;
@@ -19,7 +21,9 @@
           </svg>
           Education
         </div>
-        <div class="graduate-button" data-target="#work" :class="[works.isOpen ? 'graduate-active' : '']" @click="
+        <div
+          class="graduate-button flex items-center text-2xl font-medium cursor-pointer hover:text-primary lg:my-0 lg:mx-4"
+          data-target="#work" :class="[works.isOpen ? 'graduate-active' : '']" @click="
           works.isOpen = true;
         educations.isOpen = false;
         ">
@@ -31,14 +35,14 @@
         </div>
       </div>
 
-      <div class="graduate-section">
+      <div class="md:grid md:grid-cols-[0.6fr] md:justify-center lg:grid-cols-[0.5fr]">
         <div id="education" class="graduate-content" :class="[educations.isOpen ? 'graduate-active' : '']" data-content>
-          <div v-for="(edu, i) in educations.data" :key="i" class="graduate-data">
+          <div v-for="(edu, i) in educations.data" :key="i" class="grid grid-cols-[1fr_max-content_1fr] gap-2 sm:gap-6">
             <div v-if="i % 2 != 0"></div>
             <div>
-              <h3 class="graduate-title">{{ edu.grades }}</h3>
-              <span class="graduate-subtitle">{{ edu.city }} - {{ edu.school }}</span>
-              <div class="graduate-calendar">
+              <h3 class="text-base font-semibold">{{ edu.grades }}</h3>
+              <span class="inline-block text-sm mb-4">{{ edu.city }} - {{ edu.school }}</span>
+              <div class="text-sm text-primary-textLight">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
                   stroke="currentColor">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -49,18 +53,18 @@
             </div>
 
             <div :class="[i % 2 != 0 ? 'graduate-inv' : '']">
-              <span class="graduate-rounder"></span>
-              <span class="graduate-line"></span>
+              <span class="inline-block w-3 h-3 bg-primary rounded-full"></span>
+              <span class="block w-px h-full transform translate-x-1.5 -translate-y-1.8 bg-primary"></span>
             </div>
           </div>
         </div>
         <div id="work" class="graduate-content" :class="[works.isOpen ? 'graduate-active' : '']" data-content>
-          <div v-for="(work, i) in works.data" :key="i" class="graduate-data">
+          <div v-for="(work, i) in works.data" :key="i" class="grid grid-cols-[1fr_max-content_1fr] gap-2 sm:gap-6">
             <div v-if="i % 2 != 0"></div>
             <div>
-              <h3 class="graduate-title">{{ work.post }}</h3>
-              <span class="graduate-subtitle">{{ work.city }} - {{ work.entreprise }}</span>
-              <div class="graduate-calendar">
+              <h3 class="text-base font-semibold">{{ work.post }}</h3>
+              <span class="inline-block text-sm mb-4">{{ work.city }} - {{ work.entreprise }}</span>
+              <div class="text-sm text-primary-textLight">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
                   stroke="currentColor">
                   <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -71,8 +75,8 @@
             </div>
 
             <div :class="[i % 2 != 0 ? 'graduate-inv' : '']">
-              <span class="graduate-rounder"></span>
-              <span class="graduate-line"></span>
+              <span class="inline-block w-3 h-3 bg-primary rounded-full"></span>
+              <span class="block w-px h-full transform translate-x-1.5 -translate-y-1.8 bg-primary"></span>
             </div>
           </div>
         </div>
@@ -149,75 +153,8 @@ export default {
 </script>
 
 <style lang="postcss">
+
 .graduate {
-  &-container {}
-
-  &-section {
-    @screen md {
-      display: grid;
-      grid-template-columns: 0.6fr;
-      justify-content: center;
-    }
-
-    @screen lg {
-      grid-template-columns: 0.5fr;
-    }
-  }
-
-  &-tabs {
-    @apply flex justify-evenly items-center mb-8;
-
-    @screen lg {
-      @apply justify-center;
-    }
-  }
-
-  &-button {
-    @apply flex items-center text-2xl font-medium cursor-pointer;
-
-    @screen lg {
-      @apply my-0 mx-4;
-    }
-
-    &:hover {
-      @apply text-primary;
-    }
-  }
-
-  &-icon {
-    @apply text-3xl mb-1;
-  }
-
-  &-data {
-    display: grid;
-    grid-template-columns: 1fr max-content 1fr;
-    column-gap: 0.5rem;
-
-    @screen sm {
-      gap: 1.5rem;
-    }
-  }
-
-  &-title {
-    @apply text-base font-semibold;
-  }
-
-  &-subtitle {
-    @apply inline-block text-sm mb-4;
-  }
-
-  &-calendar {
-    @apply text-sm text-primary-textLight;
-  }
-
-  &-rounder {
-    @apply inline-block w-3 h-3 bg-primary rounded-full;
-  }
-
-  &-line {
-    @apply block w-px h-full transform translate-x-1.5 -translate-y-1.8 bg-primary;
-  }
-
   & [data-content] {
     @apply hidden;
   }

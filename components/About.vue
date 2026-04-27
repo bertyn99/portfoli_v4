@@ -1,7 +1,7 @@
 <template>
-  <section id="about" class="about section bg-gray-100 py-8">
-    <h2 ref="title" class="section-title text-gray-800 text-center">A propos</h2>
-    <span ref="subtitle" class="section-subtitle text-gray-600 text-center block mb-6">Ma présentation</span>
+  <section id="about" class="about @container bg-gray-100 pt-8 pb-16 md:pt-24 md:pb-8 md:px-0">
+    <h2 ref="title" class="section-title">A propos</h2>
+    <span ref="subtitle" class="section-subtitle">Ma présentation</span>
     <div class="about-container container mx-auto px-4 sm:px-6 lg:px-8 grid lg:grid-cols-2 gap-8 mt-4">
       <div class="about-data col-span-2 flex flex-col md:flex-row gap-1.5">
         <div class="w-full md:basis-1/3" ref="contentLeft">
@@ -69,7 +69,7 @@
   </section>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { ref } from 'vue'
 import { useIntersectionObserver } from '@vueuse/core'
 import TheButton from './TheButton.vue'
@@ -81,14 +81,14 @@ const contentLeft = ref(null)
 const contentRight = ref(null)
 const stat = ref(null)
 // Intersection Observer callback
-const handleIntersect = ([entry]) => {
-  if (entry.isIntersecting) {
+const handleIntersect = ([entry]: IntersectionObserverEntry[]) => {
+  if (entry?.isIntersecting) {
     entry.target.classList.add('animate-fadeIn')
     if (entry.target === contentLeft.value) {
-      entry.target.classList.add('animate-slideInFromLeft')
+      entry?.target.classList?.add('animate-slideInFromLeft')
     }
     if (entry.target === contentRight.value) {
-      entry.target.classList.add('animate-slideInFromRight')
+      entry?.target.classList?.add('animate-slideInFromRight')
     }
 
     entry.target.classList.add('animate-fadeIn')

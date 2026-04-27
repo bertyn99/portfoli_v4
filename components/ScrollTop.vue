@@ -1,8 +1,8 @@
 <template>
-  <a id="scroll-up" href="#" class="scrollup">
+  <a id="scroll-up" href="#" class="fixed right-4 -bottom-1/4 rounded bg-primary opacity-80 py-0 px-2 z-10 transition duration-500 hover:bg-primary-alt">
     <svg
       xmlns="http://www.w3.org/2000/svg"
-      class="scrollup-icon"
+      class="h-6 w-6 fill-current text-white"
       fill="none"
       viewBox="0 0 24 24"
       stroke="currentColor"
@@ -39,15 +39,6 @@ export default {
 </script>
 
 <style lang="postcss">
-.scrollup {
-  @apply fixed right-4 -bottom-1/4 rounded bg-primary opacity-80 py-0 px-2 z-10 transition duration-500;
-  &:hover {
-    @apply bg-primary-alt;
-  }
-  &-icon {
-    @apply text-white h-6 w-6 fill-current;
-  }
-}
 .show-scroll {
   @apply bottom-20;
 }
