@@ -1,59 +1,47 @@
 <template>
-  <section id="portfolio" class="portfolio @container bg-primary-container py-16 md:py-24">
+  <section id="portfolio" class="portfolio @container bg-primary-container py-12 sm:py-16 md:py-24">
     <h2 class="section-title">Portfolio</h2>
     <span class="section-subtitle">Derniers projets</span>
-    <div class="container relative mx-auto px-4 sm:px-6 lg:px-8 overflow-hidden">
+    <div class="container relative mx-auto px-3 sm:px-6 lg:px-8 overflow-hidden">
       <carousel :slide-count="projects.length" v-slot="{ visibleSlide, direction }">
         <template v-for="(p, i) in projects" :key="p.link">
           <carousel-slide :index="i" :visible-index="visibleSlide" :direction="direction">
             <div
-              class="portfolio-slide grid min-h-[min(28rem,75vh)] gap-6 px-6 py-10 md:grid-cols-2 md:gap-8 md:py-12 lg:items-center xl:gap-10"
-            >
-              <NuxtImg
-                :src="`/img/${p.img}`"
-                :alt="`Aperçu : ${p.name}`"
-                width="960"
-                height="540"
-                class="h-full max-h-[min(22rem,50vh)] w-full justify-self-center rounded-lg object-cover object-top aspect-video md:max-h-none"
-                sizes="sm:100vw md:45vw xl:576px"
-                loading="lazy"
-              />
-              <div class="portfolio-data max-w-prose">
-                <h3 class="mb-2 text-2xl font-semibold">{{ p.name }}</h3>
-                <p class="mb-4 text-primary-text">
+              class="portfolio-slide grid min-h-0 gap-7 py-8 pl-14 pr-14 sm:gap-8 sm:py-10 md:min-h-[min(24rem,68vh)] md:grid-cols-2 md:items-start md:gap-x-8 md:gap-y-8 md:px-6 md:py-12 lg:items-center xl:gap-x-10">
+              <NuxtImg :src="`/img/${p.img}`" :alt="`Aperçu : ${p.name}`" width="960" height="540"
+                class="aspect-video w-full max-w-full shrink-0 justify-self-center rounded-lg object-cover object-top max-h-[min(17.5rem,42svh)] sm:max-h-[min(24rem,56vh)] md:h-full md:max-h-none"
+                sizes="sm:100vw md:45vw xl:576px" loading="lazy" />
+              <div class="portfolio-data w-full max-w-[min(100%,65ch)] md:justify-self-start">
+                <h3 class="mb-2 text-xl font-semibold tracking-tight sm:text-2xl">{{ p.name }}</h3>
+                <p class="mb-4 text-[0.9375rem] leading-relaxed text-primary-text sm:text-base">
                   {{ p.desc }}
                 </p>
-                <div class="mb-4 text-sm text-primary-text">
+                <div class="mb-4 text-sm leading-relaxed text-primary-text">
                   <strong>Stack :</strong>
-                  <ul class="mt-2 flex flex-wrap gap-x-3 gap-y-2" aria-label="Technologies utilisées">
+                  <ul class="mt-2 flex flex-wrap gap-x-3 gap-y-2.5" aria-label="Technologies utilisées">
                     <li v-for="(tech, index) in p.stack" :key="`${p.link}-stack-${index}`"
-                      class="group relative flex items-center"
-                    >
+                      class="group relative flex items-center">
                       <Icon :name="tech.icon" class="size-6 shrink-0 text-primary-title" aria-hidden="true" />
                       <span class="sr-only">{{ tech.name }}</span>
                       <span
                         class="pointer-events-none absolute left-1/2 z-[1] -translate-x-1/2 -translate-y-9 rounded bg-[var(--title-color)] px-2 py-1 text-xs text-[var(--body-color)] opacity-0 transition-opacity duration-200 group-hover:opacity-100"
-                        aria-hidden="true"
-                      >
+                        aria-hidden="true">
                         {{ tech.name }}
                       </span>
                     </li>
                   </ul>
                 </div>
                 <p class="mb-2 text-sm font-semibold text-primary-text">Fonctionnalités :</p>
-                <ul class="mb-5 list-disc space-y-1 pl-5 text-sm text-primary-text">
+                <ul
+                  class="mb-6 list-disc space-y-1.5 pl-4 text-sm leading-relaxed text-primary-text marker:text-primary sm:mb-5 sm:pl-5">
                   <li v-for="(feature, index) in p.features" :key="`${p.link}-feat-${index}`">{{ feature }}</li>
                 </ul>
-                <a
-                  :href="p.link"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  class="button button-flex button-small group inline-flex items-center px-4 py-2 transition-transform duration-300 ease-out hover:-translate-y-px"
-                  :aria-label="`Ouvrir la démo ${p.name} dans un nouvel onglet`"
-                >
+                <a :href="p.link" target="_blank" rel="noopener noreferrer"
+                  class="button button-flex button-small group inline-flex min-h-11 w-full items-center justify-center px-5 py-2.5 transition-transform duration-300 ease-out sm:inline-flex sm:w-auto sm:justify-start sm:px-4 sm:py-2 hover:-translate-y-px"
+                  :aria-label="`Ouvrir la démo ${p.name} dans un nouvel onglet`">
                   Démo
-                  <svg xmlns="http://www.w3.org/2000/svg" class="button-icon ml-2 group-hover:translate-x-2"
-                    fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="button-icon ml-2 group-hover:translate-x-2" fill="none"
+                    viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                       d="M13 7l5 5m0 0l-5 5m5-5H6" />
                   </svg>
