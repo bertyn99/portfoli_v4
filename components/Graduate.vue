@@ -14,204 +14,173 @@ const prefersReducedMotion = useReducedMotion();
     <div class="container mx-auto mb-3 max-w-7xl px-4 sm:mb-3 sm:px-6 lg:px-8">
       <div class="flex justify-center" role="tablist" aria-label="Filtrer le parcours">
         <div
-          class="inline-flex flex-wrap justify-center gap-0.5 rounded-2xl border border-primary-input/90 bg-primary-container/70 p-1 shadow-sm backdrop-blur-sm dark:border-primary-input/50 dark:bg-primary-container/40"
-        >
-          <Motion
-            v-for="opt in filterOptions"
-            :key="opt.value"
-            as="button"
-            type="button"
-            role="tab"
+          class="inline-flex flex-wrap justify-center gap-0.5 rounded-2xl border border-primary-input/90 bg-primary-container/70 p-1 shadow-sm backdrop-blur-sm dark:border-primary-input/50 dark:bg-primary-container/40">
+          <Motion v-for="opt in filterOptions" :key="opt.value" as="button" type="button" role="tab"
             :aria-selected="activeFilter === opt.value"
             class="graduate-filter-chip relative cursor-pointer rounded-xl px-3.5 py-2 text-sm font-semibold transition-colors duration-200 sm:px-4 sm:py-2.5"
             :class="[
               activeFilter === opt.value
                 ? 'graduate-filter-chip--active text-white shadow-md'
                 : 'text-primary-text hover:text-primary',
-            ]"
-            :while-hover="prefersReducedMotion ? {} : { scale: 1.02 }"
+            ]" :while-hover="prefersReducedMotion ? {} : { scale: 1.02 }"
             :while-press="prefersReducedMotion ? {} : { scale: 0.98 }"
-            :transition="{ type: 'spring', stiffness: 450, damping: 26 }"
-            @click="activeFilter = opt.value"
-          >
+            :transition="{ type: 'spring', stiffness: 450, damping: 26 }" @click="activeFilter = opt.value">
             {{ opt.label }}
           </Motion>
         </div>
       </div>
     </div>
 
-    <!-- Mobile: vertical list in container. lg+: full-viewport-width horizontal strip -->
-    <div
-      class="lg:relative lg:left-1/2 lg:w-screen lg:max-w-dvw lg:-translate-x-1/2"
-    >
-      <div
-        class="graduate-scroll mx-auto max-w-7xl overflow-x-visible overflow-y-visible px-4 pb-2 pt-0 [scrollbar-width:thin] sm:px-6 sm:pb-3 lg:max-w-none lg:overflow-x-auto lg:px-8 lg:pb-4 lg:pt-1 xl:px-12"
-      >
+    <!-- Mobile: vertical list. lg+: wrapping grid — no horizontal scroll; cards shrink when there are many -->
+    <div class="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div class="graduate-scroll pb-3 pt-0 sm:pb-4">
         <ul
-          class="graduate-timeline-list m-0 mx-auto flex w-full max-w-2xl list-none flex-col gap-6 p-0 lg:mx-0 lg:max-w-none lg:flex-row lg:gap-6 xl:gap-8"
+          class="graduate-timeline-list m-0 mx-auto flex w-full max-w-2xl list-none flex-col gap-6 p-0 lg:max-w-none lg:grid lg:grid-cols-[repeat(auto-fit,minmax(12rem,1fr))] lg:gap-x-4 lg:gap-y-10 xl:grid-cols-[repeat(auto-fit,minmax(13rem,1fr))]"
           role="list"
           aria-live="polite"
         >
           <li
             v-for="(item, index) in filteredTimeline"
             :key="`${activeFilter}-${item.id}`"
-            class="graduate-timeline-item flex w-full flex-row items-stretch gap-4 lg:w-90 lg:max-w-none lg:shrink-0 lg:flex-col lg:gap-2 lg:snap-start xl:w-96"
+            class="graduate-timeline-item flex w-full min-w-0 flex-row items-stretch gap-4 lg:flex-col lg:gap-2"
           >
             <!-- Mobile: vertical spine -->
-            <div
-              class="flex w-6 shrink-0 flex-col items-center lg:hidden"
-              aria-hidden="true"
-            >
-              <div
-                class="w-px flex-1 min-h-2 rounded-full bg-transparent"
-                :class="index === 0 ? '' : 'graduate-line-v'"
-              />
-              <span
-                class="graduate-node my-1.5 block size-3 shrink-0 rounded-full ring-4 ring-primary-body"
-                :class="item.kind === 'education' ? 'bg-primary' : 'bg-primary-alt'"
-              />
-              <div
-                class="w-px flex-1 min-h-2 rounded-full bg-transparent"
-                :class="index === filteredTimeline.length - 1 ? '' : 'graduate-line-v'"
-              />
+            <div class="flex w-6 shrink-0 flex-col items-center lg:hidden" aria-hidden="true">
+              <div class="w-px flex-1 min-h-2 rounded-full bg-transparent"
+                :class="index === 0 ? '' : 'graduate-line-v'" />
+              <span class="graduate-node my-1.5 block size-3 shrink-0 rounded-full ring-4 ring-primary-body"
+                :class="item.kind === 'education' ? 'bg-primary' : 'bg-primary-alt'" />
+              <div class="w-px flex-1 min-h-2 rounded-full bg-transparent"
+                :class="index === filteredTimeline.length - 1 ? '' : 'graduate-line-v'" />
             </div>
 
             <!-- Desktop: horizontal spine above card -->
             <div class="mb-2 hidden h-8 w-full items-center sm:mb-2.5 sm:h-9 lg:flex">
-              <div
-                class="h-[3px] min-w-3 flex-1 rounded-full transition-opacity"
-                :class="index === 0 ? 'opacity-0' : 'graduate-line-h'"
-                aria-hidden="true"
-              />
+              <div class="h-[3px] min-w-3 flex-1 rounded-full transition-opacity"
+                :class="index === 0 ? 'opacity-0' : 'graduate-line-h'" aria-hidden="true" />
               <span
                 class="graduate-node relative mx-1.5 block size-3 shrink-0 rounded-full ring-4 ring-primary-body sm:size-3.5"
-                :class="item.kind === 'education' ? 'bg-primary' : 'bg-primary-alt'"
-                aria-hidden="true"
-              />
-              <div
-                class="h-[3px] min-w-3 flex-1 rounded-full transition-opacity"
-                :class="index === filteredTimeline.length - 1 ? 'opacity-0' : 'graduate-line-h'"
-                aria-hidden="true"
-              />
+                :class="item.kind === 'education' ? 'bg-primary' : 'bg-primary-alt'" aria-hidden="true" />
+              <div class="h-[3px] min-w-3 flex-1 rounded-full transition-opacity"
+                :class="index === filteredTimeline.length - 1 ? 'opacity-0' : 'graduate-line-h'" aria-hidden="true" />
             </div>
 
-            <Motion
-              as="article"
+            <Motion as="article"
               class="graduate-card-shell group relative flex min-w-0 flex-1 flex-col overflow-hidden rounded-2xl text-primary-text"
               :class="[
                 item.kind === 'education' ? 'graduate-card-shell--edu' : 'graduate-card-shell--work',
                 item.current ? 'graduate-card-shell--current' : '',
-              ]"
-              :initial="prefersReducedMotion ? { opacity: 1, y: 0 } : { opacity: 0, y: 18 }"
+              ]" :initial="prefersReducedMotion ? { opacity: 1, y: 0 } : { opacity: 0, y: 18 }"
               :while-in-view="prefersReducedMotion ? { opacity: 1, y: 0 } : { opacity: 1, y: 0 }"
-              :while-hover="prefersReducedMotion ? {} : { y: -4, transition: { type: 'spring', stiffness: 420, damping: 24 } }"
-              :transition="
-                prefersReducedMotion
+              :while-hover="prefersReducedMotion ? {} : { y: -2, scale: 1.01, transition: { type: 'spring', stiffness: 440, damping: 26 } }"
+              :transition="prefersReducedMotion
                   ? { duration: 0 }
                   : { type: 'spring', stiffness: 360, damping: 28, delay: index * 0.04 }
-              "
-              :viewport="{ once: true, margin: '0px -8% 0px -8%' }"
-            >
-              <div class="graduate-card-sheen pointer-events-none absolute inset-0 opacity-60" aria-hidden="true" />
+                " :viewport="{ once: true, margin: '0px -8% 0px -8%' }">
+              <div class="graduate-card-sheen pointer-events-none absolute inset-0 opacity-40" aria-hidden="true" />
               <div
-                class="graduate-card-blob pointer-events-none absolute -right-10 -top-10 size-36 rounded-full opacity-40 blur-3xl"
+                class="graduate-card-blob pointer-events-none absolute -right-10 -top-10 size-36 rounded-full opacity-[0.14] blur-3xl"
                 aria-hidden="true"
               />
               <div
-                class="graduate-card-blob2 pointer-events-none absolute -bottom-8 -left-8 size-28 rounded-full opacity-30 blur-2xl"
+                class="graduate-card-blob2 pointer-events-none absolute -bottom-8 -left-8 size-28 rounded-full opacity-[0.1] blur-2xl"
                 aria-hidden="true"
               />
 
               <div
-                class="relative flex min-h-0 flex-1 flex-col rounded-[0.9375rem] border border-primary-input/70 bg-primary-container/90 p-4 shadow-lg backdrop-blur-md dark:border-primary-input/40 dark:bg-primary-container/75 sm:p-5"
+                class="graduate-card-inner relative flex min-h-0 flex-1 flex-col rounded-[0.9375rem] border border-primary-input/60 bg-primary-container p-3.5 shadow-sm backdrop-blur-sm dark:border-primary-input/35 dark:bg-primary-container/90 sm:p-4"
               >
-                <div class="graduate-card-accent absolute inset-x-0 top-0 z-1 h-1 rounded-t-[0.9375rem]" aria-hidden="true" />
+                <div
+                  class="graduate-card-accent absolute inset-x-0 top-0 z-1 h-1 rounded-t-[0.9375rem]"
+                  aria-hidden="true"
+                />
 
-                <div class="relative mb-3 flex items-start gap-3">
-                  <div
-                    class="flex size-11 shrink-0 items-center justify-center rounded-xl border border-primary/20 bg-linear-to-br from-primary/12 to-primary/5 text-primary shadow-inner dark:from-primary/25 dark:to-primary/5 dark:text-primary-lighter"
-                    :class="
-                      item.kind === 'work'
-                        ? 'border-primary-alt/30 from-primary-alt/15 to-primary-alt/5 dark:from-primary-alt/20'
-                        : ''
-                    "
-                  >
-                    <Icon
-                      :name="item.kind === 'education' ? 'mdi:school-outline' : 'mdi:briefcase-outline'"
-                      class="size-6"
+                <header class="relative border-b border-primary-input/55 pb-3 dark:border-primary-input/30">
+                  <div class="mb-2 flex items-center justify-between gap-2">
+                    <span
+                      class="font-mono text-[0.58rem] font-semibold tabular-nums tracking-[0.18em] text-primary-textLight"
                       aria-hidden="true"
-                    />
-                  </div>
-                  <div class="min-w-0 flex-1">
-                    <div class="mb-1.5 flex flex-wrap items-center justify-between gap-2">
+                    >
+                      {{ stepNumber(item) }}
+                    </span>
+                    <div class="flex flex-wrap items-center justify-end gap-1.5">
                       <span
-                        class="font-mono text-[0.6rem] font-bold tabular-nums tracking-[0.2em] text-primary-textLight"
-                        aria-hidden="true"
+                        class="inline-flex items-center rounded-full px-2 py-0.5 text-[0.58rem] font-bold uppercase tracking-wider text-primary ring-1 ring-primary/20 dark:ring-primary/30 sm:text-[0.62rem]"
+                        :class="
+                          item.kind === 'education'
+                            ? 'bg-primary/10'
+                            : 'bg-primary-alt/14 text-primary-alt ring-primary-alt/25'
+                        "
                       >
-                        {{ stepNumber(item) }}
+                        {{ item.kind === "education" ? "Formation" : "Expérience" }}
                       </span>
-                      <div class="flex flex-wrap items-center justify-end gap-1.5">
-                        <span
-                          class="inline-flex items-center rounded-md px-2 py-0.5 text-[0.6rem] font-bold uppercase tracking-wider text-primary ring-1 ring-primary/25 dark:ring-primary/35 sm:text-[0.65rem]"
-                          :class="
-                            item.kind === 'education'
-                              ? 'bg-primary/12'
-                              : 'bg-primary-alt/18 text-primary-alt ring-primary-alt/30'
-                          "
-                        >
-                          {{ item.kind === "education" ? "Formation" : "Expérience" }}
-                        </span>
-                        <span
-                          v-if="item.current"
-                          class="inline-flex items-center rounded-md bg-emerald-500/15 px-1.5 py-0.5 text-[0.6rem] font-bold uppercase tracking-wide text-emerald-700 ring-1 ring-emerald-500/30 dark:text-emerald-400 sm:text-[0.65rem]"
-                        >
-                          En cours
-                        </span>
+                      <span
+                        v-if="item.current"
+                        class="inline-flex items-center rounded-full bg-emerald-500/12 px-1.5 py-0.5 text-[0.58rem] font-bold uppercase tracking-wide text-emerald-700 ring-1 ring-emerald-500/25 dark:text-emerald-400 sm:text-[0.62rem]"
+                      >
+                        En cours
+                      </span>
+                    </div>
+                  </div>
+
+                  <h3
+                    class="text-balance wrap-break-word text-[1.05rem] font-bold leading-snug tracking-tight text-primary-title sm:text-[1.1rem]"
+                  >
+                    {{ item.title }}
+                  </h3>
+
+                  <div class="mt-3 flex items-start gap-2.5">
+                    <div
+                      class="flex size-9 shrink-0 items-center justify-center rounded-lg border border-primary/15 bg-linear-to-br from-primary/10 to-primary/5 text-primary dark:from-primary/18 dark:to-primary/5"
+                      :class="
+                        item.kind === 'work'
+                          ? 'border-primary-alt/25 from-primary-alt/12 to-primary-alt/5 dark:from-primary-alt/16'
+                          : ''
+                      "
+                    >
+                      <Icon
+                        :name="item.kind === 'education' ? 'mdi:school-outline' : 'mdi:briefcase-outline'"
+                        class="size-[1.15rem]"
+                        aria-hidden="true"
+                      />
+                    </div>
+                    <div class="min-w-0 flex-1 space-y-1">
+                      <p class="text-[0.7rem] leading-snug text-primary-text sm:text-xs">
+                        <span class="font-semibold text-primary-title">{{ item.org }}</span>
+                        <span class="text-primary-textLight"> · {{ item.city }}</span>
+                      </p>
+                      <div class="flex items-center gap-1.5 text-[0.7rem] text-primary-textLight sm:text-xs">
+                        <Icon
+                          name="mdi:calendar-month-outline"
+                          class="size-3.5 shrink-0 text-primary/65"
+                          aria-hidden="true"
+                        />
+                        <time class="font-medium text-primary-text/90">{{ item.period }}</time>
                       </div>
                     </div>
-                    <h3
-                      class="text-balance wrap-break-word text-base font-extrabold leading-snug tracking-tight text-primary-title sm:text-lg"
-                    >
-                      {{ item.title }}
-                    </h3>
                   </div>
+                </header>
+
+                <div class="relative flex-1 py-3">
+                  <p class="m-0 text-[0.8125rem] leading-relaxed text-primary-text sm:text-sm">
+                    {{ item.description }}
+                  </p>
                 </div>
 
-                <p
-                  class="relative mb-2 text-[0.65rem] font-bold uppercase leading-snug tracking-wide text-primary-textLight sm:text-xs"
-                >
-                  {{ item.org }}
-                  <span class="block font-semibold normal-case text-primary-text sm:inline sm:font-medium">
-                    · {{ item.city }}
-                  </span>
-                </p>
-
-                <p
-                  class="relative mb-2.5 inline-flex w-fit items-center gap-1.5 rounded-md border border-primary/15 bg-primary-body/50 px-2 py-1 text-xs font-bold text-primary-text dark:border-primary/25 dark:bg-primary-body/30"
-                >
-                  <Icon name="mdi:calendar-month-outline" class="size-3.5 shrink-0 text-primary opacity-80" />
-                  {{ item.period }}
-                </p>
-
-                <p
-                  class="relative mb-3 flex-1 text-[0.8125rem] leading-relaxed text-primary-text/95 sm:text-sm"
-                >
-                  {{ item.description }}
-                </p>
-
-                <ul
+                <footer
                   v-if="item.tags && item.tags.length"
-                  class="relative m-0 flex list-none flex-wrap gap-1.5 border-t border-primary-input/50 pt-3 dark:border-primary-input/35"
-                  aria-label="Technologies"
+                  class="relative mt-auto border-t border-primary-input/50 pt-2.5 dark:border-primary-input/30"
                 >
-                  <li
-                    v-for="tag in item.tags"
-                    :key="tag"
-                    class="rounded-md bg-linear-to-br from-primary/10 to-primary/5 px-2 py-0.5 text-[0.65rem] font-semibold text-primary ring-1 ring-primary/15 dark:from-primary/20 dark:to-primary/10 dark:ring-primary/25 sm:text-xs"
-                  >
-                    {{ tag }}
-                  </li>
-                </ul>
+                  <ul class="m-0 flex list-none flex-wrap gap-1.5 p-0" aria-label="Technologies">
+                    <li
+                      v-for="tag in item.tags"
+                      :key="tag"
+                      class="rounded-md bg-primary-body/60 px-2 py-0.5 text-[0.62rem] font-medium text-primary-text dark:bg-primary-input/40 sm:text-xs"
+                    >
+                      {{ tag }}
+                    </li>
+                  </ul>
+                </footer>
               </div>
             </Motion>
           </li>
@@ -351,70 +320,22 @@ export default {
   @apply mt-1 mb-0 text-xl md:text-2xl;
 }
 
-/* Horizontal strip only from lg (768px in this project) */
 .graduate-timeline-list {
-  scroll-snap-align: none;
-}
-
-@media (min-width: 768px) {
-  .graduate-timeline-list {
-    padding-left: max(0.5rem, env(safe-area-inset-left, 0px));
-    padding-right: max(0.5rem, env(safe-area-inset-right, 0px));
-  }
-}
-
-.graduate-timeline-list::after {
-  content: "";
-  display: none;
-}
-
-@media (min-width: 768px) {
-  .graduate-timeline-list::after {
-    display: block;
-    flex-shrink: 0;
-    width: clamp(2.5rem, calc(50vw - 11.25rem), 12rem);
-    align-self: stretch;
-    pointer-events: none;
-  }
-}
-
-.graduate-scroll {
-  -webkit-overflow-scrolling: touch;
-}
-
-@media (min-width: 768px) {
-  .graduate-scroll {
-    scroll-snap-type: x mandatory;
-    scroll-padding-inline: max(1rem, env(safe-area-inset-left, 0px), env(safe-area-inset-right, 0px));
-  }
-}
-
-.graduate-timeline-item {
-  scroll-snap-align: none;
-}
-
-@media (min-width: 768px) {
-  .graduate-timeline-item {
-    scroll-snap-align: start;
-  }
+  align-items: start;
 }
 
 .graduate-line-v {
-  background: linear-gradient(
-    to bottom,
-    hsl(var(--hue-color) 57% 53% / 0.12),
-    hsl(var(--hue-color) 69% 61% / 0.45),
-    hsl(var(--hue-color) 57% 53% / 0.12)
-  );
+  background: linear-gradient(to bottom,
+      hsl(var(--hue-color) 57% 53% / 0.12),
+      hsl(var(--hue-color) 69% 61% / 0.45),
+      hsl(var(--hue-color) 57% 53% / 0.12));
 }
 
 :global(.dark) .graduate-line-v {
-  background: linear-gradient(
-    to bottom,
-    hsl(var(--hue-color) 57% 53% / 0.08),
-    hsl(var(--hue-color) 69% 61% / 0.4),
-    hsl(var(--hue-color) 57% 53% / 0.08)
-  );
+  background: linear-gradient(to bottom,
+      hsl(var(--hue-color) 57% 53% / 0.08),
+      hsl(var(--hue-color) 69% 61% / 0.4),
+      hsl(var(--hue-color) 57% 53% / 0.08));
 }
 
 .graduate-filter-chip--active {
@@ -439,37 +360,33 @@ export default {
   padding: 1px;
   background: linear-gradient(
     145deg,
-    hsl(var(--hue-color) 69% 61% / 0.55),
-    hsl(var(--hue-color) 57% 53% / 0.25) 40%,
-    hsl(var(--hue-color) 69% 61% / 0.2) 100%
+    hsl(var(--hue-color) 69% 61% / 0.42),
+    hsl(var(--hue-color) 57% 53% / 0.2) 45%,
+    hsl(var(--hue-color) 69% 61% / 0.16) 100%
   );
   box-shadow:
-    0 12px 40px -12px hsl(var(--hue-color) 69% 45% / 0.22),
-    0 4px 12px -4px hsl(var(--hue-color) 8% 15% / 0.08);
+    0 8px 28px -10px hsl(var(--hue-color) 69% 45% / 0.18),
+    0 2px 8px -2px hsl(var(--hue-color) 8% 15% / 0.06);
   transition:
-    box-shadow 0.35s ease,
-    transform 0.35s ease;
+    box-shadow 0.3s ease,
+    transform 0.3s ease;
 }
 
 :global(.dark) .graduate-card-shell {
-  background: linear-gradient(
-    145deg,
-    hsl(var(--hue-color) 69% 58% / 0.45),
-    hsl(var(--hue-color) 57% 48% / 0.2) 45%,
-    hsl(var(--hue-color) 30% 20% / 0.5) 100%
-  );
+  background: linear-gradient(145deg,
+      hsl(var(--hue-color) 69% 58% / 0.45),
+      hsl(var(--hue-color) 57% 48% / 0.2) 45%,
+      hsl(var(--hue-color) 30% 20% / 0.5) 100%);
   box-shadow:
     0 16px 48px -14px hsl(var(--hue-color) 69% 40% / 0.35),
     0 0 0 1px hsl(var(--hue-color) 69% 61% / 0.12);
 }
 
 .graduate-card-shell--work {
-  background: linear-gradient(
-    145deg,
-    hsl(var(--hue-color) 57% 53% / 0.5),
-    hsl(var(--hue-color) 69% 61% / 0.2) 50%,
-    hsl(var(--hue-color) 57% 45% / 0.25) 100%
-  );
+  background: linear-gradient(145deg,
+      hsl(var(--hue-color) 57% 53% / 0.5),
+      hsl(var(--hue-color) 69% 61% / 0.2) 50%,
+      hsl(var(--hue-color) 57% 45% / 0.25) 100%);
 }
 
 .graduate-card-shell--current {
@@ -481,8 +398,8 @@ export default {
 
 .graduate-card-shell:hover {
   box-shadow:
-    0 20px 48px -14px hsl(var(--hue-color) 69% 45% / 0.3),
-    0 8px 16px -6px hsl(var(--hue-color) 8% 15% / 0.1);
+    0 14px 36px -12px hsl(var(--hue-color) 69% 45% / 0.24),
+    0 4px 12px -4px hsl(var(--hue-color) 8% 15% / 0.08);
 }
 
 :global(.dark) .graduate-card-shell:hover {
@@ -492,46 +409,36 @@ export default {
 }
 
 .graduate-card-sheen {
-  background: linear-gradient(
-    125deg,
-    transparent 0%,
-    hsl(0 0% 100% / 0.07) 35%,
-    transparent 55%
-  );
+  background: linear-gradient(125deg,
+      transparent 0%,
+      hsl(0 0% 100% / 0.07) 35%,
+      transparent 55%);
   border-radius: inherit;
 }
 
 :global(.dark) .graduate-card-sheen {
-  background: linear-gradient(
-    125deg,
-    transparent 0%,
-    hsl(0 0% 100% / 0.04) 40%,
-    transparent 60%
-  );
+  background: linear-gradient(125deg,
+      transparent 0%,
+      hsl(0 0% 100% / 0.04) 40%,
+      transparent 60%);
 }
 
 .graduate-card-shell--edu .graduate-card-blob {
-  background: radial-gradient(
-    circle,
-    hsl(var(--hue-color) 69% 61% / 0.35) 0%,
-    transparent 70%
-  );
+  background: radial-gradient(circle,
+      hsl(var(--hue-color) 69% 61% / 0.35) 0%,
+      transparent 70%);
 }
 
 .graduate-card-shell--work .graduate-card-blob {
-  background: radial-gradient(
-    circle,
-    hsl(var(--hue-color) 57% 53% / 0.35) 0%,
-    transparent 70%
-  );
+  background: radial-gradient(circle,
+      hsl(var(--hue-color) 57% 53% / 0.35) 0%,
+      transparent 70%);
 }
 
 .graduate-card-blob2 {
-  background: radial-gradient(
-    circle,
-    hsl(var(--hue-color) 92% 95% / 0.5) 0%,
-    transparent 65%
-  );
+  background: radial-gradient(circle,
+      hsl(var(--hue-color) 92% 95% / 0.5) 0%,
+      transparent 65%);
 }
 
 :global(.dark) .graduate-card-blob2 {
@@ -539,64 +446,36 @@ export default {
 }
 
 .graduate-card-accent {
-  background: linear-gradient(
-    90deg,
-    hsl(var(--hue-color) 69% 61% / 0.9),
-    hsl(var(--hue-color) 57% 53% / 0.85),
-    hsl(var(--hue-color) 69% 61% / 0.75)
-  );
+  background: linear-gradient(90deg,
+      hsl(var(--hue-color) 69% 61% / 0.9),
+      hsl(var(--hue-color) 57% 53% / 0.85),
+      hsl(var(--hue-color) 69% 61% / 0.75));
 }
 
 .graduate-card-shell--work .graduate-card-accent {
-  background: linear-gradient(
-    90deg,
-    hsl(var(--hue-color) 57% 53% / 0.95),
-    hsl(var(--hue-color) 69% 61% / 0.7),
-    hsl(var(--hue-color) 57% 48% / 0.85)
-  );
+  background: linear-gradient(90deg,
+      hsl(var(--hue-color) 57% 53% / 0.95),
+      hsl(var(--hue-color) 69% 61% / 0.7),
+      hsl(var(--hue-color) 57% 48% / 0.85));
 }
 
 .graduate-line-h {
-  background: linear-gradient(
-    to right,
-    hsl(var(--hue-color) 57% 53% / 0.15),
-    hsl(var(--hue-color) 69% 61% / 0.55),
-    hsl(var(--hue-color) 57% 53% / 0.15)
-  );
+  background: linear-gradient(to right,
+      hsl(var(--hue-color) 57% 53% / 0.15),
+      hsl(var(--hue-color) 69% 61% / 0.55),
+      hsl(var(--hue-color) 57% 53% / 0.15));
 }
 
 :global(.dark) .graduate-line-h {
-  background: linear-gradient(
-    to right,
-    hsl(var(--hue-color) 57% 53% / 0.1),
-    hsl(var(--hue-color) 69% 61% / 0.5),
-    hsl(var(--hue-color) 57% 53% / 0.1)
-  );
-}
-
-.graduate-scroll::-webkit-scrollbar {
-  height: 8px;
-}
-
-.graduate-scroll::-webkit-scrollbar-track {
-  @apply mx-2 rounded-full bg-primary-input/35;
-}
-
-.graduate-scroll::-webkit-scrollbar-thumb {
-  @apply rounded-full border-2 border-transparent bg-primary/45 bg-clip-padding;
-}
-
-.graduate-scroll::-webkit-scrollbar-thumb:hover {
-  @apply bg-primary/65;
+  background: linear-gradient(to right,
+      hsl(var(--hue-color) 57% 53% / 0.1),
+      hsl(var(--hue-color) 69% 61% / 0.5),
+      hsl(var(--hue-color) 57% 53% / 0.1));
 }
 
 @media (prefers-reduced-motion: reduce) {
   .graduate-filter-chip {
     transform: none !important;
-  }
-
-  .graduate-scroll {
-    scroll-snap-type: none;
   }
 }
 </style>
