@@ -4,6 +4,16 @@
 
 Personal portfolio site for Bertyn Boulikou — a single-page Nuxt 3 site (SSG/static generation). French-language content throughout. Deploys as a static site (`target: "static"`).
 
+## Design context
+
+Defaults for strategic and visual work live at the repo root (Impeccable-style context):
+
+- **`PRODUCT.md`** — register (`brand` vs `product`), users, purpose, personality, anti-references, principles.
+- **`DESIGN.md`** — Stitch-format design spec (YAML frontmatter + sections Overview / Colors / Typography / Elevation / Components / Do's and Don'ts); aligned with `assets/css/main.css`.
+- **`DESIGN.json`** — sidecar (motion, breakpoints, métadonnées couleur, snippets de composants pour tooling / panneaux).
+
+Read these before sizable UI or UX changes so variants stay on-brand.
+
 ## Stack
 
 - **Nuxt 3** (~3.15) with `@nuxt/content` v2 (not v3), `@nuxtjs/tailwindcss`, `@nuxt/image`, `@nuxt/icon`, `@vueuse/nuxt`

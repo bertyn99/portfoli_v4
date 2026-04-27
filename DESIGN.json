@@ -1,0 +1,128 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-04-27T12:00:00.000Z",
+  "title": "Design System: Portfolio Bertyn Boulikou",
+  "extensions": {
+    "colorMeta": {
+      "accent-primary": {
+        "role": "primary",
+        "displayName": "Violet accent",
+        "canonical": "hsl(250 69% 61%)",
+        "sourceVar": "--first-color"
+      },
+      "accent-primary-alt": {
+        "role": "primary",
+        "displayName": "Violet hover",
+        "canonical": "hsl(250 57% 53%)",
+        "sourceVar": "--first-color-alt"
+      },
+      "surface-body-light": {
+        "role": "neutral",
+        "displayName": "Fond page clair",
+        "canonical": "hsl(250 60% 99%)",
+        "sourceVar": "--body-color"
+      },
+      "surface-container-dark": {
+        "role": "neutral",
+        "displayName": "Conteneur sombre",
+        "canonical": "hsl(250 29% 16%)",
+        "sourceVar": "--container-color"
+      }
+    },
+    "shadows": [],
+    "motion": [
+      {
+        "name": "skills-cell-reveal",
+        "value": "0.52s cubic-bezier(0.22, 1, 0.36, 1)",
+        "purpose": "Entrée des tuiles Skills (opacity + translateY + scale)."
+      },
+      {
+        "name": "fade-in",
+        "value": "1s ease-in-out",
+        "purpose": "Animation fadeIn déclarée dans @theme."
+      },
+      {
+        "name": "button-icon-transition",
+        "value": "300ms",
+        "purpose": "Transition sur `.button-icon` au survol."
+      }
+    ],
+    "breakpoints": [
+      { "name": "sm", "value": "375px" },
+      { "name": "md", "value": "568px" },
+      { "name": "lg", "value": "768px" },
+      { "name": "xl", "value": "1024px" }
+    ]
+  },
+  "components": [
+    {
+      "name": "Primary Button",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "CTA principal; fond accent, survol vers --first-color-alt.",
+      "html": "<button type=\"button\" class=\"ds-btn-primary\">Envoyer</button>",
+      "css": ".ds-btn-primary { font-family: var(--font-family-barlow, Barlow, sans-serif); background: var(--first-color); color: #fff; padding: 16px; border-radius: 6px; font-weight: 500; border: none; cursor: pointer; transition: background-color 0.3s ease; } .ds-btn-primary:hover { background: var(--first-color-alt); } .ds-btn-primary:focus-visible { outline: 2px solid var(--first-color); outline-offset: 2px; }"
+    },
+    {
+      "name": "White Button",
+      "kind": "button",
+      "refersTo": "button-white",
+      "description": "Bouton inversé sur fond coloré ou sombre.",
+      "html": "<button type=\"button\" class=\"ds-btn-white\">Voir</button>",
+      "css": ".ds-btn-white { font-family: var(--font-family-barlow, Barlow, sans-serif); background: #fff; color: var(--first-color); padding: 16px; border-radius: 6px; font-weight: 500; border: none; cursor: pointer; transition: background-color 0.3s ease, color 0.3s ease; } .ds-btn-white:hover { background: var(--first-color-alt); color: #fff; } .ds-btn-white:focus-visible { outline: 2px solid var(--first-color); outline-offset: 2px; }"
+    },
+    {
+      "name": "Section heading block",
+      "kind": "custom",
+      "refersTo": null,
+      "description": "h2.section-title + sous-titre majuscule (.section-subtitle).",
+      "html": "<div class=\"ds-section-head\"><h2 class=\"ds-section-title\">Réalisations</h2><span class=\"ds-section-subtitle\">Projets sélectionnés</span></div>",
+      "css": ".ds-section-head { text-align: center; } .ds-section-title { font-family: var(--font-family-barlow, Barlow, sans-serif); font-weight: 900; font-size: 1.25rem; color: var(--title-color); margin: 0; } .ds-section-subtitle { display: block; font-family: var(--font-family-barlow, Barlow, sans-serif); font-weight: 900; font-size: 1.5rem; line-height: 1.25; letter-spacing: 0.05em; text-transform: uppercase; color: var(--text-color); margin: 0 0 1.5rem 0; } @media (min-width: 768px) { .ds-section-subtitle { margin-bottom: 2rem; } }"
+    }
+  ],
+  "narrative": {
+    "northStar": "La vitrine calme",
+    "overview": "Le système visuel repose sur des surfaces neutres teintées violet et un accent saturé contrôlé: le site se lit comme une vitrine professionnelle. La hiérarchie passe par la typographie Barlow et le rythme vertical des sections (shell-section). Le mode sombre recycle les mêmes rôles sémantiques via des variables CSS dans assets/css/main.css.",
+    "keyCharacteristics": [
+      "Accent violet pour actions et liens; neutres dominants.",
+      "Peu d’ombre portée système; profondeur par couches de fond.",
+      "Animations centrées sur opacity et transform.",
+      "Jetons --color-primary-* et --color-skills-* via @theme dans main.css."
+    ],
+    "rules": [
+      {
+        "name": "La règle d’une voix",
+        "body": "L’accent violet structure les CTA et la hiérarchie; pas d’arc-en-ciel ni d’accents concurrents sans raison stratégique.",
+        "section": "colors"
+      },
+      {
+        "name": "La règle des neutres teintés",
+        "body": "Les gris reprennent la teinte --hue-color pour éviter le gris « Excel » sur du blanc pur.",
+        "section": "colors"
+      },
+      {
+        "name": "La règle de la mesure",
+        "body": "Les blocs de texte long restent dans une colonne lisible; pas de lignes interminables sur grand écran sans contrainte de largeur.",
+        "section": "typography"
+      },
+      {
+        "name": "La règle du plat utile",
+        "body": "N’ajouter des ombres ou du glow que lorsqu’ils clarifient un groupe interactif (ex. grille Skills), pas pour décorer chaque bloc.",
+        "section": "elevation"
+      }
+    ],
+    "dos": [
+      "Do utiliser les variables --first-color, --title-color, --body-color et les classes primary.* / skills.* déjà mappées dans @theme.",
+      "Do conserver Barlow pour le corps et les titres de section, sauf exception localisée et documentée.",
+      "Do respecter le focus clavier et les contrastes sur les boutons du header, du thème et du formulaire de contact.",
+      "Do limiter les animations à opacity/transform et prévoir prefers-reduced-motion pour toute nouvelle animation décorative."
+    ],
+    "donts": [
+      "Don't reproduire les templates portfolio génériques « startup » (metrics hero, grille de cartes identiques, accents néon sans intention).",
+      "Don't basculer vers une ambiance crypto néon ou finance marine/or si ce n’est pas une décision de marque assumée.",
+      "Don't ajouter effets gadgets (glassmorphism, dégradés texte décoratifs, bandes latérales colorées épaisses sur les cartes) sans besoin utilisateur clair.",
+      "Don't animer width/height/margin pour des transitions décoratives; privilégier transform/opacity.",
+      "Don't introduire de nouvelles couleurs en dur là où un token existe déjà."
+    ]
+  }
+}
