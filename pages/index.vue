@@ -1,5 +1,5 @@
 <template>
-  <main>
+  <main class="">
     <Home></Home>
     <About></About>
     <Skills></Skills>

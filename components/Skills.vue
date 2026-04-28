@@ -1,6 +1,6 @@
 <template>
-  <section id="skills" class="@container bg-skills-bg py-14 text-primary-text md:py-24 dark:text-skills-muted">
-    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+  <section id="skills" class="bg-skills-bg py-14 text-primary-text md:py-24 dark:text-skills-muted">
+    <div class="container">
       <div class="mb-8 flex flex-col gap-6 lg:mb-10 items-center lg:gap-8">
         <header class="shrink-0">
           <h2 id="skills-heading" class="section-title dark:text-white">

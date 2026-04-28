@@ -32,7 +32,7 @@ const services = [
 </script>
 
 <template>
-  <section id="services" class="@container services shell-section">
+  <section id="services" class="services shell-section">
     <Motion
       as="div"
       class="w-full text-center"
@@ -45,7 +45,7 @@ const services = [
       <span class="section-subtitle">Services</span>
     </Motion>
 
-    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="container">
       <div class="lg:flex lg:items-center lg:justify-between lg:gap-12 xl:gap-16">
         <Motion
           as="div"

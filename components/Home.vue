@@ -1,6 +1,6 @@
 <template>
-  <section class="@container home shell-section">
-    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+  <section class="home shell-section">
+    <div class="container">
       <div
         class="grid grid-cols-[auto_1fr] gap-x-6 gap-y-8 pt-14 sm:grid-cols-[auto_1fr] md:grid-cols-[max-content_1fr_1fr] md:gap-x-8 lg:pt-20 lg:gap-x-10">
         <div class="grid grid-cols-[max-content] gap-y-2 md:mr-4">

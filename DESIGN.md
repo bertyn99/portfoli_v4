@@ -153,7 +153,7 @@ Le système est **plat par défaut**: séparation des régions par **couleur de 
 
 ### Sections (`shell-section`)
 
-- **Surface:** `bg-primary-container`, padding vertical `pt-8` / `pb-16` mobile, `md:pt-24` / `md:pb-8` desktop, souvent avec `@container` sur le `<section>` associé.
+- **Surface:** `bg-primary-container`, padding vertical `pt-8` / `pb-16` mobile, `md:pt-24` / `md:pb-8` desktop ; contenu interne dans `.container` (centrage, gouttières `px-4` / `sm:px-6` / `lg:px-8`, largeur max **`max-w-6xl`**, défini dans `assets/css/main.css`).
 - **Titres:** combinaison `h2.section-title` + `span.section-subtitle` (ou `p` équivalent pour le sous-titre).
 
 ### Buttons (`.button` dans `main.css`)

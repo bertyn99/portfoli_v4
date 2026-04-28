@@ -2,7 +2,7 @@
   <footer
     class="border-t border-primary/15 bg-primary-container pt-10 pb-12 text-primary-title dark:border-white/10"
   >
-    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="container">
       <div class="grid grid-flow-row gap-10 md:grid-cols-2 md:gap-12 lg:grid-cols-3 lg:gap-14">
         <div>
           <h1 class="mb-1 text-2xl font-semibold text-primary-title">Bertyn Boulikou</h1>

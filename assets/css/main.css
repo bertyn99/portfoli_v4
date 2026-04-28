@@ -49,6 +49,7 @@
 }
 
 @theme {
+  /* Viewport breakpoints — drive `sm:`/`md:`/`lg:`/`xl:` and the `container` max-width chain */
   --breakpoint-sm: 375px;
   --breakpoint-md: 568px;
   --breakpoint-lg: 768px;
@@ -151,7 +152,7 @@ img {
   @apply max-w-full h-auto;
 }
 
-/* Section surface (padding + background). Pair with Tailwind `@container` on the same `<section>`. */
+/* Section surface (padding + background). Full-bleed band; constrain copy with `.container` inside. */
 .shell-section {
   @apply pt-8 pb-16 bg-primary-container md:pt-24 md:pb-8 md:px-0;
 }
@@ -205,6 +206,14 @@ img {
 
 /* Below Tailwind utilities layer so responsive utilities like `lg:hidden` win over `display`. */
 @layer components {
+  /**
+   * Site container: centers, horizontal padding at sm/lg, capped at `--container-6xl` (72rem).
+   * `!max-w-6xl` wins over Tailwind’s default `container` max-width steps from `--breakpoint-*`.
+   */
+  .container {
+    @apply mx-auto w-full max-w-6xl! px-4 sm:px-6 lg:px-8;
+  }
+
   .touch-target-inline {
     @apply inline-flex min-h-11 min-w-11 items-center justify-center rounded-md px-3 py-2;
   }

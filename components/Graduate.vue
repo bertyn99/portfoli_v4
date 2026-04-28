@@ -5,13 +5,13 @@ const prefersReducedMotion = useReducedMotion();
 </script>
 
 <template>
-  <section id="graduate" class="@container graduate graduate-section shell-section">
-    <div class="graduate-heading mx-auto mb-3 max-w-7xl px-4 text-center sm:mb-4 sm:px-6 lg:px-8">
+  <section id="graduate" class="graduate graduate-section shell-section">
+    <div class="graduate-heading container mb-3 text-center sm:mb-4">
       <h2 class="section-title mb-1">Diplômes et certifications</h2>
       <span class="section-subtitle graduate-subtitle">Mon parcours professionnel</span>
     </div>
 
-    <div class="container mx-auto mb-3 max-w-7xl px-4 sm:mb-3 sm:px-6 lg:px-8">
+    <div class="container mb-3 sm:mb-3">
       <div class="flex justify-center" role="tablist" aria-label="Filtrer le parcours">
         <div
           class="inline-flex flex-wrap justify-center gap-0.5 rounded-2xl border border-primary-input/90 bg-primary-container/70 p-1 shadow-sm backdrop-blur-sm dark:border-primary-input/50 dark:bg-primary-container/40">
@@ -32,7 +32,7 @@ const prefersReducedMotion = useReducedMotion();
     </div>
 
     <!-- Mobile: vertical list. lg+: wrapping grid — no horizontal scroll; cards shrink when there are many -->
-    <div class="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+    <div class="container">
       <div class="graduate-scroll pb-3 pt-0 sm:pb-4">
         <ul
           class="graduate-timeline-list m-0 mx-auto flex w-full max-w-2xl list-none flex-col gap-6 p-0 lg:max-w-none lg:grid lg:grid-cols-[repeat(auto-fit,minmax(12rem,1fr))] lg:gap-x-4 lg:gap-y-10 xl:grid-cols-[repeat(auto-fit,minmax(13rem,1fr))]"

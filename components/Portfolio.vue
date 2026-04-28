@@ -1,8 +1,8 @@
 <template>
-  <section id="portfolio" class="portfolio @container bg-primary-container py-12 sm:py-16 md:py-24">
+  <section id="portfolio" class="portfolio bg-primary-container py-12 sm:py-16 md:py-24">
     <h2 class="section-title">Portfolio</h2>
     <span class="section-subtitle">Derniers projets</span>
-    <div class="container relative mx-auto px-3 sm:px-6 lg:px-8 overflow-hidden">
+    <div class="container relative overflow-hidden">
       <carousel :slide-count="projects.length" v-slot="{ visibleSlide, direction }">
         <template v-for="(p, i) in projects" :key="p.link">
           <carousel-slide :index="i" :visible-index="visibleSlide" :direction="direction">

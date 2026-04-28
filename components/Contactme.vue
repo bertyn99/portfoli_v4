@@ -1,10 +1,10 @@
 <template>
-  <section id="contact" class="@container shell-section">
+  <section id="contact" class="shell-section">
     <h2 class="section-title">Contact</h2>
     <span class="section-subtitle">Une question ou un projet : écrivez-moi</span>
 
     <div
-      class="container mx-auto grid max-w-6xl auto-rows-auto gap-10 px-4 sm:px-6 md:grid-cols-2 md:gap-x-12 md:gap-y-10 lg:gap-x-16 lg:px-8">
+      class="container grid auto-rows-auto gap-10 md:grid-cols-2 md:gap-x-12 md:gap-y-10 lg:gap-x-16">
       <div class="md:max-w-md">
         <div v-for="(c, i) in contact" :key="i" class="mb-8 flex gap-4 items-start last:mb-0">
           <svg v-if="c.kind === 'phone'" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 shrink-0 text-primary"

@@ -1,10 +1,10 @@
 <template>
-  <section class="@container shell-section text-center lg:text-left">
+  <section class="shell-section text-center lg:text-left">
     <div class="bg-primary-second py-12 lg:bg-transparent">
-      <div class="container grid mx-auto px-4 sm:px-6 lg:px-8 md:grid-cols-2 md:gap-6 lg:[grid-template-columns:1fr_max-content] lg:bg-primary-second lg:rounded-2xl lg:py-12 lg:px-6 lg:gap-12">
-        <div class="projetc-data flex min-w-0 flex-col items-center lg:items-start lg:pt-3">
+      <div class="container grid md:grid-cols-2 md:gap-6 lg:[grid-template-columns:1fr_max-content] lg:bg-primary-second lg:rounded-2xl lg:py-12 lg:px-6 lg:gap-12">
+        <div class="project-data flex min-w-0 flex-col items-center lg:items-start lg:pt-3">
           <p class="project-cta-lead mb-3 max-w-prose text-center text-sm font-medium leading-snug text-white lg:text-left">
-            Vous avez des idées de projet ou vous avez des question
+            Vous avez des idées de projet ou des questions
           </p>
           <h2 class="project-cta-heading mb-6 text-center text-xl font-black uppercase tracking-wide text-white/90 lg:text-left">
             Contactez-moi afin que nous en discutions.
@@ -14,8 +14,9 @@
             target="_blank"
             rel="noopener noreferrer"
             class="button button-flex button-white mb-6 inline-flex shrink-0 items-center gap-2 whitespace-nowrap no-underline"
+            aria-label="Réserver un entretien (ouvre Cal.com dans un nouvel onglet)"
           >
-            <span>Booker un entretien</span>
+            <span>Réserver un entretien</span>
             <svg
               xmlns="http://www.w3.org/2000/svg"
               class="button-icon h-6 w-6 shrink-0 transition duration-300"
@@ -303,12 +304,12 @@ export default {}
 
 <style lang="postcss">
 /* Override global `h2` / body rules so this CTA card keeps light copy on dark `bg-primary-second`. */
-.projetc-data .project-cta-heading {
+.project-data .project-cta-heading {
   @apply text-white/90;
   font-family: var(--font-family-barlow);
 }
 
-.projetc-data .project-cta-lead {
+.project-data .project-cta-lead {
   font-family: var(--font-family-barlow);
 }
 </style>
