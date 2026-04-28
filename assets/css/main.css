@@ -202,3 +202,11 @@ img {
     }
   }
 }
+
+.touch-target-inline {
+  @apply inline-flex min-h-11 min-w-11 items-center justify-center rounded-md px-3 py-2;
+}
+
+.touch-target-square {
+  @apply inline-flex h-11 w-11 items-center justify-center rounded-md;
+}

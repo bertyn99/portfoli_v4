@@ -8,15 +8,15 @@
           <h1 class="mb-1 text-2xl font-semibold text-primary-title">Bertyn Boulikou</h1>
           <span class="text-sm text-primary-text">Developpeur FullStack Freelance</span>
         </div>
-        <ul class="flex flex-col gap-4 lg:flex-row lg:gap-8">
-          <li><a href="#services" class="text-primary font-medium hover:text-primary-alt">Services</a></li>
-          <li><a href="#portfolio" class="text-primary font-medium hover:text-primary-alt">Portfolio</a></li>
-          <li><a href="#contact" class="text-primary font-medium hover:text-primary-alt">Contact</a></li>
+        <ul class="flex flex-col gap-2 lg:flex-row lg:gap-4">
+          <li><a href="#services" class="touch-target-inline text-primary font-medium hover:text-primary-alt">Services</a></li>
+          <li><a href="#portfolio" class="touch-target-inline text-primary font-medium hover:text-primary-alt">Portfolio</a></li>
+          <li><a href="#contact" class="touch-target-inline text-primary font-medium hover:text-primary-alt">Contact</a></li>
         </ul>
-        <div class="flex lg:justify-self-end">
+        <div class="flex gap-2 lg:justify-self-end">
           <a href="https://www.facebook.com/helenbertyn.boulikoudamours" target="_blank"
             rel="noopener noreferrer"
-            class="mr-4 text-primary-title hover:text-primary"
+            class="touch-target-square text-primary-title hover:text-primary"
             aria-label="Facebook">
             <svg class="h-5 w-5 fill-current"
               enable-background="new 0 0 24 24" viewBox="0 0 24 24"
@@ -27,7 +27,7 @@
           </a>
           <a href="https://github.com/bertyn99" target="_blank"
             rel="noopener noreferrer"
-            class="mr-4 text-primary-title hover:text-primary"
+            class="touch-target-square text-primary-title hover:text-primary"
             aria-label="GitHub">
             <svg class="h-6 w-6 fill-current" viewBox="0 0 24 24">
               <path fill="currentColor"
@@ -36,7 +36,7 @@
           </a>
           <a href="https://www.linkedin.com/in/bertyn-boulikou/" target="_blank"
             rel="noopener noreferrer"
-            class="mr-4 text-primary-title hover:text-primary"
+            class="touch-target-square text-primary-title hover:text-primary"
             aria-label="LinkedIn"><svg id="Bold"
               enable-background="new 0 0 24 24"
               class="h-5 w-5 fill-current" viewBox="0 0 24 24"

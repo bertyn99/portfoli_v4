@@ -14,7 +14,7 @@
         <div class="flex flex-1 flex-wrap justify-center gap-8 sm:gap-10 md:gap-14" role="tablist"
           aria-label="Catégories de compétences">
           <button v-for="(tab, index) in skillTabs" :id="`skills-tab-${index}`" :key="tab.name" type="button"
-            class="rounded-sm border-0 bg-transparent font-family-barlow text-sm font-medium tracking-wide text-primary-text/75 transition-colors duration-200 hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/70 focus-visible:ring-offset-2 focus-visible:ring-offset-skills-bg dark:text-skills-muted dark:hover:text-white"
+            class="inline-flex min-h-11 items-center justify-center rounded-md border-0 bg-transparent px-3 py-2 font-family-barlow text-sm font-medium tracking-wide text-primary-text/75 transition-colors duration-200 hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/70 focus-visible:ring-offset-2 focus-visible:ring-offset-skills-bg dark:text-skills-muted dark:hover:text-white"
             :class="{ 'font-semibold text-primary-title dark:text-white': index === activeTabIndex }" role="tab"
             :tabindex="index === activeTabIndex ? 0 : -1" :aria-selected="index === activeTabIndex"
             :aria-controls="SKILLS_PANEL_ID" @click="selectCategory(index)" @keydown="onTabKeydown($event, index)">

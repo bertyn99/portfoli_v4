@@ -38,26 +38,26 @@
             <label for="contact-name" class="text-sm font-medium text-primary-title">Nom</label>
             <input id="contact-name" v-model="formData.name" type="text" name="name" autocomplete="name"
               placeholder="Jean Dupont"
-              class="w-full border-none bg-primary-input px-2 pt-1 pr-0 font-family-poppins text-primary-text outline-none" />
+              class="w-full rounded-sm border-none bg-primary-input px-2 pt-1 pr-0 font-family-poppins text-primary-text outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-primary-input" />
           </div>
           <div class="rounded-lg bg-primary-input px-4 pt-3 pb-2">
             <label for="contact-email" class="text-sm font-medium text-primary-title">Courriel</label>
             <input id="contact-email" v-model="formData.email" type="email" name="email" autocomplete="email"
               placeholder="vous@exemple.fr" required
-              class="w-full border-none bg-primary-input px-2 pt-1 pr-0 font-family-poppins text-primary-text outline-none" />
+              class="w-full rounded-sm border-none bg-primary-input px-2 pt-1 pr-0 font-family-poppins text-primary-text outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-primary-input" />
           </div>
         </div>
         <div class="rounded-lg bg-primary-input px-4 pt-3 pb-2">
           <label for="contact-project" class="text-sm font-medium text-primary-title">Projet</label>
           <input id="contact-project" v-model="formData.project" type="text" name="subject" autocomplete="off"
             placeholder="Site vitrine, API, …" required
-            class="w-full border-none bg-primary-input px-2 pt-1 pr-0 font-family-poppins text-primary-text outline-none" />
+            class="w-full rounded-sm border-none bg-primary-input px-2 pt-1 pr-0 font-family-poppins text-primary-text outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-primary-input" />
         </div>
         <div class="rounded-lg bg-primary-input px-4 pt-3 pb-2">
           <label for="contact-message" class="text-sm font-medium text-primary-title">Message</label>
           <textarea id="contact-message" v-model="formData.message" name="message" placeholder="Écrivez votre message"
             rows="7" required
-            class="w-full resize-y border-none bg-primary-input px-2 pt-1 pr-0 font-family-poppins text-primary-text outline-none" />
+            class="w-full resize-y rounded-sm border-none bg-primary-input px-2 pt-1 pr-0 font-family-poppins text-primary-text outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-primary-input" />
         </div>
         <div v-if="errorMessage" class="mt-1 text-center text-(--form-status-error)" role="alert">
           {{ errorMessage }}
@@ -67,7 +67,7 @@
         </div>
         <div>
           <button type="submit"
-            class="button inline-flex items-center gap-2 disabled:cursor-not-allowed disabled:opacity-70"
+            class="button inline-flex items-center gap-2 rounded-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-primary-container disabled:cursor-not-allowed disabled:opacity-70"
             :disabled="isLoading">
             {{ isLoading ? 'Envoi en cours...' : 'Envoyer' }}
             <Icon :name="isLoading ? 'i-mdi:loading' : 'i-mdi:send'" class="button-icon"
@@ -80,7 +80,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
+import { reactive, ref } from 'vue'
 import emailjs from '@emailjs/browser'
 
 const formData = reactive({

@@ -1,17 +1,20 @@
 <template>
   <header id="header" class="w-full fixed bottom-0 left-0 z-20 bg-primary-body lg:bottom-auto lg:top-0 lg:px-4 lg:py-0 xl:px-5">
-    <nav class="w-full flex h-16 justify-between items-center lg:h-[4.5rem]">
-      <nuxt-link to="/" class="text-primary-title font-medium hover:text-primary"
+    <nav class="w-full flex h-16 justify-between items-center lg:h-[4.5rem]" aria-label="Navigation principale">
+      <nuxt-link to="/" class="touch-target-inline text-primary-title font-medium hover:text-primary"
         ><img src="/BB.png" alt="bertyn boulikou initiale"
       /></nuxt-link>
 
       <div
         class="max-lg:fixed max-lg:-bottom-full max-lg:left-0 max-lg:w-full max-lg:bg-primary-body max-lg:pt-8 max-lg:px-1 max-lg:pb-16 max-lg:shadow-md max-lg:rounded-t-3xl max-lg:transition max-lg:duration-300 lg:ml-auto"
-        :class="[isOpen ? 'show-menu' : '']">
+        :class="[isOpen ? 'show-menu' : '']"
+        id="site-menu-panel"
+      >
         <ul class="grid grid-cols-3 gap-y-8 lg:flex lg:gap-8">
           <li class="nav-item">
-            <nuxt-link to="/" class="flex flex-col items-center font-medium text-primary-title text-sm hover:text-primary"
-              @click="iOpen = false"
+            <nuxt-link to="/"
+              class="touch-target-inline flex flex-col items-center font-medium text-primary-title text-sm hover:text-primary"
+              @click="isOpen = false"
               ><svg
                 xmlns="http://www.w3.org/2000/svg"
                 class="h-5 w-5 lg:hidden"
@@ -30,8 +33,9 @@
             >
           </li>
           <li class="nav-item">
-            <nuxt-link to="#about" class="flex flex-col items-center font-medium text-primary-title text-sm hover:text-primary"
-              @click="iOpen = false"
+            <nuxt-link to="#about"
+              class="touch-target-inline flex flex-col items-center font-medium text-primary-title text-sm hover:text-primary"
+              @click="isOpen = false"
               ><svg
                 xmlns="http://www.w3.org/2000/svg"
                 class="h-5 w-5 lg:hidden"
@@ -49,8 +53,9 @@
             >
           </li>
           <li class="nav-item">
-            <nuxt-link to="#skills" class="flex flex-col items-center font-medium text-primary-title text-sm hover:text-primary"
-              @click="iOpen = false"
+            <nuxt-link to="#skills"
+              class="touch-target-inline flex flex-col items-center font-medium text-primary-title text-sm hover:text-primary"
+              @click="isOpen = false"
               ><svg
                 xmlns="http://www.w3.org/2000/svg"
                 class="h-5 w-5 lg:hidden"
@@ -68,15 +73,20 @@
             >
           </li>
           <li class="nav-item">
-            <nuxt-link to="https://sciredev.com"
-              class="flex flex-col items-center font-medium text-primary-title text-sm hover:text-primary"
-              @click="iOpen = false"
-              ><svg
+            <a
+              href="https://sciredev.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="touch-target-inline flex flex-col items-center font-medium text-primary-title text-sm hover:text-primary"
+              @click="isOpen = false"
+            >
+              <svg
                 xmlns="http://www.w3.org/2000/svg"
                 class="h-6 w-6 lg:hidden"
                 fill="none"
                 viewBox="0 0 24 24"
                 stroke="currentColor"
+                aria-hidden="true"
               >
                 <path
                   stroke-linecap="round"
@@ -85,13 +95,13 @@
                   d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z"
                 />
               </svg>
-              Blog</nuxt-link
-            >
+              Blog<span class="sr-only"> (ouvre dans un nouvel onglet)</span>
+            </a>
           </li>
           <li class="nav-item">
             <nuxt-link to="#portfolio"
-              class="flex flex-col items-center font-medium text-primary-title text-sm hover:text-primary"
-              @click="iOpen = false"
+              class="touch-target-inline flex flex-col items-center font-medium text-primary-title text-sm hover:text-primary"
+              @click="isOpen = false"
               ><svg
                 xmlns="http://www.w3.org/2000/svg"
                 class="h-5 w-5 lg:hidden"
@@ -109,8 +119,9 @@
             >
           </li>
           <li class="nav-item">
-            <nuxt-link to="#contact" class="flex flex-col items-center font-medium text-primary-title text-sm hover:text-primary"
-              @click="iOpen = false"
+            <nuxt-link to="#contact"
+              class="touch-target-inline flex flex-col items-center font-medium text-primary-title text-sm hover:text-primary"
+              @click="isOpen = false"
               ><svg
                 xmlns="http://www.w3.org/2000/svg"
                 class="h-5 w-5 lg:hidden"
@@ -128,14 +139,19 @@
             >
           </li>
         </ul>
-        <button class="absolute right-5 bottom-2 text-2xl cursor-pointer text-primary hover:text-primary-alt lg:hidden"
-          @click="isOpen = !isOpen">
+        <button
+          type="button"
+          class="touch-target-square absolute right-3 bottom-2 cursor-pointer text-primary hover:text-primary-alt lg:hidden focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-primary-body"
+          aria-label="Fermer le menu"
+          @click="isOpen = !isOpen"
+        >
           <svg
             xmlns="http://www.w3.org/2000/svg"
             class="h-5 w-5"
             fill="none"
             viewBox="0 0 24 24"
             stroke="currentColor"
+            aria-hidden="true"
           >
             <path
               stroke-linecap="round"
@@ -147,7 +163,13 @@
         </button>
       </div>
       <div class="flex items-center">
-        <button class="h-6 w-6 text-primary mr-4 cursor-pointer hover:text-primary-alt lg:ml-4 lg:mr-0" @click="theme">
+        <button
+          type="button"
+          class="touch-target-square mr-2 text-primary cursor-pointer hover:text-primary-alt lg:ml-4 lg:mr-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-primary-body"
+          :aria-pressed="isDark"
+          :aria-label="isDark ? 'Passer au thème clair' : 'Passer au thème sombre'"
+          @click="theme"
+        >
           <svg
             v-if="!isDark"
             xmlns="http://www.w3.org/2000/svg"
@@ -155,6 +177,7 @@
             fill="none"
             viewBox="0 0 24 24"
             stroke="currentColor"
+            aria-hidden="true"
           >
             <path
               stroke-linecap="round"
@@ -170,6 +193,7 @@
             fill="none"
             viewBox="0 0 24 24"
             stroke="currentColor"
+            aria-hidden="true"
           >
             <path
               stroke-linecap="round"
@@ -179,14 +203,21 @@
             />
           </svg>
         </button>
-        <div class="text-primary-title font-medium text-base cursor-pointer hover:text-primary lg:hidden"
-          @click="isOpen = !isOpen">
+        <button
+          type="button"
+          class="touch-target-square text-primary-title font-medium text-base cursor-pointer hover:text-primary lg:hidden focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-primary-body"
+          :aria-expanded="isOpen"
+          aria-controls="site-menu-panel"
+          aria-label="Ouvrir ou fermer le menu"
+          @click="isOpen = !isOpen"
+        >
           <svg
             xmlns="http://www.w3.org/2000/svg"
             class="h-6 w-6"
             fill="none"
             viewBox="0 0 24 24"
             stroke="currentColor"
+            aria-hidden="true"
           >
             <path
               stroke-linecap="round"
@@ -195,7 +226,7 @@
               d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"
             />
           </svg>
-        </div>
+        </button>
       </div>
     </nav>
   </header>
@@ -249,7 +280,7 @@ export default {
 
 <style lang="postcss" scoped>
 .show-menu {
-  @apply bottom-0;
+  bottom: 0;
 }
 
 .scroll-header {

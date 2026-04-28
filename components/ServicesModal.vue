@@ -6,21 +6,28 @@
           {{ service.name }} <br />
           {{ service.post }}
         </h4>
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          class="absolute top-4 right-4 h-6 w-6 cursor-pointer text-2xl text-primary"
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke="currentColor"
+        <button
+          type="button"
+          class="touch-target-square absolute top-2 right-2 text-primary"
+          aria-label="Fermer la fenêtre"
           @click="closeModal"
         >
-          <path
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke-width="2"
-            d="M6 18L18 6M6 6l12 12"
-          />
-        </svg>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            class="h-6 w-6"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+            aria-hidden="true"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M6 18L18 6M6 6l12 12"
+            />
+          </svg>
+        </button>
         <ul class="grid gap-4">
           <li
             v-for="(skill, i) in service.skills"

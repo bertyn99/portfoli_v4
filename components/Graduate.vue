@@ -17,7 +17,7 @@ const prefersReducedMotion = useReducedMotion();
           class="inline-flex flex-wrap justify-center gap-0.5 rounded-2xl border border-primary-input/90 bg-primary-container/70 p-1 shadow-sm backdrop-blur-sm dark:border-primary-input/50 dark:bg-primary-container/40">
           <Motion v-for="opt in filterOptions" :key="opt.value" as="button" type="button" role="tab"
             :aria-selected="activeFilter === opt.value"
-            class="graduate-filter-chip relative cursor-pointer rounded-xl px-3.5 py-2 text-sm font-semibold transition-colors duration-200 sm:px-4 sm:py-2.5"
+            class="graduate-filter-chip relative inline-flex min-h-11 items-center justify-center cursor-pointer rounded-xl px-3.5 py-2.5 text-sm font-semibold transition-colors duration-200 sm:px-4"
             :class="[
               activeFilter === opt.value
                 ? 'graduate-filter-chip--active text-white shadow-md'

@@ -8,7 +8,7 @@
     </div>
 
     <button type="button"
-      class="absolute top-1/2 -left-4 z-[1] -translate-y-1/2 rounded-sm p-1 text-primary-title hover:text-primary "
+      class="absolute top-1/2 -left-2 z-[1] inline-flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-md text-primary-title hover:text-primary md:-left-3 xl:-left-4"
       :aria-controls="slidesPanelId" aria-label="Projet précédent" @click.prevent="goPrev">
       <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 md:h-7 md:w-7 xl:h-10 xl:w-10" fill="none"
         viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
@@ -16,7 +16,7 @@
       </svg>
     </button>
     <button type="button"
-      class="absolute top-1/2 right-2.5 z-[1] -translate-y-1/2 rounded-sm p-1 text-primary-title hover:text-primary md:right-3 xl:right-4"
+      class="absolute top-1/2 right-0 z-[1] inline-flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-md text-primary-title hover:text-primary md:right-1 xl:right-2"
       :aria-controls="slidesPanelId" aria-label="Projet suivant" @click.prevent="goNext">
       <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 md:h-7 md:w-7 xl:h-10 xl:w-10" fill="none"
         viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
@@ -27,8 +27,10 @@
     <div class="carousel-pagination mt-2 w-full text-center">
       <button v-for="n in totalSlides" :key="n" type="button" :aria-label="`Afficher le projet ${n} sur ${totalSlides}`"
         :aria-current="n - 1 === currentSlide ? 'true' : undefined" :class="{ active: n - 1 === currentSlide }"
-        class="mx-0.5 inline-block h-2.5 w-2.5 rounded-full bg-[var(--text-color-light)] opacity-80 transition-opacity hover:opacity-100"
-        @click="goTo(n - 1)" />
+        class="mx-0.5 inline-flex h-11 w-11 items-center justify-center rounded-full opacity-80 transition-opacity hover:opacity-100"
+        @click="goTo(n - 1)">
+        <span class="carousel-dot h-2.5 w-2.5 rounded-full bg-[var(--text-color-light)]" />
+      </button>
     </div>
   </div>
 </template>
@@ -102,8 +104,12 @@ function onCarouselKeydown(e) {
 </script>
 
 <style lang="postcss" scoped>
-.carousel-pagination button.active {
+.carousel-dot {
+  transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+.carousel-pagination button.active .carousel-dot {
   background: var(--first-color);
-  opacity: 1;
+  transform: scale(1.08);
 }
 </style>
