@@ -24,6 +24,9 @@
   --skills-tile-dark: hsl(var(--hue-color) 16% 22%);
   --skills-tile-dark-border: hsl(var(--hue-color) 14% 36%);
   --skills-tile-glow: rgb(124 58 237 / 0.22);
+
+  --form-status-error: hsl(350 55% 42%);
+  --form-status-success: hsl(155 55% 32%);
 }
 
 .dark {
@@ -40,6 +43,9 @@
   --skills-tile-dark: hsl(248 22% 14%);
   --skills-tile-dark-border: hsl(250 12% 28%);
   --skills-tile-glow: rgb(167 139 250 / 0.32);
+
+  --form-status-error: hsl(350 58% 62%);
+  --form-status-success: hsl(155 45% 48%);
 }
 
 @theme {
@@ -78,6 +84,7 @@
     0% {
       opacity: 0;
     }
+
     100% {
       opacity: 1;
     }
@@ -88,6 +95,7 @@
       opacity: 0;
       transform: translateY(14px) scale(0.94);
     }
+
     to {
       opacity: 1;
       transform: translateY(0) scale(1);
@@ -99,6 +107,7 @@
       transform: translateX(-100%);
       opacity: 0;
     }
+
     100% {
       transform: translateX(0);
       opacity: 1;
@@ -110,6 +119,7 @@
       transform: translateX(100%);
       opacity: 0;
     }
+
     100% {
       transform: translateX(0);
       opacity: 1;
@@ -120,6 +130,7 @@
 body {
   font-family: var(--font-family-barlow);
   @apply text-base mb-8 text-primary-text;
+
   @media (min-width: 768px) {
     @apply m-0;
   }
@@ -135,6 +146,7 @@ h3,
 h4 {
   @apply text-primary-title font-semibold;
 }
+
 img {
   @apply max-w-full h-auto;
 }
@@ -156,25 +168,32 @@ img {
 }
 
 .button {
-  @apply bg-primary text-white p-4  rounded-md font-medium;
+  @apply bg-primary text-white p-4 rounded-md font-medium;
+
   &-icon {
-    @apply h-6 w-6 ml-2 transition duration-300;
+    @apply h-6 w-6 transition duration-300;
   }
+
   &:hover {
     @apply bg-primary-alt;
   }
+
   &-flex {
     @apply inline-flex items-center;
   }
+
   &-small {
     @apply py-3 px-4;
   }
+
   &-link {
     @apply p-0 bg-transparent text-primary;
+
     &:hover {
       @apply text-primary-alt;
     }
   }
+
   &-white {
     @apply bg-white text-primary;
 
