@@ -20,7 +20,7 @@ const prefersReducedMotion = useReducedMotion();
             class="graduate-filter-chip relative inline-flex min-h-11 items-center justify-center cursor-pointer rounded-xl px-3.5 py-2.5 text-sm font-semibold transition-colors duration-200 sm:px-4"
             :class="[
               activeFilter === opt.value
-                ? 'graduate-filter-chip--active text-white shadow-md'
+                ? 'graduate-filter-chip--active shadow-md'
                 : 'text-primary-text hover:text-primary',
             ]" :while-hover="prefersReducedMotion ? {} : { scale: 1.02 }"
             :while-press="prefersReducedMotion ? {} : { scale: 0.98 }"
@@ -338,8 +338,19 @@ export default {
   box-shadow: 0 0 8px hsl(var(--hue-color) 69% 61% / 0.25);
 }
 
+/* Active chip: explicit HSL so the fill always paints (Tailwind @apply bg-primary was a no-op in this file in light mode). */
 .graduate-filter-chip--active {
-  @apply bg-primary text-white shadow-sm;
+  background-color: hsl(var(--hue-color) 69% 61%);
+  color: hsl(var(--hue-color) 92% 98%);
+  box-shadow:
+    0 2px 8px hsl(var(--hue-color) 57% 38% / 0.28),
+    0 1px 2px hsl(var(--hue-color) 8% 22% / 0.06);
+}
+
+:global(.dark) .graduate-filter-chip--active {
+  box-shadow:
+    0 2px 12px hsl(var(--hue-color) 69% 48% / 0.35),
+    0 1px 2px hsl(var(--hue-color) 69% 6% / 0.5);
 }
 
 .graduate-filter-chip:not(.graduate-filter-chip--active):hover {
