@@ -18,6 +18,14 @@ export default defineNuxtConfig({
   compatibilityDate: "2026-04-21",
   devtools: { enabled: false },
 
+    vite: {
+      optimizeDeps: {
+        include: [
+          '@emailjs/browser',
+        ]
+      }
+    },
+  
   /** @nuxtjs/seo / nuxt-site-config — set NUXT_SITE_URL in production for correct canonicals, OG URLs, and sitemap */
   site: {
     url: process.env.NUXT_SITE_URL || "http://localhost:3000",
@@ -43,6 +51,9 @@ export default defineNuxtConfig({
 
 
   sitemap: {
+    zeroRuntime: true,
+  },
+  ogImage: {
     zeroRuntime: true,
   },
 
