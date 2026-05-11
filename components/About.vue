@@ -65,8 +65,8 @@
         </div>
       </div>
       <div class="about-buttons col-span-full inline-flex justify-center mt-8">
-        <the-button link="CV-Bertyn_Boulikou.pdf" class="button button-flex bg-blue-600 text-white px-4 py-2 rounded"
-          download="CV-Bertyn Boulikou.pdf">Télécharger mon cv</the-button>
+        <the-button link="CV_Bertyn_Boulikou.pdf" class="button button-flex bg-blue-600 text-white px-4 py-2 rounded"
+          download="CV_Bertyn_Boulikou.pdf">Télécharger mon cv</the-button>
       </div>
       </div>
     </div>
