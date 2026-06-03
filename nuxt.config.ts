@@ -65,6 +65,9 @@ export default defineNuxtConfig({
   },
 
   runtimeConfig: {
+    notionToken: process.env.NOTION_TOKEN,
+    notionClientDbId: process.env.NOTION_CLIENT_DB_ID,
+    notionProjectDbId: process.env.NOTION_PROJECT_DB_ID,
     public: {
       EMAILJS_SERVICE_ID: process.env.NUXT_PUBLIC_EMAILJS_SERVICE_ID,
       EMAILJS_TEMPLATE_OWNER_ID: process.env.NUXT_PUBLIC_EMAILJS_TEMPLATE_ID_MYSELF,

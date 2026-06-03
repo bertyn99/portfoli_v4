@@ -5,7 +5,9 @@
     <Skills></Skills>
     <Graduate></Graduate>
     <Services></Services>
+    <AuditCTA></AuditCTA>
     <Portfolio></Portfolio>
+    <DevisCTA></DevisCTA>
     <ProjectInMind></ProjectInMind>
 
     <Contactme></Contactme>
