@@ -37,16 +37,21 @@ No test runner configured. No CI workflows.
 
 ## Environment Variables
 
-Required in `.env`:
+Copy `.env.example` to `.env`. Required keys:
 
 ```
+NUXT_SITE_URL=                    # production canonical URL (not localhost)
 NUXT_PUBLIC_EMAILJS_SERVICE_ID=
 NUXT_PUBLIC_EMAILJS_TEMPLATE_ID_MYSELF=
 NUXT_PUBLIC_EMAILJS_TEMPLATE_ID_VISITOR=
 NUXT_PUBLIC_EMAILJS_PUBLIC_KEY=
 ```
 
-These are exposed via `runtimeConfig.public` in `nuxt.config.js`.
+Optional: `NUXT_SEO_PRO_API_KEY` (`nsp_…`) for the [Nuxt SEO Pro](https://nuxtseo.com/pro/docs/getting-started/mcp-setup) MCP in `.cursor/mcp.json`.
+
+SEO stack: `@nuxtjs/seo` v5 in `nuxt.config.ts` (`site`, `sitemap`, `ogImage`, `robots`). Pages use `useSeoMeta` / `useSchemaOrg`.
+
+EmailJS vars are exposed via `runtimeConfig.public` in `nuxt.config.ts`.
 
 ## Architecture
 

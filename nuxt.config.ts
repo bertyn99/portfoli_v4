@@ -26,13 +26,23 @@ export default defineNuxtConfig({
       }
     },
   
-  /** @nuxtjs/seo / nuxt-site-config — set NUXT_SITE_URL in production for correct canonicals, OG URLs, and sitemap */
+  /** @nuxtjs/seo / nuxt-site-config — NUXT_SITE_URL in .env (https://bertynboulikou.com) */
   site: {
-    url: process.env.NUXT_SITE_URL || "http://localhost:3000",
+    url: process.env.NUXT_SITE_URL || "https://bertynboulikou.com",
     name: "Bertyn Boulikou",
     description:
       "Portfolio de Bertyn Boulikou : développement web, compétences, réalisations et contact. Contenu en français pour recruteurs et clients.",
     defaultLocale: "fr",
+    indexable: process.env.NODE_ENV === "production",
+  },
+
+  robots: {
+    groups: [
+      {
+        userAgent: "*",
+        allow: "/",
+      },
+    ],
   },
 
   app: {

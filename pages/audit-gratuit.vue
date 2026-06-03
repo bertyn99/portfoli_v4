@@ -1,5 +1,7 @@
 <script setup lang="ts">
 const site = useSiteConfig()
+const pageUrl = useAbsoluteSiteUrl('/audit-gratuit')
+const ogImageUrl = useAbsoluteSiteUrl('/img/bertyn.png')
 
 const title = 'Audit gratuit de votre site web'
 const description =
@@ -36,12 +38,39 @@ useSeoMeta({
   ogType: 'website',
   ogLocale: 'fr_FR',
   ogSiteName: site.name,
-  ogImage: '/img/bertyn.png',
+  ogUrl: pageUrl,
+  ogImage: ogImageUrl,
+  ogImageAlt: 'Audit SEO et performance gratuit — Bertyn Boulikou',
   twitterCard: 'summary_large_image',
   twitterTitle: title,
   twitterDescription: description,
-  twitterImage: '/img/bertyn.png',
+  twitterImage: ogImageUrl,
+  robots: 'index, follow',
 })
+
+useHead({
+  link: [{ rel: 'canonical', href: pageUrl }],
+})
+
+useSchemaOrg([
+  defineWebPage({
+    name: title,
+    description,
+    url: pageUrl,
+    inLanguage: 'fr-FR',
+  }),
+  {
+    '@type': 'FAQPage',
+    mainEntity: faqItems.map((item) => ({
+      '@type': 'Question',
+      name: item.question,
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: item.answer,
+      },
+    })),
+  },
+])
 </script>
 
 <template>

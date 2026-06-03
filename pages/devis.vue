@@ -1,5 +1,7 @@
 <script setup lang="ts">
 const site = useSiteConfig()
+const pageUrl = useAbsoluteSiteUrl('/devis')
+const ogImageUrl = useAbsoluteSiteUrl('/img/bertyn.png')
 
 const title = 'Devis gratuit — développement web & applications'
 const description =
@@ -30,19 +32,6 @@ const faqItems = [
   },
 ]
 
-const faqSchema = {
-  '@context': 'https://schema.org',
-  '@type': 'FAQPage',
-  mainEntity: faqItems.map((item) => ({
-    '@type': 'Question',
-    name: item.question,
-    acceptedAnswer: {
-      '@type': 'Answer',
-      text: item.answer,
-    },
-  })),
-}
-
 useSeoMeta({
   title,
   description,
@@ -51,21 +40,39 @@ useSeoMeta({
   ogType: 'website',
   ogLocale: 'fr_FR',
   ogSiteName: site.name,
-  ogImage: '/img/bertyn.png',
+  ogUrl: pageUrl,
+  ogImage: ogImageUrl,
+  ogImageAlt: 'Devis développement web — Bertyn Boulikou',
   twitterCard: 'summary_large_image',
   twitterTitle: title,
   twitterDescription: description,
-  twitterImage: '/img/bertyn.png',
+  twitterImage: ogImageUrl,
+  robots: 'index, follow',
 })
 
 useHead({
-  script: [
-    {
-      type: 'application/ld+json',
-      innerHTML: JSON.stringify(faqSchema),
-    },
-  ],
+  link: [{ rel: 'canonical', href: pageUrl }],
 })
+
+useSchemaOrg([
+  defineWebPage({
+    name: title,
+    description,
+    url: pageUrl,
+    inLanguage: 'fr-FR',
+  }),
+  {
+    '@type': 'FAQPage',
+    mainEntity: faqItems.map((item) => ({
+      '@type': 'Question',
+      name: item.question,
+      acceptedAnswer: {
+        '@type': 'Answer',
+        text: item.answer,
+      },
+    })),
+  },
+])
 </script>
 
 <template>
