@@ -15,45 +15,17 @@
 </template>
 
 <script setup lang="ts">
-const site = useSiteConfig()
-const pageUrl = useAbsoluteSiteUrl("/")
-const ogImageUrl = useAbsoluteSiteUrl("/img/bertyn.png")
-
 const title = "Développeur web freelance — portfolio & réalisations"
 const description =
   "Bertyn Boulikou, développeur web full stack (Nuxt, Vue). Portfolio, études de cas, devis et audit gratuit — recruteurs et clients en France."
 
-useSeoMeta({
+const { pageUrl, site } = usePageSeo({
+  path: "/",
   title,
   description,
-  ogTitle: title,
-  ogDescription: description,
-  ogType: "website",
-  ogLocale: "fr_FR",
-  ogSiteName: site.name,
-  ogUrl: pageUrl,
-  ogImage: ogImageUrl,
-  ogImageAlt: "Bertyn Boulikou — développeur web freelance",
-  ogImageWidth: 1200,
-  ogImageHeight: 630,
-  twitterCard: "summary_large_image",
-  twitterTitle: title,
-  twitterDescription: description,
-  twitterImage: ogImageUrl,
-  robots: "index, follow, max-image-preview:large",
 })
 
-useHead({
-  link: [{ rel: "canonical", href: pageUrl }],
-  meta: [
-    { name: "author", content: "Bertyn Boulikou" },
-    {
-      name: "keywords",
-      content:
-        "développeur web freelance, Nuxt, Vue.js, portfolio développeur, création site web, Bertyn Boulikou",
-    },
-  ],
-})
+const portraitUrl = useAbsoluteSiteUrl("/img/bertyn.png")
 
 useSchemaOrg([
   defineWebSite({
@@ -61,6 +33,13 @@ useSchemaOrg([
     description: site.description,
     url: site.url,
     inLanguage: "fr-FR",
+    potentialAction: [
+      {
+        "@type": "ContactAction",
+        target: `${site.url}#contact`,
+        name: "Contact",
+      },
+    ],
   }),
   defineWebPage({
     "@type": "ProfilePage",
@@ -74,7 +53,7 @@ useSchemaOrg([
     url: site.url,
     jobTitle: "Développeur web full stack",
     description,
-    image: ogImageUrl,
+    image: portraitUrl,
     sameAs: [
       "https://github.com/bertyn99",
       "https://www.linkedin.com/in/bertyn-boulikou/",

@@ -26,9 +26,9 @@ export default defineNuxtConfig({
       }
     },
   
-  /** @nuxtjs/seo / nuxt-site-config — NUXT_SITE_URL in .env (https://bertynboulikou.com) */
+  /** @nuxtjs/seo — must match live host (Vercel redirects apex → www) */
   site: {
-    url: process.env.NUXT_SITE_URL || "https://bertynboulikou.com",
+    url: process.env.NUXT_SITE_URL || "https://www.bertynboulikou.com",
     name: "Bertyn Boulikou",
     description:
       "Portfolio de Bertyn Boulikou : développement web, compétences, réalisations et contact. Contenu en français pour recruteurs et clients.",
@@ -37,6 +37,7 @@ export default defineNuxtConfig({
   },
 
   robots: {
+    sitemap: ["/sitemap.xml"],
     groups: [
       {
         userAgent: "*",
@@ -65,13 +66,17 @@ export default defineNuxtConfig({
   },
   ogImage: {
     zeroRuntime: true,
+    defaults: {
+      width: 1200,
+      height: 630,
+    },
   },
 
   css: ["@/assets/css/main.css"],
   icon: {
     serverBundle: {
-      collections: ['uil', 'mdi', 'vscode-icons'] // <!--- this
-    }
+      collections: ['mdi', 'vscode-icons'],
+    },
   },
 
   runtimeConfig: {

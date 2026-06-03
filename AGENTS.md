@@ -40,7 +40,7 @@ No test runner configured. No CI workflows.
 Copy `.env.example` to `.env`. Required keys:
 
 ```
-NUXT_SITE_URL=                    # production canonical URL (not localhost)
+NUXT_SITE_URL=                    # https://www.bertynboulikou.com (match Vercel primary domain)
 NUXT_PUBLIC_EMAILJS_SERVICE_ID=
 NUXT_PUBLIC_EMAILJS_TEMPLATE_ID_MYSELF=
 NUXT_PUBLIC_EMAILJS_TEMPLATE_ID_VISITOR=

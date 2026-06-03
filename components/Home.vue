@@ -40,11 +40,10 @@
           </svg>
         </div>
         <div class="[grid-column:1/3] md:[grid-column:initial]">
-          <h1 class="text-2xl">Salut, je m'appelle Bertyn</h1>
-          <h2 class="text-xl font-medium mb-3 text-primary-text">Développeur web</h2>
-          <p class="mb-8">
-            Freelance développeur full stack, produisant du travail de qualité et
-            toujours curieux de découvrir de nouvelles technologies.
+          <h1 class="text-2xl text-primary-title">Développeur web freelance</h1>
+          <p class="mb-1 text-lg font-medium text-primary">Bertyn Boulikou</p>
+          <p class="mb-8 text-primary-text">
+            Développeur full stack (Nuxt, Vue, TypeScript) — sites vitrines, applications et intégrations sur mesure.
           </p>
           <the-button link="https://cal.com/bertyn-boulikou"
             class="button button-flex inline-flex items-center">Discutons de votre projet
@@ -58,7 +57,7 @@
           <nuxt-link to="#about"
             class="button-flex touch-target-inline mt-8 text-primary transition duration-300 hover:translate-y-1 hover:transform">
             <Icon name="i-mdi:mouse" class="h-8 w-6" aria-hidden="true" />
-            <span class="mr-1 text-sm font-medium text-primary-title">Scroll down</span>
+            <span class="mr-1 text-sm font-medium text-primary-title">Voir la suite</span>
             <Icon name="i-mdi:chevron-down" class="h-4 w-4" aria-hidden="true" />
           </nuxt-link>
         </div>

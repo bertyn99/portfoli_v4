@@ -1,57 +1,41 @@
 <script setup lang="ts">
-const site = useSiteConfig()
-const pageUrl = useAbsoluteSiteUrl('/devis')
-const ogImageUrl = useAbsoluteSiteUrl('/img/bertyn.png')
-
-const title = 'Devis gratuit — développement web & applications'
+const title = "Devis gratuit — développement web & applications"
 const description =
-  'Estimez le coût de votre projet web en quelques clics : site vitrine, application, e-commerce. Devis gratuit et sans engagement.'
+  "Estimez le coût de votre projet web en quelques clics : site vitrine, application, e-commerce. Devis gratuit et sans engagement."
 
-const trustBadges = ['Gratuit', '2 min', 'Sans engagement'] as const
+const trustBadges = ["Gratuit", "2 min", "Sans engagement"] as const
 
 const faqItems = [
   {
-    question: 'Le devis est-il engageant ?',
+    question: "Le devis est-il engageant ?",
     answer:
-      'Non. C\'est une estimation indicative basée sur vos choix. Le devis final est affiné après un échange.',
+      "Non. C'est une estimation indicative basée sur vos choix. Le devis final est affiné après un échange.",
   },
   {
-    question: 'Comment sont calculés les prix ?',
+    question: "Comment sont calculés les prix ?",
     answer:
-      'Les estimations sont basées sur les tarifs du marché et mon expérience sur des projets similaires.',
+      "Les estimations sont basées sur les tarifs du marché et mon expérience sur des projets similaires.",
   },
   {
-    question: 'Puis-je modifier mon projet ensuite ?',
+    question: "Puis-je modifier mon projet ensuite ?",
     answer:
-      'Bien sûr. Le devis est un point de départ — tout est ajustable lors de notre premier échange.',
+      "Bien sûr. Le devis est un point de départ — tout est ajustable lors de notre premier échange.",
   },
   {
-    question: 'Quels modes de paiement acceptez-vous ?',
+    question: "Quels modes de paiement acceptez-vous ?",
     answer:
-      'Paiement en 3 fois : 30% à la commande, 40% à la livraison, 30% après la garantie.',
+      "Paiement en 3 fois : 30% à la commande, 40% à la livraison, 30% après la garantie.",
   },
 ]
 
-useSeoMeta({
+const { pageUrl } = usePageSeo({
+  path: "/devis",
   title,
   description,
-  ogTitle: 'Devis gratuit — développement web — Bertyn Boulikou',
-  ogDescription: 'Calculez le budget de votre projet web. Estimation instantanée et personnalisée.',
-  ogType: 'website',
-  ogLocale: 'fr_FR',
-  ogSiteName: site.name,
-  ogUrl: pageUrl,
-  ogImage: ogImageUrl,
-  ogImageAlt: 'Devis développement web — Bertyn Boulikou',
-  twitterCard: 'summary_large_image',
-  twitterTitle: title,
-  twitterDescription: description,
-  twitterImage: ogImageUrl,
-  robots: 'index, follow',
-})
-
-useHead({
-  link: [{ rel: 'canonical', href: pageUrl }],
+  ogTitle: "Devis gratuit — développement web — Bertyn Boulikou",
+  ogDescription:
+    "Calculez le budget de votre projet web. Estimation instantanée et personnalisée.",
+  ogBadge: "Devis en ligne",
 })
 
 useSchemaOrg([
@@ -59,15 +43,15 @@ useSchemaOrg([
     name: title,
     description,
     url: pageUrl,
-    inLanguage: 'fr-FR',
+    inLanguage: "fr-FR",
   }),
   {
-    '@type': 'FAQPage',
+    "@type": "FAQPage",
     mainEntity: faqItems.map((item) => ({
-      '@type': 'Question',
+      "@type": "Question",
       name: item.question,
       acceptedAnswer: {
-        '@type': 'Answer',
+        "@type": "Answer",
         text: item.answer,
       },
     })),

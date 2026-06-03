@@ -1,55 +1,38 @@
 <script setup lang="ts">
-const site = useSiteConfig()
-const pageUrl = useAbsoluteSiteUrl('/audit-gratuit')
-const ogImageUrl = useAbsoluteSiteUrl('/img/bertyn.png')
-
-const title = 'Audit gratuit de votre site web'
+const title = "Audit gratuit de votre site web"
 const description =
-  'Analyse gratuite de votre site : performance, SEO, accessibilité et design. Rapport personnalisé livré en 48h, sans engagement.'
+  "Analyse gratuite de votre site : performance, SEO, accessibilité et design. Rapport personnalisé livré en 48h, sans engagement."
 
 const faqItems = [
   {
-    question: 'L\'audit est-il vraiment gratuit ?',
+    question: "L'audit est-il vraiment gratuit ?",
     answer:
-      'Oui, sans engagement. Vous recevez un rapport détaillé sans avoir à payer quoi que ce soit.',
+      "Oui, sans engagement. Vous recevez un rapport détaillé sans avoir à payer quoi que ce soit.",
   },
   {
-    question: 'Combien de temps prend l\'audit ?',
-    answer: 'Vous recevez votre rapport sous 48h ouvrées.',
+    question: "Combien de temps prend l'audit ?",
+    answer: "Vous recevez votre rapport sous 48h ouvrées.",
   },
   {
-    question: 'Que contient le rapport ?',
+    question: "Que contient le rapport ?",
     answer:
-      'Analyse de performance (Core Web Vitals), SEO technique, accessibilité WCAG, et recommandations de design avec priorités.',
+      "Analyse de performance (Core Web Vitals), SEO technique, accessibilité WCAG, et recommandations de design avec priorités.",
   },
   {
-    question: 'Que faire après ?',
+    question: "Que faire après ?",
     answer:
-      'Vous êtes libre de suivre les recommandations seul ou de me contacter pour un devis sur mesure.',
+      "Vous êtes libre de suivre les recommandations seul ou de me contacter pour un devis sur mesure.",
   },
 ]
 
-useSeoMeta({
+const { pageUrl } = usePageSeo({
+  path: "/audit-gratuit",
   title,
   description,
-  ogTitle: 'Audit gratuit de votre site web — Bertyn Boulikou',
+  ogTitle: "Audit gratuit de votre site web — Bertyn Boulikou",
   ogDescription:
-    'Découvrez les points d\'amélioration de votre site avec un audit gratuit : performance, SEO, accessibilité et design.',
-  ogType: 'website',
-  ogLocale: 'fr_FR',
-  ogSiteName: site.name,
-  ogUrl: pageUrl,
-  ogImage: ogImageUrl,
-  ogImageAlt: 'Audit SEO et performance gratuit — Bertyn Boulikou',
-  twitterCard: 'summary_large_image',
-  twitterTitle: title,
-  twitterDescription: description,
-  twitterImage: ogImageUrl,
-  robots: 'index, follow',
-})
-
-useHead({
-  link: [{ rel: 'canonical', href: pageUrl }],
+    "Découvrez les points d'amélioration de votre site avec un audit gratuit : performance, SEO, accessibilité et design.",
+  ogBadge: "Audit gratuit · 48h",
 })
 
 useSchemaOrg([
@@ -57,15 +40,15 @@ useSchemaOrg([
     name: title,
     description,
     url: pageUrl,
-    inLanguage: 'fr-FR',
+    inLanguage: "fr-FR",
   }),
   {
-    '@type': 'FAQPage',
+    "@type": "FAQPage",
     mainEntity: faqItems.map((item) => ({
-      '@type': 'Question',
+      "@type": "Question",
       name: item.question,
       acceptedAnswer: {
-        '@type': 'Answer',
+        "@type": "Answer",
         text: item.answer,
       },
     })),

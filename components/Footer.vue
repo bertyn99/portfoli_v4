@@ -5,13 +5,15 @@
     <div class="container">
       <div class="grid grid-flow-row gap-10 md:grid-cols-2 md:gap-12 lg:grid-cols-3 lg:gap-14">
         <div>
-          <h1 class="mb-1 text-2xl font-semibold text-primary-title">Bertyn Boulikou</h1>
-          <span class="text-sm text-primary-text">Developpeur FullStack Freelance</span>
+          <p class="mb-1 text-2xl font-semibold text-primary-title">Bertyn Boulikou</p>
+          <span class="text-sm text-primary-text">Développeur full stack freelance</span>
         </div>
-        <ul class="flex flex-col gap-2 lg:flex-row lg:gap-4">
+        <ul class="flex flex-col gap-2 lg:flex-row lg:flex-wrap lg:gap-4">
           <li><a href="#services" class="touch-target-inline text-primary font-medium hover:text-primary-alt">Services</a></li>
           <li><a href="#portfolio" class="touch-target-inline text-primary font-medium hover:text-primary-alt">Portfolio</a></li>
           <li><a href="#contact" class="touch-target-inline text-primary font-medium hover:text-primary-alt">Contact</a></li>
+          <li><NuxtLink to="/devis" class="touch-target-inline text-primary font-medium hover:text-primary-alt">Devis gratuit</NuxtLink></li>
+          <li><NuxtLink to="/audit-gratuit" class="touch-target-inline text-primary font-medium hover:text-primary-alt">Audit gratuit</NuxtLink></li>
         </ul>
         <div class="flex gap-2 lg:justify-self-end">
           <a href="https://www.facebook.com/helenbertyn.boulikoudamours" target="_blank"
