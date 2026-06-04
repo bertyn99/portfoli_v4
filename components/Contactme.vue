@@ -136,6 +136,7 @@ const sendEmails = async () => {
     )
 
     successMessage.value = 'Message envoyé avec succès !'
+    umTrackEvent('form-submit-contact')
     formData.name = ''
     formData.email = ''
     formData.project = ''

@@ -168,6 +168,14 @@ async function submitDevis() {
         estimateMax: estimate.value.max,
       },
     })
+    umTrackEvent('form-submit-devis', {
+      projectType: form.projectType,
+      budget: form.budget,
+      timeline: form.timeline,
+      featuresCount: form.features.length,
+      estimateMin: estimate.value.min,
+      estimateMax: estimate.value.max,
+    })
     submitted.value = true
   } catch (err: unknown) {
     const data = err as { data?: { statusMessage?: string }; statusMessage?: string }

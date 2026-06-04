@@ -59,6 +59,9 @@ async function submitAudit() {
     })
     successMessage.value =
       'Demande envoyée ! Vous recevrez votre rapport sous 48h ouvrées.'
+    umTrackEvent('form-submit-audit', {
+      objectivesCount: form.objectives.length,
+    })
     form.url = ''
     form.name = ''
     form.email = ''

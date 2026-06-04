@@ -20,6 +20,7 @@ Read these before sizable UI or UX changes so variants stay on-brand.
 - **Tailwind CSS** with `postcss-nested` and `tailwindcss-animate` — custom breakpoints (`sm:375 md:568 lg:768 xl:1024`)
 - **Font**: Barlow via `@nuxtjs/google-fonts`, Poppins via self-hosted `@font-face` in CSS
 - **Icons**: `@iconify-json/mdi`, `@iconify-json/vscode-icons`, plus the `uil` collection (configured in `nuxt.config.js`)
+- **Analytics**: Umami via `nuxt-umami` — requires `NUXT_UMAMI_HOST` + `NUXT_UMAMI_ID` at build time
 - **Contact form**: EmailJS (`@emailjs/browser`) — requires env vars (see below)
 - **No `app.vue`** — uses `layouts/default.vue` + `pages/index.vue` as the single page
 
@@ -46,6 +47,8 @@ NUXT_PUBLIC_EMAILJS_TEMPLATE_ID_MYSELF=
 NUXT_PUBLIC_EMAILJS_TEMPLATE_ID_VISITOR=
 NUXT_PUBLIC_EMAILJS_PUBLIC_KEY=
 ```
+
+Optional: `NUXT_UMAMI_HOST` + `NUXT_UMAMI_ID` for [Umami](https://umami.is/) analytics via `nuxt-umami` (must be set at build time on Vercel).
 
 Optional: `NUXT_SEO_PRO_API_KEY` (`nsp_…`) for the [Nuxt SEO Pro](https://nuxtseo.com/pro/docs/getting-started/mcp-setup) MCP in `.cursor/mcp.json`.
 
