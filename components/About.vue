@@ -60,8 +60,8 @@
           <span class="about-info-name mt-2 block text-xs text-primary-text">Projets <br /> Complétés</span>
         </div>
         <div class="flex min-w-0 flex-1 flex-col items-center bg-white p-4 dark:bg-primary-body">
-          <span class="about-info-title text-xl font-semibold text-primary-title">2</span>
-          <span class="about-info-name mt-2 block text-xs text-primary-text">Entreprises<br /> où j'ai travaillés</span>
+          <span class="about-info-title text-xl font-semibold text-primary-title">7</span>
+          <span class="about-info-name mt-2 block text-xs text-primary-text">Entreprises<br /> où j'ai travaillé</span>
         </div>
       </div>
       <div class="about-buttons col-span-full inline-flex justify-center mt-8">
