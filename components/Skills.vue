@@ -1,57 +1,6 @@
-<template>
-  <section id="skills" class="bg-skills-bg py-14 text-primary-text md:py-24 dark:text-skills-muted">
-    <div class="container">
-      <div class="mb-8 flex flex-col gap-6 lg:mb-10 items-center lg:gap-8">
-        <header class="shrink-0">
-          <h2 id="skills-heading" class="section-title dark:text-white">
-            Compétences
-          </h2>
-          <span class="section-subtitle text-primary">
-            Mon niveau technique
-          </span>
-        </header>
-
-        <div class="flex flex-1 flex-wrap justify-center gap-8 sm:gap-10 md:gap-14" role="tablist"
-          aria-label="Catégories de compétences">
-          <button v-for="(tab, index) in skillTabs" :id="`skills-tab-${index}`" :key="tab.name" type="button"
-            class="inline-flex min-h-11 items-center justify-center rounded-md border-0 bg-transparent px-3 py-2 font-family-barlow text-sm font-medium tracking-wide text-primary-text/75 transition-colors duration-200 hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/70 focus-visible:ring-offset-2 focus-visible:ring-offset-skills-bg dark:text-skills-muted dark:hover:text-white"
-            :class="{ 'font-semibold text-primary-title dark:text-white': index === activeTabIndex }" role="tab"
-            :tabindex="index === activeTabIndex ? 0 : -1" :aria-selected="index === activeTabIndex"
-            :aria-controls="SKILLS_PANEL_ID" @click="selectCategory(index)" @keydown="onTabKeydown($event, index)">
-            {{ tab.name }}
-          </button>
-        </div>
-      </div>
-
-      <div :id="SKILLS_PANEL_ID" class="grid w-full grid-cols-2 gap-3 sm:grid-cols-3 sm:gap-4 md:gap-6 lg:grid-cols-6"
-        role="grid" aria-labelledby="skills-heading" :aria-rowcount="gridLayout.length" :aria-colcount="6">
-        <div v-for="(cell, i) in flatCells" :key="i" role="gridcell"
-          class="skills-bento-cell flex aspect-square min-h-0 min-w-0 items-center justify-center rounded-2xl transition-[transform,box-shadow,opacity,filter] duration-300 motion-safe:hover:-translate-y-1 motion-safe:hover:duration-300"
-          :class="[cellClasses(cell), cellMotionClass]" :style="cellStaggerStyle(i)"
-          :aria-label="cell.skill ? cell.skill.name : 'Accent visuel'">
-          <template v-if="cell.skill">
-            <div
-              class="group relative box-border flex h-full min-h-0 w-full min-w-0 items-center justify-center p-1 sm:p-1.5">
-              <div class="skills-icon-slot flex items-center justify-center">
-                <Icon :name="cell.skill.icon"
-                  class="skills-icon-host flex h-full! w-full! items-center justify-center transition-transform duration-300 ease-out motion-safe:group-hover:scale-110 motion-safe:group-hover:-translate-y-0.5"
-                  :class="iconToneClass(cell)" :aria-hidden="true" />
-              </div>
-              <span class="sr-only">{{ cell.skill.name }}</span>
-              <div
-                class="skills-tooltip pointer-events-none absolute -top-2 left-1/2 z-10 -translate-x-1/2 -translate-y-full rounded-md px-2 py-1 text-xs text-white opacity-0 transition-opacity duration-200 group-hover:opacity-100">
-                {{ cell.skill.name }}
-              </div>
-            </div>
-          </template>
-        </div>
-      </div>
-    </div>
-  </section>
-</template>
-
 <script setup>
 const SKILLS_PANEL_ID = 'skills-panel'
+const CATEGORY_LABELS = ['Front-End', 'Back-End', 'Design']
 
 const prefersReducedMotion = usePreferredReducedMotion()
 
@@ -65,7 +14,7 @@ function cellStaggerStyle(i) {
   return { animationDelay: `${Math.min(i, 23) * 30}ms` }
 }
 
-/** Explicit 6×4 bento (primary accent + light + dark icon cells). */
+/** Explicit 6×4 board: empty squares + skill pieces. */
 const gridLayout = [
   [
     { variant: 'accent', skill: { name: 'SEO', icon: 'mdi:search-web' }, categoryIndex: 0 },
@@ -102,88 +51,82 @@ const gridLayout = [
 ]
 
 const flatCells = computed(() => gridLayout.flat())
+const COLS = 6
 
-const skillTabs = [
-  { name: 'Front-End' },
-  { name: 'Back-End' },
-  { name: 'Design' },
+const skillTabItems = [
+  { label: 'Toutes', value: 'all' },
+  { label: 'Front-End', value: '0' },
+  { label: 'Back-End', value: '1' },
+  { label: 'Design', value: '2' },
 ]
 
-const activeTabIndex = ref(0)
-const filterIndex = ref(null)
+const activeTab = ref('all')
+const featuredIndex = ref(null)
 
-function selectCategory(index) {
-  activeTabIndex.value = index
-  if (filterIndex.value === index) {
-    filterIndex.value = null
+const filterIndex = computed(() =>
+  activeTab.value === 'all' ? null : Number(activeTab.value),
+)
+
+watch(activeTab, () => {
+  featuredIndex.value = null
+})
+
+const filterStatus = computed(() => {
+  if (featuredIndex.value !== null) {
+    const cell = flatCells.value[featuredIndex.value]
+    return cell?.skill
+      ? `${cell.skill.name} mise en évidence sur le podium.`
+      : 'Pièce mise en évidence sur le podium.'
   }
-  else {
-    filterIndex.value = index
-  }
+  if (filterIndex.value === null)
+    return 'Plateau au repos, toutes les compétences au même niveau.'
+  return `Famille ${CATEGORY_LABELS[filterIndex.value]} hissée sur le podium.`
+})
+
+function featurePiece(i) {
+  featuredIndex.value = featuredIndex.value === i ? null : i
 }
 
-function onTabKeydown(e, index) {
-  const len = skillTabs.length
-  let next = null
-  if (e.key === 'ArrowRight' || e.key === 'ArrowDown') {
-    e.preventDefault()
-    next = (index + 1) % len
-  }
-  else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') {
-    e.preventDefault()
-    next = (index - 1 + len) % len
-  }
-  else if (e.key === 'Home') {
-    e.preventDefault()
-    next = 0
-  }
-  else if (e.key === 'End') {
-    e.preventDefault()
-    next = len - 1
-  }
-  if (next === null)
-    return
-  selectCategory(next)
-  nextTick(() => {
-    document.getElementById(`skills-tab-${next}`)?.focus()
-  })
+/** Checkerboard: lozenge blobs on one colour, rectangle blobs on the other. */
+function blobClass(_cell, i) {
+  const col = i % COLS
+  const row = Math.floor(i / COLS)
+  const lozenge = (row + col) % 2 === 0
+  const alt = Math.floor(i / 2) % 2 === 0
+  if (lozenge)
+    return alt ? 'skills-blob-lozenge-a' : 'skills-blob-lozenge-b'
+  return alt ? 'skills-blob-rect-a' : 'skills-blob-rect-b'
 }
 
-function cellClasses(cell) {
-  const out = []
+function faceClasses(cell, i) {
+  const out = [blobClass(cell, i)]
+
   if (cell.variant === 'accent') {
-    out.push(
-      'border border-primary-alt/35 bg-primary shadow-[inset_0_1px_0_rgba(255,255,255,0.2)] motion-safe:hover:shadow-[inset_0_1px_0_rgba(255,255,255,0.35),0_12px_28px_-6px_rgba(0,0,0,0.2)] dark:motion-safe:hover:shadow-[inset_0_1px_0_rgba(255,255,255,0.15),0_14px_36px_-8px_rgba(0,0,0,0.45)]',
-    )
+    out.push('bg-primary shadow-[inset_0_1px_0_rgba(255,255,255,0.2)]')
   }
   else if (cell.variant === 'light') {
-    out.push(
-      'border border-primary/12 bg-skills-tile-light motion-safe:hover:border-primary/25 motion-safe:hover:shadow-md motion-safe:hover:shadow-primary/10',
-    )
+    out.push('bg-skills-tile-light skills-empty')
   }
   else if (cell.variant === 'dark') {
-    out.push(
-      'border border-skills-tile-border bg-skills-tile-dark shadow-[0_0_28px_-8px_var(--skills-tile-glow)] motion-safe:hover:shadow-[0_0_36px_-6px_var(--skills-tile-glow),0_10px_24px_-10px_rgba(0,0,0,0.35)]',
-    )
+    out.push('bg-skills-tile-dark skills-filled-dark')
   }
 
-  if (
-    filterIndex.value !== null
-    && cell.skill
-    && cell.categoryIndex !== filterIndex.value
-  ) {
-    out.push('opacity-[0.38] grayscale')
-  }
+  return out
+}
+
+function cellStateClass(cell, i) {
+  if (cell.skill && featuredIndex.value === i)
+    return 'is-featured'
   if (
     filterIndex.value !== null
     && cell.skill
     && cell.categoryIndex === filterIndex.value
   ) {
-    out.push(
-      '-translate-y-0.5 shadow-[0_0_36px_-4px_var(--skills-tile-glow),0_14px_28px_-8px_rgba(0,0,0,0.35)]',
-    )
+    return 'is-up'
   }
-  return out
+  if (filterIndex.value !== null || featuredIndex.value !== null)
+    return 'is-back'
+  return ''
 }
 
 function iconToneClass(cell) {
@@ -195,11 +138,296 @@ function iconToneClass(cell) {
 }
 </script>
 
+<template>
+  <section id="skills" class="skills relative overflow-x-clip bg-skills-bg py-16 text-primary-text md:py-28 md:pb-32 dark:text-skills-muted">
+    <div class="container relative">
+      <header class="skills-heading">
+        <div class="skills-heading-copy">
+          <h2 id="skills-heading" class="skills-display">
+            <span class="skills-display-kicker">Mes</span>
+            <span>compétences</span>
+          </h2>
+          <p class="skills-lede">
+            Une famille monte sur le podium. Cliquez une pièce pour la mettre en évidence.
+          </p>
+        </div>
+
+        <div class="skills-heading-tabs">
+          <UTabs
+            v-model="activeTab"
+            :items="skillTabItems"
+            :content="false"
+            variant="link"
+            color="primary"
+            size="lg"
+            class="w-full"
+            :ui="{ list: 'justify-start lg:justify-end border-0' }"
+            aria-label="Catégories de compétences"
+          />
+        </div>
+      </header>
+
+      <p class="sr-only" aria-live="polite">{{ filterStatus }}</p>
+
+      <div class="skills-board relative pt-6 md:pt-10">
+        <div
+          :id="SKILLS_PANEL_ID"
+          class="relative grid w-full grid-cols-2 gap-3 sm:grid-cols-3 sm:gap-4 md:gap-5 lg:grid-cols-6 lg:gap-5"
+          role="grid"
+          aria-labelledby="skills-heading"
+          :aria-rowcount="gridLayout.length"
+          :aria-colcount="6"
+        >
+          <div
+            v-for="(cell, i) in flatCells"
+            :key="i"
+            role="gridcell"
+            class="skills-bento-cell relative aspect-square min-h-0 min-w-0"
+            :class="[cellMotionClass, cellStateClass(cell, i)]"
+            :style="cellStaggerStyle(i)"
+          >
+            <span class="skills-podium" aria-hidden="true" />
+
+            <button
+              v-if="cell.skill"
+              type="button"
+              class="skills-lift skills-bento-piece group relative flex h-full w-full items-center justify-center"
+              :aria-pressed="featuredIndex === i"
+              :aria-label="`${cell.skill.name}, ${CATEGORY_LABELS[cell.categoryIndex]}`"
+              @click="featurePiece(i)"
+            >
+              <span
+                class="skills-bento-face flex items-center justify-center"
+                :class="faceClasses(cell, i)"
+              >
+                <span class="skills-icon-slot flex items-center justify-center">
+                  <Icon
+                    :name="cell.skill.icon"
+                    class="skills-icon-host flex h-full! w-full! items-center justify-center"
+                    :class="iconToneClass(cell)"
+                    :aria-hidden="true"
+                  />
+                </span>
+              </span>
+              <span class="skills-tooltip pointer-events-none absolute -top-1 left-1/2 z-10 -translate-x-1/2 -translate-y-full rounded-md px-2 py-1 text-xs text-white opacity-0 transition-opacity duration-200 group-hover:opacity-100 group-focus-visible:opacity-100">
+                {{ cell.skill.name }}
+              </span>
+            </button>
+
+            <div
+              v-else
+              class="skills-lift flex h-full w-full items-center justify-center"
+              aria-hidden="true"
+            >
+              <span
+                class="skills-bento-face block"
+                :class="faceClasses(cell, i)"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</template>
+
 <style lang="postcss">
-/*
- * Tile = query container so icon size tracks the *cell*, not ambiguous % parents.
- * 72cqmin ≈ 72% of the shorter tile edge — clearly “half+” of the visible square.
- */
+.skills-heading {
+  display: grid;
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.skills-display {
+  margin: 0;
+  font-family: var(--font-family-display);
+  font-size: clamp(3.1rem, 1.3rem + 8vw, 6.4rem);
+  font-weight: 800;
+  line-height: 0.84;
+  letter-spacing: -0.07em;
+  color: var(--title-color);
+  text-wrap: balance;
+}
+
+.skills-display span {
+  display: block;
+}
+
+.skills-display-kicker {
+  color: var(--first-color);
+}
+
+.skills-lede {
+  margin: 1rem 0 0;
+  max-width: 36ch;
+  font-size: 1.05rem;
+  font-weight: 500;
+  line-height: 1.55;
+  color: var(--text-color);
+  text-wrap: pretty;
+}
+
+.skills-heading-tabs {
+  min-width: 0;
+}
+
+@media (min-width: 768px) {
+  .skills-heading {
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-items: end;
+    gap: 2rem 3rem;
+    margin-bottom: 2.75rem;
+  }
+
+  .skills-heading-tabs {
+    padding-bottom: 0.2rem;
+  }
+}
+
+.skills-board {
+  isolation: isolate;
+  overflow: visible;
+}
+
+.skills-empty {
+  box-shadow: inset 0 0 0 1px hsla(250, 28%, 62%, 0.22);
+}
+
+.dark .skills-empty {
+  box-shadow: inset 0 0 0 1px hsla(250, 20%, 70%, 0.18);
+}
+
+.skills-filled-dark {
+  box-shadow: inset 0 0 0 1px hsla(250, 16%, 32%, 0.35);
+}
+
+.dark .skills-filled-dark {
+  box-shadow: inset 0 0 0 1px hsla(250, 14%, 38%, 0.55);
+}
+
+.skills-bento-cell {
+  z-index: 1;
+  overflow: visible;
+  animation-fill-mode: backwards;
+}
+
+.skills-podium {
+  position: absolute;
+  left: 16%;
+  right: 16%;
+  bottom: 2%;
+  height: 28%;
+  z-index: 0;
+  pointer-events: none;
+  border-radius: 50%;
+  background: radial-gradient(
+    ellipse at center,
+    color-mix(in oklab, var(--first-color) 55%, transparent) 0%,
+    transparent 72%
+  );
+  opacity: 0;
+  transform: scale(0.55);
+  transition:
+    opacity 0.4s ease,
+    transform 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.dark .skills-podium {
+  background: radial-gradient(
+    ellipse at center,
+    color-mix(in oklab, var(--first-color) 70%, transparent) 0%,
+    transparent 74%
+  );
+}
+
+.skills-lift {
+  position: relative;
+  z-index: 1;
+  transition:
+    transform 0.45s cubic-bezier(0.22, 1, 0.36, 1),
+    filter 0.45s ease,
+    opacity 0.35s ease;
+}
+
+.skills-bento-face {
+  flex: none;
+}
+
+.skills-blob-rect-a,
+.skills-blob-rect-b {
+  width: 100%;
+  height: 100%;
+}
+
+.skills-blob-rect-a {
+  border-radius: 28% 22% 30% 24%;
+}
+
+.skills-blob-rect-b {
+  border-radius: 22% 30% 20% 28%;
+}
+
+.skills-blob-lozenge-a,
+.skills-blob-lozenge-b {
+  width: 72%;
+  height: 72%;
+  transform: rotate(45deg);
+}
+
+.skills-blob-lozenge-a {
+  border-radius: 22%;
+}
+
+.skills-blob-lozenge-b {
+  width: 68%;
+  height: 68%;
+  border-radius: 28%;
+}
+
+.skills-blob-lozenge-a .skills-icon-slot,
+.skills-blob-lozenge-b .skills-icon-slot {
+  transform: rotate(-45deg);
+}
+
+.skills-bento-cell.is-up {
+  z-index: 3;
+}
+
+.skills-bento-cell.is-featured {
+  z-index: 4;
+}
+
+.skills-bento-cell.is-up .skills-podium,
+.skills-bento-cell.is-featured .skills-podium {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.skills-bento-cell.is-up .skills-lift {
+  transform: translateY(-10%) scale(1.06);
+  filter: drop-shadow(0 14px 16px hsla(250, 40%, 8%, 0.38));
+}
+
+.skills-bento-cell.is-featured .skills-lift {
+  transform: translateY(-18%) scale(1.12);
+  filter: drop-shadow(0 20px 20px hsla(250, 40%, 8%, 0.48));
+}
+
+.skills-bento-cell.is-back .skills-lift {
+  opacity: 0.4;
+  transform: scale(0.92);
+}
+
+.skills-bento-cell:not(.is-back):not(.is-up):not(.is-featured) .skills-bento-piece:hover {
+  transform: translateY(-6%);
+}
+
+.skills-bento-piece:focus-visible {
+  outline: 3px solid color-mix(in oklab, var(--first-color) 55%, transparent);
+  outline-offset: 4px;
+  border-radius: 1rem;
+}
+
 #skills [role='gridcell'] {
   container-name: skill-tile;
   container-type: size;
@@ -208,7 +436,7 @@ function iconToneClass(cell) {
 #skills [role='gridcell'] .skills-icon-slot {
   box-sizing: border-box;
   flex-shrink: 0;
-  width: 45%;
+  width: 42%;
   height: auto;
   aspect-ratio: 1;
   max-width: calc(100% - 0.25rem);
@@ -217,12 +445,16 @@ function iconToneClass(cell) {
 
 @supports (width: 1cqmin) {
   #skills [role='gridcell'] .skills-icon-slot {
-    width: 55cqmin;
-    height: 55cqmin;
+    width: 46cqmin;
+    height: 46cqmin;
+  }
+
+  #skills [role='gridcell'] :is(.skills-blob-lozenge-a, .skills-blob-lozenge-b) .skills-icon-slot {
+    width: 40cqmin;
+    height: 40cqmin;
   }
 }
 
-/* Nuxt Icon / Iconify host fills slot; SVG ignores Iconify inline px */
 #skills [role='gridcell'] .skills-icon-slot .skills-icon-host {
   display: flex !important;
   box-sizing: border-box;
@@ -246,10 +478,32 @@ function iconToneClass(cell) {
   object-fit: contain;
 }
 
+@media (min-width: 768px) {
+  .skills-bento-cell.is-up .skills-lift {
+    transform: translateY(-14%) scale(1.08);
+  }
+
+  .skills-bento-cell.is-featured .skills-lift {
+    transform: translateY(-22%) scale(1.14);
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   #skills .skills-bento-cell {
     animation: none !important;
     transition-duration: 0.01ms !important;
+  }
+
+  .skills-lift,
+  .skills-podium {
+    transition: none;
+  }
+
+  .skills-bento-cell.is-up .skills-lift,
+  .skills-bento-cell.is-featured .skills-lift,
+  .skills-bento-cell.is-back .skills-lift {
+    transform: none;
+    filter: none;
   }
 }
 

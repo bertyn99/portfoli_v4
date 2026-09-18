@@ -26,7 +26,6 @@ defineOptions({
 })
 
 const attr = useAttrs()
-console.log(attr)
 const shapes = [
     {
         width: 655,

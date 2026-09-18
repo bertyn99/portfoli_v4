@@ -1,54 +1,58 @@
 <script setup lang="ts">
-import { reactive, ref } from 'vue'
+import type { FormError, FormSubmitEvent } from "@nuxt/ui"
+import { reactive, ref } from "vue"
 
 const objectiveOptions = [
-  { id: 'performance', label: 'Performance', icon: 'i-mdi:speedometer' },
-  { id: 'seo', label: 'SEO', icon: 'i-mdi:magnify' },
-  { id: 'accessibility', label: 'Accessibilité', icon: 'i-mdi:wheelchair-accessibility' },
-  { id: 'design', label: 'Design / UX', icon: 'i-mdi:palette-outline' },
-  { id: 'other', label: 'Autre', icon: 'i-mdi:dots-horizontal' },
-] as const
+  { value: "Performance", label: "Performance", icon: "i-mdi-speedometer" },
+  { value: "SEO", label: "SEO", icon: "i-mdi-magnify" },
+  { value: "Accessibilité", label: "Accessibilité", icon: "i-mdi-wheelchair-accessibility" },
+  { value: "Design / UX", label: "Design / UX", icon: "i-mdi-palette-outline" },
+  { value: "Autre", label: "Autre", icon: "i-mdi-dots-horizontal" },
+]
 
 const auditPoints = [
-  { icon: 'i-mdi:speedometer', label: 'Performance', text: 'Core Web Vitals et temps de chargement' },
-  { icon: 'i-mdi:magnify', label: 'SEO', text: 'Balises, structure et indexation' },
-  { icon: 'i-mdi:wheelchair-accessibility', label: 'Accessibilité', text: 'Conformité WCAG et navigation clavier' },
-  { icon: 'i-mdi:palette-outline', label: 'Design', text: 'Hiérarchie visuelle et expérience utilisateur' },
+  { icon: "i-mdi-speedometer", label: "Performance", text: "Core Web Vitals et temps de chargement" },
+  { icon: "i-mdi-magnify", label: "SEO", text: "Balises, structure et indexation" },
+  { icon: "i-mdi-wheelchair-accessibility", label: "Accessibilité", text: "Conformité WCAG et navigation clavier" },
+  { icon: "i-mdi-palette-outline", label: "Design", text: "Hiérarchie visuelle et expérience utilisateur" },
 ] as const
 
 const form = reactive({
-  url: '',
-  name: '',
-  email: '',
+  url: "",
+  name: "",
+  email: "",
   objectives: [] as string[],
-  message: '',
+  message: "",
 })
 
 const isLoading = ref(false)
-const errorMessage = ref('')
-const successMessage = ref('')
+const toast = useToast()
 
-function toggleObjective(label: string) {
-  const idx = form.objectives.indexOf(label)
-  if (idx >= 0) {
-    form.objectives.splice(idx, 1)
-  } else {
-    form.objectives.push(label)
+function validate(state: Partial<typeof form>): FormError[] {
+  const errors: FormError[] = []
+  if (!state.url?.trim()) {
+    errors.push({ name: "url", message: "L’URL du site est requise." })
   }
+  if (!state.name?.trim()) {
+    errors.push({ name: "name", message: "Le nom est requis." })
+  }
+  if (!state.email?.trim()) {
+    errors.push({ name: "email", message: "L’email est requis." })
+  } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(state.email)) {
+    errors.push({ name: "email", message: "Indiquez un email valide." })
+  }
+  if (!state.objectives?.length) {
+    errors.push({ name: "objectives", message: "Choisissez au moins un objectif." })
+  }
+  return errors
 }
 
-function isObjectiveChecked(label: string) {
-  return form.objectives.includes(label)
-}
-
-async function submitAudit() {
+async function submitAudit(_event: FormSubmitEvent<typeof form>) {
   isLoading.value = true
-  errorMessage.value = ''
-  successMessage.value = ''
 
   try {
-    await $fetch('/api/audit', {
-      method: 'POST',
+    await $fetch("/api/audit", {
+      method: "POST",
       body: {
         url: form.url,
         name: form.name,
@@ -57,22 +61,29 @@ async function submitAudit() {
         message: form.message || undefined,
       },
     })
-    successMessage.value =
-      'Demande envoyée ! Vous recevrez votre rapport sous 48h ouvrées.'
-    umTrackEvent('form-submit-audit', {
+    toast.add({
+      title: "Demande envoyée",
+      description: "Vous recevrez votre rapport sous 48h ouvrées.",
+      color: "success",
+    })
+    umTrackEvent("form-submit-audit", {
       objectivesCount: form.objectives.length,
     })
-    form.url = ''
-    form.name = ''
-    form.email = ''
+    form.url = ""
+    form.name = ""
+    form.email = ""
     form.objectives = []
-    form.message = ''
+    form.message = ""
   } catch (err: unknown) {
     const data = err as { data?: { statusMessage?: string }; statusMessage?: string }
-    errorMessage.value =
-      data?.data?.statusMessage ||
-      data?.statusMessage ||
-      'Échec de l\'envoi. Veuillez réessayer.'
+    toast.add({
+      title: "Envoi impossible",
+      description:
+        data?.data?.statusMessage
+        || data?.statusMessage
+        || "Réessayez dans un instant.",
+      color: "error",
+    })
   } finally {
     isLoading.value = false
   }
@@ -106,118 +117,65 @@ async function submitAudit() {
         </blockquote>
       </div>
 
-      <form
+      <UForm
+        :state="form"
+        :validate="validate"
         class="grid w-full max-w-xl auto-rows-auto gap-6 justify-self-center md:max-w-none md:justify-self-stretch"
-        @submit.prevent="submitAudit"
+        @submit="submitAudit"
       >
-        <div class="rounded-lg bg-primary-input px-4 pt-3 pb-2">
-          <label for="audit-url" class="text-sm font-medium text-primary-title">URL du site</label>
-          <input
-            id="audit-url"
+        <UFormField label="URL du site" name="url" required>
+          <UInput
             v-model="form.url"
             type="url"
-            name="url"
-            required
             placeholder="https://votresite.fr"
-            class="w-full rounded-sm border-none bg-primary-input px-2 pt-1 font-family-poppins text-primary-text outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-primary-input"
+            class="w-full"
           />
-        </div>
+        </UFormField>
 
         <div class="grid gap-6 md:grid-cols-2">
-          <div class="rounded-lg bg-primary-input px-4 pt-3 pb-2">
-            <label for="audit-name" class="text-sm font-medium text-primary-title">Nom</label>
-            <input
-              id="audit-name"
+          <UFormField label="Nom" name="name" required>
+            <UInput
               v-model="form.name"
-              type="text"
-              name="name"
               autocomplete="name"
-              required
               placeholder="Jean Dupont"
-              class="w-full rounded-sm border-none bg-primary-input px-2 pt-1 font-family-poppins text-primary-text outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-primary-input"
+              class="w-full"
             />
-          </div>
-          <div class="rounded-lg bg-primary-input px-4 pt-3 pb-2">
-            <label for="audit-email" class="text-sm font-medium text-primary-title">Email</label>
-            <input
-              id="audit-email"
+          </UFormField>
+          <UFormField label="Email" name="email" required>
+            <UInput
               v-model="form.email"
               type="email"
-              name="email"
               autocomplete="email"
-              required
               placeholder="vous@exemple.fr"
-              class="w-full rounded-sm border-none bg-primary-input px-2 pt-1 font-family-poppins text-primary-text outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-primary-input"
+              class="w-full"
             />
-          </div>
+          </UFormField>
         </div>
 
-        <fieldset>
-          <legend id="audit-objectives-label" class="mb-3 text-sm font-medium text-primary-title">
-            Objectifs <span class="text-primary-text">(au moins un)</span>
-          </legend>
-          <div
-            class="grid gap-3 sm:grid-cols-2"
-            role="group"
-            aria-labelledby="audit-objectives-label"
-          >
-            <label
-              v-for="opt in objectiveOptions"
-              :key="opt.id"
-              class="flex cursor-pointer items-center gap-2 rounded-lg border-2 px-3 py-2 transition"
-              :class="
-                isObjectiveChecked(opt.label)
-                  ? 'border-primary bg-primary/8'
-                  : 'border-primary/12'
-              "
-            >
-              <input
-                type="checkbox"
-                class="sr-only"
-                :checked="isObjectiveChecked(opt.label)"
-                @change="toggleObjective(opt.label)"
-              />
-              <Icon :name="opt.icon" class="h-5 w-5 shrink-0 text-primary" aria-hidden="true" />
-              <span class="text-sm font-medium text-primary-title">{{ opt.label }}</span>
-            </label>
-          </div>
-        </fieldset>
-
-        <div class="rounded-lg bg-primary-input px-4 pt-3 pb-2">
-          <label for="audit-message" class="text-sm font-medium text-primary-title">Message (optionnel)</label>
-          <textarea
-            id="audit-message"
-            v-model="form.message"
-            name="message"
-            rows="4"
-            placeholder="Décrivez ce que vous souhaitez améliorer..."
-            class="w-full resize-y rounded-sm border-none bg-primary-input px-2 pt-1 font-family-poppins text-primary-text outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-primary-input"
+        <UFormField label="Objectifs" name="objectives" hint="Au moins un" required>
+          <UCheckboxGroup
+            v-model="form.objectives"
+            :items="objectiveOptions"
+            variant="card"
+            class="w-full"
           />
-        </div>
+        </UFormField>
 
-        <div v-if="errorMessage" class="text-center text-(--form-status-error)" role="alert">
-          {{ errorMessage }}
-        </div>
-        <div v-if="successMessage" class="text-center text-(--form-status-success)" role="status">
-          {{ successMessage }}
-        </div>
+        <UFormField label="Message" name="message" hint="Optionnel">
+          <UTextarea
+            v-model="form.message"
+            :rows="4"
+            placeholder="Décrivez ce que vous souhaitez améliorer..."
+            class="w-full"
+          />
+        </UFormField>
 
         <div>
-          <button
-            type="submit"
-            class="button button-flex inline-flex items-center gap-2 rounded-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-primary-container disabled:cursor-not-allowed disabled:opacity-70"
-            :disabled="isLoading || form.objectives.length === 0"
-          >
-            {{ isLoading ? 'Envoi en cours...' : 'Demander mon audit gratuit' }}
-            <Icon
-              :name="isLoading ? 'i-mdi:loading' : 'i-mdi:send'"
-              class="button-icon"
-              :class="{ 'motion-safe:animate-spin': isLoading }"
-              aria-hidden="true"
-            />
-          </button>
+          <UButton type="submit" :loading="isLoading" trailing-icon="i-mdi-send">
+            {{ isLoading ? "Envoi en cours..." : "Demander mon audit gratuit" }}
+          </UButton>
         </div>
-      </form>
+      </UForm>
     </div>
   </section>
 </template>

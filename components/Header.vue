@@ -1,329 +1,165 @@
-<template>
-  <header id="header" class="w-full fixed bottom-0 left-0 z-20 bg-primary-body lg:bottom-auto lg:top-0 lg:px-4 lg:py-0 xl:px-5">
-    <nav class="w-full flex h-16 justify-between items-center lg:h-[4.5rem]" aria-label="Navigation principale">
-      <nuxt-link to="/" class="touch-target-inline text-primary-title font-medium hover:text-primary"
-        ><img src="/BB.png" alt="bertyn boulikou initiale"
-      /></nuxt-link>
+<script setup lang="ts">
+import type { NavigationMenuItem } from "@nuxt/ui"
 
-      <div
-        class="max-lg:fixed max-lg:-bottom-full max-lg:left-0 max-lg:w-full max-lg:bg-primary-body max-lg:pt-8 max-lg:px-1 max-lg:pb-16 max-lg:shadow-md max-lg:rounded-t-3xl max-lg:transition max-lg:duration-300 lg:ml-auto"
-        :class="[isOpen ? 'show-menu' : '']"
-        id="site-menu-panel"
-      >
-        <ul class="grid grid-cols-4 gap-y-8 lg:flex lg:gap-8">
-          <li class="nav-item">
-            <nuxt-link to="/"
-              class="touch-target-inline flex flex-col items-center font-medium text-primary-title text-sm hover:text-primary"
-              @click="isOpen = false"
-              ><svg
-                xmlns="http://www.w3.org/2000/svg"
-                class="h-5 w-5 lg:hidden"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"
-                />
-                </svg>
-                Accueil</nuxt-link
-            >
-          </li>
-          <li class="nav-item">
-            <nuxt-link to="#about"
-              class="touch-target-inline flex flex-col items-center font-medium text-primary-title text-sm hover:text-primary"
-              @click="isOpen = false"
-              ><svg
-                xmlns="http://www.w3.org/2000/svg"
-                class="h-5 w-5 lg:hidden"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
-                /></svg
-              >A propos</nuxt-link
-            >
-          </li>
-          <li class="nav-item">
-            <nuxt-link to="#skills"
-              class="touch-target-inline flex flex-col items-center font-medium text-primary-title text-sm hover:text-primary"
-              @click="isOpen = false"
-              ><svg
-                xmlns="http://www.w3.org/2000/svg"
-                class="h-5 w-5 lg:hidden"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M11 4a2 2 0 114 0v1a1 1 0 001 1h3a1 1 0 011 1v3a1 1 0 01-1 1h-1a2 2 0 100 4h1a1 1 0 011 1v3a1 1 0 01-1 1h-3a1 1 0 01-1-1v-1a2 2 0 10-4 0v1a1 1 0 01-1 1H7a1 1 0 01-1-1v-3a1 1 0 00-1-1H4a2 2 0 110-4h1a1 1 0 001-1V7a1 1 0 011-1h3a1 1 0 001-1V4z"
-                /></svg
-              >Compétences</nuxt-link
-            >
-          </li>
-          <li class="nav-item">
-            <a
-              href="https://sciredev.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              class="touch-target-inline flex flex-col items-center font-medium text-primary-title text-sm hover:text-primary"
-              @click="isOpen = false"
-            >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                class="h-6 w-6 lg:hidden"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-                aria-hidden="true"
-              >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z"
-                />
-              </svg>
-              Blog<span class="sr-only"> (ouvre dans un nouvel onglet)</span>
-            </a>
-          </li>
-          <li class="nav-item">
-            <nuxt-link to="/audit-gratuit"
-              class="touch-target-inline flex flex-col items-center font-medium text-primary-title text-sm hover:text-primary"
-              @click="isOpen = false"
-              ><svg
-                xmlns="http://www.w3.org/2000/svg"
-                class="h-5 w-5 lg:hidden"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
-                /></svg
-              >Audit</nuxt-link
-            >
-          </li>
-          <li class="nav-item">
-            <nuxt-link to="/devis"
-              class="touch-target-inline flex flex-col items-center font-medium text-primary-title text-sm hover:text-primary"
-              @click="isOpen = false"
-              ><svg
-                xmlns="http://www.w3.org/2000/svg"
-                class="h-5 w-5 lg:hidden"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z"
-                /></svg
-              >Devis</nuxt-link
-            >
-          </li>
-          <li class="nav-item">
-            <nuxt-link to="#portfolio"
-              class="touch-target-inline flex flex-col items-center font-medium text-primary-title text-sm hover:text-primary"
-              @click="isOpen = false"
-              ><svg
-                xmlns="http://www.w3.org/2000/svg"
-                class="h-5 w-5 lg:hidden"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"
-                /></svg
-              >Portfolio</nuxt-link
-            >
-          </li>
-          <li class="nav-item">
-            <nuxt-link to="#contact"
-              class="touch-target-inline flex flex-col items-center font-medium text-primary-title text-sm hover:text-primary"
-              @click="isOpen = false"
-              ><svg
-                xmlns="http://www.w3.org/2000/svg"
-                class="h-5 w-5 lg:hidden"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
-                /></svg
-              >Contact</nuxt-link
-            >
-          </li>
-        </ul>
-        <button
-          type="button"
-          class="touch-target-square absolute right-3 bottom-2 cursor-pointer text-primary hover:text-primary-alt lg:hidden focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-primary-body"
-          aria-label="Fermer le menu"
-          @click="isOpen = !isOpen"
-        >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            class="h-5 w-5"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-            aria-hidden="true"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              d="M6 18L18 6M6 6l12 12"
-            />
-          </svg>
-        </button>
-      </div>
-      <div class="flex items-center">
-        <button
-          type="button"
-          class="touch-target-square mr-2 text-primary cursor-pointer hover:text-primary-alt lg:ml-4 lg:mr-0 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-primary-body"
-          :aria-pressed="isDark"
-          :aria-label="isDark ? 'Passer au thème clair' : 'Passer au thème sombre'"
-          @click="theme"
-        >
-          <svg
-            v-if="!isDark"
-            xmlns="http://www.w3.org/2000/svg"
-            class="h-6 w-6"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-            aria-hidden="true"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"
-            />
-          </svg>
-          <svg
-            v-if="isDark"
-            xmlns="http://www.w3.org/2000/svg"
-            class="h-6 w-6"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-            aria-hidden="true"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"
-            />
-          </svg>
-        </button>
-        <button
-          type="button"
-          class="touch-target-square text-primary-title font-medium text-base cursor-pointer hover:text-primary lg:hidden focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-primary-body"
-          :aria-expanded="isOpen"
-          aria-controls="site-menu-panel"
-          aria-label="Ouvrir ou fermer le menu"
-          @click="isOpen = !isOpen"
-        >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            class="h-6 w-6"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-            aria-hidden="true"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"
-            />
-          </svg>
-        </button>
-      </div>
-    </nav>
-  </header>
-</template>
+const route = useRoute()
+const menuOpen = ref(false)
 
-<script>
-export default {
-  data() {
-    return {
-      isOpen: false,
-      isDark: false,
-    }
+watch(
+  () => route.fullPath,
+  () => {
+    menuOpen.value = false
   },
-  destroyed() {
-    window.removeEventListener('scroll', this.scrollHeader)
+)
+
+const items = computed<NavigationMenuItem[]>(() => [
+  {
+    label: "Accueil",
+    to: "/",
+    exact: true,
+    active: route.path === "/" && !route.hash,
   },
-  mounted() {
-    this.loadTheme()
-    window.addEventListener('scroll', this.scrollHeader)
+  {
+    label: "A propos",
+    to: "/#about",
+    exactHash: true,
   },
-  methods: {
-    scrollHeader() {
-      const nav = document.getElementById('header')
-      if (window.scrollY >= 80) {
-        nav.classList.add('scroll-header')
-      } else {
-        nav.classList.remove('scroll-header')
-      }
-    },
-    theme() {
-      this.isDark = !this.isDark
-      localStorage.theme = this.isDark ? 'dark' : 'light'
-      document.documentElement.classList.toggle('dark')
-    },
-    loadTheme() {
-      if (
-        localStorage.theme === 'dark' ||
-        (!('theme' in localStorage) &&
-          window.matchMedia('(prefers-color-scheme: dark)').matches)
-      ) {
-        this.isDark = true
-        document.documentElement.classList.add('dark')
-      } else {
-        this.isDark = false
-        document.documentElement.classList.remove('dark')
-      }
-    },
+  {
+    label: "Compétences",
+    to: "/#skills",
+    exactHash: true,
   },
-}
+  {
+    label: "Audit",
+    to: "/audit-gratuit",
+    active: route.path.startsWith("/audit-gratuit"),
+  },
+  {
+    label: "Devis",
+    to: "/devis",
+    active: route.path.startsWith("/devis"),
+  },
+  {
+    label: "Portfolio",
+    to: "/#portfolio",
+    exactHash: true,
+  },
+  {
+    label: "Contact",
+    to: "/#contact",
+    exactHash: true,
+  },
+])
+
+const mobileItems = computed(() => [
+  { label: "Accueil", to: "/", icon: "i-mdi-home-outline", active: route.path === "/" && !route.hash },
+  { label: "A propos", to: "/#about", icon: "i-mdi-account-outline", active: route.hash === "#about" },
+  { label: "Compétences", to: "/#skills", icon: "i-mdi-puzzle-outline", active: route.hash === "#skills" },
+  { label: "Audit", to: "/audit-gratuit", icon: "i-mdi-check-circle-outline", active: route.path.startsWith("/audit-gratuit") },
+  { label: "Devis", to: "/devis", icon: "i-mdi-calculator-variant-outline", active: route.path.startsWith("/devis") },
+  { label: "Portfolio", to: "/#portfolio", icon: "i-mdi-flask-outline", active: route.hash === "#portfolio" },
+  { label: "Contact", to: "/#contact", icon: "i-mdi-email-outline", active: route.hash === "#contact" },
+])
 </script>
 
-<style lang="postcss" scoped>
-.show-menu {
+<template>
+  <UHeader
+    title="Bertyn Boulikou"
+    to="/"
+    :toggle="false"
+    class="hidden lg:block"
+  >
+    <template #title>
+      <img src="/BB.png" alt="Bertyn Boulikou" class="h-8 w-auto" />
+    </template>
+
+    <UNavigationMenu :items="items" />
+
+    <template #right>
+      <UColorModeButton />
+      <UButton
+        to="https://cal.com/bertyn-boulikou"
+        target="_blank"
+        label="Discutons de votre projet"
+        trailing-icon="i-mdi-email-outline"
+      />
+    </template>
+  </UHeader>
+
+  <header v-show="!menuOpen" class="header-mobile">
+    <NuxtLink to="/" class="inline-flex items-center" aria-label="Bertyn Boulikou">
+      <img src="/BB.png" alt="" class="h-8 w-auto" />
+    </NuxtLink>
+    <div class="flex items-center gap-0.5">
+      <UColorModeButton />
+      <UButton
+        icon="i-mdi-apps"
+        color="neutral"
+        variant="ghost"
+        aria-label="Ouvrir le menu"
+        @click="menuOpen = true"
+      />
+    </div>
+  </header>
+
+  <UDrawer
+    v-model:open="menuOpen"
+    direction="bottom"
+    :handle="false"
+    :ui="{
+      content: 'lg:hidden rounded-t-3xl bg-primary-input dark:bg-primary-container',
+    }"
+  >
+    <template #content>
+      <nav class="px-5 pb-3 pt-8" aria-label="Navigation principale">
+        <ul class="m-0 grid list-none grid-cols-4 gap-y-7 p-0">
+          <li v-for="item in mobileItems" :key="item.to" class="flex justify-center">
+            <NuxtLink
+              :to="item.to"
+              class="flex min-h-11 w-full max-w-[4.75rem] flex-col items-center gap-1.5 text-[0.7rem] leading-tight text-primary-title"
+              :class="item.active ? 'text-primary' : 'text-primary-title'"
+              @click="menuOpen = false"
+            >
+              <UIcon :name="item.icon" class="size-6" />
+              <span>{{ item.label }}</span>
+            </NuxtLink>
+          </li>
+        </ul>
+        <div class="mt-4 flex justify-end">
+          <UButton
+            icon="i-mdi-close"
+            color="primary"
+            variant="ghost"
+            aria-label="Fermer le menu"
+            @click="menuOpen = false"
+          />
+        </div>
+      </nav>
+    </template>
+  </UDrawer>
+</template>
+
+<style lang="postcss">
+.header-mobile {
+  position: fixed;
+  inset-inline: 0;
   bottom: 0;
+  z-index: 40;
+  display: flex;
+  height: calc(3.75rem + env(safe-area-inset-bottom, 0px));
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 1rem env(safe-area-inset-bottom, 0px);
+  background-color: var(--container-color);
+  box-shadow: 0 -1px 4px hsl(var(--hue-color) 8% 15% / 0.08);
 }
 
-.scroll-header {
-  box-shadow: 0 -1px 4px;
+.dark .header-mobile {
+  box-shadow: 0 -1px 4px hsl(var(--hue-color) 8% 8% / 0.45);
+}
+
+@media (min-width: 768px) {
+  .header-mobile {
+    display: none;
+  }
 }
 </style>

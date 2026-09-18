@@ -92,8 +92,16 @@ const canGoNext = computed(() => {
   return true
 })
 
-const inputClass =
-  'w-full rounded-sm border-none bg-primary-input px-2 pt-1 font-family-poppins text-primary-text outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2 focus-visible:ring-offset-primary-input'
+const stepperItems = stepLabels.map((title) => ({ title }))
+const budgetItems = budgetOptions.map((opt) => ({ label: opt, value: opt }))
+const timelineItems = timelineOptions.map((opt) => ({ label: opt, value: opt }))
+
+const stepperIndex = computed({
+  get: () => currentStep.value - 1,
+  set: (value: string | number) => {
+    currentStep.value = Number(value) + 1
+  },
+})
 
 function selectProjectType(label: string) {
   form.projectType = label
@@ -110,13 +118,6 @@ function toggleFeature(feature: string) {
 
 function isFeatureSelected(feature: string) {
   return form.features.includes(feature)
-}
-
-function stepCircleClass(stepIndex: number) {
-  const n = stepIndex + 1
-  if (n < currentStep.value) return 'devis-step devis-step--done'
-  if (n === currentStep.value) return 'devis-step devis-step--active'
-  return 'devis-step'
 }
 
 async function focusStepField() {
@@ -228,16 +229,14 @@ const stepMotionAnimate = computed(() => {
         <p class="mb-8 text-sm text-primary-text">
           Je vous recontacte sous 48h pour affiner ce devis selon vos besoins réels.
         </p>
-        <a
-          href="https://cal.com/bertyn-boulikou"
+        <UButton
+          to="https://cal.com/bertyn-boulikou"
           target="_blank"
-          rel="noopener noreferrer"
-          class="button button-flex button-white inline-flex items-center gap-2 no-underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-offset-2"
+          trailing-icon="i-mdi-calendar"
           aria-label="Réserver un entretien (ouvre Cal.com dans un nouvel onglet)"
         >
           Réserver un entretien pour affiner
-          <Icon name="i-mdi:calendar" class="button-icon" aria-hidden="true" />
-        </a>
+        </UButton>
       </div>
 
       <div
@@ -246,52 +245,13 @@ const stepMotionAnimate = computed(() => {
       >
         <div class="devis-card min-w-0 p-5 sm:p-6 md:p-8">
           <nav class="mb-8" aria-label="Étapes du devis">
-            <div
-              class="mb-3 flex h-1 gap-1 overflow-hidden rounded-full"
-              role="progressbar"
-              :aria-valuenow="currentStep"
-              aria-valuemin="1"
-              aria-valuemax="4"
-              :aria-label="`Étape ${currentStep} sur 4`"
-            >
-              <div
-                v-for="n in 4"
-                :key="n"
-                class="flex-1 rounded-full transition-colors duration-300"
-                :class="
-                  n <= currentStep ? 'bg-primary' : 'bg-primary/10'
-                "
-              />
-            </div>
-            <ol class="grid grid-cols-4 gap-1 sm:gap-2">
-              <li
-                v-for="(label, index) in stepLabels"
-                :key="label"
-                class="flex flex-col items-center text-center"
-                :aria-current="index + 1 === currentStep ? 'step' : undefined"
-              >
-                <span :class="stepCircleClass(index)" aria-hidden="true">
-                  <Icon
-                    v-if="index + 1 < currentStep"
-                    name="i-mdi:check"
-                    class="size-4"
-                  />
-                  <span v-else class="text-sm font-bold tabular-nums">{{ index + 1 }}</span>
-                </span>
-                <span
-                  class="mt-2 hidden text-[0.65rem] font-medium uppercase tracking-wide sm:block sm:text-xs"
-                  :class="
-                    index + 1 === currentStep
-                      ? 'text-primary'
-                      : index + 1 < currentStep
-                        ? 'text-primary-title'
-                        : 'text-primary-textLight'
-                  "
-                >
-                  {{ label }}
-                </span>
-              </li>
-            </ol>
+            <UStepper
+              v-model="stepperIndex"
+              :items="stepperItems"
+              color="primary"
+              class="w-full"
+              :linear="true"
+            />
           </nav>
 
           <header class="mb-6 border-b border-primary/10 pb-6">
@@ -403,65 +363,48 @@ const stepMotionAnimate = computed(() => {
 
               <div v-show="currentStep === 3" class="grid gap-5">
                 <div class="grid gap-5 sm:grid-cols-2">
-                  <div class="rounded-lg bg-primary-input px-4 pt-3 pb-2">
-                    <label for="devis-budget" class="text-sm font-medium text-primary-title">Budget estimé</label>
-                    <select id="devis-budget" v-model="form.budget" :class="inputClass">
-                      <option v-for="opt in budgetOptions" :key="opt" :value="opt">{{ opt }}</option>
-                    </select>
-                  </div>
-                  <div class="rounded-lg bg-primary-input px-4 pt-3 pb-2">
-                    <label for="devis-timeline" class="text-sm font-medium text-primary-title">Délai souhaité</label>
-                    <select id="devis-timeline" v-model="form.timeline" :class="inputClass">
-                      <option v-for="opt in timelineOptions" :key="opt" :value="opt">{{ opt }}</option>
-                    </select>
-                  </div>
+                  <UFormField label="Budget estimé" name="budget">
+                    <USelect v-model="form.budget" :items="budgetItems" class="w-full" />
+                  </UFormField>
+                  <UFormField label="Délai souhaité" name="timeline">
+                    <USelect v-model="form.timeline" :items="timelineItems" class="w-full" />
+                  </UFormField>
                 </div>
                 <div class="grid gap-5 sm:grid-cols-2">
-                  <div class="rounded-lg bg-primary-input px-4 pt-3 pb-2">
-                    <label for="devis-name" class="text-sm font-medium text-primary-title">Nom</label>
-                    <input
-                      id="devis-name"
+                  <UFormField label="Nom" name="name" required>
+                    <UInput
                       v-model="form.name"
-                      type="text"
                       autocomplete="name"
-                      required
                       placeholder="Jean Dupont"
-                      :class="inputClass"
+                      class="w-full"
                     />
-                  </div>
-                  <div class="rounded-lg bg-primary-input px-4 pt-3 pb-2">
-                    <label for="devis-email" class="text-sm font-medium text-primary-title">Email</label>
-                    <input
-                      id="devis-email"
+                  </UFormField>
+                  <UFormField label="Email" name="email" required>
+                    <UInput
                       v-model="form.email"
                       type="email"
                       autocomplete="email"
-                      required
                       placeholder="vous@exemple.fr"
-                      :class="inputClass"
+                      class="w-full"
                     />
-                  </div>
+                  </UFormField>
                 </div>
-                <div class="rounded-lg bg-primary-input px-4 pt-3 pb-2">
-                  <label for="devis-url" class="text-sm font-medium text-primary-title">URL actuelle (optionnel)</label>
-                  <input
-                    id="devis-url"
+                <UFormField label="URL actuelle" name="url" hint="Optionnel">
+                  <UInput
                     v-model="form.url"
                     type="url"
                     placeholder="https://votresite.fr"
-                    :class="inputClass"
+                    class="w-full"
                   />
-                </div>
-                <div class="rounded-lg bg-primary-input px-4 pt-3 pb-2">
-                  <label for="devis-description" class="text-sm font-medium text-primary-title">Description (optionnel)</label>
-                  <textarea
-                    id="devis-description"
+                </UFormField>
+                <UFormField label="Description" name="description" hint="Optionnel">
+                  <UTextarea
                     v-model="form.description"
-                    rows="4"
+                    :rows="4"
                     placeholder="Décrivez brièvement votre projet..."
-                    :class="inputClass"
+                    class="w-full"
                   />
-                </div>
+                </UFormField>
               </div>
 
               <div v-show="currentStep === 4" class="grid gap-6">
@@ -530,42 +473,34 @@ const stepMotionAnimate = computed(() => {
           </div>
 
           <footer class="mt-8 flex flex-wrap items-center justify-between gap-4 border-t border-primary/10 pt-6">
-            <button
+            <UButton
               v-if="currentStep > 1"
-              type="button"
-              class="button button-link touch-target-inline"
+              color="neutral"
+              variant="ghost"
+              leading-icon="i-mdi-arrow-left"
               @click="goPrev"
             >
-              <Icon name="i-mdi:arrow-left" class="mr-1 inline size-5" aria-hidden="true" />
               Précédent
-            </button>
-            <span v-else class="text-sm text-primary-textLight">Étape {{ currentStep }} sur 4</span>
+            </UButton>
+            <span v-else class="text-sm text-muted">Étape {{ currentStep }} sur 4</span>
 
-            <button
+            <UButton
               v-if="currentStep < 4"
-              type="button"
-              class="button button-flex inline-flex items-center gap-2 disabled:cursor-not-allowed disabled:opacity-70"
+              trailing-icon="i-mdi-arrow-right"
               :disabled="!canGoNext"
               @click="goNext"
             >
               Suivant
-              <Icon name="i-mdi:arrow-right" class="button-icon" aria-hidden="true" />
-            </button>
-            <button
+            </UButton>
+            <UButton
               v-else
-              type="button"
-              class="button button-flex inline-flex items-center gap-2 disabled:cursor-not-allowed disabled:opacity-70"
-              :disabled="isLoading || !estimate"
+              trailing-icon="i-mdi-send"
+              :loading="isLoading"
+              :disabled="!estimate"
               @click="submitDevis"
             >
-              {{ isLoading ? 'Envoi en cours...' : 'Demander mon devis' }}
-              <Icon
-                :name="isLoading ? 'i-mdi:loading' : 'i-mdi:send'"
-                class="button-icon"
-                :class="{ 'motion-safe:animate-spin': isLoading }"
-                aria-hidden="true"
-              />
-            </button>
+              {{ isLoading ? "Envoi en cours..." : "Demander mon devis" }}
+            </UButton>
           </footer>
         </div>
 

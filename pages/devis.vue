@@ -19,7 +19,7 @@ const faqItems = [
   {
     question: "Puis-je modifier mon projet ensuite ?",
     answer:
-      "Bien sûr. Le devis est un point de départ — tout est ajustable lors de notre premier échange.",
+      "Bien sûr. Le devis est un point de départ. Tout est ajustable lors de notre premier échange.",
   },
   {
     question: "Quels modes de paiement acceptez-vous ?",
@@ -62,13 +62,12 @@ useSchemaOrg([
 <template>
   <main>
     <section class="shell-section pt-24 md:pt-28">
-      <div class="container text-center">
-        <h1 class="section-title text-2xl md:text-3xl">Créez votre devis</h1>
-        <span class="section-subtitle">Estimation en ligne</span>
-        <p class="mx-auto mb-8 max-w-2xl text-primary-text">
-          Parcourez quatre étapes guidées : type de projet, fonctionnalités, détails — puis recevez une fourchette de prix adaptée.
+      <div class="container">
+        <h1 class="section-title">Créez votre devis</h1>
+        <p class="mt-4 mb-8 max-w-prose text-lg text-primary-text">
+          Quatre étapes guidées: type de projet, fonctionnalités, détails, puis une fourchette de prix adaptée.
         </p>
-        <ul class="flex flex-wrap justify-center gap-3" role="list">
+        <ul class="flex flex-wrap gap-3" role="list">
           <li
             v-for="badge in trustBadges"
             :key="badge"
@@ -84,8 +83,7 @@ useSchemaOrg([
 
     <section class="shell-section">
       <div class="container max-w-3xl">
-        <h2 class="section-title">Questions fréquentes</h2>
-        <span class="section-subtitle">FAQ</span>
+        <h2 class="section-title mb-8">Questions fréquentes</h2>
         <FaqAccordion :items="faqItems" />
       </div>
     </section>

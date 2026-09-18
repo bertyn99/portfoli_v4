@@ -1,14 +1,9 @@
-import tailwindcss from "@tailwindcss/vite";
-
-
 export default defineNuxtConfig({
   modules: [
+    "@nuxt/ui",
     "@nuxtjs/seo",
     /*     "@nuxt/content", */
-    '@nuxt/fonts',
-    '@nuxtjs/tailwindcss',
-    "@nuxt/icon",
-    '@vueuse/nuxt',
+    "@vueuse/nuxt",
     "@nuxt/image",
     "motion-v/nuxt",
     "nuxt-umami",
@@ -87,10 +82,26 @@ export default defineNuxtConfig({
     },
   },
 
+  fonts: {
+    families: [
+      { name: "Bricolage Grotesque", weights: [500, 600, 700, 800] },
+      { name: "Barlow", weights: [400, 500, 600, 700, 800] },
+    ],
+  },
+
   css: ["@/assets/css/main.css"],
+  ui: {
+    colorMode: true,
+    fonts: true,
+  },
+  colorMode: {
+    classSuffix: "",
+    preference: "system",
+    fallback: "light",
+  },
   icon: {
     serverBundle: {
-      collections: ['mdi', 'vscode-icons'],
+      collections: ["mdi", "vscode-icons", "lucide", "simple-icons", "tabler", "logos", "majesticons"],
     },
   },
 

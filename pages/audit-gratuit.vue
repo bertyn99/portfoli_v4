@@ -59,13 +59,12 @@ useSchemaOrg([
 <template>
   <main>
     <section class="shell-section pt-24 md:pt-28">
-      <div class="container text-center">
-        <h1 class="section-title text-2xl md:text-3xl">Audit gratuit de votre site web</h1>
-        <span class="section-subtitle">Sans engagement</span>
-        <p class="mx-auto mb-8 max-w-2xl text-primary-text">
-          Recevez un rapport personnalisé : performance, SEO, accessibilité et design.
+      <div class="container">
+        <h1 class="section-title">Audit gratuit de votre site web</h1>
+        <p class="mt-4 mb-8 max-w-prose text-lg text-primary-text">
+          Un rapport personnalisé: performance, SEO, accessibilité et design.
         </p>
-        <ul class="flex flex-wrap justify-center gap-3" role="list">
+        <ul class="flex flex-wrap gap-3" role="list">
           <li class="rounded-full border border-primary/20 bg-primary/8 px-4 py-1.5 text-sm font-medium text-primary">
             Gratuit
           </li>
@@ -83,8 +82,7 @@ useSchemaOrg([
 
     <section class="shell-section">
       <div class="container">
-        <h2 class="section-title">Questions fréquentes</h2>
-        <span class="section-subtitle">FAQ</span>
+        <h2 class="section-title mb-8">Questions fréquentes</h2>
         <FaqAccordion :items="faqItems" />
       </div>
     </section>

@@ -3,36 +3,22 @@
     <div class="bg-primary-second py-12 lg:bg-transparent">
       <div class="container grid md:grid-cols-2 md:gap-6 lg:[grid-template-columns:1fr_max-content] lg:bg-primary-second lg:rounded-2xl lg:py-12 lg:px-6 lg:gap-12">
         <div class="project-data flex min-w-0 flex-col items-center lg:items-start lg:pt-3">
-          <p class="project-cta-lead mb-3 max-w-prose text-center text-sm font-medium leading-snug text-white lg:text-left">
-            Vous avez des idées de projet ou des questions
+          <p class="project-cta-lead mb-3 max-w-prose text-center text-base font-medium leading-snug text-white/90 lg:text-left">
+            Une idée, une question, un brief encore flou.
           </p>
-          <h2 class="project-cta-heading mb-6 text-center text-xl font-black uppercase tracking-wide text-white/90 lg:text-left">
-            Contactez-moi afin que nous en discutions.
+          <h2 class="project-cta-heading mb-6 text-center font-display text-2xl font-extrabold tracking-tight text-white md:text-3xl lg:text-left">
+            Un projet en tête
           </h2>
-          <a
-            href="https://cal.com/bertyn-boulikou"
+          <UButton
+            to="https://cal.com/bertyn-boulikou"
             target="_blank"
-            rel="noopener noreferrer"
-            class="button button-flex button-white mb-6 inline-flex shrink-0 items-center gap-2 whitespace-nowrap no-underline"
+            color="neutral"
+            trailing-icon="i-mdi-email-outline"
+            class="mb-6"
             aria-label="Réserver un entretien (ouvre Cal.com dans un nouvel onglet)"
           >
-            <span>Réserver un entretien</span>
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              class="button-icon h-6 w-6 shrink-0 transition duration-300"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-              aria-hidden="true"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
-              />
-            </svg>
-          </a>
+            Réserver un entretien
+          </UButton>
         </div>
         <svg class="w-60 justify-self-center lg:w-64" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg"
           viewBox="0 0 1036.608 758.00135">

@@ -1,4 +1,5 @@
 @import "tailwindcss";
+@import "@nuxt/ui";
 
 @plugin "@tailwindcss/typography";
 
@@ -18,15 +19,28 @@
   --container-color: #fff;
 
   /* Skills strip + tiles (light) — overridden in .dark */
-  --skills-strip-bg: hsl(var(--hue-color) 38% 97%);
+  --skills-strip-bg: hsl(var(--hue-color) 36% 96%);
   --skills-strip-muted: hsl(var(--hue-color) 10% 42%);
-  --skills-tile-light: hsl(var(--hue-color) 45% 98%);
-  --skills-tile-dark: hsl(var(--hue-color) 16% 22%);
-  --skills-tile-dark-border: hsl(var(--hue-color) 14% 36%);
+  --skills-tile-light: hsl(var(--hue-color) 28% 86%);
+  --skills-tile-dark: hsl(var(--hue-color) 18% 20%);
+  --skills-tile-dark-border: hsl(var(--hue-color) 16% 32%);
   --skills-tile-glow: rgb(124 58 237 / 0.22);
 
   --form-status-error: hsl(350 55% 42%);
   --form-status-success: hsl(155 55% 32%);
+
+  --ui-primary: var(--first-color);
+  --ui-secondary: var(--first-color);
+  --ui-radius: 0.375rem;
+  --ui-container: 72rem;
+  --ui-header-height: 4.5rem;
+  --mobile-dock-height: 3.75rem;
+  --ui-bg: var(--body-color);
+  --ui-bg-muted: var(--input-color);
+  --ui-bg-elevated: var(--container-color);
+  --ui-text: var(--text-color);
+  --ui-text-muted: var(--text-color-light);
+  --ui-text-highlighted: var(--title-color);
 }
 
 .dark {
@@ -39,13 +53,36 @@
 
   --skills-strip-bg: hsl(245 22% 9%);
   --skills-strip-muted: hsl(250 12% 72%);
-  --skills-tile-light: hsl(252 26% 93%);
-  --skills-tile-dark: hsl(248 22% 14%);
-  --skills-tile-dark-border: hsl(250 12% 28%);
+  --skills-tile-light: hsl(252 20% 82%);
+  --skills-tile-dark: hsl(248 18% 20%);
+  --skills-tile-dark-border: hsl(250 14% 32%);
   --skills-tile-glow: rgb(167 139 250 / 0.32);
 
   --form-status-error: hsl(350 58% 62%);
   --form-status-success: hsl(155 45% 48%);
+
+  --ui-primary: hsl(var(--hue-color), 72%, 72%);
+  --ui-secondary: hsl(var(--hue-color), 72%, 72%);
+  --ui-bg: var(--body-color);
+  --ui-bg-muted: var(--input-color);
+  --ui-bg-elevated: var(--container-color);
+  --ui-text: var(--text-color);
+  --ui-text-muted: var(--text-color-light);
+  --ui-text-highlighted: var(--title-color);
+}
+
+@theme static {
+  --color-brand-50: hsl(250 92% 97%);
+  --color-brand-100: hsl(250 92% 95%);
+  --color-brand-200: hsl(250 85% 90%);
+  --color-brand-300: hsl(250 80% 82%);
+  --color-brand-400: hsl(250 72% 72%);
+  --color-brand-500: hsl(250 69% 61%);
+  --color-brand-600: hsl(250 57% 53%);
+  --color-brand-700: hsl(250 55% 44%);
+  --color-brand-800: hsl(250 50% 32%);
+  --color-brand-900: hsl(250 45% 22%);
+  --color-brand-950: hsl(250 40% 12%);
 }
 
 @theme {
@@ -55,10 +92,12 @@
   --breakpoint-lg: 768px;
   --breakpoint-xl: 1024px;
 
+  --font-sans: "Barlow", sans-serif;
+  --font-display: "Bricolage Grotesque", "Barlow", sans-serif;
   --font-family-poppins: "Poppins", sans-serif;
   --font-family-barlow: "Barlow", sans-serif;
+  --font-family-display: "Bricolage Grotesque", "Barlow", sans-serif;
 
-  --color-primary: var(--first-color);
   --color-primary-second: var(--first-color-second);
   --color-primary-lighter: var(--first-color-lighter);
   --color-primary-alt: var(--first-color-alt);
@@ -80,6 +119,7 @@
   --animate-skills-cell-reveal: skillsCellReveal 0.52s cubic-bezier(0.22, 1, 0.36, 1) both;
   --animate-slideInFromLeft: slideInFromLeft 1s ease-in-out;
   --animate-slideInFromRight: slideInFromRight 1s ease-in-out;
+  --animate-blob-float: blobFloat 7s ease-in-out infinite;
 
   @keyframes fadeIn {
     0% {
@@ -126,15 +166,22 @@
       opacity: 1;
     }
   }
+
+  @keyframes blobFloat {
+    0%,
+    100% {
+      transform: translateY(0);
+    }
+
+    50% {
+      transform: translateY(-10px);
+    }
+  }
 }
 
 body {
   font-family: var(--font-family-barlow);
-  @apply text-base mb-8 text-primary-text;
-
-  @media (min-width: 768px) {
-    @apply m-0;
-  }
+  @apply m-0 text-base text-primary-text;
 }
 
 html {
@@ -145,7 +192,12 @@ h1,
 h2,
 h3,
 h4 {
-  @apply text-primary-title font-semibold;
+  @apply text-primary-title font-semibold text-pretty;
+  text-wrap: balance;
+}
+
+p {
+  text-wrap: pretty;
 }
 
 img {
@@ -154,18 +206,62 @@ img {
 
 /* Section surface (padding + background). Full-bleed band; constrain copy with `.container` inside. */
 .shell-section {
-  @apply pt-8 pb-16 bg-primary-container md:pt-24 md:pb-8 md:px-0;
+  @apply bg-primary-body pt-16 pb-20 md:pt-28 md:pb-28 md:px-0;
 }
 
-/* Unified section headings — use `h2.section-title` + `span.section-subtitle` (or `p` with subtitle class). */
+.section-heading {
+  @apply mb-10 max-w-3xl md:mb-14;
+}
+
+/* Display titles: Bricolage, left-aligned, sentence case. */
 .section-title {
-  @apply text-center font-black text-xl text-primary-title;
-  font-family: var(--font-family-barlow);
+  @apply text-left font-extrabold tracking-tight text-primary-title;
+  font-family: var(--font-family-display);
+  font-size: clamp(1.85rem, 1.2rem + 2.4vw, 3.15rem);
+  letter-spacing: -0.035em;
+  line-height: 1.12;
 }
 
 .section-subtitle {
-  @apply block text-center text-2xl leading-tight font-black uppercase tracking-wide text-primary-text mb-6 md:mb-8;
+  @apply mt-3 mb-0 block max-w-prose text-left text-base font-medium normal-case tracking-normal text-primary-text md:text-lg;
   font-family: var(--font-family-barlow);
+}
+
+.site-grain {
+  pointer-events: none;
+  position: fixed;
+  inset: 0;
+  z-index: 80;
+  opacity: 0.035;
+  mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-repeat: repeat;
+  background-size: 180px 180px;
+}
+
+.dark .site-grain {
+  opacity: 0.055;
+}
+
+@media (max-width: 767px) {
+  :root,
+  .dark {
+    --ui-header-height: 0px;
+  }
+
+  body {
+    padding-bottom: calc(var(--mobile-dock-height) + env(safe-area-inset-bottom, 0px));
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .home-blob {
+    animation: none !important;
+  }
 }
 
 .button {
@@ -220,5 +316,12 @@ img {
 
   .touch-target-square {
     @apply inline-flex h-11 w-11 items-center justify-center rounded-md;
+  }
+}
+
+@layer base {
+  button:not(:disabled),
+  [role="button"]:not(:disabled) {
+    cursor: pointer;
   }
 }

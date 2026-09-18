@@ -34,15 +34,14 @@ const services = [
 <template>
   <section id="services" class="services shell-section">
     <Motion
-      as="div"
-      class="w-full text-center"
+      as="header"
+      class="container section-heading"
       :initial="prefersReducedMotion ? { opacity: 1, y: 0 } : { opacity: 0, y: 10 }"
       :while-in-view="prefersReducedMotion ? { opacity: 1, y: 0 } : { opacity: 1, y: 0 }"
       :transition="prefersReducedMotion ? { duration: 0 } : { duration: 0.45, ease: easeOut }"
       :viewport="{ once: true, margin: '0px 0px -8% 0px' }"
     >
-      <h2 class="section-title">Expertise</h2>
-      <span class="section-subtitle">Services</span>
+      <h2 class="section-title">Services</h2>
     </Motion>
 
     <div class="container">

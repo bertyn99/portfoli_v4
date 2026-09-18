@@ -6,46 +6,41 @@ const prefersReducedMotion = useReducedMotion();
 
 <template>
   <section id="graduate" class="graduate graduate-section shell-section">
-    <div class="graduate-heading container mb-3 text-center sm:mb-4">
-      <h2 class="section-title mb-1">Diplômes et certifications</h2>
-      <span class="section-subtitle graduate-subtitle">Mon parcours professionnel</span>
+    <div class="graduate-heading container mb-8 md:mb-12">
+      <header class="section-heading mb-0">
+        <h2 class="section-title mb-1">Parcours</h2>
+        <span class="section-subtitle">Formations et expériences, de Nantes au freelance.</span>
+      </header>
     </div>
 
-    <div class="container mb-3 sm:mb-3">
-      <div class="flex justify-center" role="tablist" aria-label="Filtrer le parcours">
-        <div
-          class="inline-flex flex-wrap justify-center gap-0.5 rounded-2xl border border-primary-input/90 bg-primary-container/70 p-1 shadow-sm backdrop-blur-sm dark:border-primary-input/50 dark:bg-primary-container/40">
-          <Motion v-for="opt in filterOptions" :key="opt.value" as="button" type="button" role="tab"
-            :aria-selected="activeFilter === opt.value"
-            class="graduate-filter-chip relative inline-flex min-h-11 items-center justify-center cursor-pointer rounded-xl px-3.5 py-2.5 text-sm font-semibold transition-colors duration-200 sm:px-4"
-            :class="[
-              activeFilter === opt.value
-                ? 'graduate-filter-chip--active shadow-md'
-                : 'text-primary-text hover:text-primary',
-            ]" :while-hover="prefersReducedMotion ? {} : { scale: 1.02 }"
-            :while-press="prefersReducedMotion ? {} : { scale: 0.98 }"
-            :transition="{ type: 'spring', stiffness: 450, damping: 26 }" @click="activeFilter = opt.value">
-            {{ opt.label }}
-          </Motion>
-        </div>
+    <div class="container mb-8">
+      <div class="flex">
+        <UTabs
+          v-model="activeFilter"
+          :items="filterTabItems"
+          :content="false"
+          variant="pill"
+          color="primary"
+          class="w-fit"
+        />
       </div>
     </div>
 
-    <!-- Mobile: vertical list. lg+: wrapping grid — no horizontal scroll; cards shrink when there are many -->
+    <!-- Vertical timeline -->
     <div class="container">
       <div class="graduate-scroll pb-3 pt-0 sm:pb-4">
         <ul
-          class="graduate-timeline-list m-0 mx-auto flex w-full max-w-2xl list-none flex-col gap-6 p-0 lg:max-w-none lg:grid lg:grid-cols-[repeat(auto-fit,minmax(12rem,1fr))] lg:gap-x-4 lg:gap-y-10 xl:grid-cols-[repeat(auto-fit,minmax(13rem,1fr))]"
+          class="graduate-timeline-list m-0 mx-auto flex w-full max-w-2xl list-none flex-col gap-6 p-0"
           role="list"
           aria-live="polite"
         >
           <li
             v-for="(item, index) in filteredTimeline"
             :key="`${activeFilter}-${item.id}`"
-            class="graduate-timeline-item flex w-full min-w-0 flex-row items-stretch gap-4 lg:flex-col lg:gap-2"
+            class="graduate-timeline-item flex w-full min-w-0 flex-row items-stretch gap-4"
           >
-            <!-- Mobile: vertical spine -->
-            <div class="flex w-6 shrink-0 flex-col items-center lg:hidden" aria-hidden="true">
+            <!-- Vertical spine -->
+            <div class="flex w-6 shrink-0 flex-col items-center" aria-hidden="true">
               <div class="w-px flex-1 min-h-2 rounded-full bg-transparent"
                 :class="index === 0 ? '' : 'graduate-line-v'" />
               <span class="graduate-node my-1.5 block size-3 shrink-0 rounded-full ring-4 ring-primary-body"
@@ -54,17 +49,7 @@ const prefersReducedMotion = useReducedMotion();
                 :class="index === filteredTimeline.length - 1 ? '' : 'graduate-line-v'" />
             </div>
 
-            <!-- Desktop: horizontal spine above card -->
-            <div class="mb-2 hidden h-8 w-full items-center sm:mb-2.5 sm:h-9 lg:flex">
-              <div class="h-[3px] min-w-3 flex-1 rounded-full transition-opacity"
-                :class="index === 0 ? 'opacity-0' : 'graduate-line-h'" aria-hidden="true" />
-              <span
-                class="graduate-node relative mx-1.5 block size-3 shrink-0 rounded-full ring-4 ring-primary-body sm:size-3.5"
-                :class="item.kind === 'education' ? 'bg-primary' : 'bg-primary-alt'" aria-hidden="true" />
-              <div class="h-[3px] min-w-3 flex-1 rounded-full transition-opacity"
-                :class="index === filteredTimeline.length - 1 ? 'opacity-0' : 'graduate-line-h'" aria-hidden="true" />
-            </div>
-
+            <!-- card -->
             <Motion as="article"
               class="graduate-card group flex min-w-0 flex-1 flex-col p-4 sm:p-5"
               :class="[
@@ -177,7 +162,7 @@ export default {
           title: "Baccalauréat scientifique",
           org: "Lycée Sacré-Cœur",
           city: "Nantes",
-          period: "2016 – 2017",
+          period: "2016 - 2017",
           description:
             "Baccalauréat scientifique, avant les études en informatique et le développement web.",
           tags: [],
@@ -188,7 +173,7 @@ export default {
           title: "Licence d’informatique",
           org: "Faculté des sciences de Nantes",
           city: "Nantes",
-          period: "2016 – 2017",
+          period: "2016 - 2017",
           description:
             "Première année de licence en informatique à l’université des Sciences de Nantes.",
           tags: [],
@@ -210,7 +195,7 @@ export default {
           title: "Bachelor en développement logiciel et applicatif",
           org: "Ynov Campus Nantes",
           city: "Nantes",
-          period: "sept. 2019 – sept. 2022",
+          period: "sept. 2019 - sept. 2022",
           description:
             "Formation aux fondamentaux du développement logiciel, des applications web et du travail en équipe.",
           tags: ["JavaScript", "Git", "Agile"],
@@ -221,7 +206,7 @@ export default {
           title: "Master en développement web",
           org: "Ynov Campus Nantes",
           city: "Nantes",
-          period: "sept. 2022 – sept. 2024",
+          period: "sept. 2022 - sept. 2024",
           description:
             "Parcours orienté conception et développement d’applications web modernes, de l’architecture au déploiement.",
           tags: ["Vue.js", "Node.js", "API REST"],
@@ -232,7 +217,7 @@ export default {
           title: "Co-chef de projet & développeur mobile",
           org: "TEDx Nantes",
           city: "Nantes",
-          period: "oct. 2019 – juil. 2020",
+          period: "oct. 2019 - juil. 2020",
           description:
             "Pilotage de l’équipe et développement d’un prototype d’application mobile (Ionic + Angular).",
           tags: ["Ionic", "Angular"],
@@ -243,7 +228,7 @@ export default {
           title: "Développeur fullstack",
           org: "Exp4",
           city: "Nantes",
-          period: "avr. 2022 – sept. 2024",
+          period: "avr. 2022 - sept. 2024",
           description:
             "Création d’applications, automatisation de processus, mise en place de CI/CD et analyse du SI.",
           tags: ["Laravel", "React", "Node.js", "Python"],
@@ -254,7 +239,7 @@ export default {
           title: "Lead développeur fullstack",
           org: "VAGABOX",
           city: "Nantes",
-          period: "sept. 2023 – déc. 2026",
+          period: "sept. 2023 - déc. 2026",
           description:
             "De la conception (UX, stack) à la production : CI/CD, maintenance et Google Analytics. Laravel + Vue.",
           tags: ["Laravel", "Vue", "CI/CD"],
@@ -266,7 +251,7 @@ export default {
           title: "Développeur fullstack · freelance",
           org: "Aldere",
           city: "Nantes",
-          period: "déc. 2024 – janv. 2025",
+          period: "déc. 2024 - janv. 2025",
           description:
             "Migration d’une application e-commerce de Nuxt 2 + Express vers Nuxt 3.",
           tags: ["Nuxt 3", "Vue", "Express"],
@@ -277,7 +262,7 @@ export default {
           title: "Développeur fullstack · freelance",
           org: "Kosmonotes",
           city: "Nantes",
-          period: "févr. 2025 – nov. 2025",
+          period: "févr. 2025 - nov. 2025",
           description:
             "Application Nuxt fullstack avec RAG IA, déployée sur Cloudflare (R2, D1, Vectorize, IA générative).",
           tags: ["Nuxt", "Cloudflare", "RAG"],
@@ -288,7 +273,7 @@ export default {
           title: "Développeur fullstack · freelance",
           org: "FCF",
           city: "Nantes",
-          period: "mars 2025 – juin 2026",
+          period: "mars 2025 - juin 2026",
           description:
             "Développement fullstack d’une application autour des sports de combat, automatisation et scraping.",
           tags: ["Fullstack", "Automatisation"],
@@ -299,7 +284,7 @@ export default {
           title: "Développeur backend · freelance",
           org: "YKONE",
           city: "Nantes",
-          period: "avr. 2026 – sept. 2026",
+          period: "avr. 2026 - sept. 2026",
           description:
             "Développement backend d’une application interne en AdonisJS.",
           tags: ["AdonisJS", "Node.js"],
@@ -312,6 +297,12 @@ export default {
     filteredTimeline() {
       return this.timeline.filter((e) => e.kind === this.activeFilter);
     },
+    filterTabItems() {
+      return this.filterOptions.map((opt) => ({
+        label: opt.label,
+        value: opt.value,
+      }));
+    },
   },
   methods: {
     stepNumber(item) {
@@ -323,16 +314,8 @@ export default {
 </script>
 
 <style lang="postcss">
-.graduate-section.shell-section {
-  @apply pb-8 md:pb-10;
-}
-
 .graduate-heading .section-title {
   @apply mb-0;
-}
-
-.graduate-subtitle.section-subtitle {
-  @apply mt-1 mb-0 text-xl md:text-2xl;
 }
 
 .graduate-timeline-list {

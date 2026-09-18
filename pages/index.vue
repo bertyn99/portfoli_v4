@@ -15,7 +15,7 @@
 </template>
 
 <script setup lang="ts">
-const title = "Développeur web freelance — portfolio & réalisations"
+const title = "Développeur web freelance, portfolio et réalisations"
 const description =
   "Bertyn Boulikou, développeur web full stack (Nuxt, Vue). Portfolio, études de cas, devis et audit gratuit — recruteurs et clients en France."
 
