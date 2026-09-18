@@ -53,10 +53,46 @@ const gridLayout = [
 const flatCells = computed(() => gridLayout.flat())
 const COLS = 6
 
-const skillTabItems = [
+const categoryCounts = computed(() => {
+  const counts = [0, 0, 0]
+  for (const cell of gridLayout.flat()) {
+    if (cell.skill)
+      counts[cell.categoryIndex] += 1
+  }
+  return counts
+})
+
+const skillTabItems = computed(() => [
+  {
+    label: 'Toutes',
+    value: 'all',
+    icon: 'i-mdi-dots-grid',
+    badge: categoryCounts.value.reduce((a, b) => a + b, 0),
+  },
+  {
+    label: 'Front-End',
+    value: '0',
+    icon: 'i-mdi-monitor',
+    badge: categoryCounts.value[0],
+  },
+  {
+    label: 'Back-End',
+    value: '1',
+    icon: 'i-mdi-server-outline',
+    badge: categoryCounts.value[1],
+  },
+  {
+    label: 'Design',
+    value: '2',
+    icon: 'i-mdi-palette-outline',
+    badge: categoryCounts.value[2],
+  },
+])
+
+const skillTabItemsMobile = [
   { label: 'Toutes', value: 'all' },
-  { label: 'Front-End', value: '0' },
-  { label: 'Back-End', value: '1' },
+  { label: 'Front', value: '0' },
+  { label: 'Back', value: '1' },
   { label: 'Design', value: '2' },
 ]
 
@@ -82,6 +118,10 @@ const filterStatus = computed(() => {
     return 'Plateau au repos, toutes les compétences au même niveau.'
   return `Famille ${CATEGORY_LABELS[filterIndex.value]} hissée sur le podium.`
 })
+
+function selectFamily(value) {
+  activeTab.value = value
+}
 
 function featurePiece(i) {
   featuredIndex.value = featuredIndex.value === i ? null : i
@@ -142,42 +182,76 @@ function iconToneClass(cell) {
   <section id="skills" class="skills relative overflow-x-clip bg-skills-bg py-16 text-primary-text md:py-28 md:pb-32 dark:text-skills-muted">
     <div class="container relative">
       <header class="skills-heading">
-        <div class="skills-heading-copy">
-          <h2 id="skills-heading" class="skills-display">
-            <span class="skills-display-kicker">Mes</span>
-            <span>compétences</span>
-          </h2>
-          <p class="skills-lede">
-            Une famille monte sur le podium. Cliquez une pièce pour la mettre en évidence.
-          </p>
-        </div>
-
-        <div class="skills-heading-tabs">
-          <UTabs
-            v-model="activeTab"
-            :items="skillTabItems"
-            :content="false"
-            variant="link"
-            color="primary"
-            size="lg"
-            class="w-full"
-            :ui="{ list: 'justify-start lg:justify-end border-0' }"
-            aria-label="Catégories de compétences"
-          />
-        </div>
+        <h2 id="skills-heading" class="skills-display">
+          <span class="skills-display-kicker">Mes</span>
+          <span>compétences</span>
+        </h2>
+        <p class="skills-lede">
+          Une famille monte sur le podium. Cliquez une pièce pour la mettre en évidence.
+        </p>
       </header>
 
       <p class="sr-only" aria-live="polite">{{ filterStatus }}</p>
 
-      <div class="skills-board relative pt-6 md:pt-10">
-        <div
-          :id="SKILLS_PANEL_ID"
-          class="relative grid w-full grid-cols-2 gap-3 sm:grid-cols-3 sm:gap-4 md:gap-5 lg:grid-cols-6 lg:gap-5"
-          role="grid"
-          aria-labelledby="skills-heading"
-          :aria-rowcount="gridLayout.length"
-          :aria-colcount="6"
-        >
+      <div class="skills-stage">
+        <aside class="skills-rail">
+          <UTabs
+            v-model="activeTab"
+            class="w-full lg:hidden"
+            :items="skillTabItemsMobile"
+            :content="false"
+            variant="link"
+            color="primary"
+            size="md"
+            :ui="{ list: 'justify-start border-0' }"
+            aria-label="Catégories de compétences"
+          />
+
+          <nav
+            class="skills-rail-desktop hidden lg:flex"
+            aria-label="Catégories de compétences"
+          >
+            <span class="skills-rail-spine" aria-hidden="true" />
+            <UTooltip
+              v-for="item in skillTabItems"
+              :key="item.value"
+              :text="`${item.label} · ${item.badge}`"
+              :delay-duration="120"
+              :content="{ side: 'right', align: 'center', sideOffset: 12 }"
+            >
+              <span class="skills-rail-hit">
+                <UButton
+                  :icon="item.icon"
+                  color="primary"
+                  size="lg"
+                  :variant="activeTab === item.value ? 'solid' : 'subtle'"
+                  :active="activeTab === item.value"
+                  class="skills-rail-btn size-11"
+                  :aria-label="`${item.label}, ${item.badge} compétences`"
+                  :aria-pressed="activeTab === item.value"
+                  @click="selectFamily(item.value)"
+                />
+                <UBadge
+                  :label="String(item.badge)"
+                  color="primary"
+                  :variant="activeTab === item.value ? 'solid' : 'subtle'"
+                  size="xs"
+                  class="skills-rail-count"
+                />
+              </span>
+            </UTooltip>
+          </nav>
+        </aside>
+
+        <div class="skills-board relative">
+          <div
+            :id="SKILLS_PANEL_ID"
+            class="relative grid w-full grid-cols-2 gap-3 sm:grid-cols-3 sm:gap-4 md:gap-5 lg:grid-cols-6 lg:gap-4 xl:gap-5"
+            role="grid"
+            aria-labelledby="skills-heading"
+            :aria-rowcount="gridLayout.length"
+            :aria-colcount="6"
+          >
           <div
             v-for="(cell, i) in flatCells"
             :key="i"
@@ -228,14 +302,13 @@ function iconToneClass(cell) {
         </div>
       </div>
     </div>
+    </div>
   </section>
 </template>
 
 <style lang="postcss">
 .skills-heading {
-  display: grid;
-  gap: 1.5rem;
-  margin-bottom: 2rem;
+  margin-bottom: 1.25rem;
 }
 
 .skills-display {
@@ -258,7 +331,7 @@ function iconToneClass(cell) {
 }
 
 .skills-lede {
-  margin: 1rem 0 0;
+  margin: 0.9rem 0 0;
   max-width: 36ch;
   font-size: 1.05rem;
   font-weight: 500;
@@ -267,26 +340,83 @@ function iconToneClass(cell) {
   text-wrap: pretty;
 }
 
-.skills-heading-tabs {
+.skills-stage {
+  display: grid;
+  gap: 1.25rem;
+}
+
+.skills-rail {
   min-width: 0;
 }
 
-@media (min-width: 768px) {
-  .skills-heading {
-    grid-template-columns: minmax(0, 1fr) auto;
-    align-items: end;
-    gap: 2rem 3rem;
-    margin-bottom: 2.75rem;
-  }
+.skills-rail-desktop {
+  position: relative;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  align-self: stretch;
+  width: 3.25rem;
+  min-height: 100%;
+  padding-block: 0.85rem;
+}
 
-  .skills-heading-tabs {
-    padding-bottom: 0.2rem;
-  }
+.skills-rail-spine {
+  position: absolute;
+  top: 0.4rem;
+  bottom: 0.4rem;
+  left: 50%;
+  z-index: 0;
+  width: 1px;
+  border-radius: 999px;
+  background: color-mix(in oklab, var(--first-color) 32%, transparent);
+  transform: translateX(-50%);
+}
+
+.skills-rail-hit {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  place-items: center;
+}
+
+.skills-rail-btn {
+  border-radius: 0.9rem;
+}
+
+.skills-rail-count {
+  position: absolute;
+  top: -0.3rem;
+  right: -0.35rem;
+  z-index: 2;
+  min-width: 1.15rem;
+  justify-content: center;
+  padding-inline: 0.28rem;
+  font-variant-numeric: tabular-nums;
+  pointer-events: none;
 }
 
 .skills-board {
   isolation: isolate;
   overflow: visible;
+  width: 100%;
+}
+
+@media (min-width: 768px) {
+  .skills-heading {
+    margin-bottom: 1.75rem;
+  }
+
+  .skills-stage {
+    grid-template-columns: 3.5rem minmax(0, 1fr);
+    align-items: stretch;
+    column-gap: 1.75rem;
+    row-gap: 0;
+  }
+
+  .skills-board {
+    max-width: 56rem;
+    justify-self: start;
+  }
 }
 
 .skills-empty {
