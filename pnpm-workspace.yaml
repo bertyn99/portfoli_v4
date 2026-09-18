@@ -1,5 +1,6 @@
 allowBuilds:
-  '@parcel/watcher': false
-  esbuild: false
+  "@parcel/watcher": true
+  "@takumi-rs/core": true
+  esbuild: true
   sharp: true
-  vue-demi: false
+  vue-demi: true
