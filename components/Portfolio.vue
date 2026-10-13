@@ -1,198 +1,455 @@
+<script setup>
+const selectedIndex = ref(0)
+const carousel = useTemplateRef("carousel")
+
+const carouselUi = {
+  root: "portfolio-carousel relative",
+  viewport: "overflow-hidden",
+  container: "ms-0",
+  item: "basis-full min-w-0 ps-0",
+  controls: "relative mt-8 flex flex-wrap items-center justify-between gap-4",
+  arrows: "relative order-2 flex items-center gap-2",
+  prev: "static inset-auto start-auto top-auto translate-none rounded-[0.9rem]",
+  next: "static inset-auto end-auto top-auto translate-none rounded-[0.9rem]",
+  dots: "relative inset-auto -bottom-auto order-1 flex flex-wrap items-center justify-start gap-1.5",
+  dot: "size-auto h-1 w-5 rounded-full bg-primary/30 hover:bg-primary/50 data-[state=active]:w-8 data-[state=active]:bg-primary",
+}
+
+const arrowButton = {
+  color: "primary",
+  variant: "subtle",
+  size: "lg",
+}
+
+const projects = ref([
+  {
+    title: "Site vitrine Restaurant de PokeBowls",
+    description:
+      "Site vitrine responsive, avec des composants UI et des interactions animées.",
+    img: "/img/hawa.png",
+    stack: [
+      { name: "Vue", icon: "vscode-icons:file-type-vue" },
+      { name: "Nuxt", icon: "vscode-icons:file-type-nuxt" },
+      { name: "Tailwind", icon: "vscode-icons:file-type-tailwind" },
+      { name: "Javascript", icon: "vscode-icons:file-type-js-official" },
+    ],
+    demo: "https://hawaibowls.bertynboulikou.com/",
+    features: [
+      "Design responsive avec Tailwind CSS",
+      "Composants UI dynamiques",
+      "Animations et transitions fluides",
+    ],
+  },
+  {
+    title: "Click n Chill",
+    description:
+      "Application web pour gérer vos films et séries, et vous aider à choisir votre prochain visionnage.",
+    img: "/img/V2.png",
+    stack: [
+      { name: "Vue", icon: "vscode-icons:file-type-vue" },
+      { name: "Nuxt", icon: "vscode-icons:file-type-nuxt" },
+      { name: "Tailwind", icon: "vscode-icons:file-type-tailwind" },
+      { name: "Javascript", icon: "vscode-icons:file-type-js-official" },
+      { name: "Node", icon: "vscode-icons:file-type-node" },
+      { name: "MongoDB", icon: "vscode-icons:file-type-mongo" },
+    ],
+    demo: "https://click-n-chill.bertynboulikou.com/",
+    features: [
+      "Authentification utilisateur",
+      "Gestion de films et séries",
+      "Recommandations personnalisées",
+    ],
+  },
+  {
+    title: "Star Wars Api",
+    description: "Site vitrine utilisant l'API Star Wars.",
+    img: "/img/star_wars.png",
+    stack: [
+      { name: "Vue", icon: "vscode-icons:file-type-vue" },
+      { name: "Nuxt", icon: "vscode-icons:file-type-nuxt" },
+      { name: "Tailwind", icon: "vscode-icons:file-type-tailwind" },
+      { name: "Javascript", icon: "vscode-icons:file-type-js-official" },
+    ],
+    demo: "https://swapi.bertynboulikou.com/",
+    github: "https://github.com/Bertyn/swapi",
+    features: ["Utilisation de l'API Star Wars", "Design responsive"],
+  },
+  {
+    title: "Sciredev",
+    description:
+      "Site vitrine de l'agence web Sciredev, présentant leurs services et réalisations.",
+    img: "/img/sciredev.png",
+    stack: [
+      { name: "Vue", icon: "vscode-icons:file-type-vue" },
+      { name: "Nuxt", icon: "vscode-icons:file-type-nuxt" },
+      { name: "Tailwind", icon: "vscode-icons:file-type-tailwind" },
+      { name: "Javascript", icon: "vscode-icons:file-type-js-official" },
+      { name: "Strapi", icon: "logos:strapi-icon" },
+    ],
+    demo: "https://sciredev.com/",
+    features: [
+      "Design responsive",
+      "Présentation des services",
+      "Galerie de réalisations",
+    ],
+  },
+  {
+    title: "FightingClubFinder",
+    description:
+      "Application web pour trouver des clubs de combat près de chez vous.",
+    img: "/img/fcf.png",
+    stack: [
+      { name: "Vue", icon: "vscode-icons:file-type-vue" },
+      { name: "Nuxt", icon: "vscode-icons:file-type-nuxt" },
+      { name: "Tailwind", icon: "vscode-icons:file-type-tailwind" },
+      { name: "Javascript", icon: "vscode-icons:file-type-js-official" },
+      { name: "Node", icon: "vscode-icons:file-type-node" },
+      { name: "MongoDB", icon: "vscode-icons:file-type-mongo" },
+    ],
+    demo: "https://fightingclubfinder.bertynboulikou.com/",
+    features: [
+      "Recherche de clubs de combat",
+      "Géolocalisation",
+      "Profils de clubs détaillés",
+    ],
+  },
+  {
+    title: "Journal du cuistot",
+    description: "Site de recettes de cuisine avec un CMS headless.",
+    img: "/img/journalducuistot.png",
+    stack: [
+      { name: "Vue", icon: "vscode-icons:file-type-vue" },
+      { name: "Nuxt", icon: "vscode-icons:file-type-nuxt" },
+      { name: "Tailwind", icon: "vscode-icons:file-type-tailwind" },
+      { name: "Javascript", icon: "vscode-icons:file-type-js-official" },
+      { name: "Strapi", icon: "logos:strapi-icon" },
+    ],
+    demo: "https://journalducuistot.bertynboulikou.com/",
+    features: [
+      "Recettes de cuisine",
+      "CMS headless avec Strapi",
+      "Design responsive",
+    ],
+  },
+  {
+    title: "Kosmonotes",
+    description: "Application de prise de notes en ligne.",
+    img: "/img/kosmonotes.png",
+    stack: [
+      { name: "HTML", icon: "vscode-icons:file-type-html" },
+      { name: "CSS", icon: "vscode-icons:file-type-css" },
+      { name: "Javascript", icon: "vscode-icons:file-type-js-official" },
+      { name: "Chrome", icon: "mdi:google-chrome" },
+    ],
+    demo: "https://kosmonotes.bertynboulikou.com/",
+    features: ["Prise de notes", "Stockage local", "Design épuré"],
+  },
+])
+
+const projectCount = computed(() =>
+  String(projects.value.length).padStart(2, "0"),
+)
+
+const projectCursor = computed(() =>
+  String(selectedIndex.value + 1).padStart(2, "0"),
+)
+
+function onSelect(index) {
+  selectedIndex.value = index
+}
+
+onMounted(() => {
+  carousel.value?.emblaApi?.scrollTo(0, true)
+  selectedIndex.value = 0
+})
+</script>
+
 <template>
-  <section id="portfolio" class="portfolio py-16 sm:py-20 md:py-28">
-    <UContainer>
-      <header class="section-heading">
-        <h2 class="section-title">Derniers projets</h2>
-      </header>
-    </UContainer>
-    <UContainer class="relative">
-      <UCarousel
-        v-slot="{ item }"
-        :items="projects"
-        arrows
-        dots
-        loop
-        :ui="{ item: 'basis-full min-w-0 shrink-0', viewport: 'overflow-hidden' }"
-        :prev="{ color: 'primary', variant: 'outline' }"
-        :next="{ color: 'primary', variant: 'outline' }"
-      >
-        <div
-          class="portfolio-slide grid min-h-0 gap-7 py-8 px-12 sm:gap-8 sm:py-10 md:min-h-[min(24rem,68vh)] md:grid-cols-2 md:items-start md:gap-x-8 md:gap-y-8 md:px-6 md:py-12 lg:items-center xl:gap-x-10">
-          <NuxtImg :src="`/img/${item.img}`" :alt="`Aperçu : ${item.name}`" width="960" height="540"
-            class="aspect-video w-full max-w-full shrink-0 justify-self-center rounded-lg object-cover object-top max-h-[min(17.5rem,42svh)] sm:max-h-[min(24rem,56vh)] md:h-full md:max-h-none"
-            sizes="sm:100vw md:45vw xl:576px" loading="lazy" />
-          <div class="portfolio-data w-full max-w-[min(100%,65ch)] md:justify-self-start">
-            <h3 class="mb-2 text-xl font-semibold tracking-tight sm:text-2xl">{{ item.name }}</h3>
-            <p class="mb-4 text-[0.9375rem] leading-relaxed text-primary-text sm:text-base">
-              {{ item.desc }}
-            </p>
-            <div class="mb-4 text-sm leading-relaxed text-primary-text">
-              <strong>Stack :</strong>
-              <ul class="mt-2 flex flex-wrap gap-x-3 gap-y-2.5" aria-label="Technologies utilisées">
-                <li v-for="(tech, index) in item.stack" :key="`${item.link}-stack-${index}`"
-                  class="group relative flex items-center">
+  <section
+    id="projet"
+    class="portfolio overflow-x-clip pt-16 pb-28 text-primary-text md:pt-24 md:pb-36"
+  >
+    <div class="container">
+      <div class="portfolio-board">
+        <h2 class="portfolio-display">
+          <span class="portfolio-display-kicker">Derniers</span>
+          <span>projets</span>
+        </h2>
+
+        <p class="portfolio-index" aria-live="polite">
+          <span class="sr-only">Projet </span>{{ projectCursor }}
+          <span class="portfolio-index-sep">/</span>
+          {{ projectCount }}
+        </p>
+
+        <UCarousel
+          ref="carousel"
+          v-slot="{ item }"
+          :items="projects"
+          arrows
+          dots
+          loop
+          :start-index="0"
+          prev-icon="i-mdi-chevron-left"
+          next-icon="i-mdi-chevron-right"
+          :prev="arrowButton"
+          :next="arrowButton"
+          :ui="carouselUi"
+          class="portfolio-track"
+          aria-label="Projets réalisés"
+          @select="onSelect"
+        >
+          <article class="portfolio-slide">
+            <figure class="portfolio-figure">
+              <img
+                class="portfolio-shot"
+                :src="item.img"
+                :alt="`Capture du projet ${item.title}`"
+                loading="lazy"
+                decoding="async"
+              >
+            </figure>
+
+            <div class="portfolio-sheet">
+              <h3 class="portfolio-title">
+                {{ item.title }}
+              </h3>
+              <p class="portfolio-desc">
+                {{ item.description }}
+              </p>
+
+              <ul class="portfolio-stack" aria-label="Stack technique">
+                <li v-for="tech in item.stack" :key="tech.name">
                   <UTooltip :text="tech.name">
-                    <Icon :name="tech.icon" class="size-6 shrink-0 text-primary-title" aria-hidden="true" />
+                    <span class="portfolio-stack-chip">
+                      <Icon :name="tech.icon" class="size-6" />
+                      <span class="sr-only">{{ tech.name }}</span>
+                    </span>
                   </UTooltip>
-                  <span class="sr-only">{{ tech.name }}</span>
                 </li>
               </ul>
+
+              <ul class="portfolio-features">
+                <li v-for="feature in item.features" :key="feature">
+                  {{ feature }}
+                </li>
+              </ul>
+
+              <UButton
+                :to="item.demo"
+                target="_blank"
+                rel="noopener noreferrer"
+                color="primary"
+                size="lg"
+                trailing-icon="i-mdi-arrow-right"
+              >
+                Go See
+              </UButton>
             </div>
-            <p class="mb-2 text-sm font-semibold text-primary-text">Fonctionnalités :</p>
-            <ul
-              class="mb-6 list-disc space-y-1.5 pl-4 text-sm leading-relaxed text-primary-text marker:text-primary sm:mb-5 sm:pl-5">
-              <li v-for="(feature, index) in item.features" :key="`${item.link}-feat-${index}`">{{ feature }}</li>
-            </ul>
-            <UButton
-              :to="item.link"
-              target="_blank"
-              trailing-icon="i-mdi-arrow-right"
-              :aria-label="`Ouvrir la démo ${item.name} dans un nouvel onglet`"
-            >
-              Démo
-            </UButton>
-          </div>
-        </div>
-      </UCarousel>
-    </UContainer>
+          </article>
+        </UCarousel>
+      </div>
+    </div>
   </section>
 </template>
 
-<script setup>
-const projects = ref([
-  {
-    name: 'Site vitrine Restaurant de PokeBowls',
-    img: 'hawa.png',
-    link: 'https://hawa-bowls-website.vercel.app/',
-    desc: 'Site web adapté responsive avec des composants ui et des interactions animées.',
-    stack: [
-      { name: 'Vue.js', icon: 'vscode-icons:file-type-vue' },
-      { name: 'Nuxt.js', icon: 'vscode-icons:file-type-nuxt' },
-      { name: 'Tailwind CSS', icon: 'vscode-icons:file-type-tailwind' },
-      { name: 'JavaScript', icon: 'vscode-icons:file-type-js-official' },
-    ],
-    features: [
-      'Design responsive avec Tailwind CSS',
-      'Composants UI dynamiques',
-      'Animations et transitions fluides',
-    ],
-  },
-  {
-    name: 'Click n Chill',
-    link: 'https://wonderful-mcnulty-82fef7.netlify.app/',
-    img: 'V2.png',
-    desc: 'Extension chrome qui permet de synchroniser une série Netflix à plusieurs personnes.',
-    stack: [
-      { name: 'Vue.js', icon: 'vscode-icons:file-type-vue' },
-      { name: 'JavaScript', icon: 'vscode-icons:file-type-js-official' },
-      { name: 'Chrome Extensions', icon: '/icons/chrome.svg' },
-    ],
-    features: [
-      'Synchronisation en temps réel entre utilisateurs',
-      'Extension Chrome personnalisée',
-      'Intégration transparente avec Netflix',
-    ],
-  },
-  {
-    name: 'Carrousel Star wars',
-    link: 'https://reverent-jepsen-c6ce5c.netlify.app/',
-    img: 'star_wars.png',
-    desc: 'Projet d\'un client fiverr',
-    stack: [
-      { name: 'JavaScript', icon: 'vscode-icons:file-type-js-official' },
-      { name: 'CSS', icon: '/icons/css.svg' },
-    ],
-    features: [
-      'Carrousel interactif sur le thème Star Wars',
-      'Animations personnalisées',
-      'Personnalisation spécifique au client',
-    ],
-  },
-  {
-    name: 'Site Star wars',
-    link: 'https://clever-golick-c20c5f.netlify.app/',
-    img: 'website_star_wars.png',
-    desc: 'Projet de cours sur l\'intégration d\'une API Star Wars',
-    stack: [
-      { name: 'Vue.js', icon: 'vscode-icons:file-type-vue' },
-      { name: 'JavaScript', icon: 'vscode-icons:file-type-js-official' },
-    ],
-    features: [
-      'Intégration avec l\'API Star Wars',
-      'Chargement de contenu dynamique',
-      'Design responsive',
-    ],
-  },
-  {
-    name: 'Sciredev',
-    link: 'https://sciredev.com/',
-    img: 'sciredev.png',
-    desc: 'Blog sur le développement web et mobile. Où je partage tutoriels et news sur la tech. Dans le futur, je pense le transformer en une plateforme de formation.',
-    stack: [
-      { name: 'Vue.js', icon: 'vscode-icons:file-type-vue' },
-      { name: 'Nuxt.js', icon: 'vscode-icons:file-type-nuxt' },
-      { name: 'Tailwind CSS', icon: 'vscode-icons:file-type-tailwind' },
-    ],
-    features: [
-      'Gestion de contenu pour tutoriels et news',
-      'Design moderne et responsive',
-      'Prêt pour une transformation en plateforme de formation',
-    ],
-  },
-  {
-    name: 'FightingClubFinder',
-    link: 'https://fightingclubfinder.com',
-    img: 'fcf.png',
-    desc: 'Site web pour trouver des clubs de combat en France. Avec une carte interactive et une liste de clubs.',
-    stack: [
-      { name: 'Vue.js', icon: 'vscode-icons:file-type-vue' },
-      { name: 'Nuxt.js', icon: 'vscode-icons:file-type-nuxt' },
-      { name: 'Tailwind CSS', icon: 'vscode-icons:file-type-tailwind' },
-    ],
-    features: [
-      'Carte interactive pour trouver des clubs de combat',
-      'Liste de clubs avec des informations détaillées',
-      'Scrapping de données pour mettre à jour la liste des clubs',
-      'SEO optimisé pour une meilleure visibilité',
-    ],
-  },
-  {
-    name: 'Journal du cuistot',
-    link: 'https://journalducuistot.fr/',
-    img: 'journalducuistot.png',
-    desc: 'Blog de cuisine où je partage mes recettes et mes astuces culinaires. Avec un CMS pour gerer la gestion du contenu',
-    stack: [
-      { name: 'Vue.js', icon: 'vscode-icons:file-type-vue' },
-      { name: 'Nuxt.js', icon: 'vscode-icons:file-type-nuxt' },
-      { name: 'Strapi', icon: 'vscode-icons:file-type-strapi' },
-      { name: 'Tailwind CSS', icon: 'vscode-icons:file-type-tailwind' },
-    ],
-    features: [
-      'Partage et gestion de recettes',
-      'Design responsive optimisé pour mobile et desktop',
-      'Interface engageante et conviviale',
-    ],
-  },
-  {
-    name: 'Kosmonotes',
-    link: 'https://kosmonotes.com/',
-    img: 'kosmonotes.png',
-    desc: 'Application pour booster les notes de vos élèves et leur aider dans leur révision.',
-    stack: [
-      { name: 'Vue.js', icon: 'vscode-icons:file-type-vue' },
-      { name: 'Nuxt.js', icon: 'vscode-icons:file-type-nuxt' },
-      { name: 'Cloudflare Worker', icon: 'i-devicon-cloudflareworkers' },
-      { name: 'NuxtUi', icon: 'vscode-icons:file-type-nuxt' },
-      { name: 'OpenAI', icon: 'i-tabler-brand-openai' },
-      { name: 'llama3', icon: 'i-simple-icons-ollama' },
-    ],
-    features: [
-      'Accompagnement des élèves pour améliorer leurs résultats',
-      'Outils de révision adaptés au parcours',
-      'Nuxt, Workers et expérimentations autour de l\'IA',
-    ],
-  },
-])
-</script>
+<style lang="postcss">
+.portfolio-board {
+  display: grid;
+  gap: 1rem 0;
+}
 
-<style lang="postcss" scoped></style>
+.portfolio-display {
+  margin: 0;
+  font-family: var(--font-family-display);
+  font-size: clamp(3.1rem, 1.3rem + 8vw, 6.4rem);
+  font-weight: 800;
+  line-height: 0.84;
+  letter-spacing: -0.07em;
+  color: var(--title-color);
+  text-wrap: balance;
+}
+
+.portfolio-display span {
+  display: block;
+}
+
+.portfolio-display-kicker {
+  color: var(--first-color);
+}
+
+.portfolio-index {
+  margin: 0.35rem 0 0;
+  font-family: var(--font-family-display);
+  font-size: clamp(1.55rem, 1rem + 2vw, 2.35rem);
+  font-weight: 800;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.04em;
+  line-height: 1;
+  color: var(--first-color);
+  opacity: 0.55;
+}
+
+.portfolio-index-sep {
+  margin-inline: 0.2em;
+  font-weight: 600;
+  opacity: 0.7;
+}
+
+.portfolio-track {
+  min-width: 0;
+}
+
+.portfolio-slide {
+  display: grid;
+  gap: 1.25rem;
+  padding-block: 0.5rem 0.25rem;
+}
+
+.portfolio-figure {
+  position: relative;
+  z-index: 1;
+  width: min(100%, 38rem);
+  margin: 0 auto;
+  min-width: 0;
+}
+
+.portfolio-shot {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 16 / 10;
+  object-fit: cover;
+  object-position: top center;
+  border-radius: 1.15rem;
+  background: color-mix(in srgb, var(--first-color) 14%, var(--container-color));
+  box-shadow: 0 18px 40px hsla(250, 40%, 18%, 0.12);
+}
+
+.dark .portfolio-shot {
+  box-shadow: 0 18px 40px hsla(250, 40%, 4%, 0.35);
+}
+
+.portfolio-sheet {
+  position: relative;
+  z-index: 5;
+  display: grid;
+  gap: 0.85rem;
+  justify-items: start;
+  padding: 1.15rem 1.2rem 1.25rem;
+  border-radius: 1.15rem;
+  background: var(--container-color);
+  box-shadow: 0 18px 40px hsla(250, 40%, 18%, 0.1);
+}
+
+.dark .portfolio-sheet {
+  box-shadow: 0 18px 40px hsla(250, 40%, 4%, 0.35);
+}
+
+.portfolio-title {
+  margin: 0;
+  max-width: 22ch;
+  font-size: clamp(1.35rem, 1.1rem + 1.1vw, 1.85rem);
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: -0.03em;
+  color: var(--title-color);
+  text-wrap: balance;
+}
+
+.portfolio-desc {
+  margin: 0;
+  max-width: 42ch;
+  font-size: 0.98rem;
+  line-height: 1.55;
+  color: var(--text-color);
+  text-wrap: pretty;
+}
+
+.portfolio-stack {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.portfolio-stack-chip {
+  display: grid;
+  place-items: center;
+  width: 2.35rem;
+  height: 2.35rem;
+  border-radius: 0.7rem;
+  background: color-mix(in srgb, var(--first-color) 10%, transparent);
+}
+
+.portfolio-features {
+  display: grid;
+  gap: 0.35rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  color: var(--text-color);
+  font-size: 0.92rem;
+  line-height: 1.4;
+}
+
+.portfolio-features li {
+  position: relative;
+  padding-inline-start: 0.9rem;
+}
+
+.portfolio-features li::before {
+  content: "";
+  position: absolute;
+  top: 0.55em;
+  left: 0;
+  width: 0.4rem;
+  height: 0.4rem;
+  border-radius: 0.12rem;
+  background: var(--first-color);
+}
+
+@media (min-width: 768px) {
+  .portfolio-board {
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    column-gap: 1rem;
+    align-items: end;
+  }
+
+  .portfolio-display {
+    grid-column: 1 / 9;
+  }
+
+  .portfolio-index {
+    grid-column: 9 / 13;
+    margin: 0 0 0.35rem;
+    text-align: right;
+  }
+
+  .portfolio-track {
+    grid-column: 1 / -1;
+    margin-top: 0.75rem;
+  }
+
+  .portfolio-slide {
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    align-items: center;
+    gap: 0 1.25rem;
+  }
+
+  .portfolio-figure {
+    grid-column: 1 / 8;
+    grid-row: 1;
+    width: 100%;
+    margin-inline: 0;
+  }
+
+  .portfolio-sheet {
+    grid-column: 8 / 13;
+    grid-row: 1;
+    padding: 1.45rem 1.5rem 1.55rem;
+  }
+}
+</style>
