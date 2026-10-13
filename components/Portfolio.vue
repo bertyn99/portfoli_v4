@@ -5,8 +5,8 @@ const carousel = useTemplateRef("carousel")
 const carouselUi = {
   root: "portfolio-carousel relative",
   viewport: "overflow-hidden",
-  container: "ms-0",
-  item: "basis-full min-w-0 ps-0",
+  container: "portfolio-slides ms-0",
+  item: "portfolio-item basis-full min-w-0 ps-0",
   controls: "relative mt-8 flex flex-wrap items-center justify-between gap-4",
   arrows: "relative order-2 flex items-center gap-2",
   prev: "static inset-auto start-auto top-auto translate-none rounded-[0.9rem]",
@@ -189,6 +189,7 @@ onMounted(() => {
           arrows
           dots
           loop
+          :duration="0"
           :start-index="0"
           prev-icon="i-mdi-chevron-left"
           next-icon="i-mdi-chevron-right"
@@ -199,7 +200,10 @@ onMounted(() => {
           aria-label="Projets réalisés"
           @select="onSelect"
         >
-          <article class="portfolio-slide">
+          <article
+            class="portfolio-slide"
+            :class="{ 'is-active': item === projects[selectedIndex] }"
+          >
             <figure class="portfolio-figure">
               <img
                 class="portfolio-shot"
@@ -300,6 +304,25 @@ onMounted(() => {
   min-width: 0;
 }
 
+.portfolio-slides {
+  display: grid !important;
+  grid-template-columns: minmax(0, 1fr);
+  transform: none !important;
+}
+
+.portfolio-item {
+  grid-area: 1 / 1;
+  transform: none !important;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.portfolio-item:has(.is-active) {
+  visibility: visible;
+  pointer-events: auto;
+  z-index: 1;
+}
+
 .portfolio-slide {
   display: grid;
   gap: 1.25rem;
@@ -314,6 +337,10 @@ onMounted(() => {
   min-width: 0;
 }
 
+.portfolio-slide.is-active .portfolio-figure {
+  animation: portfolio-enter-left 250ms var(--ease-out) both;
+}
+
 .portfolio-shot {
   display: block;
   width: 100%;
@@ -322,12 +349,6 @@ onMounted(() => {
   object-fit: cover;
   object-position: top center;
   border-radius: 1.15rem;
-  background: color-mix(in srgb, var(--first-color) 14%, var(--container-color));
-  box-shadow: 0 18px 40px hsla(250, 40%, 18%, 0.12);
-}
-
-.dark .portfolio-shot {
-  box-shadow: 0 18px 40px hsla(250, 40%, 4%, 0.35);
 }
 
 .portfolio-sheet {
@@ -336,14 +357,52 @@ onMounted(() => {
   display: grid;
   gap: 0.85rem;
   justify-items: start;
-  padding: 1.15rem 1.2rem 1.25rem;
-  border-radius: 1.15rem;
-  background: var(--container-color);
-  box-shadow: 0 18px 40px hsla(250, 40%, 18%, 0.1);
+  padding: 0;
 }
 
-.dark .portfolio-sheet {
-  box-shadow: 0 18px 40px hsla(250, 40%, 4%, 0.35);
+.portfolio-slide.is-active .portfolio-sheet {
+  animation: portfolio-enter-right 250ms var(--ease-out) 50ms both;
+}
+
+@keyframes portfolio-enter-left {
+  from {
+    opacity: 0;
+    transform: translateX(-8%);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes portfolio-enter-right {
+  from {
+    opacity: 0;
+    transform: translateX(8%);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes portfolio-enter-fade {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .portfolio-slide.is-active .portfolio-figure,
+  .portfolio-slide.is-active .portfolio-sheet {
+    animation: portfolio-enter-fade 200ms var(--ease-out) both;
+  }
 }
 
 .portfolio-title {
@@ -449,7 +508,7 @@ onMounted(() => {
   .portfolio-sheet {
     grid-column: 8 / 13;
     grid-row: 1;
-    padding: 1.45rem 1.5rem 1.55rem;
+    padding: 0;
   }
 }
 </style>
