@@ -33,7 +33,7 @@ const projects = ref([
       { name: "Tailwind", icon: "vscode-icons:file-type-tailwind" },
       { name: "Javascript", icon: "vscode-icons:file-type-js-official" },
     ],
-    demo: "https://hawaibowls.bertynboulikou.com/",
+    demo: "https://hawa-bowls-website.vercel.app/",
     features: [
       "Design responsive avec Tailwind CSS",
       "Composants UI dynamiques",
@@ -53,7 +53,7 @@ const projects = ref([
       { name: "Node", icon: "vscode-icons:file-type-node" },
       { name: "MongoDB", icon: "vscode-icons:file-type-mongo" },
     ],
-    demo: "https://click-n-chill.bertynboulikou.com/",
+    demo: "https://github.com/Brizam/clicknchill-server",
     features: [
       "Authentification utilisateur",
       "Gestion de films et séries",
@@ -70,7 +70,7 @@ const projects = ref([
       { name: "Tailwind", icon: "vscode-icons:file-type-tailwind" },
       { name: "Javascript", icon: "vscode-icons:file-type-js-official" },
     ],
-    demo: "https://swapi.bertynboulikou.com/",
+    demo: "https://clever-golick-c20c5f.netlify.app/",
     github: "https://github.com/Bertyn/swapi",
     features: ["Utilisation de l'API Star Wars", "Design responsive"],
   },
@@ -106,7 +106,7 @@ const projects = ref([
       { name: "Node", icon: "vscode-icons:file-type-node" },
       { name: "MongoDB", icon: "vscode-icons:file-type-mongo" },
     ],
-    demo: "https://fightingclubfinder.bertynboulikou.com/",
+    demo: "https://fightingclubfinder.com/",
     features: [
       "Recherche de clubs de combat",
       "Géolocalisation",
@@ -124,7 +124,7 @@ const projects = ref([
       { name: "Javascript", icon: "vscode-icons:file-type-js-official" },
       { name: "Strapi", icon: "logos:strapi-icon" },
     ],
-    demo: "https://journalducuistot.bertynboulikou.com/",
+    demo: "https://journalducuistot.fr/",
     features: [
       "Recettes de cuisine",
       "CMS headless avec Strapi",
@@ -141,7 +141,7 @@ const projects = ref([
       { name: "Javascript", icon: "vscode-icons:file-type-js-official" },
       { name: "Chrome", icon: "mdi:google-chrome" },
     ],
-    demo: "https://kosmonotes.bertynboulikou.com/",
+    demo: "https://kosmonotes.com/",
     features: ["Prise de notes", "Stockage local", "Design épuré"],
   },
 ])
