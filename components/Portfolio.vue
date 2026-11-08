@@ -23,6 +23,26 @@ const arrowButton = {
 
 const projects = ref([
   {
+    title: "PadelSpotFinder",
+    description:
+      "Annuaire de clubs de padel en Europe : terrains indoor et outdoor, horaires et tarifs, comparés en un coup d'œil.",
+    img: "/img/padelspotfinder.png",
+    stack: [
+      { name: "Nuxt", icon: "logos:nuxt-icon" },
+      { name: "Vue", icon: "vscode-icons:file-type-vue" },
+      { name: "TypeScript", icon: "logos:typescript-icon" },
+      { name: "Tailwind", icon: "vscode-icons:file-type-tailwind" },
+      { name: "PostgreSQL", icon: "logos:postgresql" },
+      { name: "Drizzle", icon: "logos:drizzle-icon" },
+    ],
+    demo: "https://padelspotfinder.eu/",
+    features: [
+      "Annuaire bilingue FR/EN de clubs de padel en Europe",
+      "Collecte et déduplication des clubs multi-sources",
+      "Recherche par ville, filtres et pages SEO par catégorie",
+    ],
+  },
+  {
     title: "Site vitrine Restaurant de PokeBowls",
     description:
       "Site vitrine responsive, avec des composants UI et des interactions animées.",
