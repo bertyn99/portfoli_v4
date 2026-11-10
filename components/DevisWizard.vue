@@ -107,16 +107,17 @@ let minTween: { stop: () => void } | null = null
 let maxTween: { stop: () => void } | null = null
 
 watch(
-  estimate,
-  (next, prev) => {
+  () => (estimate.value ? `${estimate.value.min}-${estimate.value.max}` : ''),
+  (key, prevKey) => {
     minTween?.stop()
     maxTween?.stop()
-    if (!next) {
+    const next = estimate.value
+    if (!next || !key) {
       displayMin.value = 0
       displayMax.value = 0
       return
     }
-    if (prefersReducedMotion.value || !prev) {
+    if (prefersReducedMotion.value || !prevKey) {
       displayMin.value = next.min
       displayMax.value = next.max
       return
@@ -127,12 +128,18 @@ watch(
       onUpdate: (value) => {
         displayMin.value = Math.round(value)
       },
+      onComplete: () => {
+        displayMin.value = next.min
+      },
     })
     maxTween = animate(displayMax.value, next.max, {
       duration: 0.2,
       ease: easeOut,
       onUpdate: (value) => {
         displayMax.value = Math.round(value)
+      },
+      onComplete: () => {
+        displayMax.value = next.max
       },
     })
   },

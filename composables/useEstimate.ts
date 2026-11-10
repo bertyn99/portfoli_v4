@@ -205,74 +205,108 @@ export function featuresForType(projectType: string): FeatureDef[] {
   )
 }
 
+export const TYPE_ENVELOPES: Record<ProjectTypeLabel, [number, number]> = {
+  'Site vitrine': [450, 2000],
+  'Application web': [3000, 12000],
+  'E-commerce': [2500, 8000],
+  'Landing page': [500, 1500],
+  Automatisation: [1200, 5000],
+  'Refonte / Redesign': [1000, 4000],
+  'Reprise app IA': [1500, 6000],
+  Autre: [1000, 5000],
+}
+
+const FEATURE_WEIGHTS: Record<string, [number, number]> = {
+  'Design UI/UX sur mesure': [300, 1500],
+  'Responsive / Mobile-first': [200, 800],
+  'CMS (gestion de contenu)': [500, 2000],
+  'Authentification utilisateurs': [400, 1500],
+  'Paiement en ligne': [500, 2000],
+  'SEO & référencement': [200, 800],
+  'Analytics & tracking': [100, 400],
+  'Multi-langue': [300, 1000],
+  'Performance (PageSpeed)': [300, 1200],
+  'Optimisation backend & charge': [400, 1500],
+  'Optimisation des coûts d\'infra': [400, 1500],
+  'MCP ou CLI': [500, 2000],
+  'Booking / réservation': [400, 1800],
+  'Refacto / structuration complète': [800, 3500],
+  'Tests poussés pour agents IA': [600, 2500],
+  'Audit du proto': [400, 1500],
+}
+
+const SUBTYPE_WEIGHTS: Record<string, [number, number]> = {
+  Institutionnel: [200, 600],
+  'Blog / contenu': [300, 900],
+  Portfolio: [150, 500],
+  SaaS: [500, 2000],
+  'Outil métier interne': [300, 1200],
+  'Espace client': [400, 1500],
+  Boutique: [200, 800],
+  Marketplace: [800, 3000],
+  'Campagne ads': [100, 400],
+  'Page produit': [200, 700],
+  'n8n / Make': [200, 800],
+  'Scripts & API': [300, 1200],
+  'Agents IA': [500, 2500],
+  'Site vitrine': [200, 800],
+  Application: [500, 2000],
+  'E-commerce': [400, 1800],
+  Cursor: [300, 1200],
+  'Lovable / v0': [200, 800],
+  'Autre proto': [250, 1000],
+}
+
+function addonWeight(addon?: [number, number]) {
+  if (!addon) return 0
+  return (addon[0] + addon[1]) / 2
+}
+
+function clampQuote(value: number, lo: number, hi: number) {
+  const rounded = Math.round(value / 50) * 50
+  return Math.min(hi, Math.max(lo, rounded))
+}
+
+function availableWeightForType(projectType: string) {
+  let availableWeight = 0
+  for (const feature of featuresForType(projectType)) {
+    availableWeight += addonWeight(FEATURE_WEIGHTS[feature.label])
+  }
+  const typeDef = PROJECT_TYPES.find((item) => item.label === projectType)
+  let maxSubtypeWeight = 0
+  for (const option of typeDef?.subtypes ?? []) {
+    maxSubtypeWeight = Math.max(maxSubtypeWeight, addonWeight(SUBTYPE_WEIGHTS[option]))
+  }
+  return availableWeight + maxSubtypeWeight
+}
+
+export function calculateEstimate(
+  projectType: string,
+  features: string[],
+  subtype?: string,
+): { min: number; max: number } {
+  const [lo, hi] = TYPE_ENVELOPES[projectType as ProjectTypeLabel] ?? [1000, 5000]
+  const span = hi - lo
+
+  let selectedWeight = 0
+  for (const feature of features) {
+    selectedWeight += addonWeight(FEATURE_WEIGHTS[feature])
+  }
+  if (subtype) selectedWeight += addonWeight(SUBTYPE_WEIGHTS[subtype])
+  if (selectedWeight === 0) return { min: lo, max: hi }
+
+  const availableWeight = availableWeightForType(projectType)
+  const t = availableWeight > 0 ? Math.min(1, selectedWeight / availableWeight) : 0
+  const min = clampQuote(lo + span * 0.55 * t, lo, hi)
+  return { min: Math.min(min, hi), max: hi }
+}
+
 export function useEstimate() {
-  const basePrices: Record<string, [number, number]> = {
-    'Site vitrine': [800, 2500],
-    'Application web': [3000, 12000],
-    'E-commerce': [2500, 8000],
-    'Landing page': [500, 1500],
-    Automatisation: [1200, 5000],
-    'Refonte / Redesign': [1000, 4000],
-    'Reprise app IA': [1500, 6000],
-    Autre: [1000, 5000],
-  }
-
-  const featureAddons: Record<string, [number, number]> = {
-    'Design UI/UX sur mesure': [300, 1500],
-    'Responsive / Mobile-first': [200, 800],
-    'CMS (gestion de contenu)': [500, 2000],
-    'Authentification utilisateurs': [400, 1500],
-    'Paiement en ligne': [500, 2000],
-    'SEO & référencement': [200, 800],
-    'Analytics & tracking': [100, 400],
-    'Multi-langue': [300, 1000],
-    'Performance (PageSpeed)': [300, 1200],
-    'Optimisation backend & charge': [400, 1500],
-    'Optimisation des coûts d\'infra': [400, 1500],
-    'MCP ou CLI': [500, 2000],
-    'Booking / réservation': [400, 1800],
-    'Refacto / structuration complète': [800, 3500],
-    'Tests poussés pour agents IA': [600, 2500],
-    'Audit du proto': [400, 1500],
-  }
-
-  const subtypeAddons: Record<string, [number, number]> = {
-    Marketplace: [800, 3000],
-    SaaS: [500, 2000],
-    'Agents IA': [500, 2500],
-    'Espace client': [400, 1500],
-  }
-
-  function calculate(
-    projectType: string,
-    features: string[],
-    subtype?: string,
-  ): { min: number; max: number } {
-    const base = basePrices[projectType] ?? [1000, 5000]
-    let min = base[0]
-    let max = base[1]
-    for (const f of features) {
-      const addon = featureAddons[f]
-      if (addon) {
-        min += addon[0]
-        max += addon[1]
-      }
-    }
-    if (subtype) {
-      const extra = subtypeAddons[subtype]
-      if (extra) {
-        min += extra[0]
-        max += extra[1]
-      }
-    }
-    return { min, max }
-  }
-
   return {
-    calculate,
-    basePrices,
-    featureAddons,
-    subtypeAddons,
+    calculate: calculateEstimate,
+    basePrices: TYPE_ENVELOPES,
+    featureAddons: FEATURE_WEIGHTS,
+    subtypeAddons: SUBTYPE_WEIGHTS,
     projectTypes: PROJECT_TYPES,
     featuresCatalog: FEATURES_CATALOG,
     featuresForType,
