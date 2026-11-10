@@ -7,6 +7,7 @@ const objectiveOptions = [
   { value: "SEO", label: "SEO", icon: "i-mdi-magnify" },
   { value: "Accessibilité", label: "Accessibilité", icon: "i-mdi-wheelchair-accessibility" },
   { value: "Design / UX", label: "Design / UX", icon: "i-mdi-palette-outline" },
+  { value: "App générée par IA", label: "App générée par IA", icon: "i-mdi-robot-outline" },
   { value: "Autre", label: "Autre", icon: "i-mdi-dots-horizontal" },
 ]
 
@@ -17,11 +18,13 @@ const auditPoints = [
   { icon: "i-mdi-palette-outline", label: "Design", text: "Hiérarchie visuelle et expérience utilisateur" },
 ] as const
 
+const route = useRoute()
+
 const form = reactive({
   url: "",
   name: "",
   email: "",
-  objectives: [] as string[],
+  objectives: route.query.from === "ia" ? ["App générée par IA"] : ([] as string[]),
   message: "",
 })
 

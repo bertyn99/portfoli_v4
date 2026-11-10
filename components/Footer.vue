@@ -7,6 +7,7 @@ const links: NavigationMenuItem[] = [
   { label: "Contact", to: "/#contact" },
   { label: "Devis gratuit", to: "/devis" },
   { label: "Audit gratuit", to: "/audit-gratuit" },
+  { label: "Reprise app IA", to: "/reprendre-app-ia" },
   { label: "Blog", to: "https://sciredev.com", target: "_blank" },
 ]
 </script>
@@ -16,7 +17,7 @@ const links: NavigationMenuItem[] = [
     <template #left>
       <div>
         <p class="text-lg font-display font-extrabold tracking-tight text-highlighted">Bertyn Boulikou</p>
-        <p class="text-sm text-muted">Développeur full stack freelance</p>
+        <p class="text-sm text-muted">Développeur web freelance · Nantes</p>
       </div>
     </template>
 

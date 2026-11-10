@@ -4,3 +4,6 @@ allowBuilds:
   esbuild: true
   sharp: true
   vue-demi: true
+ignoredBuiltDependencies:
+  - esbuild
+  - vue-demi

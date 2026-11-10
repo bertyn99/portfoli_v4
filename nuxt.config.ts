@@ -1,3 +1,7 @@
+import { buildSitePersonIdentity } from "./data/site-identity"
+
+const siteUrl = process.env.NUXT_SITE_URL || "https://www.bertynboulikou.com"
+
 export default defineNuxtConfig({
   modules: [
     "@nuxt/ui",
@@ -38,12 +42,15 @@ export default defineNuxtConfig({
 
   /** @nuxtjs/seo — must match live host (Vercel redirects apex → www) */
   site: {
-    url: process.env.NUXT_SITE_URL || "https://www.bertynboulikou.com",
+    url: siteUrl,
     name: "Bertyn Boulikou",
-    description:
-      "Portfolio de Bertyn Boulikou : développement web, compétences, réalisations et contact. Contenu en français pour recruteurs et clients.",
+    description: buildSitePersonIdentity(siteUrl).description,
     defaultLocale: "fr",
     indexable: process.env.NODE_ENV === "production",
+  },
+
+  schemaOrg: {
+    identity: buildSitePersonIdentity(siteUrl),
   },
 
   robots: {

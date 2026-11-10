@@ -9,6 +9,7 @@ import {
 
 interface DevisBody {
   projectType?: string
+  projectSubtype?: string
   features?: string[]
   budget?: string
   timeline?: string
@@ -72,7 +73,11 @@ export default defineEventHandler(async (event: H3Event) => {
 
   const projectChildren = [
     notionHeading2('Type de projet'),
-    notionParagraph(body.projectType!),
+    notionParagraph(
+      body.projectSubtype?.trim()
+        ? `${body.projectType} · ${body.projectSubtype.trim()}`
+        : body.projectType!,
+    ),
     notionHeading2('Fonctionnalités'),
     ...(body.features?.length
       ? body.features.map((f) => notionBullet(f))

@@ -66,17 +66,20 @@
         </div>
 
         <div class="max-w-xl md:py-6">
-          <p class="mb-2 text-sm font-semibold text-primary md:text-base">Développeur web freelance</p>
+          <p class="mb-2 text-sm font-semibold text-primary md:text-base">Développeur web freelance · Nantes</p>
           <h1
             class="font-display text-[clamp(2.4rem,1.4rem+4vw,4.25rem)] font-extrabold leading-[1.08] tracking-tight text-primary-title"
           >
             Bertyn Boulikou
           </h1>
-          <p class="mt-4 max-w-[36ch] text-lg leading-relaxed text-primary-text">
-            Sites vitrines, applications et intégrations sur mesure, en Nuxt, Vue et TypeScript.
+          <p class="mt-4 max-w-[42ch] text-lg leading-relaxed text-primary-text">
+            Vous avez un proto Cursor, Lovable ou v0. Je le rends livrable : front, back, auth, paiements, mise en prod.
           </p>
           <div class="mt-8 flex flex-wrap items-center gap-3">
-            <UButton to="#portfolio" size="lg" trailing-icon="i-mdi-arrow-right">
+            <UButton to="/reprendre-app-ia" size="lg" trailing-icon="i-mdi-arrow-right">
+              Demander un audit du proto
+            </UButton>
+            <UButton to="#portfolio" size="lg" color="neutral" variant="outline">
               Voir mes projets
             </UButton>
             <div class="flex gap-1 md:hidden">

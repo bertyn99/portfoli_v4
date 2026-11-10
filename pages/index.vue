@@ -2,6 +2,7 @@
   <main>
     <Home></Home>
     <About></About>
+    <ExpertiseLocale></ExpertiseLocale>
     <Skills></Skills>
     <Graduate></Graduate>
     <Services></Services>
@@ -15,17 +16,23 @@
 </template>
 
 <script setup lang="ts">
-const title = "Développeur web freelance, portfolio et réalisations"
-const description =
-  "Bertyn Boulikou, développeur web full stack (Nuxt, Vue). Portfolio, études de cas, devis et audit gratuit — recruteurs et clients en France."
+import {
+  homeLocalFaq,
+  homePageDescription,
+  homePageTitle,
+} from "@/data/site-identity"
 
 const { pageUrl, site } = usePageSeo({
   path: "/",
-  title,
-  description,
+  title: homePageTitle,
+  description: homePageDescription,
+  ogTitle: homePageTitle,
+  ogDescription: homePageDescription,
+  ogBadge: "Développeur web freelance",
 })
 
-const portraitUrl = useAbsoluteSiteUrl("/img/bertyn.png")
+const siteBase = site.url.endsWith("/") ? site.url : `${site.url}/`
+const identityId = `${siteBase}#identity`
 
 useSchemaOrg([
   defineWebSite({
@@ -43,30 +50,18 @@ useSchemaOrg([
   }),
   defineWebPage({
     "@type": "ProfilePage",
-    name: title,
-    description,
+    name: homePageTitle,
+    description: homePageDescription,
     url: pageUrl,
     inLanguage: "fr-FR",
+    mainEntity: { "@id": identityId },
   }),
-  definePerson({
-    name: "Bertyn Boulikou",
-    url: site.url,
-    jobTitle: "Développeur web full stack",
-    description,
-    image: portraitUrl,
-    sameAs: [
-      "https://github.com/bertyn99",
-      "https://www.linkedin.com/in/bertyn-boulikou/",
-      "https://www.facebook.com/helenbertyn.boulikoudamours",
-    ],
-    knowsAbout: [
-      "Développement web",
-      "Nuxt",
-      "Vue.js",
-      "TypeScript",
-      "Applications web",
-    ],
-  }),
+  ...homeLocalFaq.map((item) =>
+    defineQuestion({
+      name: item.question,
+      acceptedAnswer: item.answer,
+    }),
+  ),
 ])
 </script>
 <style scoped lang="postcss"></style>

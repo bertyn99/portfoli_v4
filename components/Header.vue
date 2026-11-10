@@ -34,6 +34,11 @@ const items = computed<NavigationMenuItem[]>(() => [
     active: route.path.startsWith("/audit-gratuit"),
   },
   {
+    label: "Reprise IA",
+    to: "/reprendre-app-ia",
+    active: route.path.startsWith("/reprendre-app-ia"),
+  },
+  {
     label: "Devis",
     to: "/devis",
     active: route.path.startsWith("/devis"),
@@ -55,6 +60,7 @@ const mobileItems = computed(() => [
   { label: "A propos", to: "/#about", icon: "i-mdi-account-outline", active: route.hash === "#about" },
   { label: "Compétences", to: "/#skills", icon: "i-mdi-puzzle-outline", active: route.hash === "#skills" },
   { label: "Audit", to: "/audit-gratuit", icon: "i-mdi-check-circle-outline", active: route.path.startsWith("/audit-gratuit") },
+  { label: "Reprise", to: "/reprendre-app-ia", icon: "i-mdi-robot-outline", active: route.path.startsWith("/reprendre-app-ia") },
   { label: "Devis", to: "/devis", icon: "i-mdi-calculator-variant-outline", active: route.path.startsWith("/devis") },
   { label: "Portfolio", to: "/#portfolio", icon: "i-mdi-flask-outline", active: route.hash === "#portfolio" },
   { label: "Contact", to: "/#contact", icon: "i-mdi-email-outline", active: route.hash === "#contact" },
